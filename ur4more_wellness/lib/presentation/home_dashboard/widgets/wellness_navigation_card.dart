@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 
 class WellnessNavigationCard extends StatelessWidget {
   final String title;
@@ -35,7 +35,7 @@ class WellnessNavigationCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: min(4.w, 16.0), vertical: min(1.h, 8.0)),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
       child: Card(
         elevation: 2,
         shape: RoundedRectangleBorder(
@@ -47,13 +47,13 @@ class WellnessNavigationCard extends StatelessWidget {
           onLongPress: onLongPress,
           borderRadius: BorderRadius.circular(20),
           child: Container(
-            padding: EdgeInsets.all(min(4.w, 16.0)),
+            padding: const EdgeInsets.all(AppSpace.x4),
             child: Row(
               children: [
                 // Icon container
                 Container(
-                  width: min(12.w, 48.0),
-                  height: min(12.w, 48.0),
+                  width: 48,
+                  height: 48,
                   decoration: BoxDecoration(
                     color: theme.colorScheme.primary.withOpacity( 0.1),
                     borderRadius: BorderRadius.circular(12),
@@ -65,7 +65,7 @@ class WellnessNavigationCard extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(width: min(4.w, 16.0)),
+                const SizedBox(width: AppSpace.x4),
 
                 // Content
                 Expanded(
@@ -81,7 +81,7 @@ class WellnessNavigationCard extends StatelessWidget {
                         ),
                       ),
 
-                      SizedBox(height: min(0.5.h, 4.0)),
+                      const SizedBox(height: AppSpace.x1),
 
                       // Subtitle with specified color
                       Text(
@@ -91,7 +91,7 @@ class WellnessNavigationCard extends StatelessWidget {
                         ),
                       ),
 
-                      SizedBox(height: min(2.h, 16.0)),
+                      const SizedBox(height: AppSpace.x4),
 
                       // Progress indicator
                       LinearProgressIndicator(
@@ -107,11 +107,11 @@ class WellnessNavigationCard extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(width: min(2.w, 8.0)),
+                const SizedBox(width: AppSpace.x2),
 
                 // Points badge
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: min(2.w, 8.0), vertical: min(1.h, 8.0)),
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpace.x2, vertical: AppSpace.x2),
                   decoration: BoxDecoration(
                     color: theme.colorScheme.primary.withOpacity( 0.1),
                     borderRadius: BorderRadius.circular(12),
@@ -119,7 +119,7 @@ class WellnessNavigationCard extends StatelessWidget {
                   child: Text(
                     '+$pointValue',
                     style: GoogleFonts.inter(
-                      fontSize: 12.sp,
+                      fontSize: math.min(12.0, (theme.textTheme.bodySmall?.fontSize ?? 12)),
                       fontWeight: FontWeight.w600,
                       color: theme.colorScheme.primary,
                     ),
