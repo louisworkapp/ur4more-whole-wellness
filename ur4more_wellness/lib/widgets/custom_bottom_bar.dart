@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../design/tokens.dart';
 
 enum CustomBottomBarVariant {
   standard,
@@ -124,7 +125,7 @@ class CustomBottomBar extends StatelessWidget {
   Widget _buildFloatingBottomBar(
       BuildContext context, ThemeData theme, ColorScheme colorScheme) {
     return Container(
-      margin: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(AppSpace.x4),
       decoration: BoxDecoration(
         color: backgroundColor ?? colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
@@ -291,7 +292,7 @@ class CustomBottomBar extends StatelessWidget {
       onTap: () =>
           (onTap ?? (index) => _handleNavigation(context, index))(index),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: AppSpace.x2),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

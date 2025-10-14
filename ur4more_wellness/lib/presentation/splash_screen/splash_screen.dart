@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sizer/sizer.dart';
+import 'dart:math' as math;
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../routes/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -243,7 +244,7 @@ class _SplashScreenState extends State<SplashScreen>
                             },
                           ),
 
-                          const SizedBox(height: 32),
+                          const SizedBox(height: AppSpace.x8),
 
                           // Brand Text
                           AnimatedBuilder(
@@ -259,7 +260,7 @@ class _SplashScreenState extends State<SplashScreen>
                                       ?.copyWith(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w700,
-                                        fontSize: 24.sp,
+                                        fontSize: math.min(24.0, (Theme.of(context).textTheme.headlineLarge?.fontSize ?? 24)),
                                         letterSpacing: 2.0,
                                       ),
                                 ),
@@ -267,7 +268,7 @@ class _SplashScreenState extends State<SplashScreen>
                             },
                           ),
 
-                          const SizedBox(height: 16),
+                          const SizedBox(height: AppSpace.x4),
 
                           // Tagline
                           AnimatedBuilder(
@@ -283,7 +284,7 @@ class _SplashScreenState extends State<SplashScreen>
                                       ?.copyWith(
                                         color:
                                             Colors.white.withOpacity(0.8),
-                                        fontSize: 14.sp,
+                                        fontSize: math.min(14.0, (Theme.of(context).textTheme.bodyMedium?.fontSize ?? 14)),
                                         letterSpacing: 1.0,
                                       ),
                                 ),
@@ -297,13 +298,13 @@ class _SplashScreenState extends State<SplashScreen>
 
                   // Loading Section
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 32),
+                    padding: const EdgeInsets.only(bottom: AppSpace.x8),
                     child: Column(
                       children: [
                         // Loading Indicator
                         SizedBox(
-                          width: 8.w,
-                          height: 8.w,
+                          width: AppSpace.x2,
+                          height: AppSpace.x2,
                           child: CircularProgressIndicator(
                             strokeWidth: 2.0,
                             valueColor: AlwaysStoppedAnimation<Color>(
@@ -312,7 +313,7 @@ class _SplashScreenState extends State<SplashScreen>
                           ),
                         ),
 
-                        const SizedBox(height: 24),
+                        const SizedBox(height: AppSpace.x6),
 
                         // Status Text
                         AnimatedSwitcher(
@@ -325,7 +326,7 @@ class _SplashScreenState extends State<SplashScreen>
                                 .bodySmall
                                 ?.copyWith(
                                   color: Colors.white.withOpacity(0.7),
-                                  fontSize: 12.sp,
+                                  fontSize: math.min(12.0, (Theme.of(context).textTheme.bodySmall?.fontSize ?? 12)),
                                 ),
                             textAlign: TextAlign.center,
                           ),
@@ -344,8 +345,8 @@ class _SplashScreenState extends State<SplashScreen>
 
   Widget _buildLogo() {
     return Container(
-      width: 30.w,
-      height: 30.w,
+      width: 120,
+      height: 120,
       decoration: BoxDecoration(
         color: Colors.white,
         shape: BoxShape.circle,
@@ -358,7 +359,7 @@ class _SplashScreenState extends State<SplashScreen>
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(AppSpace.x4),
         child: Center(
           child: Image.asset(
             'assets/images/logo-ur4more-4-1760393143197.png',
@@ -379,7 +380,7 @@ class _SplashScreenState extends State<SplashScreen>
                 ),
                 child: Icon(
                   Icons.favorite,
-                  size: 12.w,
+                  size: 48,
                   color: Theme.of(context).colorScheme.primary,
                 ),
               );
