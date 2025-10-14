@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 import '../../../core/app_export.dart';
 import '../../../design/tokens.dart';
@@ -111,7 +110,7 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
                       style: theme.textTheme.headlineLarge?.copyWith(
                         color: _getUrgeColor(widget.urgeLevel),
                         fontWeight: FontWeight.w700,
-                        fontSize: math.min(36.0, 24),
+                        fontSize: 36,
                       ),
                     ),
                   ],

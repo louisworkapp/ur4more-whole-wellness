@@ -241,7 +241,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
         suggestionAction: suggestionAction,
         onContinue: () {
           Navigator.pop(context); // Close modal
-          Navigator.pushReplacementNamed(context, '/home-dashboard');
+          Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
         },
         onSuggestionTap: (action) {
           Navigator.pop(context);
@@ -255,11 +255,11 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
     switch (action) {
       case 'mobility_reset':
         // Navigate to body fitness for mobility workout
-        Navigator.pushNamed(context, '/body-fitness');
+        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false, arguments: 1);
         break;
       case 'peace_verse':
         // Navigate to spiritual section
-        Navigator.pushNamed(context, '/spiritual-growth');
+        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false, arguments: 3);
         break;
     }
   }
@@ -600,7 +600,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
             ),
           ),
 
-          SizedBox(height: AppSpace.x2),
+          SizedBox(height: AppSpace.x1),
 
           // Subtitle
           Text(
@@ -611,12 +611,12 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                 ),
           ),
 
-          SizedBox(height: AppSpace.x3),
+          SizedBox(height: AppSpace.x2),
 
           // Section Content
           child,
 
-          SizedBox(height: AppSpace.x4),
+          SizedBox(height: AppSpace.x2),
         ],
       ),
     );

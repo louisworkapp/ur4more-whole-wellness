@@ -7,7 +7,6 @@ import '../../core/brand_rules.dart';
 import '../../core/services/points_service.dart';
 import '../../core/services/telemetry.dart';
 import '../../widgets/custom_app_bar.dart';
-import '../../widgets/custom_bottom_bar.dart';
 import '../../widgets/custom_icon_widget.dart';
 import './widgets/category_filter_widget.dart';
 import './widgets/points_balance_card_widget.dart';
@@ -624,7 +623,7 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                childAspectRatio: 0.75,
+                                childAspectRatio: 0.65, // Reduced from 0.75 to give more height
                                 crossAxisSpacing: AppSpace.x2,
                                 mainAxisSpacing: AppSpace.x1,
                               ),
@@ -643,10 +642,6 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: CustomBottomBar(
-        currentIndex: 4,
-        variant: CustomBottomBarVariant.standard,
       ),
     );
   }

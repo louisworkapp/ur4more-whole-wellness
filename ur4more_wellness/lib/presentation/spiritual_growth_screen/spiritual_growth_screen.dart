@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
 import '../../design/tokens.dart';
 import '../../widgets/custom_app_bar.dart';
-import '../../widgets/custom_bottom_bar.dart';
 import './widgets/devotional_card_widget.dart';
 import './widgets/devotional_history_widget.dart';
 import './widgets/faith_mode_banner_widget.dart';
@@ -204,10 +203,6 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
       body: _faithMode == "Off"
           ? _buildOffModeContent(context, colorScheme)
           : _buildActiveContent(context, colorScheme),
-      bottomNavigationBar: CustomBottomBar(
-        currentIndex: _currentBottomIndex,
-        variant: CustomBottomBarVariant.standard,
-      ),
     );
   }
 

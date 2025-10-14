@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class JournalEntryInterface extends StatefulWidget {
@@ -61,14 +61,14 @@ class _JournalEntryInterfaceState extends State<JournalEntryInterface> {
     final colorScheme = theme.colorScheme;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
       child: Card(
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
-          padding: EdgeInsets.all(4.w),
+          padding: Pad.card,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -79,7 +79,7 @@ class _JournalEntryInterfaceState extends State<JournalEntryInterface> {
                     color: const Color(0xFF0FA97A),
                     size: 20,
                   ),
-                  SizedBox(width: 2.w),
+                  SizedBox(width: AppSpace.x2),
                   Text(
                     'Journal Entry',
                     style: theme.textTheme.titleMedium?.copyWith(
@@ -101,13 +101,13 @@ class _JournalEntryInterfaceState extends State<JournalEntryInterface> {
                     ),
                 ],
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: AppSpace.x3),
               AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
                 constraints: BoxConstraints(
-                  minHeight: _isExpanded ? 20.h : 12.h,
-                  maxHeight: _isExpanded ? 30.h : 12.h,
+                  minHeight: _isExpanded ? 200 : 120,
+                  maxHeight: _isExpanded ? 300 : 120,
                 ),
                 child: TextField(
                   controller: _textController,
@@ -144,12 +144,12 @@ class _JournalEntryInterfaceState extends State<JournalEntryInterface> {
                         width: 2,
                       ),
                     ),
-                    contentPadding: EdgeInsets.all(3.w),
+                    contentPadding: EdgeInsets.all(AppSpace.x3),
                     counterText: '',
                   ),
                 ),
               ),
-              SizedBox(height: 1.h),
+              SizedBox(height: AppSpace.x2),
               Row(
                 children: [
                   Text(
@@ -158,7 +158,7 @@ class _JournalEntryInterfaceState extends State<JournalEntryInterface> {
                       color: colorScheme.onSurfaceVariant,
                     ),
                   ),
-                  SizedBox(width: 2.w),
+                  SizedBox(width: AppSpace.x2),
                   CustomIconWidget(
                     iconName: 'cloud_done',
                     color: const Color(0xFF0FA97A),

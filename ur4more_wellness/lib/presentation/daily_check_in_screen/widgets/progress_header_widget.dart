@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class ProgressHeaderWidget extends StatelessWidget {
@@ -27,9 +27,9 @@ class ProgressHeaderWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(
         top: MediaQuery.of(context).padding.top,
-        left: 4.w,
-        right: 4.w,
-        bottom: 2.h,
+        left: AppSpace.x4,
+        right: AppSpace.x4,
+        bottom: AppSpace.x2,
       ),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
@@ -65,7 +65,7 @@ class ProgressHeaderWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
 
           // Progress indicators
           Row(
@@ -89,7 +89,7 @@ class ProgressHeaderWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: AppSpace.x1),
 
           // Progress bar
           ClipRRect(

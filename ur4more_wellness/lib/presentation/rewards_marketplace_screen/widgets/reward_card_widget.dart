@@ -75,7 +75,7 @@ class RewardCardWidget extends StatelessWidget {
                     CustomImageWidget(
                       imageUrl: reward['image'] as String? ?? '',
                       width: double.infinity,
-                        height: 120, // Fixed height instead of percentage
+                        height: 100, // Reduced from 120 to 100
                       fit: BoxFit.cover,
                       semanticLabel: reward['semanticLabel'] as String? ??
                           'Reward item image',
@@ -83,7 +83,7 @@ class RewardCardWidget extends StatelessWidget {
                     if (!isAvailable)
                       Container(
                         width: double.infinity,
-                        height: 120, // Fixed height instead of percentage
+                        height: 100, // Reduced from 120 to 100 to match image height
                         color: Colors.black.withOpacity( 0.6),
                         child: Center(
                           child: Container(
@@ -138,13 +138,13 @@ class RewardCardWidget extends StatelessWidget {
               ),
               // Content section
               Padding(
-                padding: EdgeInsets.all(AppSpace.x3),
+                padding: EdgeInsets.all(AppSpace.x2), // Reduced from x3 to x2
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       reward['name'] as String? ?? 'Reward Item',
-                      style: theme.textTheme.titleMedium?.copyWith(
+                      style: theme.textTheme.titleSmall?.copyWith( // Changed from titleMedium to titleSmall
                         fontWeight: FontWeight.w600,
                         color: isAvailable
                             ? colorScheme.onSurface
@@ -162,7 +162,7 @@ class RewardCardWidget extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: AppSpace.x3),
+                    SizedBox(height: AppSpace.x2), // Reduced from x3 to x2
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

@@ -321,42 +321,12 @@ class CustomBottomBar extends StatelessWidget {
   }
 
   void _handleNavigation(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/home-dashboard',
-          (route) => false,
-        );
-        break;
-      case 1:
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/body-fitness-screen',
-          (route) => false,
-        );
-        break;
-      case 2:
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/mind-wellness-screen',
-          (route) => false,
-        );
-        break;
-      case 3:
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/spiritual-growth-screen',
-          (route) => false,
-        );
-        break;
-      case 4:
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          '/rewards-marketplace-screen',
-          (route) => false,
-        );
-        break;
-    }
+    // Navigate to main scaffold with the selected index
+    Navigator.pushNamedAndRemoveUntil(
+      context,
+      '/',
+      (route) => false,
+      arguments: index,
+    );
   }
 }
