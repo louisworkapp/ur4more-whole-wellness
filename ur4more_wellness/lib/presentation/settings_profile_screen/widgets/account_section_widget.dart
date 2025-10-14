@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class AccountSectionWidget extends StatelessWidget {
@@ -24,9 +24,9 @@ class AccountSectionWidget extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
       child: Padding(
-        padding: EdgeInsets.all(4.w),
+        padding: Pad.card,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,7 +37,7 @@ class AccountSectionWidget extends StatelessWidget {
                   color: colorScheme.primary,
                   size: 24,
                 ),
-                SizedBox(width: 3.w),
+                SizedBox(width: AppSpace.x3),
                 Text(
                   'Account Management',
                   style: theme.textTheme.titleLarge?.copyWith(
@@ -47,9 +47,9 @@ class AccountSectionWidget extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
             _buildSyncStatus(theme, colorScheme),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
             _buildAccountActions(context, theme, colorScheme),
           ],
         ),
