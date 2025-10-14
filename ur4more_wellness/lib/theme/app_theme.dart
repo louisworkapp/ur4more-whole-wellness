@@ -329,7 +329,7 @@ class AppTheme {
       ),
       elevation: 4.0,
     ),
-    dialogTheme: const DialogThemeData(backgroundColor: surfaceLight),
+    dialogTheme: DialogTheme(backgroundColor: surfaceLight),
   );
 
   /// Dark theme with Contemporary Wellness Minimalism
@@ -587,7 +587,7 @@ class AppTheme {
       ),
       elevation: 4.0,
     ),
-    dialogTheme: const DialogThemeData(backgroundColor: Color(0xFF374151)),
+    dialogTheme: DialogTheme(backgroundColor: Color(0xFF374151)),
   );
 
   /// Helper method to build text theme with Inter font family
