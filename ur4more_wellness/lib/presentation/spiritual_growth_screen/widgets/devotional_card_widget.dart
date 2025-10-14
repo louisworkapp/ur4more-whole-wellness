@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 
 class DevotionalCardWidget extends StatelessWidget {
   final Map<String, dynamic> devotional;
@@ -30,7 +30,7 @@ class DevotionalCardWidget extends StatelessWidget {
       onTap: onTap,
       onLongPress: () => _showOptionsBottomSheet(context),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+        margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
         decoration: BoxDecoration(
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(16),
@@ -57,7 +57,7 @@ class DevotionalCardWidget extends StatelessWidget {
   Widget _buildHeader(BuildContext context, ColorScheme colorScheme) {
     final theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: Pad.card,
       decoration: BoxDecoration(
         color: AppTheme.secondaryLight.withOpacity( 0.1),
         borderRadius: const BorderRadius.only(
@@ -68,7 +68,7 @@ class DevotionalCardWidget extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+            padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
             decoration: BoxDecoration(
               color: AppTheme.secondaryLight,
               borderRadius: BorderRadius.circular(20),
@@ -100,7 +100,7 @@ class DevotionalCardWidget extends StatelessWidget {
   Widget _buildContent(BuildContext context, ColorScheme colorScheme) {
     final theme = Theme.of(context);
     return Padding(
-      padding: EdgeInsets.all(4.w),
+      padding: Pad.card,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -111,9 +111,9 @@ class DevotionalCardWidget extends StatelessWidget {
               color: colorScheme.onSurface,
             ),
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: AppSpace.x1),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.5.h),
+            padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
             decoration: BoxDecoration(
               color: AppTheme.primaryLight.withOpacity( 0.1),
               borderRadius: BorderRadius.circular(8),
@@ -126,7 +126,7 @@ class DevotionalCardWidget extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
           Text(
             devotional["verse"] as String? ??
                 "I can do all things through Christ who strengthens me.",
@@ -136,7 +136,7 @@ class DevotionalCardWidget extends StatelessWidget {
               height: 1.5,
             ),
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
           Text(
             devotional["reflection"] as String? ??
                 "Today's reflection on spiritual growth...",
@@ -155,7 +155,7 @@ class DevotionalCardWidget extends StatelessWidget {
   Widget _buildFooter(BuildContext context, ColorScheme colorScheme) {
     final theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: Pad.card,
       child: Row(
         children: [
           if (devotional["isCompleted"] == true) ...[
@@ -218,7 +218,7 @@ class DevotionalCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (context) => Container(
-        padding: EdgeInsets.all(4.w),
+        padding: Pad.card,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -267,7 +267,7 @@ class DevotionalCardWidget extends StatelessWidget {
                 onBookmark?.call();
               },
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: AppSpace.x2),
           ],
         ),
       ),

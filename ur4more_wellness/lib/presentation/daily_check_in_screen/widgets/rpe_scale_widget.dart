@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class RpeScaleWidget extends StatefulWidget {
@@ -57,7 +57,7 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
     final theme = Theme.of(context);
 
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: Pad.card,
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
@@ -70,7 +70,7 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
         children: [
           Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
+            padding: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x3),
             decoration: BoxDecoration(
               color: _getRpeColor(widget.currentValue).withOpacity( 0.1),
               borderRadius: BorderRadius.circular(12),
@@ -85,10 +85,10 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
                   style: theme.textTheme.headlineLarge?.copyWith(
                     color: _getRpeColor(widget.currentValue),
                     fontWeight: FontWeight.w700,
-                    fontSize: 48.sp,
+                    fontSize: 48, // Fixed font size instead of Sizer
                   ),
                 ),
-                SizedBox(height: 1.h),
+                SizedBox(height: AppSpace.x1),
                 Text(
                   _getRpeDescription(widget.currentValue),
                   textAlign: TextAlign.center,
@@ -100,7 +100,7 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
               ],
             ),
           ),
-          SizedBox(height: 3.h),
+          SizedBox(height: AppSpace.x3),
           SliderTheme(
             data: SliderTheme.of(context).copyWith(
               activeTrackColor: _getRpeColor(widget.currentValue),
@@ -124,7 +124,7 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
               },
             ),
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: AppSpace.x1),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -151,9 +151,9 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
               ),
             ],
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
           Container(
-            padding: EdgeInsets.all(3.w),
+            padding: EdgeInsets.all(AppSpace.x3),
             decoration: BoxDecoration(
               color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.5),
               borderRadius: BorderRadius.circular(8),
@@ -165,7 +165,7 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
                   color: theme.colorScheme.onSurfaceVariant,
                   size: 16,
                 ),
-                SizedBox(width: 2.w),
+                SizedBox(width: AppSpace.x2),
                 Expanded(
                   child: Text(
                     'RPE tracking helps monitor your recovery - no points awarded',

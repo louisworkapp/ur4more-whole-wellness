@@ -270,12 +270,12 @@ class _HomeDashboardState extends State<HomeDashboard> {
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: AppSpace.x2),
                 Text(
                   activity["title"] as String,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: AppSpace.x2),
                 _buildQuickActionTile(
                   context,
                   'View Progress',
@@ -293,7 +293,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                   Navigator.pop(context);
                   _handleSkipToday(activity);
                 }),
-                SizedBox(height: 2.h),
+                SizedBox(height: AppSpace.x2),
               ],
             ),
           ),

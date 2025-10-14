@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class MindWellnessHeader extends StatelessWidget {
@@ -35,7 +35,7 @@ class MindWellnessHeader extends StatelessWidget {
       ),
       child: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(4.w),
+          padding: Pad.card,
           child: Column(
             children: [
               Row(
@@ -51,7 +51,7 @@ class MindWellnessHeader extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      SizedBox(height: 0.5.h),
+                      SizedBox(height: AppSpace.x1),
                       Text(
                         'Nurture your mental health',
                         style: theme.textTheme.bodyMedium?.copyWith(
@@ -63,7 +63,7 @@ class MindWellnessHeader extends StatelessWidget {
                   GestureDetector(
                     onTap: onRefresh,
                     child: Container(
-                      padding: EdgeInsets.all(2.w),
+                      padding: EdgeInsets.all(AppSpace.x2),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity( 0.2),
                         borderRadius: BorderRadius.circular(12),
@@ -77,7 +77,7 @@ class MindWellnessHeader extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 3.h),
+              SizedBox(height: AppSpace.x3),
               Row(
                 children: [
                   Expanded(
@@ -90,7 +90,7 @@ class MindWellnessHeader extends StatelessWidget {
                       theme: theme,
                     ),
                   ),
-                  SizedBox(width: 4.w),
+                  SizedBox(width: AppSpace.x4),
                   Expanded(
                     child: _buildStatCard(
                       context,
@@ -119,7 +119,7 @@ class MindWellnessHeader extends StatelessWidget {
     required ThemeData theme,
   }) {
     return Container(
-      padding: EdgeInsets.all(3.w),
+      padding: EdgeInsets.all(AppSpace.x3),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity( 0.15),
         borderRadius: BorderRadius.circular(12),
@@ -138,7 +138,7 @@ class MindWellnessHeader extends StatelessWidget {
                 color: Colors.white,
                 size: 16,
               ),
-              SizedBox(width: 2.w),
+              SizedBox(width: AppSpace.x2),
               Text(
                 title,
                 style: theme.textTheme.bodySmall?.copyWith(
@@ -148,7 +148,7 @@ class MindWellnessHeader extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: AppSpace.x1),
           Text(
             value,
             style: theme.textTheme.headlineMedium?.copyWith(

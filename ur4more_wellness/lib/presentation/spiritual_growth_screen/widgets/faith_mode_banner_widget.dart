@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 
 class FaithModeBannerWidget extends StatelessWidget {
   final String faithMode;
@@ -29,8 +29,8 @@ class FaithModeBannerWidget extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-      padding: EdgeInsets.all(4.w),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
+      padding: Pad.card,
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(16),
@@ -44,7 +44,7 @@ class FaithModeBannerWidget extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: EdgeInsets.all(2.w),
+                padding: EdgeInsets.all(AppSpace.x2),
                 decoration: BoxDecoration(
                   color: colorScheme.outline.withOpacity( 0.2),
                   borderRadius: BorderRadius.circular(12),
@@ -55,7 +55,7 @@ class FaithModeBannerWidget extends StatelessWidget {
                   size: 20,
                 ),
               ),
-              SizedBox(width: 3.w),
+              SizedBox(width: AppSpace.x3),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +67,7 @@ class FaithModeBannerWidget extends StatelessWidget {
                         color: colorScheme.onSurface,
                       ),
                     ),
-                    SizedBox(height: 0.5.h),
+                    SizedBox(height: AppSpace.x1),
                     Text(
                       "Faith mode is currently turned off",
                       style: theme.textTheme.bodySmall?.copyWith(
@@ -79,9 +79,9 @@ class FaithModeBannerWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
           Container(
-            padding: EdgeInsets.all(3.w),
+            padding: EdgeInsets.all(AppSpace.x3),
             decoration: BoxDecoration(
               color: AppTheme.primaryLight.withOpacity( 0.1),
               borderRadius: BorderRadius.circular(12),
@@ -96,14 +96,14 @@ class FaithModeBannerWidget extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: AppSpace.x2),
                 ElevatedButton(
                   onPressed: onSettingsTap,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppTheme.primaryLight,
                     foregroundColor: Colors.white,
                     padding:
-                        EdgeInsets.symmetric(horizontal: 6.w, vertical: 1.5.h),
+                        EdgeInsets.symmetric(horizontal: AppSpace.x6, vertical: AppSpace.x3),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -117,7 +117,7 @@ class FaithModeBannerWidget extends StatelessWidget {
                         color: Colors.white,
                         size: 16,
                       ),
-                      SizedBox(width: 2.w),
+                      SizedBox(width: AppSpace.x2),
                       Text(
                         "Go to Settings",
                         style: theme.textTheme.labelLarge?.copyWith(
@@ -143,8 +143,8 @@ class FaithModeBannerWidget extends StatelessWidget {
         isLightMode ? AppTheme.secondaryLight : AppTheme.primaryLight;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-      padding: EdgeInsets.all(4.w),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
+      padding: Pad.card,
       decoration: BoxDecoration(
         color: bannerColor.withOpacity( 0.1),
         borderRadius: BorderRadius.circular(16),
@@ -167,7 +167,7 @@ class FaithModeBannerWidget extends StatelessWidget {
               size: 20,
             ),
           ),
-          SizedBox(width: 3.w),
+          SizedBox(width: AppSpace.x3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -179,7 +179,7 @@ class FaithModeBannerWidget extends StatelessWidget {
                     color: colorScheme.onSurface,
                   ),
                 ),
-                SizedBox(height: 0.5.h),
+                SizedBox(height: AppSpace.x1),
                 Text(
                   isLightMode
                       ? "Simplified spiritual content enabled"

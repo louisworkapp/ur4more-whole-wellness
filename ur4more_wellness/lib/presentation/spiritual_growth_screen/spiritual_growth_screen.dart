@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../design/tokens.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/custom_bottom_bar.dart';
 import './widgets/devotional_card_widget.dart';
@@ -164,8 +164,8 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
         backgroundColor: colorScheme.surface,
         actions: [
           Container(
-            margin: EdgeInsets.only(right: 2.w),
-            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+            margin: EdgeInsets.only(right: AppSpace.x2),
+            padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
             decoration: BoxDecoration(
               color: AppTheme.secondaryLight,
               borderRadius: BorderRadius.circular(20),
@@ -178,7 +178,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
                   color: Colors.white,
                   size: 16,
                 ),
-                SizedBox(width: 1.w),
+                SizedBox(width: AppSpace.x1),
                 Text(
                   "$_spiritualPoints",
                   style: theme.textTheme.labelMedium?.copyWith(
@@ -198,7 +198,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
             onPressed: () =>
                 Navigator.pushNamed(context, '/settings-profile-screen'),
           ),
-          SizedBox(width: 2.w),
+          SizedBox(width: AppSpace.x2),
         ],
       ),
       body: _faithMode == "Off"
@@ -216,13 +216,13 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 2.h),
+            SizedBox(height: AppSpace.x2),
             FaithModeBannerWidget(
               faithMode: _faithMode,
               onSettingsTap: () =>
                   Navigator.pushNamed(context, '/settings-profile-screen'),
             ),
-            SizedBox(height: 4.h),
+            SizedBox(height: AppSpace.x4),
             _buildWelcomeBackMessage(context, colorScheme),
           ],
         ),
@@ -248,7 +248,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
 
           // Tab bar
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 4.w),
+            margin: EdgeInsets.symmetric(horizontal: AppSpace.x4),
             decoration: BoxDecoration(
               color: colorScheme.surfaceContainerHighest,
               borderRadius: BorderRadius.circular(12),
@@ -294,8 +294,8 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
     final theme = Theme.of(context);
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-      padding: EdgeInsets.all(4.w),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
+      padding: Pad.card,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -310,7 +310,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(3.w),
+            padding: EdgeInsets.all(AppSpace.x3),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity( 0.2),
               borderRadius: BorderRadius.circular(12),
@@ -321,7 +321,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
               size: 24,
             ),
           ),
-          SizedBox(width: 4.w),
+          SizedBox(width: AppSpace.x4),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -333,7 +333,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                SizedBox(height: 0.5.h),
+                SizedBox(height: AppSpace.x1),
                 Text(
                   "Keep up your daily devotion habit!",
                   style: theme.textTheme.bodyMedium?.copyWith(
@@ -344,7 +344,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+            padding: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
             decoration: BoxDecoration(
               color: AppTheme.secondaryLight,
               borderRadius: BorderRadius.circular(12),
@@ -380,7 +380,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
-            SizedBox(height: 2.h),
+            SizedBox(height: AppSpace.x2),
 
             // Today's devotionals
             ..._todayDevotionals.map((devotional) => DevotionalCardWidget(
@@ -392,14 +392,14 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
                   onAddToPrayer: () => _addToPrayerList(devotional),
                 )),
 
-            SizedBox(height: 2.h),
+            SizedBox(height: AppSpace.x2),
 
             // Prayer requests section
             PrayerRequestWidget(
               onSubmit: _submitPrayerRequest,
             ),
 
-            SizedBox(height: 4.h),
+            SizedBox(height: AppSpace.x4),
           ],
         ),
       ),
@@ -408,14 +408,14 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
 
   Widget _buildHistoryTab(BuildContext context, ColorScheme colorScheme) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: 2.h),
+        child: Column(
+          children: [
+            SizedBox(height: AppSpace.x2),
           DevotionalHistoryWidget(
             history: _devotionalHistory,
             onDevotionalTap: _openDevotional,
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: AppSpace.x4),
         ],
       ),
     );
@@ -423,13 +423,13 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
 
   Widget _buildMilestonesTab(BuildContext context, ColorScheme colorScheme) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: 2.h),
+        child: Column(
+          children: [
+            SizedBox(height: AppSpace.x2),
           SpiritualMilestoneWidget(
             milestones: _spiritualMilestones,
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: AppSpace.x4),
         ],
       ),
     );
@@ -440,8 +440,8 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
     final theme = Theme.of(context);
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w),
-      padding: EdgeInsets.all(6.w),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4),
+      padding: EdgeInsets.all(AppSpace.x6),
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
@@ -460,7 +460,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
             color: colorScheme.onSurfaceVariant,
             size: 48,
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
           Text(
             "Welcome Back!",
             style: theme.textTheme.headlineSmall?.copyWith(
@@ -468,7 +468,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
               color: colorScheme.onSurface,
             ),
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: AppSpace.x1),
           Text(
             "Your spiritual growth journey is waiting for you. Enable faith mode in settings to access devotions, prayer requests, and spiritual milestones.",
             style: theme.textTheme.bodyLarge?.copyWith(
@@ -569,19 +569,19 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
               color: AppTheme.secondaryLight,
               size: 48,
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: AppSpace.x2),
             Text(
               "Devotion Completed!",
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
             ),
-            SizedBox(height: 1.h),
+            SizedBox(height: AppSpace.x1),
             Text(
               "You earned 25 spiritual points!",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: AppSpace.x2),
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
               child: const Text("Continue"),

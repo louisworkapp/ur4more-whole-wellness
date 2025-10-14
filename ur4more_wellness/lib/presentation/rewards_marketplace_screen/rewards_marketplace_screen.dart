@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../design/tokens.dart';
 import '../../core/brand_rules.dart';
 import '../../core/services/points_service.dart';
 import '../../core/services/telemetry.dart';
@@ -403,7 +403,7 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
       backgroundColor: Colors.transparent,
       builder:
           (context) => Container(
-            height: 70.h,
+            height: 500, // Fixed height instead of percentage
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
               borderRadius: const BorderRadius.vertical(
@@ -413,9 +413,9 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 1.h),
-                  width: 12.w,
-                  height: 0.5.h,
+                  margin: EdgeInsets.only(top: AppSpace.x1),
+                  width: 48, // Fixed width instead of percentage
+                  height: 2, // Fixed height instead of percentage
                   decoration: BoxDecoration(
                     color: Theme.of(
                       context,
@@ -424,7 +424,7 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(4.w),
+                  padding: Pad.card,
                   child: Text(
                     'Points History',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -434,7 +434,7 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
                 ),
                 Expanded(
                   child: ListView.separated(
-                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    padding: EdgeInsets.symmetric(horizontal: AppSpace.x4),
                     itemCount: _recentTransactions.length,
                     separatorBuilder:
                         (context, index) => Divider(
@@ -448,7 +448,7 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
 
                       return ListTile(
                         leading: Container(
-                          padding: EdgeInsets.all(2.w),
+                          padding: EdgeInsets.all(AppSpace.x2),
                           decoration: BoxDecoration(
                             color:
                                 isEarned
@@ -548,7 +548,7 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
               size: 24,
             ),
           ),
-          SizedBox(width: 2.w),
+          SizedBox(width: AppSpace.x2),
         ],
       ),
       body: SafeArea(
@@ -598,14 +598,14 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
                                 color: colorScheme.onSurfaceVariant,
                                 size: 48,
                               ),
-                              SizedBox(height: 2.h),
+                              SizedBox(height: AppSpace.x2),
                               Text(
                                 'No rewards found',
                                 style: theme.textTheme.titleMedium?.copyWith(
                                   color: colorScheme.onSurfaceVariant,
                                 ),
                               ),
-                              SizedBox(height: 1.h),
+                              SizedBox(height: AppSpace.x1),
                               Text(
                                 'Try adjusting your search or category filter',
                                 style: theme.textTheme.bodySmall?.copyWith(
@@ -618,15 +618,15 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
                         )
                         : GridView.builder(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 2.w,
-                            vertical: 1.h,
+                            horizontal: AppSpace.x2,
+                            vertical: AppSpace.x1,
                           ),
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 childAspectRatio: 0.75,
-                                crossAxisSpacing: 2.w,
-                                mainAxisSpacing: 1.h,
+                                crossAxisSpacing: AppSpace.x2,
+                                mainAxisSpacing: AppSpace.x1,
                               ),
                           itemCount: _filteredRewards.length,
                           itemBuilder: (context, index) {

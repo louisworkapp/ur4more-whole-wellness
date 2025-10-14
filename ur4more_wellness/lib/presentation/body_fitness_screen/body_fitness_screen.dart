@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../design/tokens.dart';
 import '../../widgets/custom_bottom_bar.dart';
 import './widgets/equipment_filter_chips.dart';
 import './widgets/fitness_header.dart';
@@ -243,7 +243,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
           content: Text(
             'Workout completed! +$points points earned',
             style: GoogleFonts.inter(
-              fontSize: 14.sp,
+              fontSize: 14, // Fixed font size instead of Sizer
               fontWeight: FontWeight.w500,
               color: Colors.white,
             ),
@@ -272,7 +272,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
         content: Text(
           'Added "${workout['name']}" to favorites',
           style: GoogleFonts.inter(
-            fontSize: 14.sp,
+            fontSize: 14, // Fixed font size instead of Sizer
             fontWeight: FontWeight.w500,
             color: Colors.white,
           ),
@@ -292,7 +292,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
         content: Text(
           'Scheduled "${workout['name']}" for later',
           style: GoogleFonts.inter(
-            fontSize: 14.sp,
+            fontSize: 14, // Fixed font size instead of Sizer
             fontWeight: FontWeight.w500,
             color: Colors.white,
           ),
@@ -312,7 +312,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
         content: Text(
           'Shared "${workout['name']}" workout',
           style: GoogleFonts.inter(
-            fontSize: 14.sp,
+            fontSize: 14, // Fixed font size instead of Sizer
             fontWeight: FontWeight.w500,
             color: Colors.white,
           ),
@@ -342,7 +342,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
         content: Text(
           'Workouts refreshed successfully',
           style: GoogleFonts.inter(
-            fontSize: 14.sp,
+            fontSize: 14, // Fixed font size instead of Sizer
             fontWeight: FontWeight.w500,
             color: Colors.white,
           ),
@@ -362,7 +362,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
-        height: 70.h,
+        height: 500, // Fixed height instead of percentage
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
           borderRadius: const BorderRadius.only(
@@ -371,12 +371,12 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(4.w),
+          padding: Pad.card,
           child: Column(
             children: [
               Container(
-                width: 12.w,
-                height: 0.5.h,
+                width: 48, // Fixed width instead of percentage
+                height: 2, // Fixed height instead of percentage
                 decoration: BoxDecoration(
                   color: Theme.of(context)
                       .colorScheme
@@ -385,20 +385,20 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              SizedBox(height: 3.h),
+              SizedBox(height: AppSpace.x3),
               Text(
                 'Create Custom Workout',
                 style: GoogleFonts.inter(
-                  fontSize: 20.sp,
+                  fontSize: 20, // Fixed font size instead of Sizer
                   fontWeight: FontWeight.w700,
                   color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: AppSpace.x2),
               Text(
                 'Build your own personalized workout routine',
                 style: GoogleFonts.inter(
-                  fontSize: 14.sp,
+                  fontSize: 14, // Fixed font size instead of Sizer
                   fontWeight: FontWeight.w400,
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
@@ -413,7 +413,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                       content: Text(
                         'Custom workout creation coming soon!',
                         style: GoogleFonts.inter(
-                          fontSize: 14.sp,
+                          fontSize: 14, // Fixed font size instead of Sizer
                           fontWeight: FontWeight.w500,
                           color: Colors.white,
                         ),
@@ -428,7 +428,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppTheme.lightTheme.primaryColor,
-                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+                  padding: EdgeInsets.symmetric(horizontal: AppSpace.x8, vertical: AppSpace.x2),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -436,13 +436,13 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                 child: Text(
                   'Create Workout',
                   style: GoogleFonts.inter(
-                    fontSize: 16.sp,
+                    fontSize: 16, // Fixed font size instead of Sizer
                     fontWeight: FontWeight.w600,
                     color: Colors.white,
                   ),
                 ),
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: AppSpace.x2),
             ],
           ),
         ),
@@ -480,13 +480,13 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                   );
                 },
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: AppSpace.x2),
               EquipmentFilterChips(
                 selectedEquipment: selectedEquipment,
                 onEquipmentToggle: _onEquipmentToggle,
                 availableEquipment: availableEquipment,
               ),
-              SizedBox(height: 1.h),
+              SizedBox(height: AppSpace.x1),
               Expanded(
                 child: RefreshIndicator(
                   onRefresh: _onRefresh,
@@ -576,7 +576,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   Widget _buildEmptyState(ColorScheme colorScheme) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(8.w),
+        padding: EdgeInsets.all(AppSpace.x8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -585,26 +585,26 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
               color: colorScheme.onSurfaceVariant.withOpacity( 0.5),
               size: 80,
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
             Text(
               'No workouts found',
               style: GoogleFonts.inter(
-                fontSize: 20.sp,
+                fontSize: 20, // Fixed font size instead of Sizer
                 fontWeight: FontWeight.w600,
                 color: colorScheme.onSurfaceVariant,
               ),
             ),
-            SizedBox(height: 1.h),
+            SizedBox(height: AppSpace.x1),
             Text(
               'Try adjusting your equipment filters or create a custom workout',
               style: GoogleFonts.inter(
-                fontSize: 14.sp,
+                fontSize: 14, // Fixed font size instead of Sizer
                 fontWeight: FontWeight.w400,
                 color: colorScheme.onSurfaceVariant.withOpacity( 0.8),
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 4.h),
+            SizedBox(height: AppSpace.x4),
             ElevatedButton(
               onPressed: () {
                 setState(() {
@@ -614,12 +614,12 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppTheme.lightTheme.primaryColor,
-                padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 1.5.h),
+                padding: EdgeInsets.symmetric(horizontal: AppSpace.x6, vertical: AppSpace.x3),
               ),
               child: Text(
                 'Reset Filters',
                 style: GoogleFonts.inter(
-                  fontSize: 14.sp,
+                  fontSize: 14, // Fixed font size instead of Sizer
                   fontWeight: FontWeight.w600,
                   color: Colors.white,
                 ),
