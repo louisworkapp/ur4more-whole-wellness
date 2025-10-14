@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'dart:math' as math;
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
+import '../../../widgets/phone_card.dart';
 
 class SpiritualMilestoneWidget extends StatelessWidget {
   final List<Map<String, dynamic>> milestones;
@@ -16,19 +18,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withOpacity( 0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
+    return PhoneCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -43,7 +33,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: EdgeInsets.all(AppSpace.x4),
       decoration: BoxDecoration(
         color: AppTheme.successLight.withOpacity( 0.1),
         borderRadius: const BorderRadius.only(
@@ -54,7 +44,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(2.w),
+            padding: EdgeInsets.all(AppSpace.x2),
             decoration: BoxDecoration(
               color: AppTheme.successLight,
               borderRadius: BorderRadius.circular(12),
@@ -65,7 +55,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
               size: 20,
             ),
           ),
-          SizedBox(width: 3.w),
+          SizedBox(width: AppSpace.x3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +67,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
                     color: colorScheme.onSurface,
                   ),
                 ),
-                SizedBox(height: 0.5.h),
+                SizedBox(height: AppSpace.x1),
                 Text(
                   "Your faith journey achievements",
                   style: theme.textTheme.bodySmall?.copyWith(
@@ -88,7 +78,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+            padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
             decoration: BoxDecoration(
               color: AppTheme.secondaryLight,
               borderRadius: BorderRadius.circular(20),
@@ -108,7 +98,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
 
   Widget _buildMilestonesList(BuildContext context, ColorScheme colorScheme) {
     return Padding(
-      padding: EdgeInsets.all(4.w),
+      padding: EdgeInsets.all(AppSpace.x4),
       child: Column(
         children: milestones.asMap().entries.map((entry) {
           final index = entry.key;
@@ -143,8 +133,8 @@ class SpiritualMilestoneWidget extends StatelessWidget {
         Column(
           children: [
             Container(
-              width: 8.w,
-              height: 8.w,
+              width: AppSpace.x2,
+              height: AppSpace.x2,
               decoration: BoxDecoration(
                 color: isCompleted
                     ? AppTheme.successLight
@@ -170,8 +160,8 @@ class SpiritualMilestoneWidget extends StatelessWidget {
                       )
                     : isInProgress
                         ? Container(
-                            width: 3.w,
-                            height: 3.w,
+                            width: AppSpace.x3,
+                            height: AppSpace.x3,
                             decoration: const BoxDecoration(
                               color: Colors.white,
                               shape: BoxShape.circle,
@@ -183,16 +173,16 @@ class SpiritualMilestoneWidget extends StatelessWidget {
             if (!isLast)
               Container(
                 width: 2,
-                height: 6.h,
+                height: 24,
                 color: colorScheme.outline.withOpacity( 0.2),
-                margin: EdgeInsets.symmetric(vertical: 1.h),
+                margin: const EdgeInsets.symmetric(vertical: AppSpace.x1),
               ),
           ],
         ),
-        SizedBox(width: 4.w),
+        const SizedBox(width: AppSpace.x4),
         Expanded(
           child: Container(
-            padding: EdgeInsets.only(bottom: isLast ? 0 : 2.h),
+            padding: EdgeInsets.only(bottom: isLast ? 0 : AppSpace.x2),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -212,7 +202,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
                     if (milestone["points"] != null)
                       Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 2.w, vertical: 0.5.h),
+                            horizontal: AppSpace.x2, vertical: AppSpace.x1),
                         decoration: BoxDecoration(
                           color: AppTheme.secondaryLight.withOpacity( 0.1),
                           borderRadius: BorderRadius.circular(12),
@@ -227,7 +217,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
                       ),
                   ],
                 ),
-                SizedBox(height: 0.5.h),
+                SizedBox(height: AppSpace.x1),
                 Text(
                   milestone["description"] as String? ??
                       "Complete this milestone to grow spiritually",
@@ -237,7 +227,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
                   ),
                 ),
                 if (milestone["progress"] != null && !isCompleted) ...[
-                  SizedBox(height: 1.h),
+                  const SizedBox(height: AppSpace.x1),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -259,7 +249,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 0.5.h),
+                      SizedBox(height: AppSpace.x1),
                       LinearProgressIndicator(
                         value: (milestone["progress"] as num? ?? 0) /
                             (milestone["target"] as num? ?? 100),
@@ -267,14 +257,14 @@ class SpiritualMilestoneWidget extends StatelessWidget {
                             colorScheme.outline.withOpacity( 0.2),
                         valueColor: AlwaysStoppedAnimation<Color>(
                             AppTheme.secondaryLight),
-                        minHeight: 1.h,
+                        minHeight: AppSpace.x1,
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ],
                   ),
                 ],
                 if (isCompleted && milestone["completedDate"] != null) ...[
-                  SizedBox(height: 1.h),
+                  const SizedBox(height: AppSpace.x1),
                   Row(
                     children: [
                       CustomIconWidget(
@@ -282,7 +272,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
                         color: AppTheme.successLight,
                         size: 14,
                       ),
-                      SizedBox(width: 1.w),
+                      const SizedBox(width: AppSpace.x1),
                       Text(
                         "Completed ${milestone["completedDate"]}",
                         style: theme.textTheme.labelSmall?.copyWith(
