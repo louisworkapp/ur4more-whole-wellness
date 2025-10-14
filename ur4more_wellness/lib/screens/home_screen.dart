@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../design/tokens.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -14,7 +15,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(24),
+          padding: const EdgeInsets.all(AppSpace.x6),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -25,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: AppSpace.x2),
               Text(
                 'Your wellness journey starts here',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -33,10 +34,10 @@ class HomeScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 48),
+              const SizedBox(height: AppSpace.x12),
               Wrap(
-                spacing: 16,
-                runSpacing: 16,
+                spacing: AppSpace.x4,
+                runSpacing: AppSpace.x4,
                 alignment: WrapAlignment.center,
                 children: [
                   ElevatedButton(
@@ -46,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: AppSpace.x6, vertical: AppSpace.x4),
                     ),
                     child: const Text('Daily Check-in'),
                   ),
@@ -57,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: AppSpace.x6, vertical: AppSpace.x4),
                     ),
                     child: const Text('Rewards'),
                   ),
@@ -68,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: AppSpace.x6, vertical: AppSpace.x4),
                     ),
                     child: const Text('Settings'),
                   ),

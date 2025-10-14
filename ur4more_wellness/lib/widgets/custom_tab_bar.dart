@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../design/tokens.dart';
 
 enum CustomTabBarVariant {
   standard,
@@ -55,7 +56,7 @@ class CustomTabBar extends StatelessWidget {
       BuildContext context, ThemeData theme, ColorScheme colorScheme) {
     return Container(
       color: backgroundColor ?? colorScheme.surface,
-      padding: padding ?? const EdgeInsets.symmetric(horizontal: 16),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: AppSpace.x4),
       child: TabBar(
         tabs: tabs.map((tab) => Tab(text: tab)).toList(),
         isScrollable: isScrollable,
@@ -81,11 +82,11 @@ class CustomTabBar extends StatelessWidget {
       BuildContext context, ThemeData theme, ColorScheme colorScheme) {
     return Container(
       height: 48,
-      padding: padding ?? const EdgeInsets.all(16),
+      padding: padding ?? const EdgeInsets.all(AppSpace.x4),
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: tabs.length,
-        separatorBuilder: (context, index) => const SizedBox(width: 8),
+        separatorBuilder: (context, index) => const SizedBox(width: AppSpace.x2),
         itemBuilder: (context, index) {
           final isSelected = currentIndex == index;
           return GestureDetector(
@@ -93,7 +94,7 @@ class CustomTabBar extends StatelessWidget {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeInOut,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpace.x5, vertical: AppSpace.x2),
               decoration: BoxDecoration(
                 color: isSelected
                     ? (selectedColor ?? colorScheme.primary)
@@ -126,7 +127,7 @@ class CustomTabBar extends StatelessWidget {
   Widget _buildUnderlineTabBar(
       BuildContext context, ThemeData theme, ColorScheme colorScheme) {
     return Container(
-      padding: padding ?? const EdgeInsets.symmetric(horizontal: 16),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: AppSpace.x4),
       decoration: BoxDecoration(
         color: backgroundColor ?? colorScheme.surface,
         border: Border(
@@ -146,7 +147,7 @@ class CustomTabBar extends StatelessWidget {
             child: GestureDetector(
               onTap: () => onTap?.call(index),
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.symmetric(vertical: AppSpace.x4),
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
@@ -179,8 +180,8 @@ class CustomTabBar extends StatelessWidget {
   Widget _buildSegmentedTabBar(
       BuildContext context, ThemeData theme, ColorScheme colorScheme) {
     return Container(
-      margin: padding ?? const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(4),
+      margin: padding ?? const EdgeInsets.all(AppSpace.x4),
+      padding: const EdgeInsets.all(AppSpace.x1),
       decoration: BoxDecoration(
         color: backgroundColor ?? colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(12),
@@ -197,7 +198,7 @@ class CustomTabBar extends StatelessWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 curve: Curves.easeInOut,
-                padding: const EdgeInsets.symmetric(vertical: 12),
+                padding: const EdgeInsets.symmetric(vertical: AppSpace.x3),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? (selectedColor ?? colorScheme.surface)

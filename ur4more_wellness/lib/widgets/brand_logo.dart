@@ -19,7 +19,7 @@ class BrandLogo extends StatelessWidget {
         width: size,
         height: size,
         child: Image.asset(
-          'assets/images/logo-ur4more-1760380957365.png',
+          'assets/images/logo-ur4more-4.png',
           fit: BoxFit.contain,
           errorBuilder: (context, error, stackTrace) {
             // Fallback icon with brand primary color
