@@ -116,7 +116,7 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
         decoration: BoxDecoration(
-          border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
+          border: Border.all(color: colorScheme.outline.withOpacity( 0.3)),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -197,7 +197,7 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
       decoration: BoxDecoration(
-        border: Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
+        border: Border.all(color: colorScheme.outline.withOpacity( 0.3)),
         borderRadius: BorderRadius.circular(12),
       ),
       child: DropdownButtonHideUnderline(

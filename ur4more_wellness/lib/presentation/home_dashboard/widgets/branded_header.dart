@@ -27,7 +27,7 @@ class BrandedHeader extends StatelessWidget {
         color: colorScheme.surface,
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.05),
+            color: colorScheme.shadow.withOpacity( 0.05),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -76,10 +76,10 @@ class BrandedHeader extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
                   decoration: BoxDecoration(
-                    color: AppTheme.secondaryLight.withValues(alpha: 0.1),
+                    color: AppTheme.secondaryLight.withOpacity( 0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: AppTheme.secondaryLight.withValues(alpha: 0.3),
+                      color: AppTheme.secondaryLight.withOpacity( 0.3),
                       width: 1,
                     ),
                   ),
@@ -114,7 +114,7 @@ class BrandedHeader extends StatelessWidget {
                       color: colorScheme.surface,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: colorScheme.outline.withValues(alpha: 0.2),
+                        color: colorScheme.outline.withOpacity( 0.2),
                         width: 1,
                       ),
                     ),
@@ -151,10 +151,10 @@ class BrandedHeader extends StatelessWidget {
                     width: 10.w,
                     height: 10.w,
                     decoration: BoxDecoration(
-                      color: colorScheme.primary.withValues(alpha: 0.1),
+                      color: colorScheme.primary.withOpacity( 0.1),
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: colorScheme.primary.withValues(alpha: 0.3),
+                        color: colorScheme.primary.withOpacity( 0.3),
                         width: 1,
                       ),
                     ),

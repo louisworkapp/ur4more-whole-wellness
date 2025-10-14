@@ -136,7 +136,7 @@ class AppTheme {
     // Navigation bar theme for modern navigation
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: surfaceLight,
-      indicatorColor: primaryLight.withValues(alpha: 0.1),
+      indicatorColor: primaryLight.withOpacity( 0.1),
       labelTextStyle: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
           return GoogleFonts.inter(
@@ -238,7 +238,7 @@ class AppTheme {
       }),
       trackColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return primaryLight.withValues(alpha: 0.3);
+          return primaryLight.withOpacity( 0.3);
         }
         return Colors.grey.shade300;
       }),
@@ -272,16 +272,16 @@ class AppTheme {
     // Progress indicator with navy theming
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: primaryLight,
-      linearTrackColor: primaryLight.withValues(alpha: 0.2),
-      circularTrackColor: primaryLight.withValues(alpha: 0.2),
+      linearTrackColor: primaryLight.withOpacity( 0.2),
+      circularTrackColor: primaryLight.withOpacity( 0.2),
     ),
 
     // Slider theme
     sliderTheme: SliderThemeData(
       activeTrackColor: primaryLight,
       thumbColor: primaryLight,
-      overlayColor: primaryLight.withValues(alpha: 0.2),
-      inactiveTrackColor: primaryLight.withValues(alpha: 0.3),
+      overlayColor: primaryLight.withOpacity( 0.2),
+      inactiveTrackColor: primaryLight.withOpacity( 0.3),
       trackHeight: 4.0,
     ),
 
@@ -304,7 +304,7 @@ class AppTheme {
     // Tooltip theme
     tooltipTheme: TooltipThemeData(
       decoration: BoxDecoration(
-        color: onBackgroundLight.withValues(alpha: 0.9),
+        color: onBackgroundLight.withOpacity( 0.9),
         borderRadius: BorderRadius.circular(8),
       ),
       textStyle: GoogleFonts.inter(
@@ -393,7 +393,7 @@ class AppTheme {
     // Navigation bar theme for dark mode
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: surfaceDark,
-      indicatorColor: primaryDark.withValues(alpha: 0.2),
+      indicatorColor: primaryDark.withOpacity( 0.2),
       labelTextStyle: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
           return GoogleFonts.inter(
@@ -496,7 +496,7 @@ class AppTheme {
       }),
       trackColor: WidgetStateProperty.resolveWith((states) {
         if (states.contains(WidgetState.selected)) {
-          return primaryDark.withValues(alpha: 0.3);
+          return primaryDark.withOpacity( 0.3);
         }
         return Colors.grey.shade700;
       }),
@@ -530,16 +530,16 @@ class AppTheme {
     // Progress indicator for dark mode
     progressIndicatorTheme: ProgressIndicatorThemeData(
       color: primaryDark,
-      linearTrackColor: primaryDark.withValues(alpha: 0.2),
-      circularTrackColor: primaryDark.withValues(alpha: 0.2),
+      linearTrackColor: primaryDark.withOpacity( 0.2),
+      circularTrackColor: primaryDark.withOpacity( 0.2),
     ),
 
     // Slider theme for dark mode
     sliderTheme: SliderThemeData(
       activeTrackColor: primaryDark,
       thumbColor: primaryDark,
-      overlayColor: primaryDark.withValues(alpha: 0.2),
-      inactiveTrackColor: primaryDark.withValues(alpha: 0.3),
+      overlayColor: primaryDark.withOpacity( 0.2),
+      inactiveTrackColor: primaryDark.withOpacity( 0.3),
       trackHeight: 4.0,
     ),
 
@@ -562,7 +562,7 @@ class AppTheme {
     // Tooltip theme for dark mode
     tooltipTheme: TooltipThemeData(
       decoration: BoxDecoration(
-        color: onBackgroundDark.withValues(alpha: 0.9),
+        color: onBackgroundDark.withOpacity( 0.9),
         borderRadius: BorderRadius.circular(8),
       ),
       textStyle: GoogleFonts.inter(

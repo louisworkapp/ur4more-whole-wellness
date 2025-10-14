@@ -41,18 +41,18 @@ class AuthButtonWidget extends StatelessWidget {
               ? colorScheme.onPrimary
               : colorScheme.primary,
           disabledBackgroundColor:
-              colorScheme.onSurfaceVariant.withValues(alpha: 0.12),
+              colorScheme.onSurfaceVariant.withOpacity( 0.12),
           disabledForegroundColor:
-              colorScheme.onSurfaceVariant.withValues(alpha: 0.38),
+              colorScheme.onSurfaceVariant.withOpacity( 0.38),
           elevation: type == AuthButtonType.primary ? 2 : 0,
-          shadowColor: colorScheme.shadow.withValues(alpha: 0.2),
+          shadowColor: colorScheme.shadow.withOpacity( 0.2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
             side: type == AuthButtonType.secondary
                 ? BorderSide(
                     color: isEnabled
                         ? colorScheme.primary
-                        : colorScheme.onSurfaceVariant.withValues(alpha: 0.12),
+                        : colorScheme.onSurfaceVariant.withOpacity( 0.12),
                     width: 1.5,
                   )
                 : BorderSide.none,

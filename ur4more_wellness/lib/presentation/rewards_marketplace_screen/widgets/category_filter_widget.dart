@@ -45,13 +45,13 @@ class CategoryFilterWidget extends StatelessWidget {
                 border: Border.all(
                   color: isSelected
                       ? colorScheme.primary
-                      : colorScheme.outline.withValues(alpha: 0.3),
+                      : colorScheme.outline.withOpacity( 0.3),
                   width: 1,
                 ),
                 boxShadow: isSelected
                     ? [
                         BoxShadow(
-                          color: colorScheme.primary.withValues(alpha: 0.2),
+                          color: colorScheme.primary.withOpacity( 0.2),
                           blurRadius: 4,
                           offset: const Offset(0, 2),
                         ),

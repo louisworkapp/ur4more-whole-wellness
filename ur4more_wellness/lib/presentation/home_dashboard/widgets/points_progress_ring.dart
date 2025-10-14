@@ -79,7 +79,7 @@ class _PointsProgressRingState extends State<PointsProgressRing>
                         progress: _ringAnimation.value,
                         color: theme.colorScheme.primary,
                         backgroundColor:
-                            theme.colorScheme.outline.withValues(alpha: 0.1),
+                            theme.colorScheme.outline.withOpacity( 0.1),
                       ),
                     );
                   },
@@ -163,7 +163,7 @@ class _PointsProgressRingState extends State<PointsProgressRing>
               height: 6.h,
               width: 8,
               decoration: BoxDecoration(
-                color: color.withValues(alpha: 0.1),
+                color: color.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Stack(

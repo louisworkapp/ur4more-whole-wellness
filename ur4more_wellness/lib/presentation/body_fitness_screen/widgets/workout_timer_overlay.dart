@@ -157,7 +157,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
     final colorScheme = theme.colorScheme;
 
     return Container(
-      color: Colors.black.withValues(alpha: 0.9),
+      color: Colors.black.withOpacity( 0.9),
       child: SafeArea(
         child: Padding(
           padding: EdgeInsets.all(4.w),
@@ -245,7 +245,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
             style: GoogleFonts.inter(
               fontSize: 16.sp,
               fontWeight: FontWeight.w400,
-              color: Colors.white.withValues(alpha: 0.8),
+              color: Colors.white.withOpacity( 0.8),
             ),
           ),
           SizedBox(height: 4.h),
@@ -287,7 +287,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
             width: 30.w,
             height: 30.w,
             decoration: BoxDecoration(
-              color: AppTheme.successLight.withValues(alpha: 0.2),
+              color: AppTheme.successLight.withOpacity( 0.2),
               shape: BoxShape.circle,
               border: Border.all(
                 color: AppTheme.successLight,
@@ -311,7 +311,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
             style: GoogleFonts.inter(
               fontSize: 18.sp,
               fontWeight: FontWeight.w500,
-              color: Colors.white.withValues(alpha: 0.8),
+              color: Colors.white.withOpacity( 0.8),
             ),
           ),
         ],
@@ -333,7 +333,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
             style: GoogleFonts.inter(
               fontSize: 14.sp,
               fontWeight: FontWeight.w400,
-              color: Colors.white.withValues(alpha: 0.8),
+              color: Colors.white.withOpacity( 0.8),
             ),
           ),
           SizedBox(height: 2.h),
@@ -352,7 +352,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
             style: GoogleFonts.inter(
               fontSize: 16.sp,
               fontWeight: FontWeight.w400,
-              color: Colors.white.withValues(alpha: 0.8),
+              color: Colors.white.withOpacity( 0.8),
             ),
             textAlign: TextAlign.center,
           ),
@@ -361,7 +361,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
             width: 35.w,
             height: 35.w,
             decoration: BoxDecoration(
-              color: AppTheme.lightTheme.primaryColor.withValues(alpha: 0.2),
+              color: AppTheme.lightTheme.primaryColor.withOpacity( 0.2),
               shape: BoxShape.circle,
               border: Border.all(
                 color: AppTheme.lightTheme.primaryColor,
@@ -394,7 +394,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
                       style: GoogleFonts.inter(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w400,
-                        color: Colors.white.withValues(alpha: 0.8),
+                        color: Colors.white.withOpacity( 0.8),
                       ),
                     ),
                   ],
@@ -437,7 +437,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
             style: GoogleFonts.inter(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
-              color: Colors.white.withValues(alpha: 0.8),
+              color: Colors.white.withOpacity( 0.8),
             ),
           ),
         ),

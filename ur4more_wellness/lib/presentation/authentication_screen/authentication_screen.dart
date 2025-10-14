@@ -379,7 +379,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen>
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
               side: BorderSide(
-                color: colorScheme.primary.withValues(alpha: 0.3),
+                color: colorScheme.primary.withOpacity( 0.3),
                 width: 1,
               ),
             ),
@@ -392,10 +392,10 @@ class _AuthenticationScreenState extends State<AuthenticationScreen>
         Container(
           padding: EdgeInsets.all(3.w),
           decoration: BoxDecoration(
-            color: colorScheme.primaryContainer.withValues(alpha: 0.1),
+            color: colorScheme.primaryContainer.withOpacity( 0.1),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: colorScheme.primary.withValues(alpha: 0.2),
+              color: colorScheme.primary.withOpacity( 0.2),
               width: 1,
             ),
           ),
@@ -444,7 +444,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen>
                   color: colorScheme.surface,
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: colorScheme.outline.withValues(alpha: 0.3),
+                    color: colorScheme.outline.withOpacity( 0.3),
                   ),
                 ),
                 child: CustomIconWidget(

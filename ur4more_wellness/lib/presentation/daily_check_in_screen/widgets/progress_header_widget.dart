@@ -35,7 +35,7 @@ class ProgressHeaderWidget extends StatelessWidget {
         color: theme.colorScheme.surface,
         boxShadow: [
           BoxShadow(
-            color: theme.colorScheme.shadow.withValues(alpha: 0.1),
+            color: theme.colorScheme.shadow.withOpacity( 0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -96,7 +96,7 @@ class ProgressHeaderWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(4),
             child: LinearProgressIndicator(
               value: completionPercentage,
-              backgroundColor: theme.colorScheme.outline.withValues(alpha: 0.3),
+              backgroundColor: theme.colorScheme.outline.withOpacity( 0.3),
               valueColor: AlwaysStoppedAnimation<Color>(
                 theme.colorScheme.primary,
               ),
