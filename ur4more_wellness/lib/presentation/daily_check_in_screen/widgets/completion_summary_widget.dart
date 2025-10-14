@@ -39,7 +39,7 @@ class CompletionSummaryWidget extends StatelessWidget {
             width: 20.w,
             height: 20.w,
             decoration: BoxDecoration(
-              color: theme.colorScheme.primary.withValues(alpha: 0.1),
+              color: theme.colorScheme.primary.withOpacity( 0.1),
               shape: BoxShape.circle,
             ),
             child: CustomIconWidget(
@@ -65,10 +65,10 @@ class CompletionSummaryWidget extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
               decoration: BoxDecoration(
-                color: Colors.amber.withValues(alpha: 0.1), // Gold accent
+                color: Colors.amber.withOpacity( 0.1), // Gold accent
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: Colors.amber.withValues(alpha: 0.3),
+                  color: Colors.amber.withOpacity( 0.3),
                 ),
               ),
               child: Row(
@@ -108,10 +108,10 @@ class CompletionSummaryWidget extends StatelessWidget {
               width: double.infinity,
               padding: EdgeInsets.all(4.w),
               decoration: BoxDecoration(
-                color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                color: theme.colorScheme.primary.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: theme.colorScheme.primary.withValues(alpha: 0.2),
+                  color: theme.colorScheme.primary.withOpacity( 0.2),
                 ),
               ),
               child: Column(

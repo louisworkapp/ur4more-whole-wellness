@@ -70,7 +70,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: colorScheme.outline.withValues(alpha: 0.2),
+          color: colorScheme.outline.withOpacity( 0.2),
           width: 1,
         ),
       ),

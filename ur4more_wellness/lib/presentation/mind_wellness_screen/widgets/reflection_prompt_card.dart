@@ -79,8 +79,8 @@ class _ReflectionPromptCardState extends State<ReflectionPromptCard>
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                     colors: [
-                      const Color(0xFF0FA97A).withValues(alpha: 0.1),
-                      const Color(0xFF0FA97A).withValues(alpha: 0.05),
+                      const Color(0xFF0FA97A).withOpacity( 0.1),
+                      const Color(0xFF0FA97A).withOpacity( 0.05),
                     ],
                   ),
                 ),

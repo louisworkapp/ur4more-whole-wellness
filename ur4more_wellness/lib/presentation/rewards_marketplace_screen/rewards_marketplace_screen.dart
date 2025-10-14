@@ -419,7 +419,7 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
                   decoration: BoxDecoration(
                     color: Theme.of(
                       context,
-                    ).colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+                    ).colorScheme.onSurfaceVariant.withOpacity( 0.4),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -440,7 +440,7 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
                         (context, index) => Divider(
                           color: Theme.of(
                             context,
-                          ).colorScheme.outline.withValues(alpha: 0.2),
+                          ).colorScheme.outline.withOpacity( 0.2),
                         ),
                     itemBuilder: (context, index) {
                       final transaction = _recentTransactions[index];
@@ -453,9 +453,9 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
                             color:
                                 isEarned
                                     ? Theme.of(context).colorScheme.tertiary
-                                        .withValues(alpha: 0.2)
+                                        .withOpacity( 0.2)
                                     : Theme.of(context).colorScheme.primary
-                                        .withValues(alpha: 0.2),
+                                        .withOpacity( 0.2),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: CustomIconWidget(

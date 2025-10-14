@@ -31,7 +31,7 @@ class BrandLogoWidget extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: colorScheme.shadow.withValues(alpha: 0.15),
+                color: colorScheme.shadow.withOpacity( 0.15),
                 blurRadius: 12,
                 offset: const Offset(0, 6),
               ),
@@ -86,13 +86,13 @@ class BrandLogoWidget extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              primaryColor.withValues(alpha: 0.3),
-              primaryColor.withValues(alpha: 0.1),
+              primaryColor.withOpacity( 0.3),
+              primaryColor.withOpacity( 0.1),
             ],
           ),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: primaryColor.withValues(alpha: 0.2),
+            color: primaryColor.withOpacity( 0.2),
             width: 2,
           ),
         ),
@@ -113,7 +113,7 @@ class BrandLogoWidget extends StatelessWidget {
                 style: theme.textTheme.bodyMedium?.copyWith(
                   fontSize: (logoSize * 0.08),
                   fontWeight: FontWeight.w600,
-                  color: primaryColor.withValues(alpha: 0.8),
+                  color: primaryColor.withOpacity( 0.8),
                   letterSpacing: 1.2,
                 ),
               ),

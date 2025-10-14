@@ -53,7 +53,7 @@ class FitnessHeader extends StatelessWidget {
                       style: GoogleFonts.inter(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
-                        color: Colors.white.withValues(alpha: 0.8),
+                        color: Colors.white.withOpacity( 0.8),
                       ),
                     ),
                   ],
@@ -61,7 +61,7 @@ class FitnessHeader extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.2),
+                    color: Colors.white.withOpacity( 0.2),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
@@ -90,7 +90,7 @@ class FitnessHeader extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(4.w),
               decoration: BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.1),
+                color: Colors.white.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Column(
@@ -121,7 +121,7 @@ class FitnessHeader extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     child: LinearProgressIndicator(
                       value: weeklyProgress,
-                      backgroundColor: Colors.white.withValues(alpha: 0.2),
+                      backgroundColor: Colors.white.withOpacity( 0.2),
                       valueColor: AlwaysStoppedAnimation<Color>(
                           AppTheme.secondaryLight),
                       minHeight: 8,
@@ -136,7 +136,7 @@ class FitnessHeader extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w400,
-                          color: Colors.white.withValues(alpha: 0.8),
+                          color: Colors.white.withOpacity( 0.8),
                         ),
                       ),
                       Text(
@@ -144,7 +144,7 @@ class FitnessHeader extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w400,
-                          color: Colors.white.withValues(alpha: 0.8),
+                          color: Colors.white.withOpacity( 0.8),
                         ),
                       ),
                     ],

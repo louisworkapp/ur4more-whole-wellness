@@ -45,7 +45,7 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
+          color: theme.colorScheme.outline.withOpacity( 0.2),
         ),
       ),
       child: Column(
@@ -55,10 +55,10 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
           Container(
             padding: EdgeInsets.all(3.w),
             decoration: BoxDecoration(
-              color: theme.colorScheme.tertiary.withValues(alpha: 0.1),
+              color: theme.colorScheme.tertiary.withOpacity( 0.1),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: theme.colorScheme.tertiary.withValues(alpha: 0.3),
+                color: theme.colorScheme.tertiary.withOpacity( 0.3),
               ),
             ),
             child: Row(
@@ -88,10 +88,10 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
             decoration: BoxDecoration(
-              color: _getUrgeColor(widget.urgeLevel).withValues(alpha: 0.1),
+              color: _getUrgeColor(widget.urgeLevel).withOpacity( 0.1),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: _getUrgeColor(widget.urgeLevel).withValues(alpha: 0.3),
+                color: _getUrgeColor(widget.urgeLevel).withOpacity( 0.3),
               ),
             ),
             child: Column(
@@ -135,9 +135,9 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
               activeTrackColor: _getUrgeColor(widget.urgeLevel),
               thumbColor: _getUrgeColor(widget.urgeLevel),
               overlayColor:
-                  _getUrgeColor(widget.urgeLevel).withValues(alpha: 0.2),
+                  _getUrgeColor(widget.urgeLevel).withOpacity( 0.2),
               inactiveTrackColor:
-                  theme.colorScheme.outline.withValues(alpha: 0.3),
+                  theme.colorScheme.outline.withOpacity( 0.3),
               trackHeight: 6.0,
               thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12.0),
               overlayShape: const RoundSliderOverlayShape(overlayRadius: 20.0),
@@ -183,10 +183,10 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
             Container(
               padding: EdgeInsets.all(3.w),
               decoration: BoxDecoration(
-                color: theme.colorScheme.error.withValues(alpha: 0.1),
+                color: theme.colorScheme.error.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: theme.colorScheme.error.withValues(alpha: 0.3),
+                  color: theme.colorScheme.error.withOpacity( 0.3),
                 ),
               ),
               child: Row(

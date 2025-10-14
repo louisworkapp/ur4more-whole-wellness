@@ -62,13 +62,13 @@ class AccountSectionWidget extends StatelessWidget {
       padding: EdgeInsets.all(3.w),
       decoration: BoxDecoration(
         color: isDataSynced
-            ? colorScheme.tertiary.withValues(alpha: 0.1)
-            : colorScheme.error.withValues(alpha: 0.1),
+            ? colorScheme.tertiary.withOpacity( 0.1)
+            : colorScheme.error.withOpacity( 0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: isDataSynced
-              ? colorScheme.tertiary.withValues(alpha: 0.3)
-              : colorScheme.error.withValues(alpha: 0.3),
+              ? colorScheme.tertiary.withOpacity( 0.3)
+              : colorScheme.error.withOpacity( 0.3),
           width: 1,
         ),
       ),
@@ -78,8 +78,8 @@ class AccountSectionWidget extends StatelessWidget {
             padding: EdgeInsets.all(2.w),
             decoration: BoxDecoration(
               color: isDataSynced
-                  ? colorScheme.tertiary.withValues(alpha: 0.2)
-                  : colorScheme.error.withValues(alpha: 0.2),
+                  ? colorScheme.tertiary.withOpacity( 0.2)
+                  : colorScheme.error.withOpacity( 0.2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: CustomIconWidget(
@@ -164,7 +164,7 @@ class AccountSectionWidget extends StatelessWidget {
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: colorScheme.outline.withValues(alpha: 0.2),
+            color: colorScheme.outline.withOpacity( 0.2),
             width: 1,
           ),
         ),
@@ -173,7 +173,7 @@ class AccountSectionWidget extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(2.w),
               decoration: BoxDecoration(
-                color: actionColor.withValues(alpha: 0.1),
+                color: actionColor.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: CustomIconWidget(

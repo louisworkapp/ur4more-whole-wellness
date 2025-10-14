@@ -42,7 +42,7 @@ class EmailInputWidget extends StatelessWidget {
             decoration: InputDecoration(
               hintText: 'Enter your email address',
               hintStyle: theme.textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+                color: colorScheme.onSurfaceVariant.withOpacity( 0.6),
                 fontSize: 16.sp,
               ),
               prefixIcon: Padding(
@@ -64,7 +64,7 @@ class EmailInputWidget extends StatelessWidget {
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(
-                  color: colorScheme.outline.withValues(alpha: 0.3),
+                  color: colorScheme.outline.withOpacity( 0.3),
                   width: 1,
                 ),
               ),
@@ -72,8 +72,8 @@ class EmailInputWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(
                   color: errorText != null
-                      ? colorScheme.error.withValues(alpha: 0.5)
-                      : colorScheme.outline.withValues(alpha: 0.3),
+                      ? colorScheme.error.withOpacity( 0.5)
+                      : colorScheme.outline.withOpacity( 0.3),
                   width: 1,
                 ),
               ),

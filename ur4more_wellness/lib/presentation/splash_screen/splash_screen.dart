@@ -153,32 +153,37 @@ class _SplashScreenState extends State<SplashScreen>
     }
   }
 
-  void _navigateToNextScreen() {
-    // Simulate authentication check
-    bool isAuthenticated = _checkAuthenticationStatus();
+  Future<void> _navigateToNextScreen() async {
+    // Check authentication status
+    bool isAuthenticated = await _checkAuthenticationStatus();
 
-    if (isAuthenticated) {
-      Navigator.pushReplacementNamed(context, AppRoutes.main);
-    } else {
-      Navigator.pushReplacementNamed(context, AppRoutes.authentication);
+    if (mounted) {
+      if (isAuthenticated) {
+        Navigator.pushReplacementNamed(context, AppRoutes.main);
+      } else {
+        Navigator.pushReplacementNamed(context, AppRoutes.authentication);
+      }
     }
   }
 
-  bool _checkAuthenticationStatus() {
-    // TODO: Implement actual authentication check
-    // This should check for stored authentication tokens, session validity, etc.
-    // For now, we'll simulate a basic check using SharedPreferences or similar
-
-    // Simulate checking for stored login session
-    // In a real implementation, you would:
-    // 1. Check for stored JWT tokens
-    // 2. Validate token expiration
-    // 3. Verify with backend if needed
-    // 4. Check user preferences for auto-login
-
-    // For demo purposes, you can temporarily return true to bypass auth
-    // or implement proper authentication state management
-    return false; // Change to true to skip authentication for testing
+  Future<bool> _checkAuthenticationStatus() async {
+    try {
+      // Check if user is authenticated using the auth service
+      final isAuthenticated = await AuthService.isAuthenticated();
+      
+      if (isAuthenticated) {
+        // Log successful authentication check
+        final userId = await AuthService.getCurrentUserId();
+        if (userId != null) {
+          Telemetry.appOpened(userId);
+        }
+      }
+      
+      return isAuthenticated;
+    } catch (e) {
+      debugPrint('Error checking authentication status: $e');
+      return false;
+    }
   }
 
   @override
@@ -277,7 +282,7 @@ class _SplashScreenState extends State<SplashScreen>
                                       .bodyMedium
                                       ?.copyWith(
                                         color:
-                                            Colors.white.withValues(alpha: 0.8),
+                                            Colors.white.withOpacity(0.8),
                                         fontSize: 14.sp,
                                         letterSpacing: 1.0,
                                       ),
@@ -302,7 +307,7 @@ class _SplashScreenState extends State<SplashScreen>
                           child: CircularProgressIndicator(
                             strokeWidth: 2.0,
                             valueColor: AlwaysStoppedAnimation<Color>(
-                              Colors.white.withValues(alpha: 0.8),
+                              Colors.white.withOpacity(0.8),
                             ),
                           ),
                         ),
@@ -319,7 +324,7 @@ class _SplashScreenState extends State<SplashScreen>
                                 .textTheme
                                 .bodySmall
                                 ?.copyWith(
-                                  color: Colors.white.withValues(alpha: 0.7),
+                                  color: Colors.white.withOpacity(0.7),
                                   fontSize: 12.sp,
                                 ),
                             textAlign: TextAlign.center,
@@ -346,7 +351,7 @@ class _SplashScreenState extends State<SplashScreen>
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -369,7 +374,7 @@ class _SplashScreenState extends State<SplashScreen>
                   color: Theme.of(context)
                       .colorScheme
                       .primary
-                      .withValues(alpha: 0.1),
+                      .withOpacity(0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Icon(

@@ -195,7 +195,7 @@ class NotificationSectionWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
             decoration: BoxDecoration(
               border:
-                  Border.all(color: colorScheme.outline.withValues(alpha: 0.3)),
+                  Border.all(color: colorScheme.outline.withOpacity( 0.3)),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(

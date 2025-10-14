@@ -100,7 +100,7 @@ class _ResendCodeWidgetState extends State<ResendCodeWidget>
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: _canResend
-                      ? colorScheme.primary.withValues(alpha: 0.1)
+                      ? colorScheme.primary.withOpacity( 0.1)
                       : Colors.transparent,
                 ),
                 child: Text(
@@ -112,7 +112,7 @@ class _ResendCodeWidgetState extends State<ResendCodeWidget>
                     fontWeight: FontWeight.w600,
                     color: _canResend
                         ? colorScheme.primary
-                        : colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+                        : colorScheme.onSurfaceVariant.withOpacity( 0.6),
                   ),
                 ),
               ),

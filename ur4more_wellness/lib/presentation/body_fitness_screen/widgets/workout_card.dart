@@ -31,7 +31,7 @@ class WorkoutCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.1),
+            color: colorScheme.shadow.withOpacity( 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -138,7 +138,7 @@ class WorkoutCard extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           horizontal: 3.w, vertical: 0.5.h),
                       decoration: BoxDecoration(
-                        color: AppTheme.secondaryLight.withValues(alpha: 0.1),
+                        color: AppTheme.secondaryLight.withOpacity( 0.1),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
@@ -228,7 +228,7 @@ class WorkoutCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
       decoration: BoxDecoration(
-        color: difficultyColor.withValues(alpha: 0.1),
+        color: difficultyColor.withOpacity( 0.1),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
