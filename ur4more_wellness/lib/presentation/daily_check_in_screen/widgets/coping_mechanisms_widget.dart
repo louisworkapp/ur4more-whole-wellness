@@ -137,7 +137,7 @@ class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
+          color: theme.colorScheme.outline.withOpacity( 0.2),
         ),
       ),
       child: Column(
@@ -148,10 +148,10 @@ class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
               decoration: BoxDecoration(
-                color: Colors.amber.withValues(alpha: 0.1), // Gold accent
+                color: Colors.amber.withOpacity( 0.1), // Gold accent
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: Colors.amber.withValues(alpha: 0.3),
+                  color: Colors.amber.withOpacity( 0.3),
                 ),
               ),
               child: Row(
@@ -199,13 +199,13 @@ class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
                   padding: EdgeInsets.all(2.w),
                   decoration: BoxDecoration(
                     color: isSelected
-                        ? theme.colorScheme.primary.withValues(alpha: 0.1)
+                        ? theme.colorScheme.primary.withOpacity( 0.1)
                         : theme.colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: isSelected
                           ? theme.colorScheme.primary
-                          : theme.colorScheme.outline.withValues(alpha: 0.3),
+                          : theme.colorScheme.outline.withOpacity( 0.3),
                       width: isSelected ? 2 : 1,
                     ),
                   ),
@@ -283,7 +283,7 @@ class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
             Container(
               padding: EdgeInsets.all(3.w),
               decoration: BoxDecoration(
-                color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.5),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(

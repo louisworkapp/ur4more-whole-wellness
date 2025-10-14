@@ -48,7 +48,7 @@ class CustomBottomBar extends StatelessWidget {
           onTap ?? (index) => _handleNavigation(context, index),
       backgroundColor: backgroundColor ?? colorScheme.surface,
       indicatorColor:
-          (selectedItemColor ?? colorScheme.primary).withValues(alpha: 0.1),
+          (selectedItemColor ?? colorScheme.primary).withOpacity( 0.1),
       elevation: 8.0,
       height: 80,
       destinations: [
@@ -130,7 +130,7 @@ class CustomBottomBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.1),
+            color: colorScheme.shadow.withOpacity( 0.1),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -142,7 +142,7 @@ class CustomBottomBar extends StatelessWidget {
             onTap ?? (index) => _handleNavigation(context, index),
         backgroundColor: Colors.transparent,
         indicatorColor:
-            (selectedItemColor ?? colorScheme.primary).withValues(alpha: 0.1),
+            (selectedItemColor ?? colorScheme.primary).withOpacity( 0.1),
         elevation: 0,
         height: 70,
         destinations: [
@@ -224,7 +224,7 @@ class CustomBottomBar extends StatelessWidget {
         color: backgroundColor ?? colorScheme.surface,
         border: Border(
           top: BorderSide(
-            color: colorScheme.outline.withValues(alpha: 0.2),
+            color: colorScheme.outline.withOpacity( 0.2),
             width: 1,
           ),
         ),

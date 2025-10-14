@@ -36,7 +36,7 @@ class DevotionalCardWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: colorScheme.shadow.withValues(alpha: 0.1),
+              color: colorScheme.shadow.withOpacity( 0.1),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -59,7 +59,7 @@ class DevotionalCardWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(4.w),
       decoration: BoxDecoration(
-        color: AppTheme.secondaryLight.withValues(alpha: 0.1),
+        color: AppTheme.secondaryLight.withOpacity( 0.1),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(16),
           topRight: Radius.circular(16),
@@ -115,7 +115,7 @@ class DevotionalCardWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.5.h),
             decoration: BoxDecoration(
-              color: AppTheme.primaryLight.withValues(alpha: 0.1),
+              color: AppTheme.primaryLight.withOpacity( 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
@@ -226,7 +226,7 @@ class DevotionalCardWidget extends StatelessWidget {
               width: 12.w,
               height: 0.5.h,
               decoration: BoxDecoration(
-                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.3),
+                color: colorScheme.onSurfaceVariant.withOpacity( 0.3),
                 borderRadius: BorderRadius.circular(2),
               ),
             ),

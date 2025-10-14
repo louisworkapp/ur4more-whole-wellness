@@ -155,7 +155,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
+          color: theme.colorScheme.outline.withOpacity( 0.2),
         ),
       ),
       child: Column(
@@ -166,10 +166,10 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
               decoration: BoxDecoration(
-                color: Colors.amber.withValues(alpha: 0.1), // Gold accent
+                color: Colors.amber.withOpacity( 0.1), // Gold accent
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: Colors.amber.withValues(alpha: 0.3),
+                  color: Colors.amber.withOpacity( 0.3),
                 ),
               ),
               child: Row(
@@ -225,13 +225,13 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                         EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
                     decoration: BoxDecoration(
                       color: isSelected
-                          ? (mood['color'] as Color).withValues(alpha: 0.2)
+                          ? (mood['color'] as Color).withOpacity( 0.2)
                           : theme.colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
                         color: isSelected
                             ? (mood['color'] as Color)
-                            : theme.colorScheme.outline.withValues(alpha: 0.3),
+                            : theme.colorScheme.outline.withOpacity( 0.3),
                         width: isSelected ? 2 : 1,
                       ),
                     ),
@@ -301,18 +301,18 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                   'Share your thoughts, feelings, challenges, victories, or anything on your mind...',
               hintStyle: theme.textTheme.bodyMedium?.copyWith(
                 color:
-                    theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
+                    theme.colorScheme.onSurfaceVariant.withOpacity( 0.7),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(
-                  color: theme.colorScheme.outline.withValues(alpha: 0.3),
+                  color: theme.colorScheme.outline.withOpacity( 0.3),
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(
-                  color: theme.colorScheme.outline.withValues(alpha: 0.3),
+                  color: theme.colorScheme.outline.withOpacity( 0.3),
                 ),
               ),
               focusedBorder: OutlineInputBorder(
@@ -378,7 +378,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
                             color: theme.colorScheme.outline
-                                .withValues(alpha: 0.3),
+                                .withOpacity( 0.3),
                           ),
                         ),
                         child: ClipRRect(
@@ -425,7 +425,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
             Container(
               padding: EdgeInsets.all(3.w),
               decoration: BoxDecoration(
-                color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.5),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(

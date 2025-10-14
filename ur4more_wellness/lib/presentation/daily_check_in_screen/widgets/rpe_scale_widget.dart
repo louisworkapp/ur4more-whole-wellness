@@ -62,7 +62,7 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
+          color: theme.colorScheme.outline.withOpacity( 0.2),
         ),
       ),
       child: Column(
@@ -72,10 +72,10 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
             decoration: BoxDecoration(
-              color: _getRpeColor(widget.currentValue).withValues(alpha: 0.1),
+              color: _getRpeColor(widget.currentValue).withOpacity( 0.1),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: _getRpeColor(widget.currentValue).withValues(alpha: 0.3),
+                color: _getRpeColor(widget.currentValue).withOpacity( 0.3),
               ),
             ),
             child: Column(
@@ -106,9 +106,9 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
               activeTrackColor: _getRpeColor(widget.currentValue),
               thumbColor: _getRpeColor(widget.currentValue),
               overlayColor:
-                  _getRpeColor(widget.currentValue).withValues(alpha: 0.2),
+                  _getRpeColor(widget.currentValue).withOpacity( 0.2),
               inactiveTrackColor:
-                  theme.colorScheme.outline.withValues(alpha: 0.3),
+                  theme.colorScheme.outline.withOpacity( 0.3),
               trackHeight: 8.0,
               thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 14.0),
               overlayShape: const RoundSliderOverlayShape(overlayRadius: 24.0),
@@ -155,7 +155,7 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
           Container(
             padding: EdgeInsets.all(3.w),
             decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+              color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.5),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(

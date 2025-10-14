@@ -47,7 +47,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.2),
+          color: theme.colorScheme.outline.withOpacity( 0.2),
         ),
       ),
       child: Column(
@@ -58,10 +58,10 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
             decoration: BoxDecoration(
-              color: _getPainColor(widget.painLevel).withValues(alpha: 0.1),
+              color: _getPainColor(widget.painLevel).withOpacity( 0.1),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: _getPainColor(widget.painLevel).withValues(alpha: 0.3),
+                color: _getPainColor(widget.painLevel).withOpacity( 0.3),
               ),
             ),
             child: Column(
@@ -105,9 +105,9 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
               activeTrackColor: _getPainColor(widget.painLevel),
               thumbColor: _getPainColor(widget.painLevel),
               overlayColor:
-                  _getPainColor(widget.painLevel).withValues(alpha: 0.2),
+                  _getPainColor(widget.painLevel).withOpacity( 0.2),
               inactiveTrackColor:
-                  theme.colorScheme.outline.withValues(alpha: 0.3),
+                  theme.colorScheme.outline.withOpacity( 0.3),
               trackHeight: 6.0,
               thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 12.0),
               overlayShape: const RoundSliderOverlayShape(overlayRadius: 20.0),
@@ -178,10 +178,10 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
             Container(
               padding: EdgeInsets.all(3.w),
               decoration: BoxDecoration(
-                color: theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.5),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                  color: theme.colorScheme.outline.withOpacity( 0.2),
                 ),
               ),
               child: Column(
@@ -262,7 +262,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: theme.colorScheme.outline.withValues(alpha: 0.3),
+          color: theme.colorScheme.outline.withOpacity( 0.3),
         ),
       ),
       child: Row(

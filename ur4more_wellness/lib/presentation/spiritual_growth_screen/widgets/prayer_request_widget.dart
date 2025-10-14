@@ -39,7 +39,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.1),
+            color: colorScheme.shadow.withOpacity( 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -67,7 +67,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
             Container(
               padding: EdgeInsets.all(2.w),
               decoration: BoxDecoration(
-                color: AppTheme.primaryLight.withValues(alpha: 0.1),
+                color: AppTheme.primaryLight.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: CustomIconWidget(
@@ -124,7 +124,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
               border: Border.all(
                 color: _focusNode.hasFocus
                     ? AppTheme.primaryLight
-                    : colorScheme.outline.withValues(alpha: 0.3),
+                    : colorScheme.outline.withOpacity( 0.3),
                 width: _focusNode.hasFocus ? 2 : 1,
               ),
             ),
@@ -153,7 +153,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
                 decoration: BoxDecoration(
-                  color: AppTheme.primaryLight.withValues(alpha: 0.1),
+                  color: AppTheme.primaryLight.withOpacity( 0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Row(
@@ -224,10 +224,10 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
     return Container(
       padding: EdgeInsets.all(3.w),
       decoration: BoxDecoration(
-        color: AppTheme.successLight.withValues(alpha: 0.1),
+        color: AppTheme.successLight.withOpacity( 0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: AppTheme.successLight.withValues(alpha: 0.3),
+          color: AppTheme.successLight.withOpacity( 0.3),
           width: 1,
         ),
       ),

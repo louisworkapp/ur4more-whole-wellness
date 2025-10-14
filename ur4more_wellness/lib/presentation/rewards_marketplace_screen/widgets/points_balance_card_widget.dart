@@ -38,7 +38,7 @@ class PointsBalanceCardWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: colorScheme.primary.withValues(alpha: 0.3),
+              color: colorScheme.primary.withOpacity( 0.3),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
@@ -56,7 +56,7 @@ class PointsBalanceCardWidget extends StatelessWidget {
                     Text(
                       'Available Points',
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onPrimary.withValues(alpha: 0.8),
+                        color: colorScheme.onPrimary.withOpacity( 0.8),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -74,7 +74,7 @@ class PointsBalanceCardWidget extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(3.w),
                   decoration: BoxDecoration(
-                    color: colorScheme.onPrimary.withValues(alpha: 0.2),
+                    color: colorScheme.onPrimary.withOpacity( 0.2),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: CustomIconWidget(
@@ -95,7 +95,7 @@ class PointsBalanceCardWidget extends StatelessWidget {
                       Text(
                         'Recent Activity',
                         style: theme.textTheme.labelMedium?.copyWith(
-                          color: colorScheme.onPrimary.withValues(alpha: 0.8),
+                          color: colorScheme.onPrimary.withOpacity( 0.8),
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -118,7 +118,7 @@ class PointsBalanceCardWidget extends StatelessWidget {
                                                     'earned'
                                                 ? colorScheme.tertiary
                                                 : colorScheme.onPrimary
-                                                    .withValues(alpha: 0.7),
+                                                    .withOpacity( 0.7),
                                         size: 14,
                                       ),
                                       SizedBox(width: 2.w),
@@ -130,7 +130,7 @@ class PointsBalanceCardWidget extends StatelessWidget {
                                           style: theme.textTheme.bodySmall
                                               ?.copyWith(
                                             color: colorScheme.onPrimary
-                                                .withValues(alpha: 0.9),
+                                                .withOpacity( 0.9),
                                           ),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
@@ -152,7 +152,7 @@ class PointsBalanceCardWidget extends StatelessWidget {
                         Text(
                           'No recent activity',
                           style: theme.textTheme.bodySmall?.copyWith(
-                            color: colorScheme.onPrimary.withValues(alpha: 0.7),
+                            color: colorScheme.onPrimary.withOpacity( 0.7),
                           ),
                         ),
                     ],
@@ -160,7 +160,7 @@ class PointsBalanceCardWidget extends StatelessWidget {
                 ),
                 CustomIconWidget(
                   iconName: 'chevron_right',
-                  color: colorScheme.onPrimary.withValues(alpha: 0.7),
+                  color: colorScheme.onPrimary.withOpacity( 0.7),
                   size: 20,
                 ),
               ],
