@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sizer/sizer.dart';
+import 'dart:math' as math;
+import '../../../design/tokens.dart';
 
 class ResendCodeWidget extends StatefulWidget {
   final VoidCallback? onResend;
@@ -85,7 +86,7 @@ class _ResendCodeWidgetState extends State<ResendCodeWidget>
             Text(
               "Didn't receive the code? ",
               style: theme.textTheme.bodyMedium?.copyWith(
-                fontSize: 14.sp,
+                fontSize: math.min(14.0, (theme.textTheme.bodyMedium?.fontSize ?? 14)),
                 color: colorScheme.onSurfaceVariant,
               ),
             ),
@@ -93,9 +94,9 @@ class _ResendCodeWidgetState extends State<ResendCodeWidget>
               onTap: _canResend ? _handleResend : null,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                padding: EdgeInsets.symmetric(
-                  horizontal: 2.w,
-                  vertical: 1.h,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpace.x2,
+                  vertical: AppSpace.x1,
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
@@ -108,7 +109,7 @@ class _ResendCodeWidgetState extends State<ResendCodeWidget>
                       ? 'Resend Code'
                       : 'Resend in ${_countdownAnimation.value}s',
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    fontSize: 14.sp,
+                    fontSize: math.min(14.0, (theme.textTheme.bodyMedium?.fontSize ?? 14)),
                     fontWeight: FontWeight.w600,
                     color: _canResend
                         ? colorScheme.primary

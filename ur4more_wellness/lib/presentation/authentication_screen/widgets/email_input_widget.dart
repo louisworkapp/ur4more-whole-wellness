@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'dart:math' as math;
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class EmailInputWidget extends StatelessWidget {
@@ -27,8 +28,8 @@ class EmailInputWidget extends StatelessWidget {
         Container(
           width: double.infinity,
           constraints: BoxConstraints(
-            minHeight: 6.h,
-            maxHeight: 8.h,
+            minHeight: 48,
+            maxHeight: 64,
           ),
           child: TextFormField(
             controller: controller,
@@ -36,30 +37,30 @@ class EmailInputWidget extends StatelessWidget {
             textInputAction: TextInputAction.done,
             onChanged: (value) => onChanged?.call(),
             style: theme.textTheme.bodyLarge?.copyWith(
-              fontSize: 16.sp,
+              fontSize: math.min(16.0, (theme.textTheme.bodyLarge?.fontSize ?? 16)),
               fontWeight: FontWeight.w400,
             ),
             decoration: InputDecoration(
               hintText: 'Enter your email address',
               hintStyle: theme.textTheme.bodyMedium?.copyWith(
                 color: colorScheme.onSurfaceVariant.withOpacity( 0.6),
-                fontSize: 16.sp,
+                fontSize: math.min(16.0, (theme.textTheme.bodyMedium?.fontSize ?? 16)),
               ),
               prefixIcon: Padding(
-                padding: EdgeInsets.all(3.w),
+                padding: const EdgeInsets.all(AppSpace.x3),
                 child: CustomIconWidget(
                   iconName: 'email',
                   color: errorText != null
                       ? colorScheme.error
                       : colorScheme.onSurfaceVariant,
-                  size: 5.w,
+                  size: 20,
                 ),
               ),
               filled: true,
               fillColor: colorScheme.surface,
-              contentPadding: EdgeInsets.symmetric(
-                horizontal: 4.w,
-                vertical: 2.h,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: AppSpace.x4,
+                vertical: AppSpace.x2,
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -103,15 +104,15 @@ class EmailInputWidget extends StatelessWidget {
             ),
           ),
         ),
-        errorText != null ? SizedBox(height: 1.h) : const SizedBox.shrink(),
+        errorText != null ? const SizedBox(height: AppSpace.x1) : const SizedBox.shrink(),
         errorText != null
             ? Padding(
-                padding: EdgeInsets.only(left: 3.w),
+                padding: const EdgeInsets.only(left: AppSpace.x3),
                 child: Text(
                   errorText!,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: colorScheme.error,
-                    fontSize: 12.sp,
+                    fontSize: math.min(12.0, (theme.textTheme.bodySmall?.fontSize ?? 12)),
                   ),
                 ),
               )
