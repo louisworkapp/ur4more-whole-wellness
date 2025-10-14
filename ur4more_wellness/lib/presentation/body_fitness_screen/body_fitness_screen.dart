@@ -4,7 +4,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../core/app_export.dart';
 import '../../design/tokens.dart';
-import '../../widgets/custom_bottom_bar.dart';
 import './widgets/equipment_filter_chips.dart';
 import './widgets/fitness_header.dart';
 import './widgets/workout_card.dart';
@@ -565,10 +564,6 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
           color: Colors.white,
           size: 24,
         ),
-      ),
-      bottomNavigationBar: CustomBottomBar(
-        currentIndex: 1,
-        variant: CustomBottomBarVariant.standard,
       ),
     );
   }

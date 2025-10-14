@@ -19,14 +19,6 @@ class AppRoutes {
   static const String authentication = '/authentication-screen';
   static const String home = '/home';
 
-  // Legacy routes for direct navigation
-  static const String mindWellness = '/mind-wellness-screen';
-  static const String dailyCheckIn = '/daily-check-in-screen';
-  static const String homeDashboard = '/home-dashboard';
-  static const String settingsProfile = '/settings-profile-screen';
-  static const String bodyFitness = '/body-fitness-screen';
-  static const String spiritualGrowth = '/spiritual-growth-screen';
-  static const String rewardsMarketplace = '/rewards-marketplace-screen';
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
@@ -35,14 +27,5 @@ class AppRoutes {
     settings: (context) => const SettingsProfileScreen(),
     authentication: (context) => const AuthenticationScreen(),
     home: (context) => const HomeScreen(),
-
-    // Legacy routes for direct access
-    mindWellness: (context) => const MindWellnessScreen(),
-    dailyCheckIn: (context) => const DailyCheckInScreen(),
-    homeDashboard: (context) => const HomeDashboard(),
-    settingsProfile: (context) => const SettingsProfileScreen(),
-    bodyFitness: (context) => const BodyFitnessScreen(),
-    spiritualGrowth: (context) => const SpiritualGrowthScreen(),
-    rewardsMarketplace: (context) => const RewardsMarketplaceScreen(),
   };
 }

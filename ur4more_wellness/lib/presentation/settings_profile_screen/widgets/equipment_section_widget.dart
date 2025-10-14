@@ -41,12 +41,15 @@ class EquipmentSectionWidget extends StatelessWidget {
                   color: colorScheme.primary,
                   size: 24,
                 ),
-                SizedBox(width: 3.w),
-                Text(
-                  'Equipment Configuration',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: colorScheme.onSurface,
+                SizedBox(width: 2.w), // Reduced from 3.w
+                Expanded( // Added Expanded to prevent overflow
+                  child: Text(
+                    'Equipment Configuration',
+                    style: theme.textTheme.titleMedium?.copyWith( // Changed from titleLarge to titleMedium
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface,
+                    ),
+                    overflow: TextOverflow.ellipsis, // Added overflow handling
                   ),
                 ),
               ],
@@ -54,9 +57,11 @@ class EquipmentSectionWidget extends StatelessWidget {
             SizedBox(height: 1.h),
             Text(
               'Select your available equipment to customize workout plans',
-              style: theme.textTheme.bodyMedium?.copyWith(
+              style: theme.textTheme.bodySmall?.copyWith( // Changed from bodyMedium to bodySmall
                 color: colorScheme.onSurfaceVariant,
               ),
+              overflow: TextOverflow.ellipsis, // Added overflow handling
+              maxLines: 2, // Allow text to wrap to 2 lines
             ),
             SizedBox(height: 3.h),
             _buildEquipmentToggle(
@@ -69,7 +74,7 @@ class EquipmentSectionWidget extends StatelessWidget {
               hasBodyweight,
               onBodyweightChanged,
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 1.5.h), // Reduced from 2.h
             _buildEquipmentToggle(
               context,
               theme,
@@ -80,7 +85,7 @@ class EquipmentSectionWidget extends StatelessWidget {
               hasResistanceBands,
               onResistanceBandsChanged,
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 1.5.h), // Reduced from 2.h
             _buildEquipmentToggle(
               context,
               theme,
@@ -108,7 +113,7 @@ class EquipmentSectionWidget extends StatelessWidget {
     Function(bool) onChanged,
   ) {
     return Container(
-      padding: EdgeInsets.all(3.w),
+      padding: EdgeInsets.all(2.w), // Reduced from 3.w
       decoration: BoxDecoration(
         color: value
             ? colorScheme.primary.withOpacity( 0.1)
@@ -124,7 +129,7 @@ class EquipmentSectionWidget extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(2.w),
+            padding: EdgeInsets.all(1.5.w), // Reduced from 2.w
             decoration: BoxDecoration(
               color: value
                   ? colorScheme.primary.withOpacity( 0.2)
@@ -134,31 +139,36 @@ class EquipmentSectionWidget extends StatelessWidget {
             child: CustomIconWidget(
               iconName: iconName,
               color: value ? colorScheme.primary : colorScheme.onSurfaceVariant,
-              size: 24,
+              size: 20, // Reduced from 24
             ),
           ),
-          SizedBox(width: 3.w),
+          SizedBox(width: 2.w), // Reduced from 3.w
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: theme.textTheme.titleMedium?.copyWith(
+                  style: theme.textTheme.titleSmall?.copyWith( // Changed from titleMedium to titleSmall
                     color: colorScheme.onSurface,
                     fontWeight: FontWeight.w500,
                   ),
+                  overflow: TextOverflow.ellipsis, // Added overflow handling
+                  maxLines: 2, // Allow title to wrap to 2 lines
                 ),
-                SizedBox(height: 0.5.h),
+                SizedBox(height: 0.3.h), // Reduced from 0.5.h
                 Text(
                   description,
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
+                  overflow: TextOverflow.ellipsis, // Added overflow handling
+                  maxLines: 2, // Allow description to wrap to 2 lines
                 ),
               ],
             ),
           ),
+          SizedBox(width: 1.w), // Added spacing before switch
           Switch(
             value: value,
             onChanged: onChanged,

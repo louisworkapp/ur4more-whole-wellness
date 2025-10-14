@@ -56,7 +56,8 @@ class _HomeDashboardState extends State<HomeDashboard> {
       "pointValue": 25,
       "completionPercentage": 0.75,
       "isCompleted": false,
-      "route": "/body-fitness-screen",
+      "route": "/",
+      "routeIndex": 1,
     },
     {
       "id": "mind_wellness",
@@ -67,7 +68,8 @@ class _HomeDashboardState extends State<HomeDashboard> {
       "pointValue": 20,
       "completionPercentage": 0.60,
       "isCompleted": false,
-      "route": "/mind-wellness-screen",
+      "route": "/",
+      "routeIndex": 2,
     },
     {
       "id": "spiritual_growth",
@@ -78,7 +80,8 @@ class _HomeDashboardState extends State<HomeDashboard> {
       "pointValue": 30,
       "completionPercentage": 0.85,
       "isCompleted": true,
-      "route": "/spiritual-growth-screen",
+      "route": "/",
+      "routeIndex": 3,
     },
   ];
 
@@ -205,18 +208,20 @@ class _HomeDashboardState extends State<HomeDashboard> {
         .map((activity) {
           final activityMap = activity as Map<String, dynamic>;
           return WellnessNavigationCard(
-            title: activityMap["title"] as String,
-            subtitle: activityMap["subtitle"] as String,
-            iconName: activityMap["iconName"] as String,
+            title: activityMap["title"] as String? ?? 'Activity',
+            subtitle: activityMap["subtitle"] as String? ?? 'Description',
+            iconName: activityMap["iconName"] as String? ?? 'help',
             primaryColor: Theme.of(context).colorScheme.primary,
             backgroundColor: Theme.of(context).colorScheme.primary,
-            pointValue: activityMap["pointValue"] as int,
-            completionPercentage: activityMap["completionPercentage"] as double,
-            isCompleted: activityMap["isCompleted"] as bool,
+            pointValue: activityMap["pointValue"] as int? ?? 0,
+            completionPercentage: activityMap["completionPercentage"] as double? ?? 0.0,
+            isCompleted: activityMap["isCompleted"] as bool? ?? false,
             onTap:
-                () => Navigator.pushNamed(
+                () => Navigator.pushNamedAndRemoveUntil(
                   context,
-                  activityMap["route"] as String,
+                  activityMap["route"] as String? ?? '/',
+                  (route) => false,
+                  arguments: activityMap["routeIndex"] as int? ?? 0,
                 ),
             onLongPress: () => _showQuickActions(context, activityMap),
           );
@@ -225,7 +230,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
   }
 
   bool _shouldShowSpiritualContent() {
-    final faithMode = userData["faithMode"] as String;
+    final faithMode = userData["faithMode"] as String?;
     return faithMode == "Light" || faithMode == "Full";
   }
 

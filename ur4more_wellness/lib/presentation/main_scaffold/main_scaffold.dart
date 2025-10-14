@@ -16,6 +16,16 @@ class MainScaffold extends StatefulWidget {
 class _MainScaffoldState extends State<MainScaffold> {
   int _index = 0;
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Get the index from route arguments if provided
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args is int) {
+      _index = args;
+    }
+  }
+
   final _pages = const [
     HomeDashboard(),
     BodyFitnessScreen(),

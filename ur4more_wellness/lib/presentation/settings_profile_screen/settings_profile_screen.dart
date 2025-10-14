@@ -5,7 +5,6 @@ import '../../core/app_export.dart';
 import '../../design/tokens.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/custom_app_bar.dart';
-import '../../widgets/custom_bottom_bar.dart';
 import './widgets/account_section_widget.dart';
 import './widgets/app_info_section_widget.dart';
 import './widgets/equipment_section_widget.dart';
@@ -146,11 +145,6 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: const CustomBottomBar(
-        currentIndex:
-            4, // Settings is not in bottom nav, but we'll use profile index
-        variant: CustomBottomBarVariant.standard,
       ),
     );
   }

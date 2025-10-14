@@ -285,7 +285,7 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () =>
-                        Navigator.pushNamed(context, '/home-dashboard'),
+                        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false, arguments: 0),
                     icon: CustomIconWidget(
                       iconName: 'home',
                       color: colorScheme.primary,
