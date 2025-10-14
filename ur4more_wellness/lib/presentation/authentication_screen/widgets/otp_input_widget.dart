@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pinput.dart';
-import 'package:sizer/sizer.dart';
+import 'dart:math' as math;
+import '../../../design/tokens.dart';
 
 class OtpInputWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -23,10 +24,10 @@ class OtpInputWidget extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     final defaultPinTheme = PinTheme(
-      width: 12.w,
-      height: 6.h,
+      width: 48,
+      height: 48,
       textStyle: theme.textTheme.headlineSmall?.copyWith(
-        fontSize: 18.sp,
+        fontSize: math.min(18.0, (theme.textTheme.headlineSmall?.fontSize ?? 18)),
         fontWeight: FontWeight.w600,
         color: colorScheme.onSurface,
       ),
@@ -103,23 +104,23 @@ class OtpInputWidget extends StatelessWidget {
           onChanged: (pin) => onChanged?.call(),
           cursor: Container(
             width: 2,
-            height: 3.h,
+            height: 24,
             color: colorScheme.primary,
           ),
-          separatorBuilder: (index) => SizedBox(width: 2.w),
+          separatorBuilder: (index) => const SizedBox(width: AppSpace.x2),
           enableSuggestions: false,
           autofocus: true,
           showCursor: true,
           pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
         ),
-        errorText != null ? SizedBox(height: 2.h) : const SizedBox.shrink(),
+        errorText != null ? const SizedBox(height: AppSpace.x2) : const SizedBox.shrink(),
         errorText != null
             ? Text(
                 errorText!,
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: colorScheme.error,
-                  fontSize: 12.sp,
+                  fontSize: math.min(12.0, (theme.textTheme.bodySmall?.fontSize ?? 12)),
                 ),
               )
             : const SizedBox.shrink(),

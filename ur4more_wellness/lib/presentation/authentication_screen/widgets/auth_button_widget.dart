@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'dart:math' as math;
+import '../../../design/tokens.dart';
 
 enum AuthButtonType { primary, secondary }
 
@@ -26,7 +27,7 @@ class AuthButtonWidget extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      height: 6.h,
+      height: 56,
       constraints: BoxConstraints(
         minHeight: 48,
         maxHeight: 60,
@@ -57,15 +58,15 @@ class AuthButtonWidget extends StatelessWidget {
                   )
                 : BorderSide.none,
           ),
-          padding: EdgeInsets.symmetric(
-            horizontal: 6.w,
-            vertical: 1.5.h,
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpace.x6,
+            vertical: AppSpace.x3,
           ),
         ),
         child: isLoading
             ? SizedBox(
-                width: 5.w,
-                height: 5.w,
+                width: 20,
+                height: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                   valueColor: AlwaysStoppedAnimation<Color>(
@@ -78,7 +79,7 @@ class AuthButtonWidget extends StatelessWidget {
             : Text(
                 text,
                 style: theme.textTheme.labelLarge?.copyWith(
-                  fontSize: 16.sp,
+                  fontSize: math.min(16.0, (theme.textTheme.labelLarge?.fontSize ?? 16)),
                   fontWeight: FontWeight.w600,
                   color: type == AuthButtonType.primary
                       ? colorScheme.onPrimary

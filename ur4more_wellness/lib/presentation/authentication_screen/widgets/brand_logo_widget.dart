@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'dart:math' as math;
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_image_widget.dart';
 
 class BrandLogoWidget extends StatelessWidget {
@@ -18,7 +19,7 @@ class BrandLogoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final logoSize = size ?? 20.w;
+    final logoSize = size ?? 80;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -45,21 +46,21 @@ class BrandLogoWidget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 2.h),
+        const SizedBox(height: AppSpace.x2),
         Text(
           'UR4MORE',
           style: theme.textTheme.headlineMedium?.copyWith(
-            fontSize: 24.sp,
+            fontSize: math.min(24.0, (theme.textTheme.headlineMedium?.fontSize ?? 24)),
             fontWeight: FontWeight.w700,
             color: tintColor ?? colorScheme.primary,
             letterSpacing: 1.2,
           ),
         ),
-        SizedBox(height: 0.5.h),
+        const SizedBox(height: AppSpace.x1),
         Text(
           'Made for more.',
           style: theme.textTheme.bodyLarge?.copyWith(
-            fontSize: 14.sp,
+            fontSize: math.min(14.0, (theme.textTheme.bodyLarge?.fontSize ?? 14)),
             fontWeight: FontWeight.w400,
             color: colorScheme.onSurfaceVariant,
             letterSpacing: 0.5,
@@ -103,7 +104,7 @@ class BrandLogoWidget extends StatelessWidget {
               Text(
                 'UR4',
                 style: theme.textTheme.headlineLarge?.copyWith(
-                  fontSize: (logoSize * 0.15),
+                  fontSize: math.min(logoSize * 0.15, 20),
                   fontWeight: FontWeight.w900,
                   color: primaryColor,
                 ),
@@ -111,7 +112,7 @@ class BrandLogoWidget extends StatelessWidget {
               Text(
                 'MORE',
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  fontSize: (logoSize * 0.08),
+                  fontSize: math.min(logoSize * 0.08, 12),
                   fontWeight: FontWeight.w600,
                   color: primaryColor.withOpacity( 0.8),
                   letterSpacing: 1.2,
