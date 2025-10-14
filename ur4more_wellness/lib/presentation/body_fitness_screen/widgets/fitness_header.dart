@@ -51,7 +51,7 @@ class FitnessHeader extends StatelessWidget {
                     Text(
                       'Strengthen your body',
                       style: GoogleFonts.inter(
-                        fontSize: 14.sp,
+                        fontSize: 14, // Fixed font size instead of Sizer
                         fontWeight: FontWeight.w400,
                         color: Colors.white.withOpacity( 0.8),
                       ),
@@ -101,7 +101,7 @@ class FitnessHeader extends StatelessWidget {
                       Text(
                         'Weekly Progress',
                         style: GoogleFonts.inter(
-                          fontSize: 14.sp,
+                          fontSize: 14, // Fixed font size instead of Sizer
                           fontWeight: FontWeight.w500,
                           color: Colors.white,
                         ),
@@ -109,14 +109,14 @@ class FitnessHeader extends StatelessWidget {
                       Text(
                         '${(weeklyProgress * 100).toInt()}%',
                         style: GoogleFonts.inter(
-                          fontSize: 14.sp,
+                          fontSize: 14, // Fixed font size instead of Sizer
                           fontWeight: FontWeight.w600,
                           color: AppTheme.secondaryLight,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 1.h),
+                  SizedBox(height: AppSpace.x1),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: LinearProgressIndicator(
@@ -127,14 +127,14 @@ class FitnessHeader extends StatelessWidget {
                       minHeight: 8,
                     ),
                   ),
-                  SizedBox(height: 1.h),
+                  SizedBox(height: AppSpace.x1),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         '${(currentPoints * weeklyProgress).toInt()} / $weeklyGoal points',
                         style: GoogleFonts.inter(
-                          fontSize: 12.sp,
+                          fontSize: 12, // Fixed font size instead of Sizer
                           fontWeight: FontWeight.w400,
                           color: Colors.white.withOpacity( 0.8),
                         ),
@@ -142,7 +142,7 @@ class FitnessHeader extends StatelessWidget {
                       Text(
                         '${weeklyGoal - (currentPoints * weeklyProgress).toInt()} to go',
                         style: GoogleFonts.inter(
-                          fontSize: 12.sp,
+                          fontSize: 12, // Fixed font size instead of Sizer
                           fontWeight: FontWeight.w400,
                           color: Colors.white.withOpacity( 0.8),
                         ),

@@ -230,35 +230,35 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
               );
             },
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: AppSpace.x4),
           Text(
             'Ready to start?',
             style: GoogleFonts.inter(
-              fontSize: 24.sp,
+              fontSize: 24, // Fixed font size instead of Sizer
               fontWeight: FontWeight.w600,
               color: Colors.white,
             ),
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
           Text(
             '${exercises.length} exercises • ${widget.workout['duration']} minutes',
             style: GoogleFonts.inter(
-              fontSize: 16.sp,
+              fontSize: 16, // Fixed font size instead of Sizer
               fontWeight: FontWeight.w400,
               color: Colors.white.withOpacity( 0.8),
             ),
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: AppSpace.x4),
           ElevatedButton(
             onPressed: _startWorkout,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.lightTheme.primaryColor,
-              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+              padding: EdgeInsets.symmetric(horizontal: AppSpace.x8, vertical: AppSpace.x2),
             ),
             child: Text(
               'Start Workout',
               style: GoogleFonts.inter(
-                fontSize: 16.sp,
+                fontSize: 16, // Fixed font size instead of Sizer
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
@@ -277,15 +277,15 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
           Text(
             'Rest Time',
             style: GoogleFonts.inter(
-              fontSize: 24.sp,
+              fontSize: 24, // Fixed font size instead of Sizer
               fontWeight: FontWeight.w600,
               color: Colors.white,
             ),
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: AppSpace.x4),
           Container(
-            width: 30.w,
-            height: 30.w,
+            width: 120, // Fixed width instead of percentage
+            height: 120, // Fixed height instead of percentage
             decoration: BoxDecoration(
               color: AppTheme.successLight.withOpacity( 0.2),
               shape: BoxShape.circle,
@@ -298,18 +298,18 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
               child: Text(
                 '$restTimeRemaining',
                 style: GoogleFonts.inter(
-                  fontSize: 32.sp,
+                  fontSize: 32, // Fixed font size instead of Sizer
                   fontWeight: FontWeight.w700,
                   color: AppTheme.successLight,
                 ),
               ),
             ),
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: AppSpace.x4),
           Text(
             'Next: ${exercises[currentExerciseIndex]['name']}',
             style: GoogleFonts.inter(
-              fontSize: 18.sp,
+              fontSize: 18, // Fixed font size instead of Sizer
               fontWeight: FontWeight.w500,
               color: Colors.white.withOpacity( 0.8),
             ),
@@ -331,35 +331,35 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
           Text(
             'Exercise ${currentExerciseIndex + 1} of ${exercises.length}',
             style: GoogleFonts.inter(
-              fontSize: 14.sp,
+              fontSize: 14, // Fixed font size instead of Sizer
               fontWeight: FontWeight.w400,
               color: Colors.white.withOpacity( 0.8),
             ),
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
           Text(
             currentExercise['name'] as String,
             style: GoogleFonts.inter(
-              fontSize: 28.sp,
+              fontSize: 28, // Fixed font size instead of Sizer
               fontWeight: FontWeight.w700,
               color: Colors.white,
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
           Text(
             currentExercise['description'] as String,
             style: GoogleFonts.inter(
-              fontSize: 16.sp,
+              fontSize: 16, // Fixed font size instead of Sizer
               fontWeight: FontWeight.w400,
               color: Colors.white.withOpacity( 0.8),
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: AppSpace.x4),
           Container(
-            width: 35.w,
-            height: 35.w,
+            width: 140, // Fixed width instead of percentage
+            height: 140, // Fixed height instead of percentage
             decoration: BoxDecoration(
               color: AppTheme.lightTheme.primaryColor.withOpacity( 0.2),
               shape: BoxShape.circle,
@@ -384,7 +384,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
                     Text(
                       '$currentRep',
                       style: GoogleFonts.inter(
-                        fontSize: 32.sp,
+                        fontSize: 32, // Fixed font size instead of Sizer
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                       ),
@@ -392,7 +392,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
                     Text(
                       '/ $totalReps',
                       style: GoogleFonts.inter(
-                        fontSize: 16.sp,
+                        fontSize: 16, // Fixed font size instead of Sizer
                         fontWeight: FontWeight.w400,
                         color: Colors.white.withOpacity( 0.8),
                       ),
@@ -402,12 +402,12 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
               ],
             ),
           ),
-          SizedBox(height: 4.h),
+          SizedBox(height: AppSpace.x4),
           ElevatedButton(
             onPressed: _completeRep,
             style: ElevatedButton.styleFrom(
               backgroundColor: AppTheme.secondaryLight,
-              padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
+              padding: EdgeInsets.symmetric(horizontal: AppSpace.x8, vertical: AppSpace.x2),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
@@ -415,7 +415,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
             child: Text(
               'Complete Rep',
               style: GoogleFonts.inter(
-                fontSize: 16.sp,
+                fontSize: 16, // Fixed font size instead of Sizer
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
               ),
@@ -435,7 +435,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
           child: Text(
             'Exit Workout',
             style: GoogleFonts.inter(
-              fontSize: 14.sp,
+              fontSize: 14, // Fixed font size instead of Sizer
               fontWeight: FontWeight.w500,
               color: Colors.white.withOpacity( 0.8),
             ),
@@ -447,7 +447,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
             child: Text(
               'Skip Exercise',
               style: GoogleFonts.inter(
-                fontSize: 14.sp,
+                fontSize: 14, // Fixed font size instead of Sizer
                 fontWeight: FontWeight.w500,
                 color: AppTheme.secondaryLight,
               ),

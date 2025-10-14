@@ -130,15 +130,15 @@ class CopingMechanismTracker extends StatelessWidget {
     final pointsReward = strategy["pointsReward"] as int? ?? 0;
 
     return Container(
-      margin: EdgeInsets.only(bottom: 2.h),
+      margin: EdgeInsets.only(bottom: AppSpace.x2),
       child: Row(
         children: [
           GestureDetector(
             onTap: () => onStrategyCompleted(strategy["id"] as String),
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              width: 6.w,
-              height: 6.w,
+              width: 24, // Fixed width instead of percentage
+              height: 24, // Fixed height instead of percentage
               decoration: BoxDecoration(
                 color:
                     isCompleted ? const Color(0xFF0FA97A) : Colors.transparent,
@@ -159,7 +159,7 @@ class CopingMechanismTracker extends StatelessWidget {
                   : null,
             ),
           ),
-          SizedBox(width: 3.w),
+          SizedBox(width: AppSpace.x3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -176,7 +176,7 @@ class CopingMechanismTracker extends StatelessWidget {
                 ),
                 if (strategy["description"] != null)
                   Padding(
-                    padding: EdgeInsets.only(top: 0.5.h),
+                    padding: EdgeInsets.only(top: AppSpace.x1),
                     child: Text(
                       strategy["description"] as String,
                       style: theme.textTheme.bodySmall?.copyWith(
@@ -186,7 +186,7 @@ class CopingMechanismTracker extends StatelessWidget {
                   ),
                 if (strategy["duration"] != null)
                   Padding(
-                    padding: EdgeInsets.only(top: 0.5.h),
+                    padding: EdgeInsets.only(top: AppSpace.x1),
                     child: Row(
                       children: [
                         CustomIconWidget(
@@ -194,7 +194,7 @@ class CopingMechanismTracker extends StatelessWidget {
                           color: colorScheme.onSurfaceVariant,
                           size: 12,
                         ),
-                        SizedBox(width: 1.w),
+                        SizedBox(width: AppSpace.x1),
                         Text(
                           '${strategy["duration"]} min',
                           style: theme.textTheme.bodySmall?.copyWith(
@@ -210,8 +210,8 @@ class CopingMechanismTracker extends StatelessWidget {
           if (pointsReward > 0)
             Container(
               padding: EdgeInsets.symmetric(
-                horizontal: 2.w,
-                vertical: 0.5.h,
+                horizontal: AppSpace.x2,
+                vertical: AppSpace.x1,
               ),
               decoration: BoxDecoration(
                 color: isCompleted
@@ -229,7 +229,7 @@ class CopingMechanismTracker extends StatelessWidget {
                         : const Color(0xFFC9A227),
                     size: 12,
                   ),
-                  SizedBox(width: 1.w),
+                  SizedBox(width: AppSpace.x1),
                   Text(
                     isCompleted ? 'Earned' : '+$pointsReward',
                     style: theme.textTheme.labelSmall?.copyWith(

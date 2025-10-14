@@ -141,7 +141,7 @@ class ThemeSectionWidget extends StatelessWidget {
                 size: 24,
               ),
             ),
-            SizedBox(width: 3.w),
+            SizedBox(width: AppSpace.x3),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,7 +153,7 @@ class ThemeSectionWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 0.5.h),
+                  SizedBox(height: AppSpace.x1),
                   Text(
                     description,
                     style: theme.textTheme.bodySmall?.copyWith(
@@ -165,7 +165,7 @@ class ThemeSectionWidget extends StatelessWidget {
             ),
             if (isSelected)
               Container(
-                padding: EdgeInsets.all(1.w),
+                padding: EdgeInsets.all(AppSpace.x1),
                 decoration: BoxDecoration(
                   color: colorScheme.primary,
                   shape: BoxShape.circle,

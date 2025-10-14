@@ -195,7 +195,7 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
   Widget _buildTimezoneSelector(ThemeData theme, ColorScheme colorScheme) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      padding: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
       decoration: BoxDecoration(
         border: Border.all(color: colorScheme.outline.withOpacity( 0.3)),
         borderRadius: BorderRadius.circular(12),

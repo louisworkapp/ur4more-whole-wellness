@@ -102,7 +102,7 @@ class JournalTimelineCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: AppSpace.x2),
                 Text(
                   _truncateText(entry["content"] as String, 150),
                   style: theme.textTheme.bodyMedium?.copyWith(
@@ -112,7 +112,7 @@ class JournalTimelineCard extends StatelessWidget {
                 ),
                 if ((entry["content"] as String).length > 150)
                   Padding(
-                    padding: EdgeInsets.only(top: 1.h),
+                    padding: EdgeInsets.only(top: AppSpace.x1),
                     child: Text(
                       'Read more...',
                       style: theme.textTheme.bodySmall?.copyWith(
@@ -121,7 +121,7 @@ class JournalTimelineCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                SizedBox(height: 2.h),
+                SizedBox(height: AppSpace.x2),
                 Row(
                   children: [
                     CustomIconWidget(
@@ -129,7 +129,7 @@ class JournalTimelineCard extends StatelessWidget {
                       color: colorScheme.onSurfaceVariant,
                       size: 14,
                     ),
-                    SizedBox(width: 1.w),
+                    SizedBox(width: AppSpace.x1),
                     Text(
                       _formatTime(entry["date"] as DateTime),
                       style: theme.textTheme.bodySmall?.copyWith(
@@ -184,7 +184,7 @@ class JournalTimelineCard extends StatelessWidget {
     }
 
     return Container(
-      padding: EdgeInsets.all(2.w),
+      padding: EdgeInsets.all(AppSpace.x2),
       decoration: BoxDecoration(
         color: moodColor.withOpacity( 0.1),
         shape: BoxShape.circle,
@@ -205,13 +205,13 @@ class JournalTimelineCard extends StatelessWidget {
       ),
       builder: (context) {
         return Container(
-          padding: EdgeInsets.all(4.w),
+          padding: EdgeInsets.all(AppSpace.x4),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 12.w,
-                height: 0.5.h,
+                width: 48, // Fixed width instead of percentage
+                height: 2, // Fixed height instead of percentage
                 decoration: BoxDecoration(
                   color: Theme.of(context)
                       .colorScheme
@@ -220,7 +220,7 @@ class JournalTimelineCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              SizedBox(height: 3.h),
+              SizedBox(height: AppSpace.x3),
               _buildContextMenuItem(
                 context,
                 icon: 'edit',
@@ -262,7 +262,7 @@ class JournalTimelineCard extends StatelessWidget {
                   onDelete();
                 },
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: AppSpace.x2),
             ],
           ),
         );

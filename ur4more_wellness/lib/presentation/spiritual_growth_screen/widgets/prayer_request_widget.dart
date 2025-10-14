@@ -164,7 +164,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
                       color: AppTheme.primaryLight,
                       size: 14,
                     ),
-                    SizedBox(width: 1.w),
+                    SizedBox(width: AppSpace.x1),
                     Text(
                       "Private & Encrypted",
                       style: theme.textTheme.labelSmall?.copyWith(
@@ -184,7 +184,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
                   backgroundColor: AppTheme.primaryLight,
                   foregroundColor: Colors.white,
                   padding:
-                      EdgeInsets.symmetric(horizontal: 6.w, vertical: 1.5.h),
+                      EdgeInsets.symmetric(horizontal: AppSpace.x6, vertical: AppSpace.x3),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -198,7 +198,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
                       color: Colors.white,
                       size: 16,
                     ),
-                    SizedBox(width: 2.w),
+                    SizedBox(width: AppSpace.x2),
                     Text(
                       "Submit",
                       style: theme.textTheme.labelLarge?.copyWith(
@@ -211,7 +211,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
               ),
             ],
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
           _buildPrayerTips(context, colorScheme),
         ],
       ),
@@ -222,7 +222,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
     final theme = Theme.of(context);
 
     return Container(
-      padding: EdgeInsets.all(3.w),
+      padding: EdgeInsets.all(AppSpace.x3),
       decoration: BoxDecoration(
         color: AppTheme.successLight.withOpacity( 0.1),
         borderRadius: BorderRadius.circular(12),
@@ -241,7 +241,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
                 color: AppTheme.successLight,
                 size: 16,
               ),
-              SizedBox(width: 2.w),
+              SizedBox(width: AppSpace.x2),
               Text(
                 "Prayer Tips",
                 style: theme.textTheme.labelMedium?.copyWith(
@@ -251,7 +251,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
               ),
             ],
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: AppSpace.x1),
           Text(
             "• Be specific about your needs and concerns\n• Include gratitude for God's blessings\n• Pray for others in your community\n• Ask for wisdom and guidance",
             style: theme.textTheme.bodySmall?.copyWith(

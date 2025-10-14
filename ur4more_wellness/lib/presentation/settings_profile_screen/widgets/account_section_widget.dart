@@ -59,7 +59,7 @@ class AccountSectionWidget extends StatelessWidget {
 
   Widget _buildSyncStatus(ThemeData theme, ColorScheme colorScheme) {
     return Container(
-      padding: EdgeInsets.all(3.w),
+      padding: EdgeInsets.all(AppSpace.x3),
       decoration: BoxDecoration(
         color: isDataSynced
             ? colorScheme.tertiary.withOpacity( 0.1)
@@ -75,7 +75,7 @@ class AccountSectionWidget extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(2.w),
+            padding: EdgeInsets.all(AppSpace.x2),
             decoration: BoxDecoration(
               color: isDataSynced
                   ? colorScheme.tertiary.withOpacity( 0.2)
@@ -88,7 +88,7 @@ class AccountSectionWidget extends StatelessWidget {
               size: 24,
             ),
           ),
-          SizedBox(width: 3.w),
+          SizedBox(width: AppSpace.x3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -100,7 +100,7 @@ class AccountSectionWidget extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 0.5.h),
+                SizedBox(height: AppSpace.x1),
                 Text(
                   isDataSynced
                       ? 'Last sync: ${_formatSyncTime(lastSyncTime)}'
@@ -131,7 +131,7 @@ class AccountSectionWidget extends StatelessWidget {
           colorScheme.primary,
           onExportData,
         ),
-        SizedBox(height: 2.h),
+        SizedBox(height: AppSpace.x2),
         _buildActionButton(
           context,
           theme,
@@ -159,7 +159,7 @@ class AccountSectionWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(3.w),
+        padding: EdgeInsets.all(AppSpace.x3),
         decoration: BoxDecoration(
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
@@ -171,7 +171,7 @@ class AccountSectionWidget extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(2.w),
+              padding: EdgeInsets.all(AppSpace.x2),
               decoration: BoxDecoration(
                 color: actionColor.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(8),
@@ -182,7 +182,7 @@ class AccountSectionWidget extends StatelessWidget {
                 size: 24,
               ),
             ),
-            SizedBox(width: 3.w),
+            SizedBox(width: AppSpace.x3),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +194,7 @@ class AccountSectionWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 0.5.h),
+                  SizedBox(height: AppSpace.x1),
                   Text(
                     description,
                     style: theme.textTheme.bodySmall?.copyWith(
@@ -232,7 +232,7 @@ class AccountSectionWidget extends StatelessWidget {
                 color: colorScheme.error,
                 size: 24,
               ),
-              SizedBox(width: 2.w),
+              SizedBox(width: AppSpace.x2),
               Text(
                 'Sign Out',
                 style: theme.textTheme.titleLarge?.copyWith(

@@ -108,7 +108,7 @@ class RewardCardWidget extends StatelessWidget {
                       right: AppSpace.x2,
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 2.w, vertical: 0.5.h),
+                            horizontal: AppSpace.x2, vertical: AppSpace.x1),
                         decoration: BoxDecoration(
                           color: colorScheme.primary,
                           borderRadius: BorderRadius.circular(12),
@@ -153,7 +153,7 @@ class RewardCardWidget extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 1.h),
+                    SizedBox(height: AppSpace.x1),
                     Text(
                       reward['description'] as String? ?? 'Reward description',
                       style: theme.textTheme.bodySmall?.copyWith(
@@ -162,13 +162,13 @@ class RewardCardWidget extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SizedBox(height: 1.5.h),
+                    SizedBox(height: AppSpace.x3),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 2.w, vertical: 0.5.h),
+                              horizontal: AppSpace.x2, vertical: AppSpace.x1),
                           decoration: BoxDecoration(
                             color: colorScheme.secondaryContainer,
                             borderRadius: BorderRadius.circular(8),

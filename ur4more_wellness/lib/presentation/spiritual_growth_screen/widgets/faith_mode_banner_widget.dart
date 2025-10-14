@@ -156,7 +156,7 @@ class FaithModeBannerWidget extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(2.w),
+            padding: EdgeInsets.all(AppSpace.x2),
             decoration: BoxDecoration(
               color: bannerColor,
               borderRadius: BorderRadius.circular(12),
@@ -194,7 +194,7 @@ class FaithModeBannerWidget extends StatelessWidget {
           GestureDetector(
             onTap: onSettingsTap,
             child: Container(
-              padding: EdgeInsets.all(2.w),
+              padding: EdgeInsets.all(AppSpace.x2),
               decoration: BoxDecoration(
                 color: colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(8),
