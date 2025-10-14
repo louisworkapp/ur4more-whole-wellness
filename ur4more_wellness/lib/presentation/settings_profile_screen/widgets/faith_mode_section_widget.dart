@@ -117,7 +117,7 @@ class FaithModeSectionWidget extends StatelessWidget {
             boxShadow: isSelected
                 ? [
                     BoxShadow(
-                      color: colorScheme.shadow.withValues(alpha: 0.1),
+                      color: colorScheme.shadow.withOpacity( 0.1),
                       blurRadius: 2,
                       offset: const Offset(0, 1),
                     ),
@@ -175,7 +175,7 @@ class FaithModeSectionWidget extends StatelessWidget {
         color: colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: colorScheme.outline.withValues(alpha: 0.2),
+          color: colorScheme.outline.withOpacity( 0.2),
           width: 1,
         ),
       ),
@@ -185,7 +185,7 @@ class FaithModeSectionWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(2.w),
             decoration: BoxDecoration(
-              color: iconColor.withValues(alpha: 0.1),
+              color: iconColor.withOpacity( 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(

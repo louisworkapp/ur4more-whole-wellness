@@ -53,7 +53,7 @@ class CopingMechanismTracker extends StatelessWidget {
                       vertical: 0.5.h,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF0FA97A).withValues(alpha: 0.1),
+                      color: const Color(0xFF0FA97A).withOpacity( 0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
@@ -112,7 +112,7 @@ class CopingMechanismTracker extends StatelessWidget {
         SizedBox(height: 1.h),
         LinearProgressIndicator(
           value: progress,
-          backgroundColor: colorScheme.outline.withValues(alpha: 0.2),
+          backgroundColor: colorScheme.outline.withOpacity( 0.2),
           valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF0FA97A)),
           minHeight: 0.8.h,
         ),
@@ -215,8 +215,8 @@ class CopingMechanismTracker extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: isCompleted
-                    ? const Color(0xFF0FA97A).withValues(alpha: 0.1)
-                    : const Color(0xFFC9A227).withValues(alpha: 0.1),
+                    ? const Color(0xFF0FA97A).withOpacity( 0.1)
+                    : const Color(0xFFC9A227).withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(

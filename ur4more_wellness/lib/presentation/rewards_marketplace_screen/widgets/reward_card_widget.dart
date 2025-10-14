@@ -57,7 +57,7 @@ class RewardCardWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: colorScheme.shadow.withValues(alpha: 0.1),
+                color: colorScheme.shadow.withOpacity( 0.1),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -84,7 +84,7 @@ class RewardCardWidget extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         height: 20.h,
-                        color: Colors.black.withValues(alpha: 0.6),
+                        color: Colors.black.withOpacity( 0.6),
                         child: Center(
                           child: Container(
                             padding: EdgeInsets.symmetric(

@@ -41,7 +41,7 @@ class RewardDetailModalWidget extends StatelessWidget {
             width: 12.w,
             height: 0.5.h,
             decoration: BoxDecoration(
-              color: colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
+              color: colorScheme.onSurfaceVariant.withOpacity( 0.4),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -164,8 +164,8 @@ class RewardDetailModalWidget extends StatelessWidget {
                             horizontal: 3.w, vertical: 1.h),
                         decoration: BoxDecoration(
                           color: isAvailable
-                              ? colorScheme.tertiary.withValues(alpha: 0.2)
-                              : colorScheme.error.withValues(alpha: 0.2),
+                              ? colorScheme.tertiary.withOpacity( 0.2)
+                              : colorScheme.error.withOpacity( 0.2),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Row(
@@ -255,7 +255,7 @@ class RewardDetailModalWidget extends StatelessWidget {
               color: colorScheme.surface,
               border: Border(
                 top: BorderSide(
-                  color: colorScheme.outline.withValues(alpha: 0.2),
+                  color: colorScheme.outline.withOpacity( 0.2),
                   width: 1,
                 ),
               ),
@@ -297,7 +297,7 @@ class RewardDetailModalWidget extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: (isAvailable && canAfford)
                           ? colorScheme.primary
-                          : colorScheme.onSurfaceVariant.withValues(alpha: 0.3),
+                          : colorScheme.onSurfaceVariant.withOpacity( 0.3),
                       foregroundColor: (isAvailable && canAfford)
                           ? colorScheme.onPrimary
                           : colorScheme.onSurfaceVariant,

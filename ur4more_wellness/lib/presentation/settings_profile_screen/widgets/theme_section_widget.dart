@@ -113,13 +113,13 @@ class ThemeSectionWidget extends StatelessWidget {
         padding: EdgeInsets.all(3.w),
         decoration: BoxDecoration(
           color: isSelected
-              ? colorScheme.primary.withValues(alpha: 0.1)
+              ? colorScheme.primary.withOpacity( 0.1)
               : colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSelected
-                ? colorScheme.primary.withValues(alpha: 0.3)
-                : colorScheme.outline.withValues(alpha: 0.2),
+                ? colorScheme.primary.withOpacity( 0.3)
+                : colorScheme.outline.withOpacity( 0.2),
             width: isSelected ? 2 : 1,
           ),
         ),
@@ -129,7 +129,7 @@ class ThemeSectionWidget extends StatelessWidget {
               padding: EdgeInsets.all(2.w),
               decoration: BoxDecoration(
                 color: isSelected
-                    ? colorScheme.primary.withValues(alpha: 0.2)
+                    ? colorScheme.primary.withOpacity( 0.2)
                     : colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(8),
               ),

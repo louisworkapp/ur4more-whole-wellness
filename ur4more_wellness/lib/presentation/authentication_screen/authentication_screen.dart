@@ -6,7 +6,6 @@ import '../../core/app_export.dart';
 class AuthenticationScreen extends StatelessWidget {
   const AuthenticationScreen({super.key});
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,5 +80,4 @@ class AuthenticationScreen extends StatelessWidget {
       floatingActionButton: kIsWeb ? null : null,
     );
   }
-
 }

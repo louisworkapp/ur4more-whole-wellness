@@ -300,7 +300,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
         gradient: LinearGradient(
           colors: [
             AppTheme.primaryLight,
-            AppTheme.primaryLight.withValues(alpha: 0.8),
+            AppTheme.primaryLight.withOpacity( 0.8),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -312,7 +312,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
           Container(
             padding: EdgeInsets.all(3.w),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.2),
+              color: Colors.white.withOpacity( 0.2),
               borderRadius: BorderRadius.circular(12),
             ),
             child: CustomIconWidget(
@@ -337,7 +337,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
                 Text(
                   "Keep up your daily devotion habit!",
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: Colors.white.withValues(alpha: 0.9),
+                    color: Colors.white.withOpacity( 0.9),
                   ),
                 ),
               ],
@@ -447,7 +447,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.1),
+            color: colorScheme.shadow.withOpacity( 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),

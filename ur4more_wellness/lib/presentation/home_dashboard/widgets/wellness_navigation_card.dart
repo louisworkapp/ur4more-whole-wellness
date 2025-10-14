@@ -55,7 +55,7 @@ class WellnessNavigationCard extends StatelessWidget {
                   width: min(12.w, 48.0),
                   height: min(12.w, 48.0),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                    color: theme.colorScheme.primary.withOpacity( 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Icon(
@@ -97,7 +97,7 @@ class WellnessNavigationCard extends StatelessWidget {
                       LinearProgressIndicator(
                         value: completionPercentage,
                         backgroundColor:
-                            theme.colorScheme.outline.withValues(alpha: 0.1),
+                            theme.colorScheme.outline.withOpacity( 0.1),
                         valueColor: AlwaysStoppedAnimation<Color>(
                             theme.colorScheme.primary),
                         minHeight: 4,
@@ -113,7 +113,7 @@ class WellnessNavigationCard extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: min(2.w, 8.0), vertical: min(1.h, 8.0)),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.primary.withValues(alpha: 0.1),
+                    color: theme.colorScheme.primary.withOpacity( 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(

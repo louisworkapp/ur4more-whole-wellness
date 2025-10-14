@@ -35,7 +35,7 @@ class FaithModeBannerWidget extends StatelessWidget {
         color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: colorScheme.outline.withValues(alpha: 0.3),
+          color: colorScheme.outline.withOpacity( 0.3),
           width: 1,
         ),
       ),
@@ -46,7 +46,7 @@ class FaithModeBannerWidget extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(2.w),
                 decoration: BoxDecoration(
-                  color: colorScheme.outline.withValues(alpha: 0.2),
+                  color: colorScheme.outline.withOpacity( 0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: CustomIconWidget(
@@ -83,7 +83,7 @@ class FaithModeBannerWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(3.w),
             decoration: BoxDecoration(
-              color: AppTheme.primaryLight.withValues(alpha: 0.1),
+              color: AppTheme.primaryLight.withOpacity( 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
@@ -146,10 +146,10 @@ class FaithModeBannerWidget extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
       padding: EdgeInsets.all(4.w),
       decoration: BoxDecoration(
-        color: bannerColor.withValues(alpha: 0.1),
+        color: bannerColor.withOpacity( 0.1),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: bannerColor.withValues(alpha: 0.3),
+          color: bannerColor.withOpacity( 0.3),
           width: 1,
         ),
       ),

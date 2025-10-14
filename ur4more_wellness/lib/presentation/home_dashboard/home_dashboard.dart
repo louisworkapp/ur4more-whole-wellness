@@ -266,7 +266,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                   decoration: BoxDecoration(
                     color: Theme.of(
                       context,
-                    ).colorScheme.outline.withValues(alpha: 0.3),
+                    ).colorScheme.outline.withOpacity( 0.3),
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),

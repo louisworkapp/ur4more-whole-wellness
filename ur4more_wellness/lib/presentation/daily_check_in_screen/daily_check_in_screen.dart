@@ -422,7 +422,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
               color: theme.colorScheme.surface,
               boxShadow: [
                 BoxShadow(
-                  color: theme.colorScheme.shadow.withValues(alpha: 0.1),
+                  color: theme.colorScheme.shadow.withOpacity( 0.1),
                   blurRadius: 4,
                   offset: const Offset(0, -2),
                 ),
@@ -547,7 +547,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
             padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
             decoration: BoxDecoration(
               color:
-                  Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                  Theme.of(context).colorScheme.primary.withOpacity( 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(

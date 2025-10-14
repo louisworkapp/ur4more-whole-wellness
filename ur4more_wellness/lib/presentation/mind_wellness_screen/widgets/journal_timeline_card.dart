@@ -72,7 +72,7 @@ class JournalTimelineCard extends StatelessWidget {
                                   ),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFF0FA97A)
-                                        .withValues(alpha: 0.1),
+                                        .withOpacity( 0.1),
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Text(
@@ -186,7 +186,7 @@ class JournalTimelineCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(2.w),
       decoration: BoxDecoration(
-        color: moodColor.withValues(alpha: 0.1),
+        color: moodColor.withOpacity( 0.1),
         shape: BoxShape.circle,
       ),
       child: Icon(
@@ -216,7 +216,7 @@ class JournalTimelineCard extends StatelessWidget {
                   color: Theme.of(context)
                       .colorScheme
                       .onSurfaceVariant
-                      .withValues(alpha: 0.3),
+                      .withOpacity( 0.3),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),

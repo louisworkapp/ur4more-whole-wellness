@@ -29,7 +29,7 @@ class MindWellnessHeader extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [
             const Color(0xFF0FA97A),
-            const Color(0xFF0FA97A).withValues(alpha: 0.8),
+            const Color(0xFF0FA97A).withOpacity( 0.8),
           ],
         ),
       ),
@@ -55,7 +55,7 @@ class MindWellnessHeader extends StatelessWidget {
                       Text(
                         'Nurture your mental health',
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: Colors.white.withValues(alpha: 0.9),
+                          color: Colors.white.withOpacity( 0.9),
                         ),
                       ),
                     ],
@@ -65,7 +65,7 @@ class MindWellnessHeader extends StatelessWidget {
                     child: Container(
                       padding: EdgeInsets.all(2.w),
                       decoration: BoxDecoration(
-                        color: Colors.white.withValues(alpha: 0.2),
+                        color: Colors.white.withOpacity( 0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: CustomIconWidget(
@@ -121,10 +121,10 @@ class MindWellnessHeader extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(3.w),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.15),
+        color: Colors.white.withOpacity( 0.15),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.white.withValues(alpha: 0.2),
+          color: Colors.white.withOpacity( 0.2),
           width: 1,
         ),
       ),
@@ -142,7 +142,7 @@ class MindWellnessHeader extends StatelessWidget {
               Text(
                 title,
                 style: theme.textTheme.bodySmall?.copyWith(
-                  color: Colors.white.withValues(alpha: 0.9),
+                  color: Colors.white.withOpacity( 0.9),
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -159,7 +159,7 @@ class MindWellnessHeader extends StatelessWidget {
           Text(
             subtitle,
             style: theme.textTheme.bodySmall?.copyWith(
-              color: Colors.white.withValues(alpha: 0.8),
+              color: Colors.white.withOpacity( 0.8),
             ),
           ),
         ],
