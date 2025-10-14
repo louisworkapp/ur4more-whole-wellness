@@ -381,7 +381,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                   color: Theme.of(context)
                       .colorScheme
                       .outline
-                      .withValues(alpha: 0.3),
+                      .withOpacity( 0.3),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -582,7 +582,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
           children: [
             CustomIconWidget(
               iconName: 'fitness_center',
-              color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
+              color: colorScheme.onSurfaceVariant.withOpacity( 0.5),
               size: 80,
             ),
             SizedBox(height: 3.h),
@@ -600,7 +600,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
               style: GoogleFonts.inter(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
-                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.8),
+                color: colorScheme.onSurfaceVariant.withOpacity( 0.8),
               ),
               textAlign: TextAlign.center,
             ),

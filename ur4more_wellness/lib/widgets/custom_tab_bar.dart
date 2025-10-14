@@ -102,7 +102,7 @@ class CustomTabBar extends StatelessWidget {
                 border: Border.all(
                   color: isSelected
                       ? (selectedColor ?? colorScheme.primary)
-                      : colorScheme.outline.withValues(alpha: 0.3),
+                      : colorScheme.outline.withOpacity( 0.3),
                   width: 1,
                 ),
               ),
@@ -131,7 +131,7 @@ class CustomTabBar extends StatelessWidget {
         color: backgroundColor ?? colorScheme.surface,
         border: Border(
           bottom: BorderSide(
-            color: colorScheme.outline.withValues(alpha: 0.2),
+            color: colorScheme.outline.withOpacity( 0.2),
             width: 1,
           ),
         ),
@@ -206,7 +206,7 @@ class CustomTabBar extends StatelessWidget {
                   boxShadow: isSelected
                       ? [
                           BoxShadow(
-                            color: colorScheme.shadow.withValues(alpha: 0.1),
+                            color: colorScheme.shadow.withOpacity( 0.1),
                             blurRadius: 2,
                             offset: const Offset(0, 1),
                           ),

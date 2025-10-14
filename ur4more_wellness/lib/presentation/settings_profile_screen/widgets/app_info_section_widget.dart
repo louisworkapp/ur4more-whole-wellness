@@ -64,7 +64,7 @@ class AppInfoSectionWidget extends StatelessWidget {
         color: colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: colorScheme.outline.withValues(alpha: 0.2),
+          color: colorScheme.outline.withOpacity( 0.2),
           width: 1,
         ),
       ),
@@ -73,7 +73,7 @@ class AppInfoSectionWidget extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(2.w),
             decoration: BoxDecoration(
-              color: colorScheme.primary.withValues(alpha: 0.1),
+              color: colorScheme.primary.withOpacity( 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: CustomIconWidget(
@@ -170,7 +170,7 @@ class AppInfoSectionWidget extends StatelessWidget {
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: colorScheme.outline.withValues(alpha: 0.2),
+            color: colorScheme.outline.withOpacity( 0.2),
             width: 1,
           ),
         ),
@@ -179,7 +179,7 @@ class AppInfoSectionWidget extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(2.w),
               decoration: BoxDecoration(
-                color: colorScheme.primary.withValues(alpha: 0.1),
+                color: colorScheme.primary.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: CustomIconWidget(

@@ -128,13 +128,13 @@ class _JournalEntryInterfaceState extends State<JournalEntryInterface> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
-                        color: colorScheme.outline.withValues(alpha: 0.3),
+                        color: colorScheme.outline.withOpacity( 0.3),
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
-                        color: colorScheme.outline.withValues(alpha: 0.3),
+                        color: colorScheme.outline.withOpacity( 0.3),
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(

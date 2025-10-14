@@ -23,7 +23,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.1),
+            color: colorScheme.shadow.withOpacity( 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -45,7 +45,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(4.w),
       decoration: BoxDecoration(
-        color: AppTheme.successLight.withValues(alpha: 0.1),
+        color: AppTheme.successLight.withOpacity( 0.1),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(16),
           topRight: Radius.circular(16),
@@ -150,7 +150,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
                     ? AppTheme.successLight
                     : isInProgress
                         ? AppTheme.secondaryLight
-                        : colorScheme.outline.withValues(alpha: 0.3),
+                        : colorScheme.outline.withOpacity( 0.3),
                 shape: BoxShape.circle,
                 border: Border.all(
                   color: isCompleted
@@ -184,7 +184,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
               Container(
                 width: 2,
                 height: 6.h,
-                color: colorScheme.outline.withValues(alpha: 0.2),
+                color: colorScheme.outline.withOpacity( 0.2),
                 margin: EdgeInsets.symmetric(vertical: 1.h),
               ),
           ],
@@ -214,7 +214,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             horizontal: 2.w, vertical: 0.5.h),
                         decoration: BoxDecoration(
-                          color: AppTheme.secondaryLight.withValues(alpha: 0.1),
+                          color: AppTheme.secondaryLight.withOpacity( 0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
@@ -264,7 +264,7 @@ class SpiritualMilestoneWidget extends StatelessWidget {
                         value: (milestone["progress"] as num? ?? 0) /
                             (milestone["target"] as num? ?? 100),
                         backgroundColor:
-                            colorScheme.outline.withValues(alpha: 0.2),
+                            colorScheme.outline.withOpacity( 0.2),
                         valueColor: AlwaysStoppedAnimation<Color>(
                             AppTheme.secondaryLight),
                         minHeight: 1.h,

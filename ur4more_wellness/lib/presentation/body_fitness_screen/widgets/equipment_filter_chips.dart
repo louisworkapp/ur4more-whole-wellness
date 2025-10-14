@@ -47,7 +47,7 @@ class EquipmentFilterChips extends StatelessWidget {
                 border: Border.all(
                   color: isSelected
                       ? Theme.of(context).colorScheme.primary
-                      : colorScheme.outline.withValues(alpha: 0.5),
+                      : colorScheme.outline.withOpacity( 0.5),
                   width: 1,
                 ),
               ),

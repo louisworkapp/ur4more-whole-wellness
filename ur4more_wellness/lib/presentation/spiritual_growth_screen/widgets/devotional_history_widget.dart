@@ -25,7 +25,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.1),
+            color: colorScheme.shadow.withOpacity( 0.1),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -49,7 +49,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(4.w),
       decoration: BoxDecoration(
-        color: AppTheme.primaryLight.withValues(alpha: 0.1),
+        color: AppTheme.primaryLight.withOpacity( 0.1),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(16),
           topRight: Radius.circular(16),
@@ -153,8 +153,8 @@ class DevotionalHistoryWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isCompleted
-                ? AppTheme.successLight.withValues(alpha: 0.3)
-                : colorScheme.outline.withValues(alpha: 0.2),
+                ? AppTheme.successLight.withOpacity( 0.3)
+                : colorScheme.outline.withOpacity( 0.2),
             width: 1,
           ),
         ),
@@ -166,7 +166,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isCompleted
                     ? AppTheme.successLight
-                    : colorScheme.outline.withValues(alpha: 0.3),
+                    : colorScheme.outline.withOpacity( 0.3),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Center(
@@ -247,7 +247,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
                     padding:
                         EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
                     decoration: BoxDecoration(
-                      color: AppTheme.secondaryLight.withValues(alpha: 0.1),
+                      color: AppTheme.secondaryLight.withOpacity( 0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(

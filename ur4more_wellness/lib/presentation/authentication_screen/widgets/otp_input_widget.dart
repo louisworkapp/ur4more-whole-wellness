@@ -35,8 +35,8 @@ class OtpInputWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: errorText != null
-              ? colorScheme.error.withValues(alpha: 0.5)
-              : colorScheme.outline.withValues(alpha: 0.3),
+              ? colorScheme.error.withOpacity( 0.5)
+              : colorScheme.outline.withOpacity( 0.3),
           width: 1,
         ),
       ),
@@ -53,7 +53,7 @@ class OtpInputWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: (errorText != null ? colorScheme.error : colorScheme.primary)
-                .withValues(alpha: 0.1),
+                .withOpacity( 0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -63,7 +63,7 @@ class OtpInputWidget extends StatelessWidget {
 
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: BoxDecoration(
-        color: colorScheme.primaryContainer.withValues(alpha: 0.1),
+        color: colorScheme.primaryContainer.withOpacity( 0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: errorText != null ? colorScheme.error : colorScheme.primary,
@@ -74,7 +74,7 @@ class OtpInputWidget extends StatelessWidget {
 
     final errorPinTheme = defaultPinTheme.copyWith(
       decoration: BoxDecoration(
-        color: colorScheme.errorContainer.withValues(alpha: 0.1),
+        color: colorScheme.errorContainer.withOpacity( 0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: colorScheme.error,

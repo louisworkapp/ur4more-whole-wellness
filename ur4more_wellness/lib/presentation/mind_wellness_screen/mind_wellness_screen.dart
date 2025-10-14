@@ -271,7 +271,7 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
           color: colorScheme.surface,
           boxShadow: [
             BoxShadow(
-              color: colorScheme.shadow.withValues(alpha: 0.1),
+              color: colorScheme.shadow.withOpacity( 0.1),
               blurRadius: 8,
               offset: const Offset(0, -2),
             ),
@@ -409,7 +409,7 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
                   color: Theme.of(context)
                       .colorScheme
                       .onSurfaceVariant
-                      .withValues(alpha: 0.3),
+                      .withOpacity( 0.3),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
