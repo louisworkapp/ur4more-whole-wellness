@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -56,96 +57,79 @@ class _DailyCheckinCtaState extends State<DailyCheckinCta> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w),
-      child: Card(
-        elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        color: Colors.white,
-        child: Container(
-          padding: EdgeInsets.all(4.w),
-          child: Column(
-            children: [
-              // Title with new typography
-              Text(
-                'Daily Check-in',
-                style: theme.textTheme.titleLarge?.copyWith(
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: -0.2,
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 360), // cap card width
+        child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          elevation: 0,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Daily Check-in', style: theme.textTheme.titleLarge),
+                const SizedBox(height: 8),
+                Text(
+                  'Track your daily progress and earn points',
+                  style: theme.textTheme.bodyMedium?.copyWith(color: Colors.black54),
                 ),
-              ),
+                const SizedBox(height: 16),
 
-              SizedBox(height: 2.h),
-
-              // Description with specified color
-              Text(
-                'Track your daily progress and earn points',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: const Color(0xFF475569),
-                ),
-                textAlign: TextAlign.center,
-              ),
-
-              SizedBox(height: 3.h),
-
-              // Streak pill with specified styling - only show if streak >= 7
-              if (!_isLoadingStreak && _currentStreak >= 7)
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFFF6DB), // Pale gold background
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.local_fire_department,
-                        color: AppColors.gold, // Gold text/icon
-                        size: 16,
-                      ),
-                      SizedBox(width: 1.w),
-                      Text(
-                        '$_currentStreak day streak',
-                        style: GoogleFonts.inter(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w600,
+                // Streak pill with specified styling - only show if streak >= 7
+                if (!_isLoadingStreak && _currentStreak >= 7) ...[
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFF6DB), // Pale gold background
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.local_fire_department,
                           color: AppColors.gold, // Gold text/icon
+                          size: 16,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-
-              if (!_isLoadingStreak && _currentStreak >= 7)
-                SizedBox(height: 3.h),
-
-              // CTA Button
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: widget.onTap,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: theme.colorScheme.primary,
-                    foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(vertical: 2.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    elevation: 2,
-                  ),
-                  child: Text(
-                    widget.isCompleted
-                        ? 'View Today\'s Progress'
-                        : 'Start Daily Check-in',
-                    style: GoogleFonts.inter(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
+                        const SizedBox(width: 4),
+                        Text(
+                          '$_currentStreak day streak',
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.gold, // Gold text/icon
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+                  const SizedBox(height: 16),
+                ],
+
+                // ✅ Full-width, wraps to 2 lines, no overflow
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: widget.onTap,
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(0, 56),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    ),
+                    child: Text(
+                      widget.isCompleted
+                          ? 'View Today\'s Progress'
+                          : 'Start Daily Check-in',
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

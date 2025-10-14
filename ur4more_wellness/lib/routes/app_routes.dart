@@ -9,6 +9,7 @@ import '../presentation/authentication_screen/authentication_screen.dart';
 import '../presentation/spiritual_growth_screen/spiritual_growth_screen.dart';
 import '../presentation/rewards_marketplace_screen/rewards_marketplace_screen.dart';
 import '../presentation/main_scaffold/main_scaffold.dart';
+import '../screens/home_screen.dart';
 
 class AppRoutes {
   static const String splash = '/splash';
@@ -16,6 +17,7 @@ class AppRoutes {
   static const String checkin = '/check-in';
   static const String settings = '/settings';
   static const String authentication = '/authentication-screen';
+  static const String home = '/home';
 
   // Legacy routes for direct navigation
   static const String mindWellness = '/mind-wellness-screen';
@@ -32,6 +34,7 @@ class AppRoutes {
     checkin: (context) => const DailyCheckInScreen(),
     settings: (context) => const SettingsProfileScreen(),
     authentication: (context) => const AuthenticationScreen(),
+    home: (context) => const HomeScreen(),
 
     // Legacy routes for direct access
     mindWellness: (context) => const MindWellnessScreen(),

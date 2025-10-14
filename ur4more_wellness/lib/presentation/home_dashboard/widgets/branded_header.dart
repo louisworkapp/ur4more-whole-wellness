@@ -22,7 +22,7 @@ class BrandedHeader extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Container(
-      padding: EdgeInsets.fromLTRB(4.w, 2.h, 4.w, 1.h),
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
       decoration: BoxDecoration(
         color: colorScheme.surface,
         boxShadow: [
@@ -36,45 +36,50 @@ class BrandedHeader extends StatelessWidget {
       child: SafeArea(
         bottom: false,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // Brand logo and greeting
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const BrandGlyphText(size: 22),
-                      SizedBox(width: 2.w),
-                      Text(
-                        'UR4MORE',
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          color: colorScheme.primary,
-                          fontSize: 18.sp,
+                      const SizedBox(width: 8),
+                      Flexible(
+                        child: Text(
+                          'UR4MORE',
+                          style: theme.textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: colorScheme.primary,
+                            fontSize: 18,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 0.5.h),
+                  const SizedBox(height: 4),
                   Text(
                     _getGreetingMessage(),
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: colorScheme.onSurfaceVariant,
-                      fontSize: 12.sp,
+                      fontSize: 12,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
             ),
             // Points and actions
             Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 // Points display
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: AppTheme.secondaryLight.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
@@ -89,27 +94,27 @@ class BrandedHeader extends StatelessWidget {
                       CustomIconWidget(
                         iconName: 'stars',
                         color: AppTheme.secondaryLight,
-                        size: 4.w,
+                        size: 16,
                       ),
-                      SizedBox(width: 1.w),
+                      const SizedBox(width: 4),
                       Text(
                         _formatPoints(totalPoints),
                         style: theme.textTheme.labelLarge?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: AppTheme.secondaryLight,
-                          fontSize: 12.sp,
+                          fontSize: 12,
                         ),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(width: 3.w),
+                const SizedBox(width: 8),
                 // Notification button
                 GestureDetector(
                   onTap: onNotificationTap,
                   child: Container(
-                    width: 10.w,
-                    height: 10.w,
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
                       color: colorScheme.surface,
                       borderRadius: BorderRadius.circular(8),
@@ -124,15 +129,15 @@ class BrandedHeader extends StatelessWidget {
                         CustomIconWidget(
                           iconName: 'notifications_outlined',
                           color: colorScheme.onSurfaceVariant,
-                          size: 5.w,
+                          size: 20,
                         ),
                         // Notification badge
                         Positioned(
-                          top: 2.w,
-                          right: 2.w,
+                          top: 6,
+                          right: 6,
                           child: Container(
-                            width: 2.w,
-                            height: 2.w,
+                            width: 8,
+                            height: 8,
                             decoration: BoxDecoration(
                               color: AppTheme.errorLight,
                               shape: BoxShape.circle,
@@ -143,13 +148,13 @@ class BrandedHeader extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 2.w),
+                const SizedBox(width: 8),
                 // Profile button
                 GestureDetector(
                   onTap: onProfileTap,
                   child: Container(
-                    width: 10.w,
-                    height: 10.w,
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
                       color: colorScheme.primary.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
@@ -161,7 +166,7 @@ class BrandedHeader extends StatelessWidget {
                     child: CustomIconWidget(
                       iconName: 'person_outline',
                       color: colorScheme.primary,
-                      size: 5.w,
+                      size: 20,
                     ),
                   ),
                 ),

@@ -238,7 +238,7 @@ class _SplashScreenState extends State<SplashScreen>
                             },
                           ),
 
-                          SizedBox(height: 8.h),
+                          const SizedBox(height: 32),
 
                           // Brand Text
                           AnimatedBuilder(
@@ -262,7 +262,7 @@ class _SplashScreenState extends State<SplashScreen>
                             },
                           ),
 
-                          SizedBox(height: 2.h),
+                          const SizedBox(height: 16),
 
                           // Tagline
                           AnimatedBuilder(
@@ -292,7 +292,7 @@ class _SplashScreenState extends State<SplashScreen>
 
                   // Loading Section
                   Padding(
-                    padding: EdgeInsets.only(bottom: 8.h),
+                    padding: const EdgeInsets.only(bottom: 32),
                     child: Column(
                       children: [
                         // Loading Indicator
@@ -307,7 +307,7 @@ class _SplashScreenState extends State<SplashScreen>
                           ),
                         ),
 
-                        SizedBox(height: 3.h),
+                        const SizedBox(height: 24),
 
                         // Status Text
                         AnimatedSwitcher(
@@ -353,18 +353,18 @@ class _SplashScreenState extends State<SplashScreen>
         ],
       ),
       child: Padding(
-        padding: EdgeInsets.all(4.w),
+        padding: const EdgeInsets.all(16),
         child: Center(
           child: Image.asset(
             'assets/images/logo-ur4more-4-1760393143197.png',
-            width: 22.w,
-            height: 22.w,
+            width: 88,
+            height: 88,
             fit: BoxFit.contain,
             errorBuilder: (context, error, stackTrace) {
               // Fallback to a simple icon if image fails to load
               return Container(
-                width: 22.w,
-                height: 22.w,
+                width: 88,
+                height: 88,
                 decoration: BoxDecoration(
                   color: Theme.of(context)
                       .colorScheme

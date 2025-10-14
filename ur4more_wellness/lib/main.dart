@@ -1,3 +1,5 @@
+import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
@@ -46,17 +48,25 @@ class MyApp extends StatelessWidget {
         themeMode: ThemeMode.light,
         // 🚨 CRITICAL: NEVER REMOVE OR MODIFY
         builder: (context, child) {
+          // Normalize desktop/web layout with centered content and max width
+          final media = MediaQuery.of(context);
           return MediaQuery(
-            data: MediaQuery.of(context).copyWith(
-              textScaler: TextScaler.linear(1.0),
+            data: media.copyWith(textScaler: const TextScaler.linear(1.0)),
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 430),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: child ?? const SizedBox.shrink(),
+                ),
+              ),
             ),
-            child: child!,
           );
         },
         // 🚨 END CRITICAL SECTION
         debugShowCheckedModeBanner: false,
         routes: AppRoutes.routes,
-        initialRoute: AppRoutes.splash,
+        initialRoute: AppRoutes.authentication,
       );
     });
   }

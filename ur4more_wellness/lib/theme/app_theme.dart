@@ -123,7 +123,7 @@ class AppTheme {
     ),
 
     // Card theme with contextual elevation
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: surfaceLight,
       elevation: 2.0,
       shadowColor: const Color(0x331E3A8A),
@@ -286,7 +286,7 @@ class AppTheme {
     ),
 
     // Tab bar theme
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: TabBarThemeData(
       labelColor: primaryLight,
       unselectedLabelColor: const Color(0xFF64748B),
       indicatorColor: primaryLight,
@@ -380,7 +380,7 @@ class AppTheme {
     ),
 
     // Card theme for dark mode
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: surfaceDark,
       elevation: 3.0,
       shadowColor: const Color(0x33FFFFFF),
@@ -544,7 +544,7 @@ class AppTheme {
     ),
 
     // Tab bar theme for dark mode
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: TabBarThemeData(
       labelColor: primaryDark,
       unselectedLabelColor: const Color(0xFFD1D5DB),
       indicatorColor: primaryDark,
