@@ -119,7 +119,7 @@ class WellnessNavigationCard extends StatelessWidget {
                   child: Text(
                     '+$pointValue',
                     style: GoogleFonts.inter(
-                      fontSize: math.min(12.0, (theme.textTheme.bodySmall?.fontSize ?? 12)),
+                      fontSize: min(12.0, (theme.textTheme.bodySmall?.fontSize ?? 12)),
                       fontWeight: FontWeight.w600,
                       color: theme.colorScheme.primary,
                     ),
