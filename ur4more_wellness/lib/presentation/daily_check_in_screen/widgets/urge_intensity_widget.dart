@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'dart:math' as math;
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class UrgeIntensityWidget extends StatefulWidget {
@@ -40,7 +41,7 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
     final theme = Theme.of(context);
 
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: EdgeInsets.all(AppSpace.x4),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
@@ -53,7 +54,7 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
         children: [
           // Privacy notice
           Container(
-            padding: EdgeInsets.all(3.w),
+            padding: EdgeInsets.all(AppSpace.x3),
             decoration: BoxDecoration(
               color: theme.colorScheme.tertiary.withOpacity( 0.1),
               borderRadius: BorderRadius.circular(12),
@@ -68,7 +69,7 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
                   color: theme.colorScheme.tertiary,
                   size: 20,
                 ),
-                SizedBox(width: 2.w),
+                SizedBox(width: AppSpace.x2),
                 Expanded(
                   child: Text(
                     'Your responses are private and encrypted for your safety',
@@ -81,12 +82,12 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
               ],
             ),
           ),
-          SizedBox(height: 3.h),
+          SizedBox(height: AppSpace.x3),
 
           // Current urge level display
           Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
+            padding: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x3),
             decoration: BoxDecoration(
               color: _getUrgeColor(widget.urgeLevel).withOpacity( 0.1),
               borderRadius: BorderRadius.circular(12),
@@ -104,18 +105,18 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
                       color: _getUrgeColor(widget.urgeLevel),
                       size: 32,
                     ),
-                    SizedBox(width: 2.w),
+                    SizedBox(width: AppSpace.x2),
                     Text(
                       widget.urgeLevel.round().toString(),
                       style: theme.textTheme.headlineLarge?.copyWith(
                         color: _getUrgeColor(widget.urgeLevel),
                         fontWeight: FontWeight.w700,
-                        fontSize: 36.sp,
+                        fontSize: math.min(36.0, 24),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 1.h),
+                SizedBox(height: AppSpace.x1),
                 Text(
                   _getUrgeDescription(widget.urgeLevel),
                   textAlign: TextAlign.center,
@@ -127,7 +128,7 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
               ],
             ),
           ),
-          SizedBox(height: 3.h),
+          SizedBox(height: AppSpace.x3),
 
           // Urge/craving slider
           SliderTheme(
@@ -150,7 +151,7 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
               onChanged: widget.onChanged,
             ),
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: AppSpace.x1),
 
           // Scale markers
           Row(
@@ -176,12 +177,12 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
               ),
             ],
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
 
           // High urge support message
           if (widget.urgeLevel >= 7) ...[
             Container(
-              padding: EdgeInsets.all(3.w),
+              padding: EdgeInsets.all(AppSpace.x3),
               decoration: BoxDecoration(
                 color: theme.colorScheme.error.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(12),
@@ -196,7 +197,7 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
                     color: theme.colorScheme.error,
                     size: 20,
                   ),
-                  SizedBox(width: 2.w),
+                  SizedBox(width: AppSpace.x2),
                   Expanded(
                     child: Text(
                       'Strong urges detected. Consider reaching out for support or using coping strategies.',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../design/tokens.dart';
 import '../../core/brand_rules.dart';
 import '../../core/services/points_service.dart';
 import '../../features/home/streaks.dart';
@@ -417,7 +417,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
 
           // Navigation Controls
           Container(
-            padding: EdgeInsets.all(4.w),
+            padding: EdgeInsets.all(AppSpace.x4),
             decoration: BoxDecoration(
               color: theme.colorScheme.surface,
               boxShadow: [
@@ -445,7 +445,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                               color: theme.colorScheme.primary,
                               size: 20,
                             ),
-                            SizedBox(width: 2.w),
+                            SizedBox(width: AppSpace.x2),
                             const Text('Previous'),
                           ],
                         ),
@@ -454,7 +454,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                   else
                     const Spacer(),
 
-                  SizedBox(width: 4.w),
+                  SizedBox(width: AppSpace.x4),
 
                   // Skip Button (for optional sections)
                   if (_currentSection > 0 &&
@@ -471,7 +471,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
 
                   if (_currentSection > 0 &&
                       _currentSection < _sectionTitles.length - 1)
-                    SizedBox(width: 4.w),
+                    SizedBox(width: AppSpace.x4),
 
                   // Next/Complete Button
                   Expanded(
@@ -510,7 +510,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                                 ),
                                 if (_currentSection <
                                     _sectionTitles.length - 1) ...[
-                                  SizedBox(width: 2.w),
+                                  SizedBox(width: AppSpace.x2),
                                   CustomIconWidget(
                                     iconName: 'arrow_forward',
                                     color: theme.colorScheme.onPrimary,
@@ -538,13 +538,13 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
   }) {
     return SingleChildScrollView(
       controller: _scrollController,
-      padding: EdgeInsets.all(4.w),
+      padding: EdgeInsets.all(AppSpace.x4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Section Header (updated styling)
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+            padding: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
             decoration: BoxDecoration(
               color:
                   Theme.of(context).colorScheme.primary.withOpacity( 0.1),
@@ -553,8 +553,8 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
             child: Row(
               children: [
                 Container(
-                  width: 8.w,
-                  height: 8.w,
+                  width: AppSpace.x2,
+                  height: AppSpace.x2,
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.primary, // Navy
                     shape: BoxShape.circle,
@@ -569,7 +569,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                     ),
                   ),
                 ),
-                SizedBox(width: 3.w),
+                SizedBox(width: AppSpace.x3),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -600,7 +600,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
             ),
           ),
 
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
 
           // Subtitle
           Text(
