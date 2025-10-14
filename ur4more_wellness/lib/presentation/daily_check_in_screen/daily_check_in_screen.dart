@@ -611,12 +611,12 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                 ),
           ),
 
-          SizedBox(height: 3.h),
+          SizedBox(height: AppSpace.x3),
 
           // Section Content
           child,
 
-          SizedBox(height: 4.h),
+          SizedBox(height: AppSpace.x4),
         ],
       ),
     );

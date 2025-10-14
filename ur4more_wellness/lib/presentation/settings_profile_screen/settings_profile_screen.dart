@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../design/tokens.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/custom_bottom_bar.dart';
@@ -72,7 +72,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              SizedBox(height: 2.h),
+              SizedBox(height: AppSpace.x2),
 
               // Profile Information Section
               ProfileSectionWidget(
@@ -142,7 +142,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
                 onRateApp: _rateApp,
               ),
 
-              SizedBox(height: 10.h), // Bottom padding for navigation bar
+              SizedBox(height: AppSpace.x10), // Bottom padding for navigation bar
             ],
           ),
         ),

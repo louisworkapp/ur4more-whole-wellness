@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 
 class PrayerRequestWidget extends StatefulWidget {
   final Function(String)? onSubmit;
@@ -33,7 +33,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
     final colorScheme = theme.colorScheme;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
@@ -61,11 +61,11 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
     return GestureDetector(
       onTap: () => setState(() => _isExpanded = !_isExpanded),
       child: Container(
-        padding: EdgeInsets.all(4.w),
+        padding: Pad.card,
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(2.w),
+              padding: EdgeInsets.all(AppSpace.x2),
               decoration: BoxDecoration(
                 color: AppTheme.primaryLight.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(12),
@@ -76,7 +76,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
                 size: 20,
               ),
             ),
-            SizedBox(width: 3.w),
+            SizedBox(width: AppSpace.x3),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +88,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
                       color: colorScheme.onSurface,
                     ),
                   ),
-                  SizedBox(height: 0.5.h),
+                  SizedBox(height: AppSpace.x1),
                   Text(
                     "Share your heart with God",
                     style: theme.textTheme.bodySmall?.copyWith(
@@ -113,7 +113,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
     final theme = Theme.of(context);
 
     return Container(
-      padding: EdgeInsets.fromLTRB(4.w, 0, 4.w, 4.w),
+      padding: EdgeInsets.fromLTRB(AppSpace.x4, 0, AppSpace.x4, AppSpace.x4),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -138,7 +138,7 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
                   color: colorScheme.onSurfaceVariant,
                 ),
                 border: InputBorder.none,
-                contentPadding: EdgeInsets.all(4.w),
+                contentPadding: Pad.card,
               ),
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: colorScheme.onSurface,
@@ -147,11 +147,11 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
               onChanged: (value) => setState(() {}),
             ),
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
           Row(
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+                padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
                 decoration: BoxDecoration(
                   color: AppTheme.primaryLight.withOpacity( 0.1),
                   borderRadius: BorderRadius.circular(20),

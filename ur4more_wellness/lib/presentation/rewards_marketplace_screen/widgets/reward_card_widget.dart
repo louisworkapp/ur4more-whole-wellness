@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 
 class RewardCardWidget extends StatelessWidget {
   final Map<String, dynamic> reward;
@@ -51,7 +51,7 @@ class RewardCardWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+          margin: EdgeInsets.symmetric(horizontal: AppSpace.x2, vertical: AppSpace.x1),
           decoration: BoxDecoration(
             color: colorScheme.surface,
             borderRadius: BorderRadius.circular(16),
@@ -75,7 +75,7 @@ class RewardCardWidget extends StatelessWidget {
                     CustomImageWidget(
                       imageUrl: reward['image'] as String? ?? '',
                       width: double.infinity,
-                      height: 20.h,
+                        height: 120, // Fixed height instead of percentage
                       fit: BoxFit.cover,
                       semanticLabel: reward['semanticLabel'] as String? ??
                           'Reward item image',
@@ -83,12 +83,12 @@ class RewardCardWidget extends StatelessWidget {
                     if (!isAvailable)
                       Container(
                         width: double.infinity,
-                        height: 20.h,
+                        height: 120, // Fixed height instead of percentage
                         color: Colors.black.withOpacity( 0.6),
                         child: Center(
                           child: Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 4.w, vertical: 1.h),
+                                horizontal: AppSpace.x4, vertical: AppSpace.x1),
                             decoration: BoxDecoration(
                               color: colorScheme.error,
                               borderRadius: BorderRadius.circular(8),
@@ -104,8 +104,8 @@ class RewardCardWidget extends StatelessWidget {
                         ),
                       ),
                     Positioned(
-                      top: 1.h,
-                      right: 2.w,
+                      top: AppSpace.x1,
+                      right: AppSpace.x2,
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: 2.w, vertical: 0.5.h),
@@ -121,7 +121,7 @@ class RewardCardWidget extends StatelessWidget {
                               color: colorScheme.onPrimary,
                               size: 12,
                             ),
-                            SizedBox(width: 1.w),
+                            SizedBox(width: AppSpace.x1),
                             Text(
                               pointsCost.toString(),
                               style: theme.textTheme.labelSmall?.copyWith(
@@ -138,7 +138,7 @@ class RewardCardWidget extends StatelessWidget {
               ),
               // Content section
               Padding(
-                padding: EdgeInsets.all(3.w),
+                padding: EdgeInsets.all(AppSpace.x3),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

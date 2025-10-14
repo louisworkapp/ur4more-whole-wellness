@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../design/tokens.dart';
 import '../../widgets/custom_icon_widget.dart';
 import './widgets/coping_mechanism_tracker.dart';
 import './widgets/journal_entry_interface.dart';
@@ -214,7 +214,7 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
             ),
             SliverToBoxAdapter(
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+                margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
                 child: Text(
                   'Previous Reflections',
                   style: theme.textTheme.titleMedium?.copyWith(
@@ -241,7 +241,7 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
               ),
             ),
             SliverToBoxAdapter(
-              child: SizedBox(height: 10.h),
+              child: SizedBox(height: AppSpace.x10),
             ),
           ],
         ),
@@ -279,7 +279,7 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
         ),
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+            padding: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
             child: Row(
               children: [
                 Expanded(
@@ -293,11 +293,11 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
                     ),
                     label: Text('Home'),
                     style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                      padding: EdgeInsets.symmetric(vertical: AppSpace.x3),
                     ),
                   ),
                 ),
-                SizedBox(width: 3.w),
+                SizedBox(width: AppSpace.x3),
                 Expanded(
                   child: ElevatedButton.icon(
                     onPressed: () =>
@@ -311,7 +311,7 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0FA97A),
                       foregroundColor: Colors.white,
-                      padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                      padding: EdgeInsets.symmetric(vertical: AppSpace.x3),
                     ),
                   ),
                 ),
@@ -398,13 +398,13 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
       ),
       builder: (context) {
         return Container(
-          height: 70.h,
-          padding: EdgeInsets.all(4.w),
+          height: 500, // Fixed height instead of percentage
+          padding: Pad.card,
           child: Column(
             children: [
               Container(
-                width: 12.w,
-                height: 0.5.h,
+                width: 48, // Fixed width instead of percentage
+                height: 2, // Fixed height instead of percentage
                 decoration: BoxDecoration(
                   color: Theme.of(context)
                       .colorScheme
@@ -413,14 +413,14 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: AppSpace.x2),
               Text(
                 'New Journal Entry',
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: AppSpace.x2),
               Expanded(
                 child: JournalEntryInterface(
                   onEntryChanged: (text) {
@@ -449,8 +449,8 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
             borderRadius: BorderRadius.circular(16),
           ),
           child: Container(
-            constraints: BoxConstraints(maxHeight: 70.h),
-            padding: EdgeInsets.all(4.w),
+            constraints: BoxConstraints(maxHeight: 500), // Fixed height instead of percentage
+            padding: Pad.card,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -474,7 +474,7 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
                     ),
                   ],
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: AppSpace.x2),
                 Flexible(
                   child: SingleChildScrollView(
                     child: Text(

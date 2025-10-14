@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class PointsBalanceCardWidget extends StatelessWidget {
@@ -24,8 +24,8 @@ class PointsBalanceCardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
-        padding: EdgeInsets.all(4.w),
+        margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
+        padding: Pad.card,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -60,19 +60,19 @@ class PointsBalanceCardWidget extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(height: 0.5.h),
+                    SizedBox(height: AppSpace.x1),
                     Text(
                       currentPoints.toString(),
                       style: theme.textTheme.displayMedium?.copyWith(
                         color: colorScheme.onPrimary,
                         fontWeight: FontWeight.w700,
-                        fontSize: 32.sp,
+                        fontSize: 32, // Fixed font size instead of Sizer
                       ),
                     ),
                   ],
                 ),
                 Container(
-                  padding: EdgeInsets.all(3.w),
+                  padding: EdgeInsets.all(AppSpace.x3),
                   decoration: BoxDecoration(
                     color: colorScheme.onPrimary.withOpacity( 0.2),
                     borderRadius: BorderRadius.circular(16),
@@ -85,7 +85,7 @@ class PointsBalanceCardWidget extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
             Row(
               children: [
                 Expanded(
@@ -99,12 +99,12 @@ class PointsBalanceCardWidget extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(height: 1.h),
+                      SizedBox(height: AppSpace.x1),
                       if (recentTransactions.isNotEmpty)
                         ...recentTransactions
                             .take(2)
                             .map((transaction) => Padding(
-                                  padding: EdgeInsets.only(bottom: 0.5.h),
+                                  padding: EdgeInsets.only(bottom: AppSpace.x1),
                                   child: Row(
                                     children: [
                                       CustomIconWidget(
@@ -121,7 +121,7 @@ class PointsBalanceCardWidget extends StatelessWidget {
                                                     .withOpacity( 0.7),
                                         size: 14,
                                       ),
-                                      SizedBox(width: 2.w),
+                                      SizedBox(width: AppSpace.x2),
                                       Expanded(
                                         child: Text(
                                           transaction['description']

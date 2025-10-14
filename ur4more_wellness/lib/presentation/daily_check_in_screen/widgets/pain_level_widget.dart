@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class PainLevelWidget extends StatefulWidget {
@@ -42,7 +42,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
     final theme = Theme.of(context);
 
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: Pad.card,
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
@@ -56,7 +56,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
           // Simple mode - single slider
           Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 3.h),
+            padding: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x3),
             decoration: BoxDecoration(
               color: _getPainColor(widget.painLevel).withOpacity( 0.1),
               borderRadius: BorderRadius.circular(12),
@@ -74,18 +74,18 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
                       color: _getPainColor(widget.painLevel),
                       size: 32,
                     ),
-                    SizedBox(width: 2.w),
+                    SizedBox(width: AppSpace.x2),
                     Text(
                       widget.painLevel.round().toString(),
                       style: theme.textTheme.headlineLarge?.copyWith(
                         color: _getPainColor(widget.painLevel),
                         fontWeight: FontWeight.w700,
-                        fontSize: 36.sp,
+                        fontSize: 36, // Fixed font size instead of Sizer
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 1.h),
+                SizedBox(height: AppSpace.x1),
                 Text(
                   _getPainDescription(widget.painLevel),
                   textAlign: TextAlign.center,
@@ -97,7 +97,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
               ],
             ),
           ),
-          SizedBox(height: 3.h),
+          SizedBox(height: AppSpace.x3),
 
           // Pain slider
           SliderTheme(
@@ -174,7 +174,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
 
           // Detailed view - body regions (collapsed by default for MVP)
           if (_showDetailedView) ...[
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
             Container(
               padding: EdgeInsets.all(3.w),
               decoration: BoxDecoration(
@@ -217,11 +217,11 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
 
                   // Most common regions (limited to 3 + "More areas...")
                   _buildRegionChip('Head/Neck', 'psychology'),
-                  SizedBox(height: 1.h),
+                  SizedBox(height: AppSpace.x1),
                   _buildRegionChip('Back', 'airline_seat_recline_normal'),
-                  SizedBox(height: 1.h),
+                  SizedBox(height: AppSpace.x1),
                   _buildRegionChip('Legs', 'directions_walk'),
-                  SizedBox(height: 1.h),
+                  SizedBox(height: AppSpace.x1),
 
                   // "More areas..." collapsible
                   ExpansionTile(
@@ -233,15 +233,15 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
                     ),
                     children: [
                       _buildRegionChip('Shoulders', 'accessibility'),
-                      SizedBox(height: 1.h),
+                      SizedBox(height: AppSpace.x1),
                       _buildRegionChip('Arms', 'pan_tool'),
-                      SizedBox(height: 1.h),
+                      SizedBox(height: AppSpace.x1),
                       _buildRegionChip('Chest', 'favorite'),
-                      SizedBox(height: 1.h),
+                      SizedBox(height: AppSpace.x1),
                       _buildRegionChip('Abdomen', 'circle'),
-                      SizedBox(height: 1.h),
+                      SizedBox(height: AppSpace.x1),
                       _buildRegionChip('Hips', 'accessibility_new'),
-                      SizedBox(height: 1.h),
+                      SizedBox(height: AppSpace.x1),
                       _buildRegionChip('Feet', 'directions_run'),
                     ],
                   ),

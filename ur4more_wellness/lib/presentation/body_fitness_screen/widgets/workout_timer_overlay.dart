@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 
 class WorkoutTimerOverlay extends StatefulWidget {
   final Map<String, dynamic> workout;
@@ -160,11 +160,11 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
       color: Colors.black.withOpacity( 0.9),
       child: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(4.w),
+          padding: Pad.card,
           child: Column(
             children: [
               _buildHeader(colorScheme),
-              SizedBox(height: 4.h),
+              SizedBox(height: AppSpace.x4),
               if (!isWorkoutActive)
                 _buildStartScreen(colorScheme)
               else if (isResting)
@@ -187,7 +187,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
         Text(
           widget.workout['name'] as String,
           style: GoogleFonts.inter(
-            fontSize: 20.sp,
+            fontSize: 20, // Fixed font size instead of Sizer
             fontWeight: FontWeight.w700,
             color: Colors.white,
           ),
@@ -215,8 +215,8 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
               return Transform.scale(
                 scale: 1.0 + (_pulseController.value * 0.1),
                 child: Container(
-                  width: 40.w,
-                  height: 40.w,
+                  width: 160, // Fixed size instead of percentage
+                  height: 160, // Fixed size instead of percentage
                   decoration: BoxDecoration(
                     color: AppTheme.lightTheme.primaryColor,
                     shape: BoxShape.circle,
