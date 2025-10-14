@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class JournalTimelineCard extends StatelessWidget {
@@ -30,7 +30,7 @@ class JournalTimelineCard extends StatelessWidget {
     final mood = entry["mood"] as String? ?? "neutral";
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
       child: GestureDetector(
         onTap: onTap,
         onLongPress: () => _showContextMenu(context),
@@ -40,14 +40,14 @@ class JournalTimelineCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Container(
-            padding: EdgeInsets.all(4.w),
+            padding: Pad.card,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     _buildMoodIndicator(mood, colorScheme),
-                    SizedBox(width: 3.w),
+                    SizedBox(width: AppSpace.x3),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,14 +61,14 @@ class JournalTimelineCard extends StatelessWidget {
                           if (entry["tags"] != null &&
                               (entry["tags"] as List).isNotEmpty)
                             Wrap(
-                              spacing: 1.w,
+                              spacing: AppSpace.x1,
                               children:
                                   (entry["tags"] as List).take(3).map((tag) {
                                 return Container(
-                                  margin: EdgeInsets.only(top: 0.5.h),
+                                  margin: EdgeInsets.only(top: AppSpace.x1),
                                   padding: EdgeInsets.symmetric(
-                                    horizontal: 2.w,
-                                    vertical: 0.5.h,
+                                    horizontal: AppSpace.x2,
+                                    vertical: AppSpace.x1,
                                   ),
                                   decoration: BoxDecoration(
                                     color: const Color(0xFF0FA97A)
@@ -79,7 +79,7 @@ class JournalTimelineCard extends StatelessWidget {
                                     tag as String,
                                     style: theme.textTheme.labelSmall?.copyWith(
                                       color: const Color(0xFF0FA97A),
-                                      fontSize: 10.sp,
+                                      fontSize: 10, // Fixed font size instead of Sizer
                                     ),
                                   ),
                                 );
@@ -94,7 +94,7 @@ class JournalTimelineCard extends StatelessWidget {
                         color: Colors.red,
                         size: 16,
                       ),
-                    SizedBox(width: 2.w),
+                    SizedBox(width: AppSpace.x2),
                     CustomIconWidget(
                       iconName: 'more_vert',
                       color: colorScheme.onSurfaceVariant,

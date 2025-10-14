@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 
 class RewardDetailModalWidget extends StatelessWidget {
   final Map<String, dynamic> reward;
@@ -28,7 +28,7 @@ class RewardDetailModalWidget extends StatelessWidget {
     final canAfford = currentPoints >= pointsCost;
 
     return Container(
-      height: 85.h,
+      height: 600, // Fixed height instead of percentage
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
@@ -37,9 +37,9 @@ class RewardDetailModalWidget extends StatelessWidget {
         children: [
           // Handle bar
           Container(
-            margin: EdgeInsets.only(top: 1.h),
-            width: 12.w,
-            height: 0.5.h,
+            margin: EdgeInsets.only(top: AppSpace.x1),
+            width: 48, // Fixed width instead of percentage
+            height: 2, // Fixed height instead of percentage
             decoration: BoxDecoration(
               color: colorScheme.onSurfaceVariant.withOpacity( 0.4),
               borderRadius: BorderRadius.circular(2),
@@ -82,7 +82,7 @@ class RewardDetailModalWidget extends StatelessWidget {
           ),
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 4.w),
+              padding: EdgeInsets.symmetric(horizontal: AppSpace.x4),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -92,7 +92,7 @@ class RewardDetailModalWidget extends StatelessWidget {
                     child: CustomImageWidget(
                       imageUrl: reward['image'] as String? ?? '',
                       width: double.infinity,
-                      height: 30.h,
+                      height: 200, // Fixed height instead of percentage
                       fit: BoxFit.cover,
                       semanticLabel: reward['semanticLabel'] as String? ??
                           'Reward item detail image',
