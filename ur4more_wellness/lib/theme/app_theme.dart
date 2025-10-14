@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import './app_colors.dart';
+import '../design/tokens.dart';
 
 /// A class that contains all theme configurations for the faith-based wellness application.
 class AppTheme {
@@ -86,17 +87,11 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
-        elevation: 2.0,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        textStyle: GoogleFonts.inter(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
+        minimumSize: const Size(double.infinity, 56),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        elevation: AppElev.md,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.lg)),
+        textStyle: AppText.button,
       ),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -123,14 +118,10 @@ class AppTheme {
     ),
 
     // Card theme with contextual elevation
-    cardTheme: CardThemeData(
-      color: surfaceLight,
-      elevation: 2.0,
-      shadowColor: const Color(0x331E3A8A),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+    cardTheme: const CardThemeData(
+      elevation: AppElev.none,
+      margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppRadius.xl))),
     ),
 
     // Navigation bar theme for modern navigation
@@ -286,19 +277,8 @@ class AppTheme {
     ),
 
     // Tab bar theme
-    tabBarTheme: TabBarThemeData(
-      labelColor: primaryLight,
-      unselectedLabelColor: const Color(0xFF64748B),
-      indicatorColor: primaryLight,
-      indicatorSize: TabBarIndicatorSize.tab,
-      labelStyle: GoogleFonts.inter(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-      ),
-      unselectedLabelStyle: GoogleFonts.inter(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
+    tabBarTheme: const TabBarThemeData(
+      indicatorSize: TabBarIndicatorSize.label,
     ),
 
     // Tooltip theme
@@ -343,17 +323,11 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
-        elevation: 2.0,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        textStyle: GoogleFonts.inter(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
+        minimumSize: const Size(double.infinity, 56),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+        elevation: AppElev.md,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.lg)),
+        textStyle: AppText.button,
       ),
     ),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -380,14 +354,10 @@ class AppTheme {
     ),
 
     // Card theme for dark mode
-    cardTheme: CardThemeData(
-      color: surfaceDark,
-      elevation: 3.0,
-      shadowColor: const Color(0x33FFFFFF),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+    cardTheme: const CardThemeData(
+      elevation: AppElev.none,
+      margin: EdgeInsets.zero,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(AppRadius.xl))),
     ),
 
     // Navigation bar theme for dark mode
@@ -544,19 +514,8 @@ class AppTheme {
     ),
 
     // Tab bar theme for dark mode
-    tabBarTheme: TabBarThemeData(
-      labelColor: primaryDark,
-      unselectedLabelColor: const Color(0xFFD1D5DB),
-      indicatorColor: primaryDark,
-      indicatorSize: TabBarIndicatorSize.tab,
-      labelStyle: GoogleFonts.inter(
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-      ),
-      unselectedLabelStyle: GoogleFonts.inter(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-      ),
+    tabBarTheme: const TabBarThemeData(
+      indicatorSize: TabBarIndicatorSize.label,
     ),
 
     // Tooltip theme for dark mode

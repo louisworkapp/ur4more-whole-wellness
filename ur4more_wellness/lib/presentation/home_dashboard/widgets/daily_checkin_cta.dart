@@ -1,10 +1,9 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
-import '../../../core/app_export.dart';
 import '../../../theme/app_colors.dart';
 import '../../../features/home/streaks.dart';
+import '../../../design/tokens.dart';
+import '../../../widgets/phone_card.dart';
 
 class DailyCheckinCta extends StatefulWidget {
   final bool isCompleted;
@@ -55,83 +54,63 @@ class _DailyCheckinCtaState extends State<DailyCheckinCta> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final t = Theme.of(context).textTheme;
+    
+    return PhoneCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Daily Check-in', style: t.titleLarge ?? AppText.title),
+          const SizedBox(height: AppSpace.x3),
+          Text('Track your daily progress and earn points',
+              style: t.bodyMedium?.copyWith(color: Colors.black54) ?? AppText.body.merge(AppText.mutED)),
+          const SizedBox(height: AppSpace.x4),
 
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 360), // cap card width
-        child: Card(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-          elevation: 0,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Daily Check-in', style: theme.textTheme.titleLarge),
-                const SizedBox(height: 8),
-                Text(
-                  'Track your daily progress and earn points',
-                  style: theme.textTheme.bodyMedium?.copyWith(color: Colors.black54),
-                ),
-                const SizedBox(height: 16),
-
-                // Streak pill with specified styling - only show if streak >= 7
-                if (!_isLoadingStreak && _currentStreak >= 7) ...[
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFFF6DB), // Pale gold background
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.local_fire_department,
-                          color: AppColors.gold, // Gold text/icon
-                          size: 16,
-                        ),
-                        const SizedBox(width: 4),
-                        Text(
-                          '$_currentStreak day streak',
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.gold, // Gold text/icon
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
+          // Streak pill with specified styling - only show if streak >= 7
+          if (!_isLoadingStreak && _currentStreak >= 7) ...[
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFF6DB), // Pale gold background
+                borderRadius: BorderRadius.circular(AppRadius.xl),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.local_fire_department,
+                    color: AppColors.gold, // Gold text/icon
+                    size: 16,
+                  ),
+                  const SizedBox(width: AppSpace.x1),
+                  Text(
+                    '$_currentStreak day streak',
+                    style: t.labelLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.gold, // Gold text/icon
+                      fontSize: 12,
                     ),
                   ),
-                  const SizedBox(height: 16),
                 ],
+              ),
+            ),
+            const SizedBox(height: AppSpace.x4),
+          ],
 
-                // ✅ Full-width, wraps to 2 lines, no overflow
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: widget.onTap,
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(0, 56),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                    ),
-                    child: Text(
-                      widget.isCompleted
-                          ? 'View Today\'s Progress'
-                          : 'Start Daily Check-in',
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-              ],
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: widget.onTap,
+              child: Text(
+                widget.isCompleted
+                    ? 'View Today\'s Progress'
+                    : 'Start Daily Check-in',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

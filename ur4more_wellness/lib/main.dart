@@ -1,11 +1,10 @@
-import 'dart:math';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 import '../core/app_export.dart';
 import '../widgets/custom_error_widget.dart';
+import 'design/tokens.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,9 +53,9 @@ class MyApp extends StatelessWidget {
             data: media.copyWith(textScaler: const TextScaler.linear(1.0)),
             child: Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 430),
+                constraints: const BoxConstraints(maxWidth: AppMaxW.phone),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: Pad.page,
                   child: child ?? const SizedBox.shrink(),
                 ),
               ),
