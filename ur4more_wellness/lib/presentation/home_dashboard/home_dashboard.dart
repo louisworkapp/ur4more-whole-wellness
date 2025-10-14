@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../core/app_export.dart';
+import '../../design/tokens.dart';
 import '../../widgets/level_badge.dart';
 import './widgets/branded_header.dart';
 import './widgets/daily_checkin_cta.dart';
@@ -149,7 +149,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
             SliverToBoxAdapter(
               child: Column(
                 children: [
-                  SizedBox(height: 2.h),
+                  const SizedBox(height: AppSpace.x2),
 
                   // Points progress ring
                   PointsProgressRing(
@@ -160,12 +160,12 @@ class _HomeDashboardState extends State<HomeDashboard> {
                     showSpiritualProgress: _shouldShowSpiritualContent(),
                   ),
 
-                  SizedBox(height: 2.h),
+                  const SizedBox(height: AppSpace.x2),
 
                   // Level badge under the points ring
                   LevelBadge(points: userData["totalPoints"] as int),
 
-                  SizedBox(height: 3.h),
+                  const SizedBox(height: AppSpace.x3),
 
                   // Daily check-in CTA with user ID for streak calculation
                   DailyCheckinCta(
@@ -178,12 +178,12 @@ class _HomeDashboardState extends State<HomeDashboard> {
                     userId: userData["userId"] as String,
                   ),
 
-                  SizedBox(height: 2.h),
+                  const SizedBox(height: AppSpace.x2),
 
                   // Wellness navigation cards
                   ..._buildWellnessCards(context),
 
-                  SizedBox(height: 10.h), // Bottom padding for navigation
+                  const SizedBox(height: AppSpace.x10), // Bottom padding for navigation
                 ],
               ),
             ),
@@ -256,13 +256,13 @@ class _HomeDashboardState extends State<HomeDashboard> {
       ),
       builder:
           (context) => Container(
-            padding: EdgeInsets.all(4.w),
+            padding: const EdgeInsets.all(AppSpace.x4),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  width: 10.w,
-                  height: 0.5.h,
+                  width: 40,
+                  height: 2,
                   decoration: BoxDecoration(
                     color: Theme.of(
                       context,
@@ -310,7 +310,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
       leading: CustomIconWidget(
         iconName: iconName,
         color: Theme.of(context).colorScheme.primary,
-        size: 6.w,
+        size: 24,
       ),
       title: Text(title),
       onTap: onTap,
