@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class CompletionSummaryWidget extends StatelessWidget {
@@ -26,7 +26,7 @@ class CompletionSummaryWidget extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(6.w),
+      padding: EdgeInsets.all(AppSpace.x6),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
@@ -36,8 +36,8 @@ class CompletionSummaryWidget extends StatelessWidget {
         children: [
           // Success indicator
           Container(
-            width: 20.w,
-            height: 20.w,
+            width: 80, // Fixed width instead of percentage
+            height: 80, // Fixed height instead of percentage
             decoration: BoxDecoration(
               color: theme.colorScheme.primary.withOpacity( 0.1),
               shape: BoxShape.circle,
@@ -48,7 +48,7 @@ class CompletionSummaryWidget extends StatelessWidget {
               size: 40,
             ),
           ),
-          SizedBox(height: 3.h),
+          SizedBox(height: AppSpace.x3),
 
           // Completion message
           Text(
@@ -63,7 +63,7 @@ class CompletionSummaryWidget extends StatelessWidget {
           // Points earned
           if (totalPointsEarned > 0) ...[
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+              padding: EdgeInsets.symmetric(horizontal: AppSpace.x6, vertical: AppSpace.x2),
               decoration: BoxDecoration(
                 color: Colors.amber.withOpacity( 0.1), // Gold accent
                 borderRadius: BorderRadius.circular(12),
@@ -79,7 +79,7 @@ class CompletionSummaryWidget extends StatelessWidget {
                     color: Colors.amber.shade700, // Gold color
                     size: 24,
                   ),
-                  SizedBox(width: 2.w),
+                  SizedBox(width: AppSpace.x2),
                   Text(
                     'Saved • +$totalPointsEarned points',
                     style: theme.textTheme.titleMedium?.copyWith(
@@ -90,7 +90,7 @@ class CompletionSummaryWidget extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
           ] else ...[
             // No points earned message
             Text(
@@ -99,7 +99,7 @@ class CompletionSummaryWidget extends StatelessWidget {
                 color: theme.colorScheme.onSurfaceVariant,
               ),
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
           ],
 
           // Smart suggestion based on pain/urge levels
@@ -149,7 +149,7 @@ class CompletionSummaryWidget extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
           ],
 
           // Continue button

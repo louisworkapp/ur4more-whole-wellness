@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 
 class JournalEntryWidget extends StatefulWidget {
   final String journalText;
@@ -76,7 +76,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
     showModalBottomSheet(
       context: context,
       builder: (context) => Container(
-        padding: EdgeInsets.all(4.w),
+        padding: Pad.card,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -150,7 +150,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
     final characterCount = widget.journalText.length;
 
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: Pad.card,
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
@@ -164,7 +164,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
           // Points indicator (only if qualifying)
           if (journalPoints > 0) ...[
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+              padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
               decoration: BoxDecoration(
                 color: Colors.amber.withOpacity( 0.1), // Gold accent
                 borderRadius: BorderRadius.circular(8),
@@ -180,7 +180,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                     color: Colors.amber.shade700, // Gold color
                     size: 16,
                   ),
-                  SizedBox(width: 1.w),
+                  SizedBox(width: AppSpace.x1),
                   Text(
                     '+$journalPoints points (detailed entry)',
                     style: theme.textTheme.labelMedium?.copyWith(
@@ -191,7 +191,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                 ],
               ),
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
           ],
 
           // Mood Selection - "How are you feeling today?" chips
@@ -202,11 +202,11 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
               color: theme.colorScheme.onSurface,
             ),
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
 
           // Mood chips in horizontal scroll
           SizedBox(
-            height: 8.h,
+            height: 64, // Fixed height instead of percentage
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: _moods.length,
@@ -222,7 +222,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     padding:
-                        EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+                        EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
                     decoration: BoxDecoration(
                       color: isSelected
                           ? (mood['color'] as Color).withOpacity( 0.2)
@@ -361,7 +361,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
 
           // Display attached photos
           if (widget.attachedPhotos.isNotEmpty) ...[
-            SizedBox(height: 2.h),
+            SizedBox(height: AppSpace.x2),
             SizedBox(
               height: 15.h,
               child: ListView.separated(
@@ -421,7 +421,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
 
           // Bonus points explanation
           if (characterCount < 120) ...[
-            SizedBox(height: 2.h),
+            SizedBox(height: AppSpace.x2),
             Container(
               padding: EdgeInsets.all(3.w),
               decoration: BoxDecoration(

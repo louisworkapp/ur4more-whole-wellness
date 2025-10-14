@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 
 class WorkoutCard extends StatelessWidget {
   final Map<String, dynamic> workout;
@@ -25,7 +25,7 @@ class WorkoutCard extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
@@ -43,7 +43,7 @@ class WorkoutCard extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(16),
           child: Padding(
-            padding: EdgeInsets.all(4.w),
+            padding: Pad.card,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -56,14 +56,14 @@ class WorkoutCard extends StatelessWidget {
                           Text(
                             workout['name'] as String,
                             style: GoogleFonts.inter(
-                              fontSize: 16.sp,
+                              fontSize: 16, // Fixed font size instead of Sizer
                               fontWeight: FontWeight.w600,
                               color: colorScheme.onSurface,
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(height: 0.5.h),
+                          SizedBox(height: AppSpace.x1),
                           Text(
                             workout['description'] as String,
                             style: GoogleFonts.inter(
@@ -77,10 +77,10 @@ class WorkoutCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(width: 3.w),
+                    SizedBox(width: AppSpace.x3),
                     Container(
-                      width: 20.w,
-                      height: 12.h,
+                      width: 80, // Fixed width instead of percentage
+                      height: 48, // Fixed height instead of percentage
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: colorScheme.surfaceContainerHighest,
@@ -89,8 +89,8 @@ class WorkoutCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                         child: CustomImageWidget(
                           imageUrl: workout['thumbnail'] as String,
-                          width: 20.w,
-                          height: 12.h,
+                          width: 80, // Fixed width instead of percentage
+                          height: 48, // Fixed height instead of percentage
                           fit: BoxFit.cover,
                           semanticLabel:
                               workout['thumbnailSemanticLabel'] as String,

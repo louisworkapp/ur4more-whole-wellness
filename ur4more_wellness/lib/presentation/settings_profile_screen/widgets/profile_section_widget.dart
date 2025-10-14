@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class ProfileSectionWidget extends StatefulWidget {
@@ -53,9 +53,9 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
     final colorScheme = theme.colorScheme;
 
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
       child: Padding(
-        padding: EdgeInsets.all(4.w),
+        padding: Pad.card,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -66,7 +66,7 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
                   color: colorScheme.primary,
                   size: 24,
                 ),
-                SizedBox(width: 3.w),
+                SizedBox(width: AppSpace.x3),
                 Text(
                   'Profile Information',
                   style: theme.textTheme.titleLarge?.copyWith(
@@ -76,7 +76,7 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
                 ),
               ],
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
 
             // Full Name Section
             Text(
@@ -86,12 +86,12 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 1.h),
+            SizedBox(height: AppSpace.x1),
             _isEditingName
                 ? _buildNameEditField(theme, colorScheme)
                 : _buildNameDisplay(theme, colorScheme),
 
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
 
             // Timezone Section
             Text(
@@ -101,7 +101,7 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 1.h),
+            SizedBox(height: AppSpace.x1),
             _buildTimezoneSelector(theme, colorScheme),
           ],
         ),
@@ -114,7 +114,7 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
       onTap: () => setState(() => _isEditingName = true),
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+        padding: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
         decoration: BoxDecoration(
           border: Border.all(color: colorScheme.outline.withOpacity( 0.3)),
           borderRadius: BorderRadius.circular(12),
@@ -165,7 +165,7 @@ class _ProfileSectionWidgetState extends State<ProfileSectionWidget> {
             style: theme.textTheme.bodyLarge,
           ),
         ),
-        SizedBox(width: 2.w),
+        SizedBox(width: AppSpace.x2),
         IconButton(
           onPressed: () {
             widget.onNameChanged(_nameController.text);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class CopingMechanismTracker extends StatelessWidget {
@@ -20,14 +20,14 @@ class CopingMechanismTracker extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
       child: Card(
         elevation: 2,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
-          padding: EdgeInsets.all(4.w),
+          padding: Pad.card,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -38,7 +38,7 @@ class CopingMechanismTracker extends StatelessWidget {
                     color: const Color(0xFF0FA97A),
                     size: 20,
                   ),
-                  SizedBox(width: 2.w),
+                  SizedBox(width: AppSpace.x2),
                   Text(
                     'Coping Strategies',
                     style: theme.textTheme.titleMedium?.copyWith(
@@ -49,8 +49,8 @@ class CopingMechanismTracker extends StatelessWidget {
                   const Spacer(),
                   Container(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 2.w,
-                      vertical: 0.5.h,
+                      horizontal: AppSpace.x2,
+                      vertical: AppSpace.x1,
                     ),
                     decoration: BoxDecoration(
                       color: const Color(0xFF0FA97A).withOpacity( 0.1),
@@ -66,9 +66,9 @@ class CopingMechanismTracker extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 2.h),
+              SizedBox(height: AppSpace.x2),
               _buildProgressBar(theme, colorScheme),
-              SizedBox(height: 2.h),
+              SizedBox(height: AppSpace.x2),
               ...copingStrategies.map((strategy) => _buildStrategyItem(
                     context,
                     strategy,
@@ -109,12 +109,12 @@ class CopingMechanismTracker extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 1.h),
+        SizedBox(height: AppSpace.x1),
         LinearProgressIndicator(
           value: progress,
           backgroundColor: colorScheme.outline.withOpacity( 0.2),
           valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF0FA97A)),
-          minHeight: 0.8.h,
+          minHeight: 4, // Fixed height instead of percentage
         ),
       ],
     );

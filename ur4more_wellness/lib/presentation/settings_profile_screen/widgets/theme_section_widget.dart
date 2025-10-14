@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 enum AppThemeMode { light, dark, system }
@@ -22,9 +22,9 @@ class ThemeSectionWidget extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
       child: Padding(
-        padding: EdgeInsets.all(4.w),
+        padding: Pad.card,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,7 +35,7 @@ class ThemeSectionWidget extends StatelessWidget {
                   color: colorScheme.primary,
                   size: 24,
                 ),
-                SizedBox(width: 3.w),
+                SizedBox(width: AppSpace.x3),
                 Text(
                   'Theme Settings',
                   style: theme.textTheme.titleLarge?.copyWith(
@@ -45,14 +45,14 @@ class ThemeSectionWidget extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 1.h),
+            SizedBox(height: AppSpace.x1),
             Text(
               'Choose your preferred app appearance',
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: colorScheme.onSurfaceVariant,
               ),
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
             _buildThemeOptions(theme, colorScheme),
           ],
         ),
@@ -72,7 +72,7 @@ class ThemeSectionWidget extends StatelessWidget {
           AppThemeMode.light,
           themeMode == AppThemeMode.light,
         ),
-        SizedBox(height: 2.h),
+        SizedBox(height: AppSpace.x2),
         _buildThemeOption(
           theme,
           colorScheme,
@@ -82,7 +82,7 @@ class ThemeSectionWidget extends StatelessWidget {
           AppThemeMode.dark,
           themeMode == AppThemeMode.dark,
         ),
-        SizedBox(height: 2.h),
+        SizedBox(height: AppSpace.x2),
         _buildThemeOption(
           theme,
           colorScheme,
@@ -110,7 +110,7 @@ class ThemeSectionWidget extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
-        padding: EdgeInsets.all(3.w),
+        padding: EdgeInsets.all(AppSpace.x3),
         decoration: BoxDecoration(
           color: isSelected
               ? colorScheme.primary.withOpacity( 0.1)
@@ -126,7 +126,7 @@ class ThemeSectionWidget extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(2.w),
+              padding: EdgeInsets.all(AppSpace.x2),
               decoration: BoxDecoration(
                 color: isSelected
                     ? colorScheme.primary.withOpacity( 0.2)

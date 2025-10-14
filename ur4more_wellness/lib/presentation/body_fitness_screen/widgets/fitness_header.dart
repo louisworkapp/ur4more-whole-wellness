@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 
 class FitnessHeader extends StatelessWidget {
   final int currentPoints;
@@ -21,7 +21,7 @@ class FitnessHeader extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: Pad.card,
       decoration: BoxDecoration(
         color: AppTheme.lightTheme.primaryColor,
         borderRadius: const BorderRadius.only(
@@ -42,12 +42,12 @@ class FitnessHeader extends StatelessWidget {
                     Text(
                       'Body Fitness',
                       style: GoogleFonts.inter(
-                        fontSize: 24.sp,
+                        fontSize: 24, // Fixed font size instead of Sizer
                         fontWeight: FontWeight.w700,
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 0.5.h),
+                    SizedBox(height: AppSpace.x1),
                     Text(
                       'Strengthen your body',
                       style: GoogleFonts.inter(
@@ -59,7 +59,7 @@ class FitnessHeader extends StatelessWidget {
                   ],
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+                  padding: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity( 0.2),
                     borderRadius: BorderRadius.circular(16),
@@ -72,11 +72,11 @@ class FitnessHeader extends StatelessWidget {
                         color: AppTheme.secondaryLight,
                         size: 20,
                       ),
-                      SizedBox(width: 2.w),
+                      SizedBox(width: AppSpace.x2),
                       Text(
                         '$currentPoints',
                         style: GoogleFonts.inter(
-                          fontSize: 16.sp,
+                          fontSize: 16, // Fixed font size instead of Sizer
                           fontWeight: FontWeight.w700,
                           color: Colors.white,
                         ),
@@ -86,9 +86,9 @@ class FitnessHeader extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
             Container(
-              padding: EdgeInsets.all(4.w),
+              padding: Pad.card,
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(16),
