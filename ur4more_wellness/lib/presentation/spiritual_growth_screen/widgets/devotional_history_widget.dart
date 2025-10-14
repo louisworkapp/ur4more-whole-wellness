@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 
 class DevotionalHistoryWidget extends StatelessWidget {
   final List<Map<String, dynamic>> history;
@@ -19,7 +19,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
@@ -47,7 +47,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
         history.where((h) => h["isCompleted"] == true).length;
 
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: Pad.card,
       decoration: BoxDecoration(
         color: AppTheme.primaryLight.withOpacity( 0.1),
         borderRadius: const BorderRadius.only(
@@ -58,7 +58,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(2.w),
+            padding: EdgeInsets.all(AppSpace.x2),
             decoration: BoxDecoration(
               color: AppTheme.primaryLight,
               borderRadius: BorderRadius.circular(12),
@@ -92,7 +92,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+            padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
             decoration: BoxDecoration(
               color: AppTheme.successLight,
               borderRadius: BorderRadius.circular(20),
@@ -123,11 +123,11 @@ class DevotionalHistoryWidget extends StatelessWidget {
 
   Widget _buildHistoryList(BuildContext context, ColorScheme colorScheme) {
     return Container(
-      constraints: BoxConstraints(maxHeight: 40.h),
+      constraints: BoxConstraints(maxHeight: 300), // Fixed height instead of percentage
       child: ListView.separated(
-        padding: EdgeInsets.all(4.w),
+        padding: Pad.card,
         itemCount: history.length,
-        separatorBuilder: (context, index) => SizedBox(height: 1.h),
+        separatorBuilder: (context, index) => SizedBox(height: AppSpace.x1),
         itemBuilder: (context, index) {
           final devotional = history[index];
           return _buildHistoryItem(context, colorScheme, devotional);

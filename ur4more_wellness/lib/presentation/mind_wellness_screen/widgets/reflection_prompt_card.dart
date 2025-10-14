@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
 class ReflectionPromptCard extends StatefulWidget {
@@ -53,8 +53,8 @@ class _ReflectionPromptCardState extends State<ReflectionPromptCard>
     final colorScheme = theme.colorScheme;
 
     return Container(
-      height: 25.h,
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+      height: 200, // Fixed height instead of percentage
+      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
       child: PageView.builder(
         controller: _pageController,
         onPageChanged: (index) {
@@ -84,7 +84,7 @@ class _ReflectionPromptCardState extends State<ReflectionPromptCard>
                     ],
                   ),
                 ),
-                padding: EdgeInsets.all(4.w),
+                padding: Pad.card,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -92,8 +92,8 @@ class _ReflectionPromptCardState extends State<ReflectionPromptCard>
                       children: [
                         Container(
                           padding: EdgeInsets.symmetric(
-                            horizontal: 3.w,
-                            vertical: 1.h,
+                            horizontal: AppSpace.x3,
+                            vertical: AppSpace.x1,
                           ),
                           decoration: BoxDecoration(
                             color: const Color(0xFF0FA97A),
@@ -115,7 +115,7 @@ class _ReflectionPromptCardState extends State<ReflectionPromptCard>
                         ),
                       ],
                     ),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: AppSpace.x2),
                     Expanded(
                       child: SingleChildScrollView(
                         child: Text(
@@ -127,7 +127,7 @@ class _ReflectionPromptCardState extends State<ReflectionPromptCard>
                         ),
                       ),
                     ),
-                    SizedBox(height: 1.h),
+                    SizedBox(height: AppSpace.x1),
                     Row(
                       children: [
                         CustomIconWidget(
@@ -135,7 +135,7 @@ class _ReflectionPromptCardState extends State<ReflectionPromptCard>
                           color: colorScheme.onSurfaceVariant,
                           size: 16,
                         ),
-                        SizedBox(width: 2.w),
+                        SizedBox(width: AppSpace.x2),
                         Text(
                           "${prompt["estimatedTime"]} min reflection",
                           style: theme.textTheme.bodySmall?.copyWith(
