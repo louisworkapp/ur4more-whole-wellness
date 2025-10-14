@@ -67,7 +67,7 @@ class WorkoutCard extends StatelessWidget {
                           Text(
                             workout['description'] as String,
                             style: GoogleFonts.inter(
-                              fontSize: 12.sp,
+                              fontSize: 12, // Fixed font size instead of Sizer
                               fontWeight: FontWeight.w400,
                               color: colorScheme.onSurfaceVariant,
                             ),
@@ -99,7 +99,7 @@ class WorkoutCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: AppSpace.x2),
                 Row(
                   children: [
                     _buildInfoChip(
@@ -108,14 +108,14 @@ class WorkoutCard extends StatelessWidget {
                       label: '${workout['duration']} min',
                       colorScheme: colorScheme,
                     ),
-                    SizedBox(width: 2.w),
+                    SizedBox(width: AppSpace.x2),
                     _buildInfoChip(
                       context,
                       icon: 'local_fire_department',
                       label: '${workout['calories']} cal',
                       colorScheme: colorScheme,
                     ),
-                    SizedBox(width: 2.w),
+                    SizedBox(width: AppSpace.x2),
                     _buildDifficultyChip(
                       context,
                       difficulty: workout['difficulty'] as String,
@@ -123,7 +123,7 @@ class WorkoutCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 1.h),
+                SizedBox(height: AppSpace.x1),
                 Row(
                   children: [
                     Expanded(
@@ -136,7 +136,7 @@ class WorkoutCard extends StatelessWidget {
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 3.w, vertical: 0.5.h),
+                          horizontal: AppSpace.x3, vertical: AppSpace.x1),
                       decoration: BoxDecoration(
                         color: AppTheme.secondaryLight.withOpacity( 0.1),
                         borderRadius: BorderRadius.circular(12),
@@ -149,11 +149,11 @@ class WorkoutCard extends StatelessWidget {
                             color: AppTheme.secondaryLight,
                             size: 16,
                           ),
-                          SizedBox(width: 1.w),
+                          SizedBox(width: AppSpace.x1),
                           Text(
                             '${workout['points']} pts',
                             style: GoogleFonts.inter(
-                              fontSize: 12.sp,
+                              fontSize: 12, // Fixed font size instead of Sizer
                               fontWeight: FontWeight.w600,
                               color: AppTheme.secondaryLight,
                             ),
@@ -178,7 +178,7 @@ class WorkoutCard extends StatelessWidget {
     required ColorScheme colorScheme,
   }) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+      padding: EdgeInsets.symmetric(horizontal: AppSpace.x2, vertical: AppSpace.x1),
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainerHighest,
         borderRadius: BorderRadius.circular(8),
@@ -191,11 +191,11 @@ class WorkoutCard extends StatelessWidget {
             color: colorScheme.onSurfaceVariant,
             size: 14,
           ),
-          SizedBox(width: 1.w),
+          SizedBox(width: AppSpace.x1),
           Text(
             label,
             style: GoogleFonts.inter(
-              fontSize: 10.sp,
+              fontSize: 10, // Fixed font size instead of Sizer
               fontWeight: FontWeight.w500,
               color: colorScheme.onSurfaceVariant,
             ),
@@ -226,7 +226,7 @@ class WorkoutCard extends StatelessWidget {
     }
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+      padding: EdgeInsets.symmetric(horizontal: AppSpace.x2, vertical: AppSpace.x1),
       decoration: BoxDecoration(
         color: difficultyColor.withOpacity( 0.1),
         borderRadius: BorderRadius.circular(8),
@@ -234,7 +234,7 @@ class WorkoutCard extends StatelessWidget {
       child: Text(
         difficulty,
         style: GoogleFonts.inter(
-          fontSize: 10.sp,
+          fontSize: 10, // Fixed font size instead of Sizer
           fontWeight: FontWeight.w500,
           color: difficultyColor,
         ),
@@ -250,7 +250,7 @@ class WorkoutCard extends StatelessWidget {
     return Row(
       children: equipment.take(3).map((eq) {
         return Padding(
-          padding: EdgeInsets.only(right: 1.w),
+          padding: EdgeInsets.only(right: AppSpace.x1),
           child: CustomIconWidget(
             iconName: _getEquipmentIcon(eq),
             color: colorScheme.onSurfaceVariant,

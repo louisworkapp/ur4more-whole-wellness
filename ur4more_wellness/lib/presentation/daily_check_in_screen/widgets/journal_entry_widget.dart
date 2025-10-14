@@ -210,7 +210,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: _moods.length,
-              separatorBuilder: (context, index) => SizedBox(width: 2.w),
+              separatorBuilder: (context, index) => SizedBox(width: AppSpace.x2),
               itemBuilder: (context, index) {
                 final mood = _moods[index];
                 final isSelected = widget.selectedMood == mood['name'];
@@ -245,7 +245,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                               : theme.colorScheme.onSurfaceVariant,
                           size: 20,
                         ),
-                        SizedBox(height: 0.5.h),
+                        SizedBox(height: AppSpace.x1),
                         Text(
                           mood['name'],
                           style: theme.textTheme.bodySmall?.copyWith(
@@ -264,7 +264,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
             ),
           ),
 
-          SizedBox(height: 3.h),
+          SizedBox(height: AppSpace.x3),
 
           // Journal Text Input with character counter
           Row(
@@ -290,7 +290,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
               ),
             ],
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: AppSpace.x1),
 
           TextField(
             controller: _textController,
@@ -328,7 +328,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
             ),
           ),
 
-          SizedBox(height: 3.h),
+          SizedBox(height: AppSpace.x3),
 
           // Photo Attachments - "Add Photo" option
           Row(
@@ -363,17 +363,17 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
           if (widget.attachedPhotos.isNotEmpty) ...[
             SizedBox(height: AppSpace.x2),
             SizedBox(
-              height: 15.h,
+              height: 60, // Fixed height instead of percentage
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: widget.attachedPhotos.length,
-                separatorBuilder: (context, index) => SizedBox(width: 2.w),
+                separatorBuilder: (context, index) => SizedBox(width: AppSpace.x2),
                 itemBuilder: (context, index) {
                   return Stack(
                     children: [
                       Container(
-                        width: 20.w,
-                        height: 15.h,
+                        width: 80, // Fixed width instead of percentage
+                        height: 60, // Fixed height instead of percentage
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
@@ -385,8 +385,8 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                           borderRadius: BorderRadius.circular(8),
                           child: CustomImageWidget(
                             imageUrl: widget.attachedPhotos[index],
-                            width: 20.w,
-                            height: 15.h,
+                            width: 80, // Fixed width instead of percentage
+                            height: 60, // Fixed height instead of percentage
                             fit: BoxFit.cover,
                             semanticLabel:
                                 "Progress photo ${index + 1} attached to journal entry",
@@ -394,12 +394,12 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                         ),
                       ),
                       Positioned(
-                        top: 1.w,
-                        right: 1.w,
+                        top: AppSpace.x1,
+                        right: AppSpace.x1,
                         child: GestureDetector(
                           onTap: () => _removePhoto(index),
                           child: Container(
-                            padding: EdgeInsets.all(1.w),
+                            padding: EdgeInsets.all(AppSpace.x1),
                             decoration: BoxDecoration(
                               color: theme.colorScheme.error,
                               shape: BoxShape.circle,
@@ -423,7 +423,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
           if (characterCount < 120) ...[
             SizedBox(height: AppSpace.x2),
             Container(
-              padding: EdgeInsets.all(3.w),
+              padding: EdgeInsets.all(AppSpace.x3),
               decoration: BoxDecoration(
                 color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.5),
                 borderRadius: BorderRadius.circular(8),
@@ -435,7 +435,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                     color: theme.colorScheme.onSurfaceVariant,
                     size: 16,
                   ),
-                  SizedBox(width: 2.w),
+                  SizedBox(width: AppSpace.x2),
                   Expanded(
                     child: Text(
                       'Write at least 120 characters for +10 bonus points.',

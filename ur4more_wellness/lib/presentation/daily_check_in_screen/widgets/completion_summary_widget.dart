@@ -58,7 +58,7 @@ class CompletionSummaryWidget extends StatelessWidget {
               color: theme.colorScheme.onSurface,
             ),
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
 
           // Points earned
           if (totalPointsEarned > 0) ...[
@@ -106,7 +106,7 @@ class CompletionSummaryWidget extends StatelessWidget {
           if (suggestionTitle != null && suggestionAction != null) ...[
             Container(
               width: double.infinity,
-              padding: EdgeInsets.all(4.w),
+              padding: EdgeInsets.all(AppSpace.x4),
               decoration: BoxDecoration(
                 color: theme.colorScheme.primary.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(12),
@@ -123,13 +123,13 @@ class CompletionSummaryWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 2.h),
+                  SizedBox(height: AppSpace.x2),
                   ElevatedButton.icon(
                     onPressed: () => onSuggestionTap?.call(suggestionAction!),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: theme.colorScheme.primary,
                       padding: EdgeInsets.symmetric(
-                          horizontal: 6.w, vertical: 1.5.h),
+                          horizontal: AppSpace.x6, vertical: AppSpace.x3),
                     ),
                     icon: CustomIconWidget(
                       iconName: suggestionAction == 'mobility_reset'
@@ -159,7 +159,7 @@ class CompletionSummaryWidget extends StatelessWidget {
               onPressed: onContinue,
               style: ElevatedButton.styleFrom(
                 backgroundColor: theme.colorScheme.primary, // Navy primary CTA
-                padding: EdgeInsets.symmetric(vertical: 2.h),
+                padding: EdgeInsets.symmetric(vertical: AppSpace.x2),
               ),
               child: Text(
                 'Continue',

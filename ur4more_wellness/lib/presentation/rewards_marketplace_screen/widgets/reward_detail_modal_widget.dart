@@ -47,7 +47,7 @@ class RewardDetailModalWidget extends StatelessWidget {
           ),
           // Header
           Padding(
-            padding: EdgeInsets.all(4.w),
+            padding: EdgeInsets.all(AppSpace.x4),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -98,7 +98,7 @@ class RewardDetailModalWidget extends StatelessWidget {
                           'Reward item detail image',
                     ),
                   ),
-                  SizedBox(height: 3.h),
+                  SizedBox(height: AppSpace.x3),
                   // Title and points
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +113,7 @@ class RewardDetailModalWidget extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 3.w, vertical: 1.h),
+                            horizontal: AppSpace.x3, vertical: AppSpace.x1),
                         decoration: BoxDecoration(
                           color: colorScheme.primary,
                           borderRadius: BorderRadius.circular(16),
@@ -126,7 +126,7 @@ class RewardDetailModalWidget extends StatelessWidget {
                               color: colorScheme.onPrimary,
                               size: 20,
                             ),
-                            SizedBox(width: 1.w),
+                            SizedBox(width: AppSpace.x1),
                             Text(
                               pointsCost.toString(),
                               style: theme.textTheme.titleMedium?.copyWith(
@@ -139,13 +139,13 @@ class RewardDetailModalWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 2.h),
+                  SizedBox(height: AppSpace.x2),
                   // Category and availability
                   Row(
                     children: [
                       Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 3.w, vertical: 1.h),
+                            horizontal: AppSpace.x3, vertical: AppSpace.x1),
                         decoration: BoxDecoration(
                           color: colorScheme.secondaryContainer,
                           borderRadius: BorderRadius.circular(12),
@@ -158,10 +158,10 @@ class RewardDetailModalWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 2.w),
+                      SizedBox(width: AppSpace.x2),
                       Container(
                         padding: EdgeInsets.symmetric(
-                            horizontal: 3.w, vertical: 1.h),
+                            horizontal: AppSpace.x3, vertical: AppSpace.x1),
                         decoration: BoxDecoration(
                           color: isAvailable
                               ? colorScheme.tertiary.withOpacity( 0.2)
@@ -178,7 +178,7 @@ class RewardDetailModalWidget extends StatelessWidget {
                                   : colorScheme.error,
                               size: 16,
                             ),
-                            SizedBox(width: 1.w),
+                            SizedBox(width: AppSpace.x1),
                             Text(
                               isAvailable ? 'Available' : 'Out of Stock',
                               style: theme.textTheme.labelMedium?.copyWith(
@@ -193,7 +193,7 @@ class RewardDetailModalWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 3.h),
+                  SizedBox(height: AppSpace.x3),
                   // Description
                   Text(
                     'Description',
@@ -201,7 +201,7 @@ class RewardDetailModalWidget extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: 1.h),
+                  SizedBox(height: AppSpace.x1),
                   Text(
                     reward['description'] as String? ??
                         'No description available.',
@@ -210,14 +210,14 @@ class RewardDetailModalWidget extends StatelessWidget {
                     ),
                   ),
                   if (reward['requirements'] != null) ...[
-                    SizedBox(height: 3.h),
+                    SizedBox(height: AppSpace.x3),
                     Text(
                       'Requirements',
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 1.h),
+                    SizedBox(height: AppSpace.x1),
                     Text(
                       reward['requirements'] as String? ?? '',
                       style: theme.textTheme.bodyMedium?.copyWith(
@@ -227,14 +227,14 @@ class RewardDetailModalWidget extends StatelessWidget {
                     ),
                   ],
                   if (reward['terms'] != null) ...[
-                    SizedBox(height: 3.h),
+                    SizedBox(height: AppSpace.x3),
                     Text(
                       'Terms & Conditions',
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    SizedBox(height: 1.h),
+                    SizedBox(height: AppSpace.x1),
                     Text(
                       reward['terms'] as String? ?? '',
                       style: theme.textTheme.bodySmall?.copyWith(
@@ -243,14 +243,14 @@ class RewardDetailModalWidget extends StatelessWidget {
                       ),
                     ),
                   ],
-                  SizedBox(height: 4.h),
+                  SizedBox(height: AppSpace.x4),
                 ],
               ),
             ),
           ),
           // Bottom action area
           Container(
-            padding: EdgeInsets.all(4.w),
+            padding: EdgeInsets.all(AppSpace.x4),
             decoration: BoxDecoration(
               color: colorScheme.surface,
               border: Border(
@@ -264,8 +264,8 @@ class RewardDetailModalWidget extends StatelessWidget {
               children: [
                 if (!canAfford && isAvailable)
                   Container(
-                    padding: EdgeInsets.all(3.w),
-                    margin: EdgeInsets.only(bottom: 2.h),
+                    padding: EdgeInsets.all(AppSpace.x3),
+                    margin: EdgeInsets.only(bottom: AppSpace.x2),
                     decoration: BoxDecoration(
                       color: colorScheme.errorContainer,
                       borderRadius: BorderRadius.circular(12),
@@ -277,7 +277,7 @@ class RewardDetailModalWidget extends StatelessWidget {
                           color: colorScheme.onErrorContainer,
                           size: 20,
                         ),
-                        SizedBox(width: 2.w),
+                        SizedBox(width: AppSpace.x2),
                         Expanded(
                           child: Text(
                             'You need ${pointsCost - currentPoints} more points to redeem this reward.',
@@ -301,7 +301,7 @@ class RewardDetailModalWidget extends StatelessWidget {
                       foregroundColor: (isAvailable && canAfford)
                           ? colorScheme.onPrimary
                           : colorScheme.onSurfaceVariant,
-                      padding: EdgeInsets.symmetric(vertical: 2.h),
+                      padding: EdgeInsets.symmetric(vertical: AppSpace.x2),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
                       ),

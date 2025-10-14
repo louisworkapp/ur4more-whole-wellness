@@ -164,7 +164,7 @@ class DevotionalCardWidget extends StatelessWidget {
               color: AppTheme.successLight,
               size: 16,
             ),
-            SizedBox(width: 2.w),
+            SizedBox(width: AppSpace.x2),
             Text(
               "Completed",
               style: theme.textTheme.labelMedium?.copyWith(
@@ -178,7 +178,7 @@ class DevotionalCardWidget extends StatelessWidget {
               color: colorScheme.onSurfaceVariant,
               size: 16,
             ),
-            SizedBox(width: 2.w),
+            SizedBox(width: AppSpace.x2),
             Text(
               "${devotional["readTime"] ?? "5"} min read",
               style: theme.textTheme.labelMedium?.copyWith(
@@ -190,7 +190,7 @@ class DevotionalCardWidget extends StatelessWidget {
           GestureDetector(
             onTap: onShare,
             child: Container(
-              padding: EdgeInsets.all(2.w),
+              padding: EdgeInsets.all(AppSpace.x2),
               decoration: BoxDecoration(
                 color: colorScheme.surfaceContainerHighest,
                 borderRadius: BorderRadius.circular(8),
@@ -223,14 +223,14 @@ class DevotionalCardWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              width: 12.w,
-              height: 0.5.h,
+              width: 48, // Fixed width instead of percentage
+              height: 2, // Fixed height instead of percentage
               decoration: BoxDecoration(
                 color: colorScheme.onSurfaceVariant.withOpacity( 0.3),
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: AppSpace.x3),
             _buildOptionTile(
               context,
               icon: 'share',

@@ -69,7 +69,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
               size: 20,
             ),
           ),
-          SizedBox(width: 3.w),
+          SizedBox(width: AppSpace.x3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +81,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
                     color: colorScheme.onSurface,
                   ),
                 ),
-                SizedBox(height: 0.5.h),
+                SizedBox(height: AppSpace.x1),
                 Text(
                   "$completedCount devotions completed",
                   style: theme.textTheme.bodySmall?.copyWith(
@@ -105,7 +105,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
                   color: Colors.white,
                   size: 14,
                 ),
-                SizedBox(width: 1.w),
+                SizedBox(width: AppSpace.x1),
                 Text(
                   "${_calculateStreak()} day streak",
                   style: theme.textTheme.labelMedium?.copyWith(
@@ -147,7 +147,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => onDevotionalTap?.call(devotional),
       child: Container(
-        padding: EdgeInsets.all(3.w),
+        padding: EdgeInsets.all(AppSpace.x3),
         decoration: BoxDecoration(
           color: colorScheme.surfaceContainerHighest,
           borderRadius: BorderRadius.circular(12),
@@ -161,8 +161,8 @@ class DevotionalHistoryWidget extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: 12.w,
-              height: 12.w,
+              width: 48, // Fixed width instead of percentage
+              height: 48, // Fixed height instead of percentage
               decoration: BoxDecoration(
                 color: isCompleted
                     ? AppTheme.successLight
@@ -183,7 +183,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
                       ),
               ),
             ),
-            SizedBox(width: 3.w),
+            SizedBox(width: AppSpace.x3),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -197,7 +197,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(height: 0.5.h),
+                  SizedBox(height: AppSpace.x1),
                   Text(
                     devotional["scripture"] as String? ?? "Scripture Reference",
                     style: theme.textTheme.bodySmall?.copyWith(
@@ -205,7 +205,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 0.5.h),
+                  SizedBox(height: AppSpace.x1),
                   Row(
                     children: [
                       CustomIconWidget(
@@ -213,7 +213,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
                         color: colorScheme.onSurfaceVariant,
                         size: 12,
                       ),
-                      SizedBox(width: 1.w),
+                      SizedBox(width: AppSpace.x1),
                       Text(
                         devotional["date"] as String? ?? "Today",
                         style: theme.textTheme.labelSmall?.copyWith(
@@ -221,13 +221,13 @@ class DevotionalHistoryWidget extends StatelessWidget {
                         ),
                       ),
                       if (isCompleted) ...[
-                        SizedBox(width: 3.w),
+                        SizedBox(width: AppSpace.x3),
                         CustomIconWidget(
                           iconName: 'schedule',
                           color: colorScheme.onSurfaceVariant,
                           size: 12,
                         ),
-                        SizedBox(width: 1.w),
+                        SizedBox(width: AppSpace.x1),
                         Text(
                           devotional["completedTime"] as String? ?? "Morning",
                           style: theme.textTheme.labelSmall?.copyWith(
@@ -245,7 +245,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
                 if (devotional["points"] != null)
                   Container(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+                        EdgeInsets.symmetric(horizontal: AppSpace.x2, vertical: AppSpace.x1),
                     decoration: BoxDecoration(
                       color: AppTheme.secondaryLight.withOpacity( 0.1),
                       borderRadius: BorderRadius.circular(12),
@@ -258,7 +258,7 @@ class DevotionalHistoryWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                SizedBox(height: 1.h),
+                SizedBox(height: AppSpace.x1),
                 if (devotional["isBookmarked"] == true)
                   CustomIconWidget(
                     iconName: 'bookmark',

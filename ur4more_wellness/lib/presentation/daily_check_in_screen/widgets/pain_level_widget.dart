@@ -120,7 +120,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
               onChanged: widget.onChanged,
             ),
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: AppSpace.x1),
 
           // Scale markers
           Row(
@@ -146,7 +146,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
               ),
             ],
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: AppSpace.x2),
 
           // Optional "Add details" link for body map
           if (!_showDetailedView)
@@ -176,7 +176,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
           if (_showDetailedView) ...[
             SizedBox(height: AppSpace.x3),
             Container(
-              padding: EdgeInsets.all(3.w),
+              padding: EdgeInsets.all(AppSpace.x3),
               decoration: BoxDecoration(
                 color: theme.colorScheme.surfaceContainerHighest.withOpacity( 0.5),
                 borderRadius: BorderRadius.circular(12),
@@ -213,7 +213,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 2.h),
+                  SizedBox(height: AppSpace.x2),
 
                   // Most common regions (limited to 3 + "More areas...")
                   _buildRegionChip('Head/Neck', 'psychology'),
@@ -257,7 +257,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
   Widget _buildRegionChip(String region, String iconName) {
     final theme = Theme.of(context);
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+      padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
@@ -272,7 +272,7 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
             color: theme.colorScheme.onSurfaceVariant,
             size: 18,
           ),
-          SizedBox(width: 2.w),
+          SizedBox(width: AppSpace.x2),
           Text(
             region,
             style: theme.textTheme.bodySmall?.copyWith(
