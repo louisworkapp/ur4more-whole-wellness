@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+import 'dart:math' as math;
 
 import '../../../theme/app_colors.dart';
+import '../../../design/tokens.dart';
 
 class PointsProgressRing extends StatefulWidget {
   final int totalPoints;
@@ -59,13 +60,13 @@ class _PointsProgressRingState extends State<PointsProgressRing>
     final colorScheme = theme.colorScheme;
 
     return Container(
-      width: 50.w,
+      width: 200,
       child: Column(
         children: [
           // Single brand blue ring with inner label
           Container(
-            width: 40.w,
-            height: 40.w,
+            width: 160,
+            height: 160,
             child: Stack(
               alignment: Alignment.center,
               children: [
@@ -74,7 +75,7 @@ class _PointsProgressRingState extends State<PointsProgressRing>
                   animation: _ringAnimation,
                   builder: (context, child) {
                     return CustomPaint(
-                      size: Size(40.w, 40.w),
+                      size: const Size(160, 160),
                       painter: _SingleRingPainter(
                         progress: _ringAnimation.value,
                         color: theme.colorScheme.primary,
@@ -100,7 +101,7 @@ class _PointsProgressRingState extends State<PointsProgressRing>
                       'pts',
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: const Color(0xFF475569),
-                        fontSize: 12.sp,
+                        fontSize: math.min(12.0, (theme.textTheme.headlineMedium?.fontSize ?? 12)),
                       ),
                     ),
                   ],
@@ -109,7 +110,7 @@ class _PointsProgressRingState extends State<PointsProgressRing>
             ),
           ),
 
-          SizedBox(height: 3.h),
+          const SizedBox(height: AppSpace.x3),
 
           // Row of 3 mini progress bars below
           _buildPillarBarsRow(context),
@@ -120,7 +121,7 @@ class _PointsProgressRingState extends State<PointsProgressRing>
 
   Widget _buildPillarBarsRow(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 2.w),
+      padding: const EdgeInsets.symmetric(horizontal: AppSpace.x2),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -155,12 +156,12 @@ class _PointsProgressRingState extends State<PointsProgressRing>
       BuildContext context, String label, double progress, Color color) {
     return Expanded(
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 1.w),
+        margin: const EdgeInsets.symmetric(horizontal: AppSpace.x1),
         child: Column(
           children: [
             // Mini progress bar
             Container(
-              height: 6.h,
+              height: 24,
               width: 8,
               decoration: BoxDecoration(
                 color: color.withOpacity( 0.1),
@@ -171,7 +172,7 @@ class _PointsProgressRingState extends State<PointsProgressRing>
                 children: [
                   AnimatedContainer(
                     duration: Duration(milliseconds: 1000),
-                    height: 6.h * progress,
+                    height: 24 * progress,
                     width: 8,
                     decoration: BoxDecoration(
                       color: color,
@@ -182,7 +183,7 @@ class _PointsProgressRingState extends State<PointsProgressRing>
               ),
             ),
 
-            SizedBox(height: 1.h),
+            const SizedBox(height: AppSpace.x1),
 
             // Label and percentage
             Column(
@@ -190,7 +191,7 @@ class _PointsProgressRingState extends State<PointsProgressRing>
                 Text(
                   label,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontSize: 10.sp,
+                        fontSize: math.min(10.0, 12),
                         fontWeight: FontWeight.w500,
                         color: const Color(0xFF475569),
                       ),
@@ -198,7 +199,7 @@ class _PointsProgressRingState extends State<PointsProgressRing>
                 Text(
                   '${(progress * 100).toInt()}%',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        fontSize: 9.sp,
+                        fontSize: math.min(9.0, 12),
                         fontWeight: FontWeight.w400,
                         color: const Color(0xFF475569),
                       ),
