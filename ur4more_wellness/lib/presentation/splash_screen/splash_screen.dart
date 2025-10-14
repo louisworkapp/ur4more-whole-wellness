@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
+import '../../../core/services/telemetry.dart';
 import '../../routes/app_routes.dart';
 
 class SplashScreen extends StatefulWidget {
