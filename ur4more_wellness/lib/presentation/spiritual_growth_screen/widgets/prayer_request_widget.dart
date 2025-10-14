@@ -1,0 +1,285 @@
+import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
+
+import '../../../core/app_export.dart';
+
+class PrayerRequestWidget extends StatefulWidget {
+  final Function(String)? onSubmit;
+
+  const PrayerRequestWidget({
+    super.key,
+    this.onSubmit,
+  });
+
+  @override
+  State<PrayerRequestWidget> createState() => _PrayerRequestWidgetState();
+}
+
+class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
+  final TextEditingController _prayerController = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
+  bool _isExpanded = false;
+
+  @override
+  void dispose() {
+    _prayerController.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withValues(alpha: 0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildHeader(context, colorScheme),
+          if (_isExpanded) _buildExpandedContent(context, colorScheme),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context, ColorScheme colorScheme) {
+    final theme = Theme.of(context);
+
+    return GestureDetector(
+      onTap: () => setState(() => _isExpanded = !_isExpanded),
+      child: Container(
+        padding: EdgeInsets.all(4.w),
+        child: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(2.w),
+              decoration: BoxDecoration(
+                color: AppTheme.primaryLight.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: CustomIconWidget(
+                iconName: 'favorite',
+                color: AppTheme.primaryLight,
+                size: 20,
+              ),
+            ),
+            SizedBox(width: 3.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Prayer Requests",
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.onSurface,
+                    ),
+                  ),
+                  SizedBox(height: 0.5.h),
+                  Text(
+                    "Share your heart with God",
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            CustomIconWidget(
+              iconName: _isExpanded ? 'expand_less' : 'expand_more',
+              color: colorScheme.onSurfaceVariant,
+              size: 24,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildExpandedContent(BuildContext context, ColorScheme colorScheme) {
+    final theme = Theme.of(context);
+
+    return Container(
+      padding: EdgeInsets.fromLTRB(4.w, 0, 4.w, 4.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: colorScheme.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: _focusNode.hasFocus
+                    ? AppTheme.primaryLight
+                    : colorScheme.outline.withValues(alpha: 0.3),
+                width: _focusNode.hasFocus ? 2 : 1,
+              ),
+            ),
+            child: TextField(
+              controller: _prayerController,
+              focusNode: _focusNode,
+              maxLines: 4,
+              decoration: InputDecoration(
+                hintText: "Share your prayer request or thanksgiving...",
+                hintStyle: theme.textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.all(4.w),
+              ),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurface,
+                height: 1.4,
+              ),
+              onChanged: (value) => setState(() {}),
+            ),
+          ),
+          SizedBox(height: 2.h),
+          Row(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 1.h),
+                decoration: BoxDecoration(
+                  color: AppTheme.primaryLight.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CustomIconWidget(
+                      iconName: 'lock',
+                      color: AppTheme.primaryLight,
+                      size: 14,
+                    ),
+                    SizedBox(width: 1.w),
+                    Text(
+                      "Private & Encrypted",
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        color: AppTheme.primaryLight,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              ElevatedButton(
+                onPressed: _prayerController.text.trim().isEmpty
+                    ? null
+                    : _submitPrayer,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppTheme.primaryLight,
+                  foregroundColor: Colors.white,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 6.w, vertical: 1.5.h),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 0,
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CustomIconWidget(
+                      iconName: 'send',
+                      color: Colors.white,
+                      size: 16,
+                    ),
+                    SizedBox(width: 2.w),
+                    Text(
+                      "Submit",
+                      style: theme.textTheme.labelLarge?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 2.h),
+          _buildPrayerTips(context, colorScheme),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPrayerTips(BuildContext context, ColorScheme colorScheme) {
+    final theme = Theme.of(context);
+
+    return Container(
+      padding: EdgeInsets.all(3.w),
+      decoration: BoxDecoration(
+        color: AppTheme.successLight.withValues(alpha: 0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: AppTheme.successLight.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              CustomIconWidget(
+                iconName: 'lightbulb',
+                color: AppTheme.successLight,
+                size: 16,
+              ),
+              SizedBox(width: 2.w),
+              Text(
+                "Prayer Tips",
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: AppTheme.successLight,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 1.h),
+          Text(
+            "• Be specific about your needs and concerns\n• Include gratitude for God's blessings\n• Pray for others in your community\n• Ask for wisdom and guidance",
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: colorScheme.onSurfaceVariant,
+              height: 1.4,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _submitPrayer() {
+    if (_prayerController.text.trim().isNotEmpty) {
+      widget.onSubmit?.call(_prayerController.text.trim());
+      _prayerController.clear();
+      setState(() => _isExpanded = false);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text("Prayer request submitted securely"),
+          backgroundColor: AppTheme.successLight,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      );
+    }
+  }
+}

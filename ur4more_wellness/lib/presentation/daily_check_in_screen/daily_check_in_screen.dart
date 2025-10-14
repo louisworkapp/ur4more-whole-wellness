@@ -1,0 +1,624 @@
+import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
+
+import '../../core/app_export.dart';
+import '../../core/brand_rules.dart';
+import '../../core/services/points_service.dart';
+import '../../features/home/streaks.dart';
+import '../../core/services/telemetry.dart';
+import '../../widgets/custom_icon_widget.dart';
+import './widgets/completion_summary_widget.dart';
+import './widgets/coping_mechanisms_widget.dart';
+import './widgets/journal_entry_widget.dart';
+import './widgets/pain_level_widget.dart';
+import './widgets/progress_header_widget.dart';
+import './widgets/rpe_scale_widget.dart';
+import './widgets/urge_intensity_widget.dart';
+
+class DailyCheckInScreen extends StatefulWidget {
+  const DailyCheckInScreen({super.key});
+
+  @override
+  State<DailyCheckInScreen> createState() => _DailyCheckInScreenState();
+}
+
+class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
+  final PageController _pageController = PageController();
+  final ScrollController _scrollController = ScrollController();
+
+  int _currentSection = 0;
+  bool _isCompleted = false;
+  bool _isSubmitting = false;
+
+  // Data storage - Updated structure based on requirements
+  int _rpeValue = 5; // Changed to integer as per requirements
+  double _painLevel = 0.0; // Simplified to single pain slider
+  double _urgeLevel = 0.0; // Single urge/craving slider (0-10)
+  List<String> _selectedCopingMechanisms = [];
+  String _journalText = '';
+  String _selectedMood = '';
+  List<String> _attachedPhotos = [];
+
+  // Mock user data and faith mode
+  final String _userId = "user_12345";
+  FaithMode _faithMode = FaithMode.light; // Mock faith mode
+
+  final List<String> _sectionTitles = [
+    'Rate of Perceived Exertion', // Updated titles as per requirements
+    'Pain Assessment',
+    'Urge & Craving Tracking',
+    'Coping Strategies',
+    'Journal Entry',
+  ];
+
+  final List<String> _sectionLabels = [
+    'How hard did your body work today?', // New labels as per requirements
+    'Rate pain today (0–10)',
+    'Cravings or urges (0–10)',
+    'What helped today?',
+    'A few lines about today'
+  ];
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  double get _completionPercentage {
+    if (_isCompleted) return 1.0;
+    return (_currentSection + 1) / _sectionTitles.length;
+  }
+
+  bool get _canProceedToNext {
+    switch (_currentSection) {
+      case 0: // RPE
+        return _rpeValue > 0; // RPE is required
+      case 1: // Pain
+        return true; // Optional
+      case 2: // Urges
+        return true; // Optional
+      case 3: // Coping
+        return true; // Optional
+      case 4: // Journal
+        return true; // Optional
+      default:
+        return false;
+    }
+  }
+
+  void _nextSection() {
+    if (_currentSection < _sectionTitles.length - 1) {
+      setState(() {
+        _currentSection++;
+      });
+      _pageController.nextPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      _completeCheckIn();
+    }
+  }
+
+  void _previousSection() {
+    if (_currentSection > 0) {
+      setState(() {
+        _currentSection--;
+      });
+      _pageController.previousPage(
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  void _skipSection() {
+    _nextSection();
+  }
+
+  // Updated points calculation based on new requirements
+  int _calculatePointsEarned() {
+    int totalPoints = 0;
+    bool copingDone = _selectedCopingMechanisms.isNotEmpty;
+
+    if (copingDone) {
+      // Cap coping points at +25 max per check-in
+      totalPoints += 25;
+    } else if (_journalText.trim().length >= 120) {
+      // Journal bonus only if no coping bonus (avoid double credit)
+      totalPoints += 10;
+    }
+
+    return totalPoints;
+  }
+
+  bool get _copingDone {
+    return _selectedCopingMechanisms.isNotEmpty;
+  }
+
+  Future<void> _completeCheckIn() async {
+    setState(() {
+      _isSubmitting = true;
+    });
+
+    try {
+      final pointsEarned = _calculatePointsEarned();
+
+      // Insert into checkins table
+      await _saveCheckInData();
+
+      // Award points based on new logic
+      if (_copingDone) {
+        await PointsService.award(
+          userId: _userId,
+          action: 'coping_completed',
+          value: 25,
+          note: _selectedCopingMechanisms.join(', '),
+        );
+      } else if (_journalText.trim().length >= 120) {
+        await PointsService.award(
+          userId: _userId,
+          action: 'journal_entry',
+          value: 10,
+          note: 'Daily journal entry',
+        );
+      }
+
+      // Trigger streak logic
+      await Streaks.maybeAward7(_userId);
+
+      // Log analytics
+      Telemetry.logEvent('checkin_completed', {
+        'points_earned': pointsEarned,
+        'has_coping': _copingDone,
+        'journal_length': _journalText.length,
+      });
+
+      setState(() {
+        _isSubmitting = false;
+        _isCompleted = true;
+      });
+
+      // Show completion summary with smart suggestions
+      _showCompletionSummary(pointsEarned);
+    } catch (e) {
+      setState(() {
+        _isSubmitting = false;
+      });
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error completing check-in: $e'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+      }
+    }
+  }
+
+  Future<void> _saveCheckInData() async {
+    // Mock saving to checkins table with updated structure
+    final checkInData = {
+      'user_id': _userId,
+      'plan_date': DateTime.now().toIso8601String().split('T')[0],
+      'rpe': _rpeValue, // Store as integer
+      'pain': _painLevel > 0, // Boolean: has pain or not
+      'urge': _urgeLevel.round(), // Store urge level as integer
+      'coping_done': _copingDone, // Boolean
+      'journal_text': _journalText.trim(),
+      'created_at': DateTime.now().toIso8601String(),
+    };
+
+    // In real app, insert into Supabase
+    debugPrint('Mock checkin insert: $checkInData');
+  }
+
+  void _showCompletionSummary(int pointsEarned) {
+    // Determine smart suggestion based on pain/urge levels
+    String? suggestionTitle;
+    String? suggestionAction;
+
+    if (_painLevel > 0) {
+      suggestionTitle = "Start Mobility Reset (5 min)";
+      suggestionAction = "mobility_reset";
+    } else if (_urgeLevel >= 7 && _faithMode != FaithMode.off) {
+      suggestionTitle = "Open Peace Verse (30 sec)";
+      suggestionAction = "peace_verse";
+    }
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      isDismissible: false,
+      enableDrag: false,
+      backgroundColor: Colors.transparent,
+      builder: (context) => CompletionSummaryWidget(
+        totalPointsEarned: pointsEarned,
+        suggestionTitle: suggestionTitle,
+        suggestionAction: suggestionAction,
+        onContinue: () {
+          Navigator.pop(context); // Close modal
+          Navigator.pushReplacementNamed(context, '/home-dashboard');
+        },
+        onSuggestionTap: (action) {
+          Navigator.pop(context);
+          _handleSuggestionAction(action);
+        },
+      ),
+    );
+  }
+
+  void _handleSuggestionAction(String action) {
+    switch (action) {
+      case 'mobility_reset':
+        // Navigate to body fitness for mobility workout
+        Navigator.pushNamed(context, '/body-fitness');
+        break;
+      case 'peace_verse':
+        // Navigate to spiritual section
+        Navigator.pushNamed(context, '/spiritual-growth');
+        break;
+    }
+  }
+
+  void _closeCheckIn() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Exit Check-in?'),
+        content: const Text(
+          'Your progress will be lost if you exit now. Are you sure?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close dialog
+              Navigator.pop(context); // Close check-in screen
+            },
+            child: const Text('Exit'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Scaffold(
+      backgroundColor: theme.scaffoldBackgroundColor,
+      body: Column(
+        children: [
+          // Progress Header
+          ProgressHeaderWidget(
+            title: "Daily Check-in", // Added title as per requirements
+            completionPercentage: _completionPercentage,
+            currentStep: _currentSection + 1,
+            totalSteps: _sectionTitles.length,
+            onClose: _closeCheckIn,
+          ),
+
+          // Main Content
+          Expanded(
+            child: PageView(
+              controller: _pageController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                // Step 1 - RPE Scale (integer snapping)
+                _buildSection(
+                  stepNumber: 1,
+                  title: _sectionTitles[0],
+                  subtitle: _sectionLabels[0],
+                  child: RpeScaleWidget(
+                    currentValue: _rpeValue,
+                    onChanged: (value) {
+                      setState(() {
+                        _rpeValue = value; // Already integer from widget
+                      });
+                    },
+                  ),
+                ),
+
+                // Step 2 - Pain Assessment (simplified single slider)
+                _buildSection(
+                  stepNumber: 2,
+                  title: _sectionTitles[1],
+                  subtitle: _sectionLabels[1],
+                  child: PainLevelWidget(
+                    painLevel: _painLevel,
+                    onChanged: (level) {
+                      setState(() {
+                        _painLevel = level;
+                      });
+                    },
+                  ),
+                ),
+
+                // Step 3 - Urge/Craving (single 0-10 slider)
+                _buildSection(
+                  stepNumber: 3,
+                  title: _sectionTitles[2],
+                  subtitle: _sectionLabels[2],
+                  child: UrgeIntensityWidget(
+                    urgeLevel: _urgeLevel,
+                    onChanged: (level) {
+                      setState(() {
+                        _urgeLevel = level;
+
+                        // Pre-prime coping strategies if high urge + faith mode
+                        if (level >= 7 && _faithMode != FaithMode.off) {
+                          if (!_selectedCopingMechanisms
+                              .contains('scripture')) {
+                            _selectedCopingMechanisms.add('scripture');
+                          }
+                          if (!_selectedCopingMechanisms
+                              .contains('breathing')) {
+                            _selectedCopingMechanisms.add('breathing');
+                          }
+                        }
+                      });
+                    },
+                  ),
+                ),
+
+                // Step 4 - Coping Strategies (faith-safe naming)
+                _buildSection(
+                  stepNumber: 4,
+                  title: _sectionTitles[3],
+                  subtitle: _sectionLabels[3],
+                  child: CopingMechanismsWidget(
+                    selectedMechanisms: _selectedCopingMechanisms,
+                    faithMode: _faithMode,
+                    onChanged: (mechanisms) {
+                      setState(() {
+                        _selectedCopingMechanisms = mechanisms;
+                      });
+                    },
+                  ),
+                ),
+
+                // Step 5 - Journal Entry (with character counter)
+                _buildSection(
+                  stepNumber: 5,
+                  title: _sectionTitles[4],
+                  subtitle: _sectionLabels[4],
+                  child: JournalEntryWidget(
+                    journalText: _journalText,
+                    selectedMood: _selectedMood,
+                    attachedPhotos: _attachedPhotos,
+                    onTextChanged: (text) {
+                      setState(() {
+                        _journalText = text;
+                      });
+                    },
+                    onMoodChanged: (mood) {
+                      setState(() {
+                        _selectedMood = mood;
+                      });
+                    },
+                    onPhotosChanged: (photos) {
+                      setState(() {
+                        _attachedPhotos = photos;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Navigation Controls
+          Container(
+            padding: EdgeInsets.all(4.w),
+            decoration: BoxDecoration(
+              color: theme.colorScheme.surface,
+              boxShadow: [
+                BoxShadow(
+                  color: theme.colorScheme.shadow.withValues(alpha: 0.1),
+                  blurRadius: 4,
+                  offset: const Offset(0, -2),
+                ),
+              ],
+            ),
+            child: SafeArea(
+              top: false,
+              child: Row(
+                children: [
+                  // Previous Button
+                  if (_currentSection > 0)
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: _previousSection,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomIconWidget(
+                              iconName: 'arrow_back',
+                              color: theme.colorScheme.primary,
+                              size: 20,
+                            ),
+                            SizedBox(width: 2.w),
+                            const Text('Previous'),
+                          ],
+                        ),
+                      ),
+                    )
+                  else
+                    const Spacer(),
+
+                  SizedBox(width: 4.w),
+
+                  // Skip Button (for optional sections)
+                  if (_currentSection > 0 &&
+                      _currentSection < _sectionTitles.length - 1)
+                    TextButton(
+                      onPressed: _skipSection,
+                      child: Text(
+                        'Skip',
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ),
+
+                  if (_currentSection > 0 &&
+                      _currentSection < _sectionTitles.length - 1)
+                    SizedBox(width: 4.w),
+
+                  // Next/Complete Button
+                  Expanded(
+                    flex: 2,
+                    child: ElevatedButton(
+                      onPressed: _canProceedToNext && !_isSubmitting
+                          ? (_currentSection == _sectionTitles.length - 1
+                              ? _completeCheckIn
+                              : _nextSection)
+                          : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            theme.colorScheme.primary, // Navy color
+                      ),
+                      child: _isSubmitting
+                          ? SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  theme.colorScheme.onPrimary,
+                                ),
+                              ),
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  _currentSection == _sectionTitles.length - 1
+                                      ? 'Complete Check-in ✓' // Updated CTA
+                                      : 'Next',
+                                  style: TextStyle(
+                                    color: theme.colorScheme.onPrimary,
+                                  ),
+                                ),
+                                if (_currentSection <
+                                    _sectionTitles.length - 1) ...[
+                                  SizedBox(width: 2.w),
+                                  CustomIconWidget(
+                                    iconName: 'arrow_forward',
+                                    color: theme.colorScheme.onPrimary,
+                                    size: 20,
+                                  ),
+                                ],
+                              ],
+                            ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSection({
+    required int stepNumber,
+    required String title,
+    required String subtitle,
+    required Widget child,
+  }) {
+    return SingleChildScrollView(
+      controller: _scrollController,
+      padding: EdgeInsets.all(4.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Section Header (updated styling)
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+            decoration: BoxDecoration(
+              color:
+                  Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 8.w,
+                  height: 8.w,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primary, // Navy
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Text(
+                      stepNumber.toString(),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 3.w),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context).colorScheme.onSurface,
+                            ),
+                      ),
+                      Text(
+                        'Step $stepNumber of ${_sectionTitles.length}', // Lighter step headers
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                              fontWeight: FontWeight.w400,
+                            ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SizedBox(height: 2.h),
+
+          // Subtitle
+          Text(
+            subtitle,
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontWeight: FontWeight.w500,
+                ),
+          ),
+
+          SizedBox(height: 3.h),
+
+          // Section Content
+          child,
+
+          SizedBox(height: 4.h),
+        ],
+      ),
+    );
+  }
+}
