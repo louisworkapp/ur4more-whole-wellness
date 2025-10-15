@@ -41,4 +41,5 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/coping/
     # - assets/brand/   # enable only after you add files to assets/brand/

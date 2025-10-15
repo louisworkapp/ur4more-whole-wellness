@@ -294,238 +294,200 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
-      body: Column(
+      backgroundColor: Colors.grey[50], // Light background like Body Fitness
+      body: Stack(
         children: [
-          // Progress Header
-          ProgressHeaderWidget(
-            title: "Daily Check-in", // Added title as per requirements
-            completionPercentage: _completionPercentage,
-            currentStep: _currentSection + 1,
-            totalSteps: _sectionTitles.length,
-            onClose: _closeCheckIn,
-          ),
-
-          // Main Content
-          Expanded(
-            child: PageView(
-              controller: _pageController,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                // Step 1 - RPE Scale (integer snapping)
-                _buildSection(
-                  stepNumber: 1,
-                  title: _sectionTitles[0],
-                  subtitle: _sectionLabels[0],
-                  child: RpeScaleWidget(
-                    currentValue: _rpeValue,
-                    onChanged: (value) {
-                      setState(() {
-                        _rpeValue = value; // Already integer from widget
-                      });
-                    },
-                  ),
-                ),
-
-                // Step 2 - Pain Assessment (simplified single slider)
-                _buildSection(
-                  stepNumber: 2,
-                  title: _sectionTitles[1],
-                  subtitle: _sectionLabels[1],
-                  child: PainLevelWidget(
-                    painLevel: _painLevel,
-                    onChanged: (level) {
-                      setState(() {
-                        _painLevel = level;
-                      });
-                    },
-                  ),
-                ),
-
-                // Step 3 - Urge/Craving (single 0-10 slider)
-                _buildSection(
-                  stepNumber: 3,
-                  title: _sectionTitles[2],
-                  subtitle: _sectionLabels[2],
-                  child: UrgeIntensityWidget(
-                    urgeLevel: _urgeLevel,
-                    onChanged: (level) {
-                      setState(() {
-                        _urgeLevel = level;
-
-                        // Pre-prime coping strategies if high urge + faith mode
-                        if (level >= 7 && _faithMode != FaithMode.off) {
-                          if (!_selectedCopingMechanisms
-                              .contains('scripture')) {
-                            _selectedCopingMechanisms.add('scripture');
-                          }
-                          if (!_selectedCopingMechanisms
-                              .contains('breathing')) {
-                            _selectedCopingMechanisms.add('breathing');
-                          }
-                        }
-                      });
-                    },
-                  ),
-                ),
-
-                // Step 4 - Coping Strategies (faith-safe naming)
-                _buildSection(
-                  stepNumber: 4,
-                  title: _sectionTitles[3],
-                  subtitle: _sectionLabels[3],
-                  child: CopingMechanismsWidget(
-                    selectedMechanisms: _selectedCopingMechanisms,
-                    faithMode: _faithMode,
-                    onChanged: (mechanisms) {
-                      setState(() {
-                        _selectedCopingMechanisms = mechanisms;
-                      });
-                    },
-                  ),
-                ),
-
-                // Step 5 - Journal Entry (with character counter)
-                _buildSection(
-                  stepNumber: 5,
-                  title: _sectionTitles[4],
-                  subtitle: _sectionLabels[4],
-                  child: JournalEntryWidget(
-                    journalText: _journalText,
-                    selectedMood: _selectedMood,
-                    attachedPhotos: _attachedPhotos,
-                    onTextChanged: (text) {
-                      setState(() {
-                        _journalText = text;
-                      });
-                    },
-                    onMoodChanged: (mood) {
-                      setState(() {
-                        _selectedMood = mood;
-                      });
-                    },
-                    onPhotosChanged: (photos) {
-                      setState(() {
-                        _attachedPhotos = photos;
-                      });
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Navigation Controls
-          Container(
-            padding: EdgeInsets.all(AppSpace.x4),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surface,
-              boxShadow: [
-                BoxShadow(
-                  color: theme.colorScheme.shadow.withOpacity( 0.1),
-                  blurRadius: 4,
-                  offset: const Offset(0, -2),
-                ),
-              ],
-            ),
-            child: SafeArea(
-              top: false,
-              child: Row(
-                children: [
-                  // Previous Button
-                  if (_currentSection > 0)
-                    Expanded(
-                      child: OutlinedButton(
-                        onPressed: _previousSection,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CustomIconWidget(
-                              iconName: 'arrow_back',
-                              color: theme.colorScheme.primary,
-                              size: 20,
-                            ),
-                            SizedBox(width: AppSpace.x2),
-                            const Text('Previous'),
-                          ],
-                        ),
-                      ),
-                    )
-                  else
-                    const Spacer(),
-
-                  SizedBox(width: AppSpace.x4),
-
-                  // Skip Button (for optional sections)
-                  if (_currentSection > 0 &&
-                      _currentSection < _sectionTitles.length - 1)
-                    TextButton(
-                      onPressed: _skipSection,
-                      child: Text(
-                        'Skip',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-
-                  if (_currentSection > 0 &&
-                      _currentSection < _sectionTitles.length - 1)
-                    SizedBox(width: AppSpace.x4),
-
-                  // Next/Complete Button
-                  Expanded(
-                    flex: 2,
-                    child: ElevatedButton(
-                      onPressed: _canProceedToNext && !_isSubmitting
-                          ? (_currentSection == _sectionTitles.length - 1
-                              ? _completeCheckIn
-                              : _nextSection)
-                          : null,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            theme.colorScheme.primary, // Navy color
-                      ),
-                      child: _isSubmitting
-                          ? SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(
-                                  theme.colorScheme.onPrimary,
-                                ),
-                              ),
-                            )
-                          : Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  _currentSection == _sectionTitles.length - 1
-                                      ? 'Complete Check-in ✓' // Updated CTA
-                                      : 'Next',
-                                  style: TextStyle(
-                                    color: theme.colorScheme.onPrimary,
-                                  ),
-                                ),
-                                if (_currentSection <
-                                    _sectionTitles.length - 1) ...[
-                                  SizedBox(width: AppSpace.x2),
-                                  CustomIconWidget(
-                                    iconName: 'arrow_forward',
-                                    color: theme.colorScheme.onPrimary,
-                                    size: 20,
-                                  ),
-                                ],
-                              ],
-                            ),
-                    ),
-                  ),
-                ],
+          Column(
+            children: [
+              // Progress Header
+              ProgressHeaderWidget(
+                title: "Daily Check-in", // Added title as per requirements
+                completionPercentage: _completionPercentage,
+                currentStep: _currentSection + 1,
+                totalSteps: _sectionTitles.length,
+                onClose: _closeCheckIn,
               ),
-            ),
+              SizedBox(height: AppSpace.x2),
+
+              // Main Content
+              Expanded(
+                child: PageView(
+                  controller: _pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    // Step 1 - RPE Scale (integer snapping)
+                    _buildSection(
+                      stepNumber: 1,
+                      title: _sectionTitles[0],
+                      subtitle: _sectionLabels[0],
+                      child: RpeScaleWidget(
+                        currentValue: _rpeValue,
+                        onChanged: (value) {
+                          setState(() {
+                            _rpeValue = value; // Already integer from widget
+                          });
+                        },
+                      ),
+                    ),
+
+                    // Step 2 - Pain Assessment (simplified single slider)
+                    _buildSection(
+                      stepNumber: 2,
+                      title: _sectionTitles[1],
+                      subtitle: _sectionLabels[1],
+                      child: PainLevelWidget(
+                        painLevel: _painLevel,
+                        onChanged: (level) {
+                          setState(() {
+                            _painLevel = level;
+                          });
+                        },
+                      ),
+                    ),
+
+                    // Step 3 - Urge/Craving (single 0-10 slider)
+                    _buildSection(
+                      stepNumber: 3,
+                      title: _sectionTitles[2],
+                      subtitle: _sectionLabels[2],
+                      child: UrgeIntensityWidget(
+                        urgeLevel: _urgeLevel,
+                        onChanged: (level) {
+                          setState(() {
+                            _urgeLevel = level;
+
+                            // Pre-prime coping strategies if high urge + faith mode
+                            if (level >= 7 && _faithMode != FaithMode.off) {
+                              if (!_selectedCopingMechanisms
+                                  .contains('scripture')) {
+                                _selectedCopingMechanisms.add('scripture');
+                              }
+                              if (!_selectedCopingMechanisms
+                                  .contains('breathing')) {
+                                _selectedCopingMechanisms.add('breathing');
+                              }
+                            }
+                          });
+                        },
+                      ),
+                    ),
+
+                    // Step 4 - Coping Strategies (faith-safe naming)
+                    _buildSection(
+                      stepNumber: 4,
+                      title: _sectionTitles[3],
+                      subtitle: _sectionLabels[3],
+                      child: CopingMechanismsWidget(
+                        selectedMechanisms: _selectedCopingMechanisms,
+                        faithMode: _faithMode,
+                        onChanged: (mechanisms) {
+                          setState(() {
+                            _selectedCopingMechanisms = mechanisms;
+                          });
+                        },
+                      ),
+                    ),
+
+                    // Step 5 - Journal Entry (with character counter)
+                    _buildSection(
+                      stepNumber: 5,
+                      title: _sectionTitles[4],
+                      subtitle: _sectionLabels[4],
+                      child: JournalEntryWidget(
+                        journalText: _journalText,
+                        selectedMood: _selectedMood,
+                        attachedPhotos: _attachedPhotos,
+                        onTextChanged: (text) {
+                          setState(() {
+                            _journalText = text;
+                          });
+                        },
+                        onMoodChanged: (mood) {
+                          setState(() {
+                            _selectedMood = mood;
+                          });
+                        },
+                        onPhotosChanged: (photos) {
+                          setState(() {
+                            _attachedPhotos = photos;
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
+      ),
+      bottomNavigationBar: SafeArea(
+        minimum: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+        child: Row(
+          children: [
+            // Previous Button
+            if (_currentSection > 0)
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: _previousSection,
+                  icon: const Icon(Icons.arrow_back, size: 16),
+                  label: const Text('Previous', style: TextStyle(fontSize: 14)),
+                ),
+              )
+            else
+              const Spacer(),
+
+            const SizedBox(width: 12),
+
+            // Skip Button (for optional sections) - only show on larger screens
+            if (_currentSection > 0 &&
+                _currentSection < _sectionTitles.length - 1 &&
+                MediaQuery.of(context).size.width > 400)
+              TextButton(
+                onPressed: _skipSection,
+                child: const Text('Skip'),
+              ),
+
+            if (_currentSection > 0 &&
+                _currentSection < _sectionTitles.length - 1 &&
+                MediaQuery.of(context).size.width > 400)
+              const SizedBox(width: 12),
+
+            // Next/Complete Button
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: _canProceedToNext && !_isSubmitting
+                    ? (_currentSection == _sectionTitles.length - 1
+                        ? _completeCheckIn
+                        : _nextSection)
+                    : null,
+                icon: _isSubmitting
+                    ? SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            theme.colorScheme.onPrimary,
+                          ),
+                        ),
+                      )
+                    : Icon(
+                        _currentSection < _sectionTitles.length - 1
+                            ? Icons.arrow_forward
+                            : Icons.check,
+                        size: 16,
+                      ),
+                label: Text(
+                  _currentSection == _sectionTitles.length - 1
+                      ? 'Complete'
+                      : 'Next',
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -536,87 +498,170 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
     required String subtitle,
     required Widget child,
   }) {
-    return SingleChildScrollView(
-      controller: _scrollController,
-      padding: EdgeInsets.all(AppSpace.x4),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    // Special handling for coping strategies section (Step 4)
+    if (stepNumber == 4) {
+      return Column(
         children: [
-          // Section Header (updated styling)
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
-            decoration: BoxDecoration(
-              color:
-                  Theme.of(context).colorScheme.primary.withOpacity( 0.1),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: AppSpace.x2,
-                  height: AppSpace.x2,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary, // Navy
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      stepNumber.toString(),
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            // Section Header (body fitness style)
+            Padding(
+              padding: Pad.card,
+              child: Container(
+                padding: Pad.card,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: AppTheme.lightTheme.primaryColor,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          stepNumber.toString(),
+                          style: GoogleFonts.inter(
                             color: Colors.white,
+                            fontSize: 16,
                             fontWeight: FontWeight.w700,
                           ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(width: AppSpace.x3),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(
+                    SizedBox(width: AppSpace.x3),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: GoogleFonts.inter(
+                              fontSize: 18,
                               fontWeight: FontWeight.w600,
                               color: Theme.of(context).colorScheme.onSurface,
                             ),
-                      ),
-                      Text(
-                        'Step $stepNumber of ${_sectionTitles.length}', // Lighter step headers
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Theme.of(context)
-                                  .colorScheme
-                                  .onSurfaceVariant,
+                          ),
+                          SizedBox(height: AppSpace.x1),
+                          Text(
+                            'Step $stepNumber of ${_sectionTitles.length}',
+                            style: GoogleFonts.inter(
+                              fontSize: 12,
                               fontWeight: FontWeight.w400,
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
                             ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
+            SizedBox(height: AppSpace.x2),
+            // The child (CopingMechanismsWidget) already contains CustomScrollView
+            Expanded(child: child),
+          ],
+        );
+    }
 
-          SizedBox(height: AppSpace.x1),
+    // Default handling for other sections
+    return SingleChildScrollView(
+      controller: _scrollController,
+      padding: Pad.card,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+            // Section Header (body fitness style)
+            Container(
+              padding: Pad.card,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: AppTheme.lightTheme.primaryColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Center(
+                      child: Text(
+                        stepNumber.toString(),
+                        style: GoogleFonts.inter(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: AppSpace.x3),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: GoogleFonts.inter(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                        ),
+                        SizedBox(height: AppSpace.x1),
+                        Text(
+                          'Step $stepNumber of ${_sectionTitles.length}',
+                          style: GoogleFonts.inter(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+          SizedBox(height: AppSpace.x3),
 
           // Subtitle
           Text(
             subtitle,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontWeight: FontWeight.w500,
-                ),
+            style: GoogleFonts.inter(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
           ),
 
-          SizedBox(height: AppSpace.x2),
+          SizedBox(height: AppSpace.x3),
 
           // Section Content
           child,
 
-          SizedBox(height: AppSpace.x2),
+          SizedBox(height: AppSpace.x3),
         ],
       ),
     );

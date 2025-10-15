@@ -6,6 +6,33 @@ import '../../../core/brand_rules.dart';
 import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 
+class CopingItem {
+  final String key;
+  final String label;
+  final String desc;
+  final String asset; // image path
+  final int points;
+  final bool selected;
+  
+  const CopingItem({
+    required this.key,
+    required this.label,
+    required this.desc,
+    required this.asset,
+    this.points = 5,
+    this.selected = false,
+  });
+
+  CopingItem copyWith({bool? selected}) => CopingItem(
+    key: key,
+    label: label,
+    desc: desc,
+    asset: asset,
+    points: points,
+    selected: selected ?? this.selected,
+  );
+}
+
 class CopingMechanismsWidget extends StatefulWidget {
   final List<String> selectedMechanisms;
   final FaithMode faithMode;
@@ -23,73 +50,91 @@ class CopingMechanismsWidget extends StatefulWidget {
 }
 
 class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
-  final List<Map<String, dynamic>> _copingStrategies = [
-    {
-      'key': 'read_scripture',
-      'name': 'Read Scripture',
-      'icon': 'menu_book',
-      'points': 5,
-    },
-    {
-      'key': 'physical_exercise',
-      'name': 'Physical Exercise',
-      'icon': 'fitness_center',
-      'points': 5,
-    },
-    {
-      'key': 'journaling',
-      'name': 'Journaling',
-      'icon': 'auto_stories',
-      'points': 5,
-    },
-    {
-      'key': 'listen_music',
-      'name': 'Listen to Music',
-      'icon': 'headphones',
-      'points': 5,
-    },
-    {
-      'key': 'call_friend',
-      'name': 'Call a Friend',
-      'icon': 'call',
-      'points': 5,
-    },
-    {
-      'key': 'take_walk',
-      'name': 'Take a Walk',
-      'icon': 'directions_walk',
-      'points': 5,
-    },
-    {
-      'key': 'practice_gratitude',
-      'name': 'Practice Gratitude',
-      'icon': 'favorite_border',
-      'points': 5,
-    },
-    {
-      'key': 'creative_activity',
-      'name': 'Creative Activity',
-      'icon': 'brush',
-      'points': 5,
-    },
-    {
-      'key': 'mindful_eating',
-      'name': 'Mindful Eating',
-      'icon': 'restaurant',
-      'points': 5,
-    },
-    {
-      'key': 'cold_shower',
-      'name': 'Cold Shower',
-      'icon': 'ac_unit',
-      'points': 5,
-    },
-    {
-      'key': 'deep_breathing',
-      'name': 'Deep Breathing',
-      'icon': 'self_improvement',
-      'points': 5,
-    },
+  final List<CopingItem> _copingStrategies = [
+    CopingItem(
+      key: 'read_scripture',
+      label: 'Read Scripture',
+      desc: 'Reflect and center your mind with the Word.',
+        asset: 'assets/images/coping/scripture.png',
+      points: 5,
+    ),
+    CopingItem(
+      key: 'physical_exercise',
+      label: 'Physical Exercise',
+      desc: 'Move your body to release stress and boost mood.',
+        asset: 'assets/images/coping/exercise.png',
+      points: 5,
+    ),
+    CopingItem(
+      key: 'journaling',
+      label: 'Journaling',
+      desc: 'Write thoughts to process emotions clearly.',
+        asset: 'assets/images/coping/journaling.png',
+      points: 5,
+    ),
+    CopingItem(
+      key: 'listen_music',
+      label: 'Listen to Music',
+      desc: 'Use calming or uplifting tracks to reset.',
+        asset: 'assets/images/coping/music.png',
+      points: 5,
+    ),
+    CopingItem(
+      key: 'call_friend',
+      label: 'Call a Friend',
+      desc: 'Reach out for support and connection.',
+        asset: 'assets/images/coping/call_friend.png',
+      points: 5,
+    ),
+    CopingItem(
+      key: 'take_walk',
+      label: 'Take a Walk',
+      desc: 'Get fresh air and a change of scenery.',
+        asset: 'assets/images/coping/walk.png',
+      points: 5,
+    ),
+    CopingItem(
+      key: 'practice_gratitude',
+      label: 'Practice Gratitude',
+      desc: 'List a few things you are thankful for.',
+        asset: 'assets/images/coping/gratitude.png',
+      points: 5,
+    ),
+    CopingItem(
+      key: 'creative_activity',
+      label: 'Creative Activity',
+      desc: 'Draw, craft, or create to express yourself.',
+        asset: 'assets/images/coping/creative.png',
+      points: 5,
+    ),
+    CopingItem(
+      key: 'mindful_eating',
+      label: 'Mindful Eating',
+      desc: 'Slow, intentional meal or snack.',
+        asset: 'assets/images/coping/mindful_eating.png',
+      points: 5,
+    ),
+    CopingItem(
+      key: 'cold_shower',
+      label: 'Cold Shower',
+      desc: 'Short reset to energize the body.',
+        asset: 'assets/images/coping/cold_shower.png',
+      points: 5,
+    ),
+    CopingItem(
+      key: 'deep_breathing',
+      label: 'Deep Breathing',
+      desc: 'Calm your nervous system with focused breath.',
+        asset: 'assets/images/coping/breathing.png',
+      points: 5,
+    ),
+    CopingItem(
+      key: 'pray',
+      label: 'Pray',
+      desc: 'Connect with your spiritual side through prayer.',
+        asset: 'assets/images/coping/pray.png',
+      points: 5,
+    ),
   ];
 
   void _toggleMechanism(String key) {
@@ -106,10 +151,10 @@ class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
   int _calculateTotalPoints() {
     return widget.selectedMechanisms.fold(0, (total, key) {
       final strategy = _copingStrategies.firstWhere(
-        (s) => s['key'] == key,
-        orElse: () => {'points': 0},
+        (s) => s.key == key,
+        orElse: () => CopingItem(key: '', label: '', desc: '', asset: '', points: 0),
       );
-      return total + (strategy['points'] as int);
+      return total + strategy.points;
     });
   }
 
@@ -117,143 +162,229 @@ class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final width = MediaQuery.sizeOf(context).width;
-    final cols = width >= 520 ? 3 : 2;
-    final childAspect = cols == 3 ? 2.4 : 2.0;
     final totalPoints = _calculateTotalPoints();
+    final selectedCount = widget.selectedMechanisms.length;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Points indicator
-        if (totalPoints > 0) ...[
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            decoration: BoxDecoration(
-              color: Colors.amber.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: Colors.amber.withOpacity(0.3),
-              ),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CustomIconWidget(
-                  iconName: 'stars',
-                  color: Colors.amber.shade700,
-                  size: 16,
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  '+$totalPoints points (max +25)',
-                  style: theme.textTheme.labelMedium?.copyWith(
-                    color: Colors.amber.shade800,
-                    fontWeight: FontWeight.w600,
+        // Header section
+        Padding(
+          padding: Pad.card,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Summary bar - shows selection count and total points
+              if (selectedCount > 0) ...[
+                Container(
+                  width: double.infinity,
+                  padding: Pad.card,
+                  decoration: BoxDecoration(
+                    color: AppTheme.lightTheme.primaryColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: AppTheme.lightTheme.primaryColor.withOpacity(0.2),
+                      width: 1,
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomIconWidget(
+                        iconName: 'check_circle',
+                        color: AppTheme.lightTheme.primaryColor,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Selected $selectedCount • +$totalPoints pts',
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          color: AppTheme.lightTheme.primaryColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+                const SizedBox(height: AppSpace.x3),
               ],
+              Text(
+                'What helped today?',
+                style: GoogleFonts.inter(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: theme.colorScheme.onSurface,
+                ),
+              ),
+              const SizedBox(height: AppSpace.x2),
+            ],
+          ),
+        ),
+        
+        // Coping strategies list (single column like body fitness)
+        Expanded(
+          child: ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
+            padding: EdgeInsets.fromLTRB(
+              16, 0, 16,
+              kBottomNavigationBarHeight + 16, // keep last row above buttons
             ),
+            itemCount: _copingStrategies.length,
+            itemBuilder: (context, index) {
+              final strategy = _copingStrategies[index];
+              final isSelected = widget.selectedMechanisms.contains(strategy.key);
+              return CopingTile(
+                item: strategy.copyWith(selected: isSelected),
+                onTap: () => _toggleMechanism(strategy.key),
+              );
+            },
           ),
-          const SizedBox(height: 16),
-        ],
-
-        // Responsive grid
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: cols,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: childAspect,
-          ),
-          itemCount: _copingStrategies.length,
-          itemBuilder: (context, index) {
-            final strategy = _copingStrategies[index];
-            final isSelected = widget.selectedMechanisms.contains(strategy['key']);
-            return _CopingCard(
-              strategy: strategy,
-              isSelected: isSelected,
-              onTap: () => _toggleMechanism(strategy['key']),
-            );
-          },
         ),
       ],
     );
   }
 }
 
-class _CopingCard extends StatelessWidget {
-  const _CopingCard({
-    required this.strategy,
-    required this.isSelected,
-    required this.onTap,
-  });
-
-  final Map<String, dynamic> strategy;
-  final bool isSelected;
+class CopingTile extends StatelessWidget {
+  const CopingTile({super.key, required this.item, required this.onTap});
+  final CopingItem item;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final cs = Theme.of(context).colorScheme;
+    final t = Theme.of(context).textTheme;
+    final selected = item.selected;
 
-    return Material(
-      color: isSelected
-          ? colorScheme.primary.withOpacity(0.1)
-          : colorScheme.surface,
-      elevation: 0,
-      borderRadius: BorderRadius.circular(16),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(16),
-        onTap: onTap,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: isSelected
-                  ? colorScheme.primary
-                  : colorScheme.outline.withOpacity(0.3),
-              width: isSelected ? 2 : 1,
+    return Semantics(
+      label: '${item.label} coping strategy, ${selected ? 'selected' : 'not selected'}, ${item.points} points',
+      button: true,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1), // Same as body fitness
+        decoration: BoxDecoration(
+          color: cs.surface,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: cs.shadow.withOpacity(0.1),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            child: Row(
+          ],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(16),
+            onTap: onTap,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: selected ? cs.primary : cs.outlineVariant, width: 1.5),
+              ),
+            padding: Pad.card, // Use same padding as body fitness
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  radius: 16,
-                  backgroundColor: isSelected
-                      ? colorScheme.primary.withOpacity(0.2)
-                      : colorScheme.primary.withOpacity(0.08),
-                  child: CustomIconWidget(
-                    iconName: strategy['icon'],
-                    color: isSelected
-                        ? colorScheme.primary
-                        : colorScheme.onSurfaceVariant,
-                    size: 18,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    strategy['name'],
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: isSelected
-                          ? colorScheme.primary
-                          : colorScheme.onSurfaceVariant,
-                      fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
+                Row(
+                  children: [
+                    // Title and Points
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.label,
+                            style: GoogleFonts.inter(
+                              fontSize: 16, // Same as body fitness
+                              fontWeight: FontWeight.w600,
+                              color: cs.onSurface,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: AppSpace.x1),
+                          Text(
+                            item.desc,
+                            style: GoogleFonts.inter(
+                              fontSize: 12, // Same as body fitness
+                              fontWeight: FontWeight.w400,
+                              color: cs.onSurfaceVariant,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                    SizedBox(width: AppSpace.x3),
+                    // Thumbnail (like body fitness)
+                    Container(
+                      width: 80, // Same as body fitness
+                      height: 48, // Same as body fitness
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: cs.surfaceContainerHighest,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image.asset(
+                          item.asset,
+                          width: 80,
+                          height: 48,
+                          fit: BoxFit.cover,
+                          errorBuilder: (_, __, ___) => Container(
+                            width: 80, 
+                            height: 48,
+                            color: cs.surfaceContainerHighest,
+                            alignment: Alignment.center,
+                            child: Icon(Icons.image_not_supported_outlined, size: 24, color: cs.onSurfaceVariant),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 8),
-                _PointsChip(value: strategy['points']),
+                SizedBox(height: AppSpace.x2),
+                // Points chip at bottom
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.orange.shade500,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Text('+${item.points} pts',
+                        style: GoogleFonts.inter(
+                          color: Colors.white, 
+                          fontSize: 12, 
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    const Spacer(),
+                    // Selection indicator
+                    if (selected)
+                      Container(
+                        width: 24,
+                        height: 24,
+                        decoration: BoxDecoration(
+                          color: AppTheme.secondaryLight,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.white, width: 2),
+                        ),
+                        child: const Icon(
+                          Icons.check,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                  ],
+                ),
               ],
             ),
+            ),
           ),
         ),
       ),
@@ -261,78 +392,3 @@ class _CopingCard extends StatelessWidget {
   }
 }
 
-class _PointsChip extends StatelessWidget {
-  const _PointsChip({required this.value});
-  final int value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-      decoration: BoxDecoration(
-        color: Colors.orange.shade500,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Text(
-        '+$value',
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 11,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-    );
-  }
-}
-
-class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({
-    required this.title,
-    required this.subtitle,
-  });
-
-  final String title;
-  final String subtitle;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest.withOpacity(0.6),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          CustomIconWidget(
-            iconName: 'radio_button_checked',
-            size: 14,
-            color: colorScheme.primary,
-          ),
-          const SizedBox(width: 8),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: theme.textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface,
-                ),
-              ),
-              Text(
-                subtitle,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: colorScheme.onSurfaceVariant,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}

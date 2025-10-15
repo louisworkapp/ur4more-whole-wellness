@@ -23,87 +23,125 @@ class ProgressHeaderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Container(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top,
-        left: AppSpace.x4,
-        right: AppSpace.x4,
-        bottom: AppSpace.x2,
-      ),
+      padding: Pad.card,
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        boxShadow: [
-          BoxShadow(
-            color: theme.colorScheme.shadow.withOpacity( 0.1),
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: AppTheme.lightTheme.primaryColor,
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(24),
+          bottomRight: Radius.circular(24),
+        ),
       ),
-      child: Column(
-        children: [
-          // Header with title and close button
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  title, // "Daily Check-in"
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: theme.colorScheme.onSurface,
+      child: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title, // "Daily Check-in"
+                      style: GoogleFonts.inter(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(height: AppSpace.x1),
+                    Text(
+                      'Track your wellness journey',
+                      style: GoogleFonts.inter(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white.withOpacity(0.8),
+                      ),
+                    ),
+                  ],
+                ),
+                IconButton(
+                  onPressed: onClose,
+                  icon: CustomIconWidget(
+                    iconName: 'close',
+                    color: Colors.white,
+                    size: 24,
                   ),
                 ),
-              ),
-              IconButton(
-                onPressed: onClose,
-                icon: CustomIconWidget(
-                  iconName: 'close',
-                  color: theme.colorScheme.onSurfaceVariant,
-                  size: 24,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: AppSpace.x2),
-
-          // Progress indicators
-          Row(
-            children: [
-              // Step indicator
-              Text(
-                'Step $currentStep of $totalSteps',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const Spacer(),
-              // Percentage
-              Text(
-                '${(completionPercentage * 100).round()}%',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.primary,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: AppSpace.x1),
-
-          // Progress bar
-          ClipRRect(
-            borderRadius: BorderRadius.circular(4),
-            child: LinearProgressIndicator(
-              value: completionPercentage,
-              backgroundColor: theme.colorScheme.outline.withOpacity( 0.3),
-              valueColor: AlwaysStoppedAnimation<Color>(
-                theme.colorScheme.primary,
-              ),
-              minHeight: 6,
+              ],
             ),
-          ),
-        ],
+            SizedBox(height: AppSpace.x3),
+            Container(
+              padding: Pad.card,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Progress',
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Text(
+                        '${(completionPercentage * 100).round()}%',
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: AppTheme.secondaryLight,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: AppSpace.x1),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: LinearProgressIndicator(
+                      value: completionPercentage,
+                      backgroundColor: Colors.white.withOpacity(0.2),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppTheme.secondaryLight,
+                      ),
+                      minHeight: 8,
+                    ),
+                  ),
+                  SizedBox(height: AppSpace.x1),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Step $currentStep of $totalSteps',
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white.withOpacity(0.8),
+                        ),
+                      ),
+                      Text(
+                        '${totalSteps - currentStep} to go',
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white.withOpacity(0.8),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
