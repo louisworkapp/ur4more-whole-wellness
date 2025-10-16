@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 
 import '../../../core/app_export.dart';
 import '../../../design/tokens.dart';
+import '../../../services/faith_service.dart';
 import '../../../widgets/custom_icon_widget.dart';
+import 'micro_intervention_card.dart';
 
 class UrgeIntensityWidget extends StatefulWidget {
   final double urgeLevel; // Single urge level (0-10)
+  final FaithMode faithMode;
   final ValueChanged<double> onChanged;
 
   const UrgeIntensityWidget({
     super.key,
     required this.urgeLevel,
+    required this.faithMode,
     required this.onChanged,
   });
 
@@ -178,7 +182,16 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
           ),
           SizedBox(height: AppSpace.x2),
 
-          // High urge support message
+          // Micro-intervention card (faith-based)
+          MicroInterventionCard(
+            urgeLevel: widget.urgeLevel,
+            faithMode: widget.faithMode,
+            onCompleted: () {
+              // Optional callback for when intervention is completed
+            },
+          ),
+
+          // High urge support message (for all modes)
           if (widget.urgeLevel >= 7) ...[
             Container(
               padding: EdgeInsets.all(AppSpace.x3),

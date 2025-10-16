@@ -195,7 +195,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
               size: 24,
             ),
             onPressed: () =>
-                Navigator.pushNamed(context, '/settings-profile-screen'),
+                Navigator.pushNamed(context, AppRoutes.settings),
           ),
           SizedBox(width: AppSpace.x2),
         ],
@@ -215,7 +215,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
             FaithModeBannerWidget(
               faithMode: _faithMode,
               onSettingsTap: () =>
-                  Navigator.pushNamed(context, '/settings-profile-screen'),
+                  Navigator.pushNamed(context, AppRoutes.settings),
             ),
             SizedBox(height: AppSpace.x4),
             _buildWelcomeBackMessage(context, colorScheme),
@@ -235,7 +235,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
           FaithModeBannerWidget(
             faithMode: _faithMode,
             onSettingsTap: () =>
-                Navigator.pushNamed(context, '/settings-profile-screen'),
+                Navigator.pushNamed(context, AppRoutes.settings),
           ),
 
           // Streak and points header

@@ -219,7 +219,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
             onTap:
                 () => Navigator.pushNamedAndRemoveUntil(
                   context,
-                  activityMap["route"] as String? ?? '/',
+                  AppRoutes.main,
                   (route) => false,
                   arguments: activityMap["routeIndex"] as int? ?? 0,
                 ),
@@ -287,7 +287,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                   'track_changes',
                   () {
                     Navigator.pop(context);
-                    Navigator.pushNamed(context, activity["route"] as String);
+                    Navigator.pushNamed(context, AppRoutes.main, arguments: activity["routeIndex"] as int? ?? 0);
                   },
                 ),
                 _buildQuickActionTile(context, 'Set Reminder', 'schedule', () {

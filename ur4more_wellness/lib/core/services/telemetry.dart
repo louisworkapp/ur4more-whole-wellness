@@ -73,10 +73,11 @@ class Telemetry {
     });
   }
 
-  static void checkInCompleted(String userId, int pointsEarned) {
+  static void checkInCompleted(String userId, int pointsEarned, String faithMode) {
     logEvent('checkin_completed', {
       'user_id': userId,
       'points_earned': pointsEarned,
+      'faith_mode': faithMode,
       'timestamp': DateTime.now().toIso8601String(),
     });
   }
@@ -90,6 +91,33 @@ class Telemetry {
       'user_id': userId,
       'new_mode': newMode,
       'previous_mode': previousMode,
+      'timestamp': DateTime.now().toIso8601String(),
+    });
+  }
+
+  // Faith XP events
+  static void faithXpAwarded(String userId, int delta, String source) {
+    logEvent('faith_xp_awarded', {
+      'user_id': userId,
+      'delta': delta,
+      'source': source,
+      'timestamp': DateTime.now().toIso8601String(),
+    });
+  }
+
+  static void faithOfferUpgradeShown(String userId, String currentMode, String offeredMode) {
+    logEvent('faith_offer_upgrade_shown', {
+      'user_id': userId,
+      'current_mode': currentMode,
+      'offered_mode': offeredMode,
+      'timestamp': DateTime.now().toIso8601String(),
+    });
+  }
+
+  static void faithOfferUpgradeAccepted(String userId, String newMode) {
+    logEvent('faith_offer_upgrade_accepted', {
+      'user_id': userId,
+      'new_mode': newMode,
       'timestamp': DateTime.now().toIso8601String(),
     });
   }

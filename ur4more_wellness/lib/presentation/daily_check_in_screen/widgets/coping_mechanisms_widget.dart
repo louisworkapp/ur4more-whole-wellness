@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
 
 import '../../../core/app_export.dart';
-import '../../../core/brand_rules.dart';
 import '../../../design/tokens.dart';
-import '../../../widgets/custom_icon_widget.dart';
+import '../../../services/faith_service.dart';
 
 class CopingItem {
   final String key;
@@ -36,12 +34,14 @@ class CopingItem {
 class CopingMechanismsWidget extends StatefulWidget {
   final List<String> selectedMechanisms;
   final FaithMode faithMode;
+  final double urgeLevel;
   final Function(List<String>) onChanged;
 
   const CopingMechanismsWidget({
     super.key,
     required this.selectedMechanisms,
     required this.faithMode,
+    required this.urgeLevel,
     required this.onChanged,
   });
 
@@ -50,6 +50,10 @@ class CopingMechanismsWidget extends StatefulWidget {
 }
 
 class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
+  int _faithXpEarned = 0;
+  bool _scriptureUsedToday = false;
+  bool _prayerUsedToday = false;
+
   final List<CopingItem> _copingStrategies = [
     CopingItem(
       key: 'read_scripture',
@@ -143,9 +147,29 @@ class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
         widget.selectedMechanisms.remove(key);
       } else {
         widget.selectedMechanisms.add(key);
+        
+        // Award faith XP for first-time scripture/prayer use today
+        if (widget.faithMode != FaithMode.off) {
+          if (key == 'read_scripture' && !_scriptureUsedToday) {
+            _scriptureUsedToday = true;
+            _awardFaithXp(3);
+          } else if (key == 'pray' && !_prayerUsedToday) {
+            _prayerUsedToday = true;
+            _awardFaithXp(3);
+          }
+        }
       }
       widget.onChanged(widget.selectedMechanisms);
     });
+  }
+
+  void _awardFaithXp(int amount) async {
+    final xpAwarded = await FaithService.awardFaithXp(amount, DateTime.now());
+    if (xpAwarded > 0) {
+      setState(() {
+        _faithXpEarned += xpAwarded;
+      });
+    }
   }
 
   int _calculateTotalPoints() {
@@ -173,7 +197,7 @@ class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Summary bar - shows selection count and total points
+              // Summary bar - shows selection count, total points, and faith XP
               if (selectedCount > 0) ...[
                 Container(
                   width: double.infinity,
@@ -186,23 +210,50 @@ class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
                       width: 1,
                     ),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
                     children: [
-                      CustomIconWidget(
-                        iconName: 'check_circle',
-                        color: AppTheme.lightTheme.primaryColor,
-                        size: 20,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomIconWidget(
+                            iconName: 'check_circle',
+                            color: AppTheme.lightTheme.primaryColor,
+                            size: 20,
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            'Selected $selectedCount • +$totalPoints pts',
+                            style: GoogleFonts.inter(
+                              fontSize: 14,
+                              color: AppTheme.lightTheme.primaryColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Selected $selectedCount • +$totalPoints pts',
-                        style: GoogleFonts.inter(
-                          fontSize: 14,
-                          color: AppTheme.lightTheme.primaryColor,
-                          fontWeight: FontWeight.w600,
+                      // Faith XP indicator
+                      if (_faithXpEarned > 0) ...[
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomIconWidget(
+                              iconName: 'stars',
+                              color: Colors.amber,
+                              size: 16,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              'Faith XP +$_faithXpEarned',
+                              style: GoogleFonts.inter(
+                                fontSize: 12,
+                                color: Colors.amber.shade700,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
+                      ],
                     ],
                   ),
                 ),
@@ -223,19 +274,36 @@ class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
         
         // Coping strategies list (single column like body fitness)
         Expanded(
-          child: ListView.builder(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.fromLTRB(
-              16, 0, 16,
-              kBottomNavigationBarHeight + 16, // keep last row above buttons
-            ),
-            itemCount: _copingStrategies.length,
-            itemBuilder: (context, index) {
-              final strategy = _copingStrategies[index];
-              final isSelected = widget.selectedMechanisms.contains(strategy.key);
-              return CopingTile(
-                item: strategy.copyWith(selected: isSelected),
-                onTap: () => _toggleMechanism(strategy.key),
+          child: Builder(
+            builder: (context) {
+              // Get ordered coping strategies based on faith mode and urge level
+              final baseKeys = _copingStrategies.map((s) => s.key).toList();
+              final orderedKeys = FaithService.orderedCoping(
+                widget.faithMode, 
+                baseKeys, 
+                widget.urgeLevel >= 7
+              );
+              
+              // Reorder strategies based on ordered keys
+              final orderedStrategies = orderedKeys
+                  .map((key) => _copingStrategies.firstWhere((s) => s.key == key))
+                  .toList();
+              
+              return ListView.builder(
+                physics: const AlwaysScrollableScrollPhysics(),
+                padding: EdgeInsets.fromLTRB(
+                  16, 0, 16,
+                  kBottomNavigationBarHeight + 16, // keep last row above buttons
+                ),
+                itemCount: orderedStrategies.length,
+                itemBuilder: (context, index) {
+                  final strategy = orderedStrategies[index];
+                  final isSelected = widget.selectedMechanisms.contains(strategy.key);
+                  return CopingTile(
+                    item: strategy.copyWith(selected: isSelected),
+                    onTap: () => _toggleMechanism(strategy.key),
+                  );
+                },
               );
             },
           ),

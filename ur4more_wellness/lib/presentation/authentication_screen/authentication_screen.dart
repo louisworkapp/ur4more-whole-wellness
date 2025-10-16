@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import '../../core/app_export.dart';
 import '../../design/tokens.dart';
 import '../../widgets/brand_logo.dart';
-import '../../screens/home_screen.dart';
+import '../../routes/app_routes.dart';
 
 class AuthenticationScreen extends StatelessWidget {
   const AuthenticationScreen({super.key});
@@ -64,8 +64,9 @@ class AuthenticationScreen extends StatelessWidget {
                           onPressed: () {
                             // Use your router if present; else fallback to Navigator.
                             // context.go('/home');
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (_) => const HomeScreen()),
+                            Navigator.pushReplacementNamed(
+                              context,
+                              AppRoutes.main,
                             );
                           },
                           child: Text(

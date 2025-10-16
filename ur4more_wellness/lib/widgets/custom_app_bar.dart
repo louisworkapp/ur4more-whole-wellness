@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../routes/app_routes.dart';
+
 enum CustomAppBarVariant {
   standard,
   centered,
@@ -177,7 +179,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             IconButton(
               icon: const Icon(Icons.settings_outlined),
               onPressed: () =>
-                  Navigator.pushNamed(context, '/settings-profile-screen'),
+                  Navigator.pushNamed(context, AppRoutes.settings),
             ),
             const SizedBox(width: 8),
           ],
@@ -233,7 +235,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       IconButton(
         icon: const Icon(Icons.person_outline),
         onPressed: () =>
-            Navigator.pushNamed(context, '/settings-profile-screen'),
+            Navigator.pushNamed(context, AppRoutes.settings),
       ),
       const SizedBox(width: 8),
     ];

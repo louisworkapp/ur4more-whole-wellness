@@ -540,7 +540,7 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
           ),
           IconButton(
             onPressed:
-                () => Navigator.pushNamed(context, '/settings-profile-screen'),
+                () => Navigator.pushNamed(context, AppRoutes.settings),
             icon: CustomIconWidget(
               iconName: 'person_outline',
               color: colorScheme.onSurface,

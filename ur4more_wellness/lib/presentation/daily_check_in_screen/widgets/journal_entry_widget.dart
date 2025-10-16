@@ -4,11 +4,13 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../../../core/app_export.dart';
 import '../../../design/tokens.dart';
+import '../../../services/faith_service.dart';
 
 class JournalEntryWidget extends StatefulWidget {
   final String journalText;
   final String selectedMood;
   final List<String> attachedPhotos;
+  final FaithMode faithMode;
   final ValueChanged<String> onTextChanged;
   final ValueChanged<String> onMoodChanged;
   final ValueChanged<List<String>> onPhotosChanged;
@@ -18,6 +20,7 @@ class JournalEntryWidget extends StatefulWidget {
     required this.journalText,
     required this.selectedMood,
     required this.attachedPhotos,
+    required this.faithMode,
     required this.onTextChanged,
     required this.onMoodChanged,
     required this.onPhotosChanged,
@@ -30,6 +33,8 @@ class JournalEntryWidget extends StatefulWidget {
 class _JournalEntryWidgetState extends State<JournalEntryWidget> {
   final TextEditingController _textController = TextEditingController();
   final ImagePicker _imagePicker = ImagePicker();
+  int _faithXpEarned = 0;
+  bool _faithPromptUsedToday = false;
 
   final List<Map<String, dynamic>> _moods = [
     {'name': 'Grateful', 'icon': 'favorite', 'color': Colors.pink},
@@ -136,6 +141,28 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
     final updatedPhotos = List<String>.from(widget.attachedPhotos);
     updatedPhotos.removeAt(index);
     widget.onPhotosChanged(updatedPhotos);
+  }
+
+  void _selectFaithPrompt(String prompt) async {
+    if (_faithPromptUsedToday || widget.faithMode == FaithMode.off) return;
+
+    setState(() {
+      _faithPromptUsedToday = true;
+    });
+
+    // Award faith XP for using a faith prompt
+    final xpAwarded = await FaithService.awardFaithXp(2, DateTime.now());
+    if (xpAwarded > 0) {
+      setState(() {
+        _faithXpEarned += xpAwarded;
+      });
+    }
+
+    // Add the prompt to the journal text
+    final currentText = _textController.text;
+    final newText = currentText.isEmpty ? prompt : '$currentText\n\n$prompt';
+    _textController.text = newText;
+    widget.onTextChanged(newText);
   }
 
   // Calculate journal points - +10 if text length ≥ 120 chars
@@ -265,6 +292,110 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
           ),
 
           SizedBox(height: AppSpace.x3),
+
+          // Faith Prompt Chips (for non-Off modes)
+          if (widget.faithMode != FaithMode.off) ...[
+            Text(
+              'Faith Prompts (Optional)',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
+            SizedBox(height: AppSpace.x2),
+            
+            // Faith prompt chips
+            Wrap(
+              spacing: AppSpace.x2,
+              runSpacing: AppSpace.x2,
+              children: FaithService.getFaithPromptChips(widget.faithMode)
+                  .map((prompt) => GestureDetector(
+                        onTap: _faithPromptUsedToday ? null : () => _selectFaithPrompt(prompt),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 200),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: AppSpace.x3,
+                            vertical: AppSpace.x2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: _faithPromptUsedToday
+                                ? theme.colorScheme.surfaceContainerHighest
+                                : theme.colorScheme.primaryContainer.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: _faithPromptUsedToday
+                                  ? theme.colorScheme.outline.withOpacity(0.3)
+                                  : theme.colorScheme.primary.withOpacity(0.5),
+                              width: 1,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              CustomIconWidget(
+                                iconName: 'auto_awesome',
+                                color: _faithPromptUsedToday
+                                    ? theme.colorScheme.onSurfaceVariant
+                                    : theme.colorScheme.primary,
+                                size: 16,
+                              ),
+                              SizedBox(width: AppSpace.x1),
+                              Flexible(
+                                child: Text(
+                                  prompt,
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    color: _faithPromptUsedToday
+                                        ? theme.colorScheme.onSurfaceVariant
+                                        : theme.colorScheme.onPrimaryContainer,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ))
+                  .toList(),
+            ),
+            
+            // Faith XP indicator
+            if (_faithXpEarned > 0) ...[
+              SizedBox(height: AppSpace.x2),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: AppSpace.x3,
+                  vertical: AppSpace.x2,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.amber.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: Colors.amber.withOpacity(0.3),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CustomIconWidget(
+                      iconName: 'stars',
+                      color: Colors.amber,
+                      size: 16,
+                    ),
+                    SizedBox(width: AppSpace.x2),
+                    Text(
+                      'Faith XP +$_faithXpEarned',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: Colors.amber.shade700,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            
+            SizedBox(height: AppSpace.x3),
+          ],
 
           // Journal Text Input with character counter
           Row(
