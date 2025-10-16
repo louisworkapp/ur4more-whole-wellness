@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
 import '../../../widgets/brand_glyph_text.dart';
@@ -79,7 +78,7 @@ class BrandedHeader extends StatelessWidget {
               children: [
                 // Points display
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
                   decoration: BoxDecoration(
                     color: AppTheme.secondaryLight.withOpacity( 0.1),
                     borderRadius: BorderRadius.circular(12),
@@ -94,27 +93,28 @@ class BrandedHeader extends StatelessWidget {
                       CustomIconWidget(
                         iconName: 'stars',
                         color: AppTheme.secondaryLight,
-                        size: 16,
+                        size: 14,
                       ),
-                      const SizedBox(width: 4),
+                      const SizedBox(width: 3),
                       Text(
                         _formatPoints(totalPoints),
                         style: theme.textTheme.labelLarge?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: AppTheme.secondaryLight,
-                          fontSize: 12,
+                          fontSize: 11,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 6),
                 // Notification button
                 GestureDetector(
                   onTap: onNotificationTap,
                   child: Container(
-                    width: 40,
-                    height: 40,
+                    width: 36,
+                    height: 36,
                     decoration: BoxDecoration(
                       color: colorScheme.surface,
                       borderRadius: BorderRadius.circular(8),
@@ -129,7 +129,7 @@ class BrandedHeader extends StatelessWidget {
                         CustomIconWidget(
                           iconName: 'notifications_outlined',
                           color: colorScheme.onSurfaceVariant,
-                          size: 20,
+                          size: 18,
                         ),
                         // Notification badge
                         Positioned(
@@ -148,13 +148,13 @@ class BrandedHeader extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
+                const SizedBox(width: 6),
                 // Profile button
                 GestureDetector(
                   onTap: onProfileTap,
                   child: Container(
-                    width: 40,
-                    height: 40,
+                    width: 36,
+                    height: 36,
                     decoration: BoxDecoration(
                       color: colorScheme.primary.withOpacity( 0.1),
                       borderRadius: BorderRadius.circular(8),
@@ -166,7 +166,7 @@ class BrandedHeader extends StatelessWidget {
                     child: CustomIconWidget(
                       iconName: 'person_outline',
                       color: colorScheme.primary,
-                      size: 20,
+                      size: 18,
                     ),
                   ),
                 ),

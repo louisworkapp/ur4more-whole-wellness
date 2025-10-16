@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
-import '../../../widgets/custom_icon_widget.dart';
-
-enum FaithMode { off, light, full }
+import '../../../services/faith_service.dart';
+import '../../../design/tokens.dart';
 
 class FaithModeSectionWidget extends StatelessWidget {
   final FaithMode faithMode;
@@ -22,9 +20,9 @@ class FaithModeSectionWidget extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
+      margin: const EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
       child: Padding(
-        padding: EdgeInsets.all(4.w),
+        padding: const EdgeInsets.all(AppSpace.x4),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,7 +33,7 @@ class FaithModeSectionWidget extends StatelessWidget {
                   color: colorScheme.primary,
                   size: 24,
                 ),
-                SizedBox(width: 3.w),
+                const SizedBox(width: AppSpace.x3),
                 Text(
                   'Faith Mode Control',
                   style: theme.textTheme.titleLarge?.copyWith(
@@ -45,16 +43,16 @@ class FaithModeSectionWidget extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 1.h),
+            const SizedBox(height: AppSpace.x2),
             Text(
               'Control spiritual content visibility across the app',
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: colorScheme.onSurfaceVariant,
               ),
             ),
-            SizedBox(height: 3.h),
+            const SizedBox(height: AppSpace.x4),
             _buildFaithModeSelector(theme, colorScheme),
-            SizedBox(height: 3.h),
+            const SizedBox(height: AppSpace.x4),
             _buildFaithModeDescription(theme, colorScheme),
           ],
         ),
@@ -63,114 +61,150 @@ class FaithModeSectionWidget extends StatelessWidget {
   }
 
   Widget _buildFaithModeSelector(ThemeData theme, ColorScheme colorScheme) {
-    return Container(
-      padding: EdgeInsets.all(1.w),
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        children: [
-          _buildFaithModeOption(
-            theme,
-            colorScheme,
-            'Off',
-            FaithMode.off,
-            faithMode == FaithMode.off,
-          ),
-          _buildFaithModeOption(
-            theme,
-            colorScheme,
-            'Light',
-            FaithMode.light,
-            faithMode == FaithMode.light,
-          ),
-          _buildFaithModeOption(
-            theme,
-            colorScheme,
-            'Full',
-            FaithMode.full,
-            faithMode == FaithMode.full,
-          ),
-        ],
-      ),
+    return Column(
+      children: [
+        _buildModeOption(
+          theme,
+          colorScheme,
+          FaithMode.off,
+          'Off',
+          'Secular mode - no spiritual content',
+          Icons.visibility_off,
+        ),
+        const SizedBox(height: AppSpace.x3),
+        _buildModeOption(
+          theme,
+          colorScheme,
+          FaithMode.light,
+          'Light',
+          'Minimal spiritual content with gentle encouragement',
+          Icons.wb_sunny_outlined,
+        ),
+        const SizedBox(height: AppSpace.x3),
+        _buildModeOption(
+          theme,
+          colorScheme,
+          FaithMode.disciple,
+          'Disciple',
+          'Active faith integration with daily devotions',
+          Icons.auto_awesome,
+        ),
+        const SizedBox(height: AppSpace.x3),
+        _buildModeOption(
+          theme,
+          colorScheme,
+          FaithMode.kingdom,
+          'Kingdom Builder',
+          'Complete spiritual journey with advanced features',
+          Icons.king_bed,
+        ),
+      ],
     );
   }
 
-  Widget _buildFaithModeOption(
+  Widget _buildModeOption(
     ThemeData theme,
     ColorScheme colorScheme,
-    String label,
     FaithMode mode,
-    bool isSelected,
+    String title,
+    String description,
+    IconData icon,
   ) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => onFaithModeChanged(mode),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeInOut,
-          padding: EdgeInsets.symmetric(vertical: 2.h),
-          decoration: BoxDecoration(
-            color: isSelected ? colorScheme.surface : Colors.transparent,
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: isSelected
-                ? [
-                    BoxShadow(
-                      color: colorScheme.shadow.withOpacity( 0.1),
-                      blurRadius: 2,
-                      offset: const Offset(0, 1),
-                    ),
-                  ]
-                : null,
+    final isSelected = faithMode == mode;
+    
+    return GestureDetector(
+      onTap: () => onFaithModeChanged(mode),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+        padding: const EdgeInsets.all(AppSpace.x3),
+        decoration: BoxDecoration(
+          color: isSelected ? colorScheme.primaryContainer : colorScheme.surface,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isSelected ? colorScheme.primary : colorScheme.outline.withOpacity(0.3),
+            width: isSelected ? 2 : 1,
           ),
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: theme.textTheme.titleMedium?.copyWith(
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-              color: isSelected
-                  ? colorScheme.primary
-                  : colorScheme.onSurfaceVariant,
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(AppSpace.x2),
+              decoration: BoxDecoration(
+                color: isSelected 
+                    ? colorScheme.primary.withOpacity(0.1)
+                    : colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Icon(
+                icon,
+                color: isSelected ? colorScheme.primary : colorScheme.onSurfaceVariant,
+                size: 24,
+              ),
             ),
-          ),
+            const SizedBox(width: AppSpace.x3),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: isSelected ? colorScheme.onPrimaryContainer : colorScheme.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: AppSpace.x1),
+                  Text(
+                    description,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: isSelected ? colorScheme.onPrimaryContainer.withOpacity(0.8) : colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (isSelected)
+              Icon(
+                Icons.check_circle,
+                color: colorScheme.primary,
+                size: 24,
+              ),
+          ],
         ),
       ),
     );
   }
 
   Widget _buildFaithModeDescription(ThemeData theme, ColorScheme colorScheme) {
-    String description;
-    String details;
+    // Get description from FaithService
+    final description = FaithService.getFaithModeLabel(faithMode);
+    final details = FaithService.getFaithModeDescription(faithMode);
+    
     IconData iconData;
     Color iconColor;
 
     switch (faithMode) {
       case FaithMode.off:
-        description = 'Secular Mode';
-        details =
-            'No spiritual content will be shown. Focus on physical and mental wellness only.';
         iconData = Icons.visibility_off;
         iconColor = colorScheme.onSurfaceVariant;
         break;
       case FaithMode.light:
-        description = 'Light Faith Mode';
-        details =
-            'Minimal spiritual content with optional devotions and gentle faith-based encouragement.';
         iconData = Icons.wb_sunny_outlined;
         iconColor = colorScheme.secondary;
         break;
-      case FaithMode.full:
-        description = 'Full Faith Mode';
-        details =
-            'Complete spiritual integration with daily devotions, scripture references, and faith-based wellness content.';
+      case FaithMode.disciple:
         iconData = Icons.auto_awesome;
+        iconColor = colorScheme.primary;
+        break;
+      case FaithMode.kingdom:
+        iconData = Icons.king_bed;
         iconColor = colorScheme.primary;
         break;
     }
 
     return Container(
-      padding: EdgeInsets.all(3.w),
+      padding: const EdgeInsets.all(AppSpace.x3),
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
@@ -183,7 +217,7 @@ class FaithModeSectionWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.all(2.w),
+            padding: const EdgeInsets.all(AppSpace.x2),
             decoration: BoxDecoration(
               color: iconColor.withOpacity( 0.1),
               borderRadius: BorderRadius.circular(8),
@@ -194,7 +228,7 @@ class FaithModeSectionWidget extends StatelessWidget {
               size: 24,
             ),
           ),
-          SizedBox(width: 3.w),
+          const SizedBox(width: AppSpace.x3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,7 +240,7 @@ class FaithModeSectionWidget extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(height: 1.h),
+                const SizedBox(height: AppSpace.x2),
                 Text(
                   details,
                   style: theme.textTheme.bodyMedium?.copyWith(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../design/tokens.dart';
+import '../routes/app_routes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -40,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
                     context,
-                    '/',
+                    AppRoutes.main,
                     (route) => false,
                   );
                 },
@@ -72,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamedAndRemoveUntil(
                         context,
-                        '/',
+                        AppRoutes.main,
                         (route) => false,
                         arguments: 4, // Rewards index
                       );

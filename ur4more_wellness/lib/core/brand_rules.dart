@@ -1,5 +1,11 @@
 import 'package:flutter/foundation.dart';
 
+// Import the new faith service
+import '../services/faith_service.dart';
+
+// Re-export FaithMode from faith service for backward compatibility
+export '../services/faith_service.dart' show FaithMode;
+
 // Brand Safety & Faith Rules
 bool isFaithSafe(String s) {
   final t = s.toLowerCase();
@@ -7,17 +13,18 @@ bool isFaithSafe(String s) {
   return !banned.any(t.contains);
 }
 
-enum FaithMode { off, light, full }
-
 FaithMode parseFaith(String? v) => switch (v) {
   'Light' => FaithMode.light,
-  'Full' => FaithMode.full,
+  'Full' => FaithMode.disciple, // Migrate old 'Full' to 'Disciple'
+  'Disciple' => FaithMode.disciple,
+  'Kingdom' => FaithMode.kingdom,
   _ => FaithMode.off,
 };
 
 String faithModeToString(FaithMode mode) => switch (mode) {
   FaithMode.light => 'Light',
-  FaithMode.full => 'Full',
+  FaithMode.disciple => 'Disciple',
+  FaithMode.kingdom => 'Kingdom',
   FaithMode.off => 'Off',
 };
 

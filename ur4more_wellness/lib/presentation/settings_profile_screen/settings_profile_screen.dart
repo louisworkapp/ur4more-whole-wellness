@@ -3,8 +3,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../core/app_export.dart';
 import '../../design/tokens.dart';
+import '../../services/faith_service.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/custom_app_bar.dart';
+import '../../routes/app_routes.dart';
 import './widgets/account_section_widget.dart';
 import './widgets/app_info_section_widget.dart';
 import './widgets/equipment_section_widget.dart';
@@ -200,7 +202,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
       _faithMode = mode;
     });
 
-    String modeText;
+    String modeText = '';
     switch (mode) {
       case FaithMode.off:
         modeText = 'Secular mode activated';
@@ -208,8 +210,11 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
       case FaithMode.light:
         modeText = 'Light faith mode activated';
         break;
-      case FaithMode.full:
-        modeText = 'Full faith mode activated';
+      case FaithMode.disciple:
+        modeText = 'Disciple faith mode activated';
+        break;
+      case FaithMode.kingdom:
+        modeText = 'Kingdom Builder faith mode activated';
         break;
     }
 
@@ -298,7 +303,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
     // Clear user session and navigate to authentication
     Navigator.pushNamedAndRemoveUntil(
       context,
-      '/authentication-screen',
+      AppRoutes.authentication,
       (route) => false,
     );
     _showSuccessToast('Signed out successfully');
@@ -364,17 +369,15 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
     if (_hasPullupBar) availableEquipment.add('pullup_bar');
 
     // Store equipment preferences
-    print('Equipment updated: $availableEquipment');
+    // Equipment preferences updated
   }
 
   void _updateNotificationSchedule() {
     if (_notificationsEnabled) {
       // Schedule notifications between start and end time
-      print(
-          'Notifications scheduled: ${_formatTime(_notificationStartTime)} - ${_formatTime(_notificationEndTime)}');
+      // Notifications scheduled
     } else {
       // Cancel all notifications
-      print('All notifications cancelled');
     }
   }
 
@@ -407,8 +410,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
 
   void _downloadFile(String content, String filename) {
     // Simulate file download
-    print('Downloading file: $filename');
-    print('Content: $content');
+    // File download initiated
   }
 
   String _formatTime(TimeOfDay time) {

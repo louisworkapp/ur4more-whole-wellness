@@ -6,7 +6,7 @@ import '../../core/brand_rules.dart';
 import '../../core/services/points_service.dart';
 import '../../features/home/streaks.dart';
 import '../../core/services/telemetry.dart';
-import '../../widgets/custom_icon_widget.dart';
+import '../../services/faith_service.dart';
 import './widgets/completion_summary_widget.dart';
 import './widgets/coping_mechanisms_widget.dart';
 import './widgets/journal_entry_widget.dart';
@@ -170,11 +170,11 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
       await Streaks.maybeAward7(_userId);
 
       // Log analytics
-      Telemetry.logEvent('checkin_completed', {
-        'points_earned': pointsEarned,
-        'has_coping': _copingDone,
-        'journal_length': _journalText.length,
-      });
+      Telemetry.checkInCompleted(
+        _userId, 
+        pointsEarned, 
+        FaithService.getFaithModeLabel(_faithMode)
+      );
 
       setState(() {
         _isSubmitting = false;
@@ -239,9 +239,12 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
         totalPointsEarned: pointsEarned,
         suggestionTitle: suggestionTitle,
         suggestionAction: suggestionAction,
+        faithMode: _faithMode,
+        painLevel: _painLevel,
+        urgeLevel: _urgeLevel,
         onContinue: () {
           Navigator.pop(context); // Close modal
-          Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+          Navigator.pushNamedAndRemoveUntil(context, AppRoutes.main, (route) => false);
         },
         onSuggestionTap: (action) {
           Navigator.pop(context);
@@ -255,11 +258,11 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
     switch (action) {
       case 'mobility_reset':
         // Navigate to body fitness for mobility workout
-        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false, arguments: 1);
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.main, (route) => false, arguments: 1);
         break;
       case 'peace_verse':
         // Navigate to spiritual section
-        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false, arguments: 3);
+        Navigator.pushNamedAndRemoveUntil(context, AppRoutes.main, (route) => false, arguments: 3);
         break;
     }
   }
@@ -352,6 +355,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                       subtitle: _sectionLabels[2],
                       child: UrgeIntensityWidget(
                         urgeLevel: _urgeLevel,
+                        faithMode: _faithMode,
                         onChanged: (level) {
                           setState(() {
                             _urgeLevel = level;
@@ -380,6 +384,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                       child: CopingMechanismsWidget(
                         selectedMechanisms: _selectedCopingMechanisms,
                         faithMode: _faithMode,
+                        urgeLevel: _urgeLevel,
                         onChanged: (mechanisms) {
                           setState(() {
                             _selectedCopingMechanisms = mechanisms;
@@ -397,6 +402,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                         journalText: _journalText,
                         selectedMood: _selectedMood,
                         attachedPhotos: _attachedPhotos,
+                        faithMode: _faithMode,
                         onTextChanged: (text) {
                           setState(() {
                             _journalText = text;
