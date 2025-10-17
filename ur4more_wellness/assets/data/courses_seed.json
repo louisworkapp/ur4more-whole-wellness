@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "updatedAt": "2025-01-16",
+  "categories": ["discipleship"],
+  "courses": [
+    {
+      "id": "alpha",
+      "title": "Alpha",
+      "provider": "Alpha",
+      "url": "https://www.alpha.org/",
+      "format": ["video", "group", "hybrid"],
+      "duration": "10–11 weeks",
+      "cost": "Free",
+      "tiers": ["Light", "Disciple", "Kingdom Builder"],
+      "tags": ["introduction", "evangelism", "basics"],
+      "summary": "Explore life, faith, and meaning through short films and honest conversations.",
+      "brandSafe": true,
+      "licenseNotes": "External link only; do not re-host media."
+    },
+    {
+      "id": "bp_classroom",
+      "title": "BibleProject Classroom",
+      "provider": "BibleProject",
+      "url": "https://bibleproject.com/classroom/",
+      "format": ["video", "self-paced"],
+      "duration": "varies (10–20+ hrs per class)",
+      "cost": "Free",
+      "tiers": ["Disciple", "Kingdom Builder"],
+      "tags": ["bible", "theology", "formation"],
+      "summary": "Free, self-paced classes that go deep into Scripture with guided notes.",
+      "brandSafe": true,
+      "licenseNotes": "External link only; follow Classroom terms."
+    },
+    {
+      "id": "rooted",
+      "title": "Rooted",
+      "provider": "Mariners / Rooted Network",
+      "url": "https://www.experiencerooted.com/",
+      "format": ["group", "in-person", "hybrid"],
+      "duration": "10 weeks",
+      "cost": "Paid (church materials)",
+      "tiers": ["Disciple"],
+      "tags": ["rhythms", "community", "habits"],
+      "summary": "Ten-week experience forming daily rhythms of prayer, serving, community.",
+      "brandSafe": true,
+      "licenseNotes": "List metadata; link to provider."
+    },
+    {
+      "id": "ficm",
+      "title": "Freedom in Christ",
+      "provider": "FICM",
+      "url": "https://www.ficm.org.uk/discipleship-course",
+      "format": ["video", "group"],
+      "duration": "10 sessions",
+      "cost": "Paid (kits) / some free resources",
+      "tiers": ["Disciple"],
+      "tags": ["identity", "freedom", "spiritual-health"],
+      "summary": "A structured path to live in your identity in Christ and experience freedom.",
+      "brandSafe": true,
+      "licenseNotes": "External link only."
+    },
+    {
+      "id": "ur4more_core_12wk",
+      "title": "UR4MORE Discipleship Core",
+      "provider": "UR4MORE",
+      "url": "",
+      "format": ["video", "self-paced", "app"],
+      "duration": "12 weeks",
+      "cost": "Free",
+      "tiers": ["Light", "Disciple", "Kingdom Builder"],
+      "tags": ["foundations", "habits", "community", "first-party"],
+      "summary": "A 12-week journey to follow Jesus deeply and multiply impact in your daily life.",
+      "brandSafe": true,
+      "licenseNotes": "First-party content - no external licensing required."
+    }
+  ]
+}

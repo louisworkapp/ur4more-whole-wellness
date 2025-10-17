@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import '../../core/app_export.dart';
 import '../../design/tokens.dart';
+import '../../routes/app_routes.dart';
 import '../../widgets/level_badge.dart';
 import './widgets/branded_header.dart';
 import './widgets/daily_checkin_cta.dart';
@@ -82,6 +83,18 @@ class _HomeDashboardState extends State<HomeDashboard> {
       "isCompleted": true,
       "route": "/",
       "routeIndex": 3,
+    },
+    {
+      "id": "discipleship",
+      "title": "Discipleship",
+      "subtitle": "Courses & spiritual growth",
+      "iconName": "auto_stories",
+      "primaryColor": "#8B5CF6",
+      "pointValue": 35,
+      "completionPercentage": 0.25,
+      "isCompleted": false,
+      "route": "/courses",
+      "routeIndex": -1, // Special route for courses
     },
   ];
 
@@ -199,9 +212,14 @@ class _HomeDashboardState extends State<HomeDashboard> {
   List<Widget> _buildWellnessCards(BuildContext context) {
     return (wellnessActivities as List)
         .where((activity) {
+          final activityMap = activity as Map<String, dynamic>;
           // Filter spiritual content based on faith mode
-          if ((activity as Map<String, dynamic>)["id"] == "spiritual_growth") {
+          if (activityMap["id"] == "spiritual_growth") {
             return _shouldShowSpiritualContent();
+          }
+          // Filter discipleship content based on faith mode
+          if (activityMap["id"] == "discipleship") {
+            return _shouldShowDiscipleshipContent();
           }
           return true;
         })
@@ -216,13 +234,23 @@ class _HomeDashboardState extends State<HomeDashboard> {
             pointValue: activityMap["pointValue"] as int? ?? 0,
             completionPercentage: activityMap["completionPercentage"] as double? ?? 0.0,
             isCompleted: activityMap["isCompleted"] as bool? ?? false,
-            onTap:
-                () => Navigator.pushNamedAndRemoveUntil(
+            onTap: () {
+              final routeIndex = activityMap["routeIndex"] as int? ?? 0;
+              final route = activityMap["route"] as String? ?? "/";
+              
+              if (route == "/courses") {
+                // Navigate directly to courses screen
+                Navigator.pushNamed(context, AppRoutes.courses);
+              } else {
+                // Navigate to main scaffold with specific tab
+                Navigator.pushNamedAndRemoveUntil(
                   context,
                   AppRoutes.main,
                   (route) => false,
-                  arguments: activityMap["routeIndex"] as int? ?? 0,
-                ),
+                  arguments: routeIndex,
+                );
+              }
+            },
             onLongPress: () => _showQuickActions(context, activityMap),
           );
         })
@@ -231,6 +259,12 @@ class _HomeDashboardState extends State<HomeDashboard> {
 
   bool _shouldShowSpiritualContent() {
     final faithMode = userData["faithMode"] as String?;
+    return faithMode == "Light" || faithMode == "Full";
+  }
+
+  bool _shouldShowDiscipleshipContent() {
+    final faithMode = userData["faithMode"] as String?;
+    // Show discipleship for Light, Disciple, and Kingdom Builder tiers
     return faithMode == "Light" || faithMode == "Full";
   }
 

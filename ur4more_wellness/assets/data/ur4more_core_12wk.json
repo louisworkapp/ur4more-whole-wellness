@@ -1,0 +1,153 @@
+{
+  "id": "ur4more_core_12wk",
+  "title": "UR4MORE Discipleship Core",
+  "provider": "UR4MORE",
+  "duration": "12 weeks",
+  "description": "A comprehensive 12-week journey to follow Jesus deeply and multiply impact in your daily life. Build foundational habits, understand your identity in Christ, and learn to disciple others.",
+  "lessons": [
+    {
+      "week": 1,
+      "title": "Follow Jesus 101",
+      "objective": "Understand the gospel, grace, and the basics of following Jesus. Learn about baptism, church community, and what it means to be a disciple.",
+      "practices": [
+        "Read John 3:16-17 daily",
+        "Write your testimony in 3 minutes",
+        "Find a local church community"
+      ],
+      "duration": "15 minutes",
+      "type": "foundation"
+    },
+    {
+      "week": 2,
+      "title": "Habits of Grace",
+      "objective": "Develop daily rhythms of Scripture reading, prayer, and Sabbath rest. Learn a 15-minute daily plan that fits your schedule.",
+      "practices": [
+        "Start with 5 minutes of Bible reading",
+        "Practice the ACTS prayer model",
+        "Plan one hour of Sabbath rest"
+      ],
+      "duration": "15 minutes",
+      "type": "habits"
+    },
+    {
+      "week": 3,
+      "title": "Identity in Christ",
+      "objective": "Discover who you are in Christ and how to 'die to self' while becoming more like Him. Learn to fight from victory, not for victory.",
+      "practices": [
+        "Memorize 3 identity verses",
+        "Write down old vs. new identity",
+        "Practice daily affirmations"
+      ],
+      "duration": "12 minutes",
+      "type": "identity"
+    },
+    {
+      "week": 4,
+      "title": "Obedience in the Everyday",
+      "objective": "Develop a personal rule of life and learn habit stacking for spiritual growth. Make obedience practical and sustainable.",
+      "practices": [
+        "Create your personal rule of life",
+        "Stack one new habit with existing routine",
+        "Track obedience for 7 days"
+      ],
+      "duration": "18 minutes",
+      "type": "discipline"
+    },
+    {
+      "week": 5,
+      "title": "Community & Confession",
+      "objective": "Learn peacemaking, forgiveness, and healthy rhythms of confession. Build authentic Christian community.",
+      "practices": [
+        "Practice the 24-hour rule for conflicts",
+        "Choose one person to forgive this week",
+        "Join or start a small group"
+      ],
+      "duration": "14 minutes",
+      "type": "community"
+    },
+    {
+      "week": 6,
+      "title": "Emotional Health",
+      "objective": "Understand boundaries, grief, anxiety, and learn breath + Scripture micro-interventions for emotional wellness.",
+      "practices": [
+        "Set one healthy boundary",
+        "Practice 4-7-8 breathing daily",
+        "Memorize anxiety verses"
+      ],
+      "duration": "16 minutes",
+      "type": "emotional-health"
+    },
+    {
+      "week": 7,
+      "title": "Work as Worship",
+      "objective": "Understand vocation, integrity, and excellence. Learn to see your work as worship and service to God.",
+      "practices": [
+        "Write your vocational mission statement",
+        "Practice integrity in one workplace situation",
+        "Serve a colleague this week"
+      ],
+      "duration": "13 minutes",
+      "type": "vocation"
+    },
+    {
+      "week": 8,
+      "title": "Sharing the Hope",
+      "objective": "Learn to share your story and engage in Alpha-style conversations about faith. Develop hospitality skills.",
+      "practices": [
+        "Practice your 3-minute testimony",
+        "Invite someone for coffee",
+        "Ask one spiritual question"
+      ],
+      "duration": "17 minutes",
+      "type": "evangelism"
+    },
+    {
+      "week": 9,
+      "title": "Serving & Gifts",
+      "objective": "Discover and deploy your spiritual gifts. Learn about weekly serving and finding your place in ministry.",
+      "practices": [
+        "Take a spiritual gifts assessment",
+        "Serve in one area this week",
+        "Identify your top 3 gifts"
+      ],
+      "duration": "15 minutes",
+      "type": "service"
+    },
+    {
+      "week": 10,
+      "title": "Generosity & Justice",
+      "objective": "Understand biblical generosity with time, talent, and treasure. Learn about local mission and justice.",
+      "practices": [
+        "Give one hour to local mission",
+        "Increase giving by 1%",
+        "Research one justice issue"
+      ],
+      "duration": "14 minutes",
+      "type": "generosity"
+    },
+    {
+      "week": 11,
+      "title": "Spiritual Warfare Basics",
+      "objective": "Learn about the armor of God and freedom practices. Understand spiritual warfare and how to stand firm.",
+      "practices": [
+        "Put on armor of God daily",
+        "Practice freedom declarations",
+        "Identify one stronghold to break"
+      ],
+      "duration": "16 minutes",
+      "type": "spiritual-warfare"
+    },
+    {
+      "week": 12,
+      "title": "Multiply",
+      "objective": "Learn to disciple someone else and start a micro-group. Begin your journey as a disciple-maker.",
+      "practices": [
+        "Identify one person to disciple",
+        "Start a 3-person micro-group",
+        "Create your multiplication plan"
+      ],
+      "duration": "20 minutes",
+      "type": "multiplication"
+    }
+  ]
+}

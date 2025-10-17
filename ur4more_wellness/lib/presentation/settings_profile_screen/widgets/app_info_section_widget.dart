@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
 import '../../../widgets/custom_icon_widget.dart';
+import '../../../widgets/settings/setting_card.dart';
+import '../../../design/tokens.dart';
 
 class AppInfoSectionWidget extends StatelessWidget {
   final String appVersion;
@@ -23,58 +24,40 @@ class AppInfoSectionWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-      child: Padding(
-        padding: EdgeInsets.all(4.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CustomIconWidget(
-                  iconName: 'info',
-                  color: colorScheme.primary,
-                  size: 24,
-                ),
-                SizedBox(width: 3.w),
-                Text(
-                  'App Information',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 3.h),
-            _buildAppVersionInfo(theme, colorScheme),
-            SizedBox(height: 3.h),
-            _buildSupportActions(context, theme, colorScheme),
-          ],
-        ),
+    return SettingCard(
+      title: 'App Information',
+      subtitle: 'Version information and support options',
+      icon: CustomIconWidget(
+        iconName: 'info',
+        color: colorScheme.primary,
+        size: 24,
       ),
+      children: [
+        _buildAppVersionInfo(theme, colorScheme),
+        const SizedBox(height: AppSpace.x4),
+        _buildSupportActions(context, theme, colorScheme),
+      ],
     );
   }
 
   Widget _buildAppVersionInfo(ThemeData theme, ColorScheme colorScheme) {
     return Container(
-      padding: EdgeInsets.all(3.w),
+      padding: const EdgeInsets.all(AppSpace.x3),
       decoration: BoxDecoration(
         color: colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: colorScheme.outline.withOpacity( 0.2),
+          color: colorScheme.outline.withOpacity(0.2),
           width: 1,
         ),
       ),
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(2.w),
+            padding: const EdgeInsets.all(AppSpace.x3),
             decoration: BoxDecoration(
-              color: colorScheme.primary.withOpacity( 0.1),
-              borderRadius: BorderRadius.circular(8),
+              color: colorScheme.primary.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(12),
             ),
             child: CustomIconWidget(
               iconName: 'auto_awesome',
@@ -82,7 +65,7 @@ class AppInfoSectionWidget extends StatelessWidget {
               size: 32,
             ),
           ),
-          SizedBox(width: 3.w),
+          const SizedBox(width: AppSpace.x3),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,14 +77,14 @@ class AppInfoSectionWidget extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                SizedBox(height: 0.5.h),
+                const SizedBox(height: AppSpace.x1),
                 Text(
                   'Version $appVersion',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
                 ),
-                SizedBox(height: 0.5.h),
+                const SizedBox(height: AppSpace.x1),
                 Text(
                   'Faith-based holistic wellness platform',
                   style: theme.textTheme.bodySmall?.copyWith(
@@ -129,7 +112,7 @@ class AppInfoSectionWidget extends StatelessWidget {
           'help_outline',
           onViewHelp,
         ),
-        SizedBox(height: 2.h),
+        const SizedBox(height: AppSpace.x3),
         _buildSupportButton(
           context,
           theme,
@@ -139,7 +122,7 @@ class AppInfoSectionWidget extends StatelessWidget {
           'support_agent',
           onContactSupport,
         ),
-        SizedBox(height: 2.h),
+        const SizedBox(height: AppSpace.x3),
         _buildSupportButton(
           context,
           theme,
@@ -165,7 +148,7 @@ class AppInfoSectionWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(3.w),
+        padding: const EdgeInsets.all(AppSpace.x3),
         decoration: BoxDecoration(
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
@@ -177,7 +160,7 @@ class AppInfoSectionWidget extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(2.w),
+              padding: const EdgeInsets.all(AppSpace.x3),
               decoration: BoxDecoration(
                 color: colorScheme.primary.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(8),
@@ -188,7 +171,7 @@ class AppInfoSectionWidget extends StatelessWidget {
                 size: 24,
               ),
             ),
-            SizedBox(width: 3.w),
+            const SizedBox(width: AppSpace.x3),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,7 +183,7 @@ class AppInfoSectionWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 0.5.h),
+                  const SizedBox(height: AppSpace.x1),
                   Text(
                     description,
                     style: theme.textTheme.bodySmall?.copyWith(
