@@ -9,7 +9,6 @@ import './widgets/devotional_history_widget.dart';
 import './widgets/faith_mode_banner_widget.dart';
 import './widgets/prayer_request_widget.dart';
 import './widgets/spiritual_milestone_widget.dart';
-import './widgets/discipleship_tile_widget.dart';
 
 class SpiritualGrowthScreen extends StatefulWidget {
   const SpiritualGrowthScreen({super.key});
@@ -245,9 +244,6 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
 
           // Streak and points header
           _buildStreakHeader(context, colorScheme),
-
-          // Discipleship tile
-          const DiscipleshipTileWidget(),
 
           // Tab bar
           Container(
