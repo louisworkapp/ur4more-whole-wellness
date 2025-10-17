@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../design/tokens.dart';
 import '../../../theme/app_theme.dart';
-import '../../../features/courses/models/course.dart';
+import '../../../features/courses/models/course_models.dart';
 
 class FeaturedCourseCard extends StatelessWidget {
   final Course course;
