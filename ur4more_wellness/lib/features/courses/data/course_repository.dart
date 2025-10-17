@@ -9,6 +9,7 @@ class CourseRepository {
   static const String _progressPercentageKey = 'course:ur4more_core_12w:progress';
   static const String _lastWeekKey = 'course:ur4more_core_12w:lastWeek';
   static const String _courseProgressKey = 'course:ur4more_core_12w:progress_data';
+  static const String _unlockKeyPrefix = 'course:ur4more_core_12w:week:';
   
   // Toggle for testing - set to false to unlock all weeks
   static const bool kLockSequential = true;
@@ -273,6 +274,35 @@ class CourseRepository {
       await markWeekComplete(week);
     } else {
       await persistWeekComplete(week, false);
+    }
+  }
+
+  /// Check if a week's unlock content is unlocked
+  Future<bool> isWeekUnlock(int week) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = '$_unlockKeyPrefix$week:unlock';
+    return prefs.getBool(key) ?? false;
+  }
+
+  /// Set a week's unlock content as unlocked
+  Future<void> setWeekUnlock(int week, bool unlocked) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = '$_unlockKeyPrefix$week:unlock';
+    
+    if (unlocked) {
+      await prefs.setBool(key, true);
+    } else {
+      await prefs.remove(key);
+    }
+  }
+
+  /// Reset all unlock states (for testing)
+  Future<void> resetUnlockStates() async {
+    final prefs = await SharedPreferences.getInstance();
+    
+    for (int week = 1; week <= 12; week++) {
+      final key = '$_unlockKeyPrefix$week:unlock';
+      await prefs.remove(key);
     }
   }
 }
