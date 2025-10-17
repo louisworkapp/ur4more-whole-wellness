@@ -21,7 +21,14 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   @override
   void initState() {
     super.initState();
-    _loadData();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_isLoading) {
+      _loadData();
+    }
   }
 
   Future<void> _loadData() async {
