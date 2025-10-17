@@ -38,12 +38,24 @@ class Course {
   final String id;
   final String title;
   final String description;
+  final String summary;
+  final String provider;
+  final String duration;
+  final String cost;
+  final List<String> format;
+  final List<String> tags;
   final List<Week> weeks;
 
   Course({
     required this.id,
     required this.title,
     required this.description,
+    required this.summary,
+    required this.provider,
+    required this.duration,
+    required this.cost,
+    required this.format,
+    required this.tags,
     required this.weeks,
   });
 
@@ -52,6 +64,12 @@ class Course {
       id: json['id'] as String,
       title: json['title'] as String,
       description: json['description'] as String,
+      summary: json['summary'] as String? ?? json['description'] as String,
+      provider: json['provider'] as String? ?? 'UR4MORE',
+      duration: json['duration'] as String? ?? '12 weeks',
+      cost: json['cost'] as String? ?? 'Free',
+      format: List<String>.from(json['format'] as List? ?? ['Self-paced']),
+      tags: List<String>.from(json['tags'] as List? ?? ['foundations']),
       weeks: (json['weeks'] as List)
           .map((weekJson) => Week.fromJson(weekJson as Map<String, dynamic>))
           .toList(),
@@ -63,8 +81,18 @@ class Course {
       'id': id,
       'title': title,
       'description': description,
+      'summary': summary,
+      'provider': provider,
+      'duration': duration,
+      'cost': cost,
+      'format': format,
+      'tags': tags,
       'weeks': weeks.map((week) => week.toJson()).toList(),
     };
+  }
+
+  bool isFirstParty() {
+    return provider == 'UR4MORE';
   }
 }
 
@@ -225,6 +253,8 @@ class CourseProgress {
     final completedWeeks = weekCompletion.values.where((completed) => completed).length;
     return completedWeeks / weekCompletion.length;
   }
+
+  double get progress => progressPercentage;
 
   int get nextIncompleteWeek {
     for (int week = 1; week <= 12; week++) {
