@@ -7,6 +7,9 @@ import '../presentation/main_scaffold/main_scaffold.dart';
 import '../screens/home_screen.dart';
 import '../features/courses/courses_screen.dart';
 import '../features/courses/course_detail_screen.dart';
+import '../features/courses/presentation/courses_screen.dart';
+import '../features/courses/presentation/course_detail_screen.dart';
+import '../features/courses/presentation/week_lesson_screen.dart';
 import '../presentation/discipleship_courses_screen/discipleship_courses_screen.dart';
 import '../presentation/lesson_screen/lesson_screen.dart';
 
@@ -19,11 +22,12 @@ class AppRoutes {
   static const String home = '/home';
   static const String courses = '/courses';
   static const String courseDetail = '/courses/detail';
+  static const String weekLesson = '/courses/week';
   static const String discipleshipCourses = '/discipleship-courses';
   static const String lesson = '/lesson';
   
   // Special course IDs
-  static const String ur4moreCoreId = 'ur4more_core_12wk';
+  static const String ur4moreCoreId = 'ur4more_core_12w';
 
 
   static Map<String, WidgetBuilder> routes = {
@@ -35,6 +39,7 @@ class AppRoutes {
     home: (context) => const HomeScreen(),
     courses: (context) => const CoursesScreen(),
     courseDetail: (context) => const CourseDetailScreen(),
+    weekLesson: (context) => const WeekLessonScreen(),
     discipleshipCourses: (context) => const DiscipleshipCoursesScreen(),
     lesson: (context) => const LessonScreen(),
   };

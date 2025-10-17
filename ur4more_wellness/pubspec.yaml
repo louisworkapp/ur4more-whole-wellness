@@ -44,4 +44,5 @@ flutter:
     - assets/images/
     - assets/images/coping/
     - assets/data/
+    - assets/courses/
     # - assets/brand/   # enable only after you add files to assets/brand/

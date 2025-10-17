@@ -1,165 +1,224 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/course.dart';
+import '../models/course_models.dart';
 
 class CourseRepository {
-  static const String _coursesAssetPath = 'assets/data/courses_seed.json';
-  static const String _ur4moreCoreAssetPath = 'assets/data/ur4more_core_12wk.json';
-  static const String _progressPrefix = 'course:';
+  static const String _progressKeyPrefix = 'course:ur4more_core_12w:week:';
+  static const String _progressPercentageKey = 'course:ur4more_core_12w:progress';
+  static const String _lastWeekKey = 'course:ur4more_core_12w:lastWeek';
+  static const String _courseProgressKey = 'course:ur4more_core_12w:progress_data';
+  
+  // Toggle for testing - set to false to unlock all weeks
+  static const bool kLockSequential = true;
 
-  List<Course>? _cachedCourses;
-  Map<String, dynamic>? _ur4moreCoreData;
-
-  Future<List<Course>> getAllCourses() async {
-    if (_cachedCourses != null) {
-      return _cachedCourses!;
-    }
-
+  /// Load the core discipleship course from assets
+  Future<Course> loadCoreFromAssets(BuildContext context) async {
     try {
-      final String jsonString = await rootBundle.loadString(_coursesAssetPath);
+      final String jsonString = await rootBundle.loadString('assets/courses/ur4more_core_12w.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
-      final List<dynamic> coursesJson = jsonData['courses'] as List<dynamic>;
-
-      _cachedCourses = coursesJson
-          .map((json) => Course.fromJson(json as Map<String, dynamic>))
-          .toList();
-
-      return _cachedCourses!;
+      return Course.fromJson(jsonData);
     } catch (e) {
-      print('Error loading courses: $e');
-      return [];
+      print('Error loading course from assets: $e');
+      rethrow;
     }
   }
 
-  Future<List<Course>> getCoursesForTier(FaithTier tier) async {
-    final allCourses = await getAllCourses();
+  /// Get weeks visible for a given faith tier
+  List<Week> visibleWeeksForTier(FaithTier tier, List<Week> allWeeks) {
+    switch (tier) {
+      case FaithTier.off:
+        return [];
+      case FaithTier.light:
+        return allWeeks.where((week) => week.requiredTier == FaithTier.light).toList();
+      case FaithTier.disciple:
+      case FaithTier.kingdomBuilder:
+        return allWeeks;
+    }
+  }
+
+  /// Check if a specific week is unlocked for the user
+  bool isWeekUnlocked(int week, FaithTier tier, CourseProgress progress) {
+    // Check tier requirements first
+    final weekData = _getWeekData(week);
+    if (weekData != null && tier.index < weekData.requiredTier.index) {
+      return false;
+    }
+
+    // If sequential locking is disabled, all weeks are unlocked (except tier restrictions)
+    if (!kLockSequential) {
+      return true;
+    }
+
+    // Sequential unlocking: Week 1 is always unlocked
+    if (week == 1) return true;
+
+    // Week N+1 is unlocked only if Week N is completed
+    return progress.isWeekComplete(week - 1);
+  }
+
+  /// Get week data by week number (helper method)
+  Week? _getWeekData(int week) {
+    // This would typically come from the loaded course
+    // For now, we'll use a simple mapping
+    if (week <= 2) return null; // Weeks 1-2 are Light tier
+    return null; // All other weeks are Disciple+ tier
+  }
+
+  /// Mark a week as complete
+  Future<void> persistWeekComplete(int week, bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = '$_progressKeyPrefix$week:done';
     
-    return allCourses.where((course) {
-      return course.isVisibleForTier(tier);
-    }).toList();
-  }
-
-  Future<List<Course>> getFilteredCourses({
-    required FaithTier tier,
-    String? searchQuery,
-    List<String>? formatFilters,
-    bool? freeOnly,
-  }) async {
-    var courses = await getCoursesForTier(tier);
-
-    // Apply search filter
-    if (searchQuery != null && searchQuery.isNotEmpty) {
-      courses = courses.where((course) {
-        return course.title.toLowerCase().contains(searchQuery.toLowerCase()) ||
-               course.provider.toLowerCase().contains(searchQuery.toLowerCase()) ||
-               course.tags.any((tag) => tag.toLowerCase().contains(searchQuery.toLowerCase()));
-      }).toList();
+    if (value) {
+      await prefs.setBool(key, true);
+    } else {
+      await prefs.remove(key);
     }
-
-    // Apply format filters
-    if (formatFilters != null && formatFilters.isNotEmpty) {
-      courses = courses.where((course) {
-        return formatFilters.any((filter) => course.format.contains(filter));
-      }).toList();
-    }
-
-    // Apply free filter
-    if (freeOnly == true) {
-      courses = courses.where((course) {
-        return course.cost.toLowerCase().contains('free');
-      }).toList();
-    }
-
-    return courses;
-  }
-
-  Future<Course?> getCourseById(String id) async {
-    final courses = await getAllCourses();
-    try {
-      return courses.firstWhere((course) => course.id == id);
-    } catch (e) {
-      return null;
+    
+    // Update progress percentage
+    await _updateProgressPercentage();
+    
+    // Update last week accessed
+    if (value) {
+      await prefs.setInt(_lastWeekKey, week);
     }
   }
 
-  Future<Map<String, dynamic>?> getUr4moreCoreData() async {
-    if (_ur4moreCoreData != null) {
-      return _ur4moreCoreData;
+  /// Check if a week is complete
+  Future<bool> isWeekComplete(int week) async {
+    final prefs = await SharedPreferences.getInstance();
+    final key = '$_progressKeyPrefix$week:done';
+    return prefs.getBool(key) ?? false;
+  }
+
+  /// Get overall progress percentage (0.0 to 1.0)
+  Future<double> percentComplete() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble(_progressPercentageKey) ?? 0.0;
+  }
+
+  /// Get the current week (next incomplete week)
+  Future<int> currentWeek() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(_lastWeekKey) ?? 1;
+  }
+
+  /// Update progress percentage based on completed weeks
+  Future<void> _updateProgressPercentage() async {
+    final prefs = await SharedPreferences.getInstance();
+    int completedWeeks = 0;
+    
+    for (int week = 1; week <= 12; week++) {
+      final key = '$_progressKeyPrefix$week:done';
+      if (prefs.getBool(key) ?? false) {
+        completedWeeks++;
+      }
     }
+    
+    final percentage = completedWeeks / 12;
+    await prefs.setDouble(_progressPercentageKey, percentage);
+  }
 
-    try {
-      final String jsonString = await rootBundle.loadString(_ur4moreCoreAssetPath);
-      _ur4moreCoreData = json.decode(jsonString) as Map<String, dynamic>;
-      return _ur4moreCoreData!;
-    } catch (e) {
-      print('Error loading UR4MORE Core data: $e');
-      return null;
+  /// Get complete course progress
+  Future<CourseProgress> getCourseProgress(String courseId) async {
+    final prefs = await SharedPreferences.getInstance();
+    final progressJson = prefs.getString(_courseProgressKey);
+    
+    if (progressJson != null) {
+      try {
+        final Map<String, dynamic> json = jsonDecode(progressJson);
+        return CourseProgress.fromJson(json);
+      } catch (e) {
+        print('Error parsing course progress: $e');
+      }
     }
+    
+    // Return empty progress if none exists
+    return CourseProgress.empty(courseId);
   }
 
-  // Progress management
-  Future<CourseProgress?> getCourseProgress(String courseId) async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final progressKey = '$_progressPrefix$courseId:progress';
-      final weekKey = '$_progressPrefix$courseId:week';
-      final lastAccessedKey = '$_progressPrefix$courseId:lastAccessed';
+  /// Save complete course progress
+  Future<void> saveCourseProgress(CourseProgress progress) async {
+    final prefs = await SharedPreferences.getInstance();
+    final progressJson = jsonEncode(progress.toJson());
+    await prefs.setString(_courseProgressKey, progressJson);
+  }
 
-      final progress = prefs.getDouble(progressKey) ?? 0.0;
-      final week = prefs.getInt(weekKey) ?? 0;
-      final lastAccessedString = prefs.getString(lastAccessedKey);
-      
-      final lastAccessed = lastAccessedString != null 
-          ? DateTime.parse(lastAccessedString)
-          : DateTime.now();
+  /// Mark a week as complete and update progress
+  Future<void> markWeekComplete(int week) async {
+    await persistWeekComplete(week, true);
+    
+    // Update the complete course progress
+    final progress = await getCourseProgress('ur4more_core_12w');
+    final updatedWeekCompletion = Map<int, bool>.from(progress.weekCompletion);
+    updatedWeekCompletion[week] = true;
+    
+    final updatedProgress = progress.copyWith(
+      weekCompletion: updatedWeekCompletion,
+      currentWeek: week + 1 > 12 ? 12 : week + 1,
+      lastAccessed: DateTime.now(),
+    );
+    
+    await saveCourseProgress(updatedProgress);
+  }
 
-      return CourseProgress(
-        courseId: courseId,
-        progress: progress.clamp(0.0, 1.0),
-        currentWeek: week,
-        hasStarted: progress > 0,
-        lastAccessed: lastAccessed,
-      );
-    } catch (e) {
-      print('Error loading course progress: $e');
-      return null;
+  /// Get next incomplete week
+  Future<int> getNextIncompleteWeek() async {
+    for (int week = 1; week <= 12; week++) {
+      if (!(await isWeekComplete(week))) {
+        return week;
+      }
     }
+    return 12; // All weeks completed
   }
 
-  Future<void> updateCourseProgress(String courseId, double progress, int week) async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final progressKey = '$_progressPrefix$courseId:progress';
-      final weekKey = '$_progressPrefix$courseId:week';
-      final lastAccessedKey = '$_progressPrefix$courseId:lastAccessed';
-
-      await prefs.setDouble(progressKey, progress.clamp(0.0, 1.0));
-      await prefs.setInt(weekKey, week);
-      await prefs.setString(lastAccessedKey, DateTime.now().toIso8601String());
-    } catch (e) {
-      print('Error updating course progress: $e');
+  /// Check if course is completed
+  Future<bool> isCourseCompleted() async {
+    for (int week = 1; week <= 12; week++) {
+      if (!(await isWeekComplete(week))) {
+        return false;
+      }
     }
+    return true;
   }
 
-  Future<void> markCourseStarted(String courseId) async {
-    await updateCourseProgress(courseId, 0.01, 1); // Minimal progress to mark as started
+  /// Reset all progress (for testing)
+  Future<void> resetProgress() async {
+    final prefs = await SharedPreferences.getInstance();
+    
+    // Remove all week completion keys
+    for (int week = 1; week <= 12; week++) {
+      final key = '$_progressKeyPrefix$week:done';
+      await prefs.remove(key);
+    }
+    
+    // Remove progress keys
+    await prefs.remove(_progressPercentageKey);
+    await prefs.remove(_lastWeekKey);
+    await prefs.remove(_courseProgressKey);
   }
 
-  // Helper methods for UI
-  List<String> getAllFormats() {
-    final formats = <String>{};
-    _cachedCourses?.forEach((course) {
-      formats.addAll(course.format);
-    });
-    return formats.toList()..sort();
+  /// Get week completion status for all weeks
+  Future<Map<int, bool>> getAllWeekCompletion() async {
+    final prefs = await SharedPreferences.getInstance();
+    final Map<int, bool> completion = {};
+    
+    for (int week = 1; week <= 12; week++) {
+      final key = '$_progressKeyPrefix$week:done';
+      completion[week] = prefs.getBool(key) ?? false;
+    }
+    
+    return completion;
   }
 
-  List<String> getAllTags() {
-    final tags = <String>{};
-    _cachedCourses?.forEach((course) {
-      tags.addAll(course.tags);
-    });
-    return tags.toList()..sort();
+  /// Get formatted progress text
+  Future<String> getProgressText() async {
+    final completedWeeks = (await getAllWeekCompletion())
+        .values
+        .where((completed) => completed)
+        .length;
+    return '$completedWeeks of 12 weeks completed';
   }
 }
