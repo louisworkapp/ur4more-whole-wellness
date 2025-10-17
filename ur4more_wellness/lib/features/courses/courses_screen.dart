@@ -4,7 +4,6 @@ import '../../design/tokens.dart';
 import '../../services/faith_service.dart';
 import 'data/course_repository.dart';
 import 'models/course.dart';
-import 'course_detail_screen.dart';
 
 class CoursesScreen extends StatefulWidget {
   const CoursesScreen({super.key});

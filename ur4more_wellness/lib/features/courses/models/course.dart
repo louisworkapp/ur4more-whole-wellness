@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// 4-tier Faith Mode system with XP progression
 enum FaithTier { off, light, disciple, kingdomBuilder }
