@@ -3,7 +3,6 @@ import '../../../design/tokens.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../data/course_repository.dart';
 import '../models/course_models.dart';
-import '../../../services/faith_service.dart';
 
 class WeekLessonScreen extends StatefulWidget {
   const WeekLessonScreen({super.key});
@@ -92,7 +91,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
               style: theme.textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: AppSpace.x2),
+            SizedBox(height: AppSpace.x2),
             Text(
               'Please try again later.',
               style: theme.textTheme.bodyMedium?.copyWith(
@@ -116,7 +115,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
       children: [
         Expanded(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(AppSpace.x4),
+            padding: EdgeInsets.all(AppSpace.x4),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 430),
               child: Column(
@@ -217,7 +216,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
               ),
             ],
           ),
-          const SizedBox(height: AppSpace.x3),
+          SizedBox(height: AppSpace.x3),
           Text(
             _week!.theme,
             style: theme.textTheme.bodyLarge?.copyWith(
@@ -342,7 +341,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
           final question = entry.value;
           return Container(
             margin: const EdgeInsets.only(bottom: AppSpace.x3),
-            padding: const EdgeInsets.all(AppSpace.x4),
+            padding: EdgeInsets.all(AppSpace.x4),
             decoration: BoxDecoration(
               color: colorScheme.surfaceVariant.withOpacity(0.3),
               borderRadius: BorderRadius.circular(AppRadius.md),
@@ -400,7 +399,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
         children: _week!.practice.map((practice) {
           return Container(
             margin: const EdgeInsets.only(bottom: AppSpace.x3),
-            padding: const EdgeInsets.all(AppSpace.x4),
+            padding: EdgeInsets.all(AppSpace.x4),
             decoration: BoxDecoration(
               color: colorScheme.tertiaryContainer.withOpacity(0.3),
               borderRadius: BorderRadius.circular(AppRadius.md),
@@ -420,10 +419,10 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                       ),
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpace.x2,
-                        vertical: AppSpace.x1,
-                      ),
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSpace.x2,
+              vertical: AppSpace.x1,
+            ),
                       decoration: BoxDecoration(
                         color: colorScheme.tertiary,
                         borderRadius: BorderRadius.circular(AppRadius.sm),
@@ -438,7 +437,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: AppSpace.x2),
+                SizedBox(height: AppSpace.x2),
                 Text(
                   practice.desc,
                   style: theme.textTheme.bodyMedium?.copyWith(
@@ -463,7 +462,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
       'Prayer',
       Icons.favorite,
       Container(
-        padding: const EdgeInsets.all(AppSpace.x4),
+        padding: EdgeInsets.all(AppSpace.x4),
         decoration: BoxDecoration(
           color: colorScheme.secondaryContainer.withOpacity(0.3),
           borderRadius: BorderRadius.circular(AppRadius.md),
@@ -491,7 +490,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
       Column(
         children: _week!.resources.map((resource) {
           return Container(
-            margin: const EdgeInsets.only(bottom: AppSpace.x2),
+            margin: EdgeInsets.only(bottom: AppSpace.x2),
             child: ListTile(
               contentPadding: EdgeInsets.zero,
               leading: Icon(
@@ -548,7 +547,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
               size: 20,
               color: colorScheme.primary,
             ),
-            const SizedBox(width: AppSpace.x2),
+            SizedBox(width: AppSpace.x2),
             Text(
               title,
               style: theme.textTheme.titleMedium?.copyWith(
@@ -558,7 +557,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
             ),
           ],
         ),
-        const SizedBox(height: AppSpace.x3),
+        SizedBox(height: AppSpace.x3),
         content,
       ],
     );
