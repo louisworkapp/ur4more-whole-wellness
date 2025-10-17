@@ -5,8 +5,6 @@ import '../presentation/settings_profile_screen/settings_profile_screen.dart';
 import '../presentation/authentication_screen/authentication_screen.dart';
 import '../presentation/main_scaffold/main_scaffold.dart';
 import '../screens/home_screen.dart';
-import '../features/courses/courses_screen.dart';
-import '../features/courses/course_detail_screen.dart';
 import '../features/courses/presentation/courses_screen.dart';
 import '../features/courses/presentation/course_detail_screen.dart';
 import '../features/courses/presentation/week_lesson_screen.dart';
