@@ -230,61 +230,67 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
     final theme = Theme.of(context);
 
     return SafeArea(
-      child: Column(
-        children: [
-          // Faith mode banner
-          FaithModeBannerWidget(
-            faithMode: _faithMode,
-            onSettingsTap: () =>
-                Navigator.pushNamed(context, AppRoutes.settings),
-          ),
-
-          // Discipleship header
-          const DiscipleshipHeader(),
-
-          // Streak and points header
-          _buildStreakHeader(context, colorScheme),
-
-          // Tab bar
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: AppSpace.x4),
-            decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHighest,
-              borderRadius: BorderRadius.circular(12),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Faith mode banner
+            FaithModeBannerWidget(
+              faithMode: _faithMode,
+              onSettingsTap: () =>
+                  Navigator.pushNamed(context, AppRoutes.settings),
             ),
-            child: TabBar(
-              controller: _tabController,
-              tabs: const [
-                Tab(text: "Today"),
-                Tab(text: "History"),
-                Tab(text: "Milestones"),
-              ],
-              labelColor: AppTheme.primaryLight,
-              unselectedLabelColor: colorScheme.onSurfaceVariant,
-              indicatorColor: AppTheme.primaryLight,
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelStyle: theme.textTheme.labelLarge?.copyWith(
-                fontWeight: FontWeight.w600,
+
+            // Discipleship header
+            const DiscipleshipHeader(),
+
+            // Streak and points header
+            _buildStreakHeader(context, colorScheme),
+
+            // Tab bar
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: AppSpace.x4),
+              decoration: BoxDecoration(
+                color: colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(12),
               ),
-              unselectedLabelStyle: theme.textTheme.labelLarge?.copyWith(
-                fontWeight: FontWeight.w400,
+              child: TabBar(
+                controller: _tabController,
+                tabs: const [
+                  Tab(text: "Today"),
+                  Tab(text: "History"),
+                  Tab(text: "Milestones"),
+                ],
+                labelColor: AppTheme.primaryLight,
+                unselectedLabelColor: colorScheme.onSurfaceVariant,
+                indicatorColor: AppTheme.primaryLight,
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelStyle: theme.textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
+                unselectedLabelStyle: theme.textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.w400,
+                ),
+                dividerColor: Colors.transparent,
               ),
-              dividerColor: Colors.transparent,
             ),
-          ),
 
-          // Tab content
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                _buildTodayTab(context, colorScheme),
-                _buildHistoryTab(context, colorScheme),
-                _buildMilestonesTab(context, colorScheme),
-              ],
+            // Tab content - now using a fixed height container instead of Expanded
+            Container(
+              height: MediaQuery.of(context).size.height * 0.6, // Give it a reasonable height
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  _buildTodayTab(context, colorScheme),
+                  _buildHistoryTab(context, colorScheme),
+                  _buildMilestonesTab(context, colorScheme),
+                ],
+              ),
             ),
-          ),
-        ],
+            
+            // Add some bottom padding to ensure content is fully visible
+            SizedBox(height: AppSpace.x6),
+          ],
+        ),
       ),
     );
   }
