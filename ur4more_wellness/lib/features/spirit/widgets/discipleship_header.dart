@@ -4,6 +4,7 @@ import '../../courses/models/course_models.dart';
 import '../../../routes/app_routes.dart';
 import '../../../services/faith_service.dart';
 import '../../../design/tokens.dart';
+import '../../../theme/app_colors.dart';
 
 class DiscipleshipHeader extends StatefulWidget {
   final FaithTier? tier;
@@ -86,7 +87,10 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
           child: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [
+                colors: _hasStarted ? [
+                  AppColors.gold,
+                  AppColors.gold.withOpacity(0.8),
+                ] : [
                   colorScheme.primaryContainer,
                   colorScheme.primaryContainer.withOpacity(0.8),
                 ],
@@ -105,12 +109,12 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
                       width: 56,
                       height: 56,
                       decoration: BoxDecoration(
-                        color: colorScheme.primary,
+                        color: _hasStarted ? AppColors.gold : colorScheme.primary,
                         borderRadius: BorderRadius.circular(AppRadius.lg),
                       ),
                       child: Icon(
                         Icons.auto_stories_rounded,
-                        color: colorScheme.onPrimary,
+                        color: _hasStarted ? Colors.white : colorScheme.onPrimary,
                         size: 28,
                       ),
                     ),
@@ -120,17 +124,17 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Start your Discipleship',
+                            _hasStarted ? 'Discipleship Progress' : 'Start your Discipleship',
                             style: theme.textTheme.titleLarge?.copyWith(
                               fontWeight: FontWeight.w700,
-                              color: colorScheme.onPrimaryContainer,
+                              color: _hasStarted ? Colors.white : colorScheme.onPrimaryContainer,
                             ),
                           ),
                           const SizedBox(height: AppSpace.x1),
                           Text(
                             _getSubtitleText(),
                             style: theme.textTheme.bodyMedium?.copyWith(
-                              color: colorScheme.onPrimaryContainer.withOpacity(0.9),
+                              color: _hasStarted ? Colors.white.withOpacity(0.9) : colorScheme.onPrimaryContainer.withOpacity(0.9),
                             ),
                           ),
                         ],
@@ -143,13 +147,13 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
                           vertical: AppSpace.x2,
                         ),
                         decoration: BoxDecoration(
-                          color: colorScheme.onPrimaryContainer.withOpacity(0.2),
+                          color: Colors.white.withOpacity(0.2),
                           borderRadius: BorderRadius.circular(AppRadius.md),
                         ),
                         child: Text(
                           '${(_progress * 100).round()}%',
                           style: theme.textTheme.labelLarge?.copyWith(
-                            color: colorScheme.onPrimaryContainer,
+                            color: Colors.white,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -179,8 +183,8 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
                         ),
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(0, 48),
-                          backgroundColor: colorScheme.primary,
-                          foregroundColor: colorScheme.onPrimary,
+                          backgroundColor: _hasStarted ? AppColors.gold : colorScheme.primary,
+                          foregroundColor: _hasStarted ? Colors.white : colorScheme.onPrimary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(AppRadius.md),
                           ),
@@ -194,7 +198,7 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
                         vertical: AppSpace.x2,
                       ),
                       decoration: BoxDecoration(
-                        color: colorScheme.onPrimaryContainer.withOpacity(0.2),
+                        color: _hasStarted ? Colors.white.withOpacity(0.2) : colorScheme.onPrimaryContainer.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(AppRadius.md),
                       ),
                       child: Row(
@@ -203,13 +207,13 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
                           Icon(
                             Icons.schedule,
                             size: 16,
-                            color: colorScheme.onPrimaryContainer,
+                            color: _hasStarted ? Colors.white : colorScheme.onPrimaryContainer,
                           ),
                           const SizedBox(width: AppSpace.x1),
                           Text(
                             '12 weeks',
                             style: theme.textTheme.labelMedium?.copyWith(
-                              color: colorScheme.onPrimaryContainer,
+                              color: _hasStarted ? Colors.white : colorScheme.onPrimaryContainer,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -238,13 +242,13 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
             Text(
               'Progress',
               style: theme.textTheme.labelMedium?.copyWith(
-                color: colorScheme.onPrimaryContainer.withOpacity(0.8),
+                color: Colors.white.withOpacity(0.8),
               ),
             ),
             Text(
               'Week $_week of 12',
               style: theme.textTheme.labelMedium?.copyWith(
-                color: colorScheme.onPrimaryContainer.withOpacity(0.8),
+                color: Colors.white.withOpacity(0.8),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -253,10 +257,8 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
         const SizedBox(height: AppSpace.x2),
         LinearProgressIndicator(
           value: _progress,
-          backgroundColor: colorScheme.onPrimaryContainer.withOpacity(0.2),
-          valueColor: AlwaysStoppedAnimation<Color>(
-            colorScheme.onPrimaryContainer,
-          ),
+          backgroundColor: Colors.white.withOpacity(0.2),
+          valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
           minHeight: 6,
         ),
       ],
@@ -276,7 +278,8 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
           return 'Start your discipleship journey';
       }
     } else {
-      return 'Continue your discipleship journey';
+      final completedWeeks = (_progress * 12).round();
+      return 'You\'ve completed $completedWeeks of 12 weeks. Keep going!';
     }
   }
 
