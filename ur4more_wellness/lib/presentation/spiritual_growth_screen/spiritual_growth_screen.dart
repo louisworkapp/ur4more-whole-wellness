@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
 import '../../design/tokens.dart';
 import '../../widgets/custom_app_bar.dart';
+import '../../features/spirit/widgets/discipleship_header.dart';
 import './widgets/devotional_card_widget.dart';
 import './widgets/devotional_history_widget.dart';
 import './widgets/faith_mode_banner_widget.dart';
 import './widgets/prayer_request_widget.dart';
 import './widgets/spiritual_milestone_widget.dart';
+import './widgets/discipleship_tile_widget.dart';
 
 class SpiritualGrowthScreen extends StatefulWidget {
   const SpiritualGrowthScreen({super.key});
@@ -238,8 +240,14 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
                 Navigator.pushNamed(context, AppRoutes.settings),
           ),
 
+          // Discipleship header
+          const DiscipleshipHeader(),
+
           // Streak and points header
           _buildStreakHeader(context, colorScheme),
+
+          // Discipleship tile
+          const DiscipleshipTileWidget(),
 
           // Tab bar
           Container(

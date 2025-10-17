@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
 import '../../../widgets/custom_icon_widget.dart';
+import '../../../widgets/settings/setting_card.dart';
+import '../../../widgets/settings/toggle_tile.dart';
+import '../../../design/tokens.dart';
 
 class PrivacySectionWidget extends StatelessWidget {
   final bool dataCollectionEnabled;
@@ -31,143 +33,56 @@ class PrivacySectionWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-      child: Padding(
-        padding: EdgeInsets.all(4.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CustomIconWidget(
-                  iconName: 'privacy_tip',
-                  color: colorScheme.primary,
-                  size: 24,
-                ),
-                SizedBox(width: 3.w),
-                Text(
-                  'Privacy Controls',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 1.h),
-            Text(
-              'Manage your data privacy and sharing preferences',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
-            ),
-            SizedBox(height: 3.h),
-            _buildPrivacyToggle(
-              theme,
-              colorScheme,
-              'Data Collection',
-              'Allow collection of wellness data for personalized insights',
-              'data_usage',
-              dataCollectionEnabled,
-              onDataCollectionChanged,
-            ),
-            SizedBox(height: 2.h),
-            _buildPrivacyToggle(
-              theme,
-              colorScheme,
-              'Usage Analytics',
-              'Help improve the app by sharing anonymous usage data',
-              'analytics',
-              analyticsEnabled,
-              onAnalyticsChanged,
-            ),
-            SizedBox(height: 2.h),
-            _buildPrivacyToggle(
-              theme,
-              colorScheme,
-              'Crash Reporting',
-              'Automatically send crash reports to help fix issues',
-              'bug_report',
-              crashReportingEnabled,
-              onCrashReportingChanged,
-            ),
-            SizedBox(height: 3.h),
-            _buildPrivacyLinks(context, theme, colorScheme),
-          ],
-        ),
+    return SettingCard(
+      title: 'Privacy Controls',
+      subtitle: 'Manage your data privacy and sharing preferences',
+      icon: CustomIconWidget(
+        iconName: 'privacy_tip',
+        color: colorScheme.primary,
+        size: 24,
       ),
+      children: [
+        ToggleTile(
+          title: 'Data Collection',
+          subtitle: 'Allow collection of wellness data for personalized insights',
+          icon: CustomIconWidget(
+            iconName: 'data_usage',
+            color: colorScheme.onSurfaceVariant,
+            size: 24,
+          ),
+          value: dataCollectionEnabled,
+          onChanged: onDataCollectionChanged,
+        ),
+        const SizedBox(height: AppSpace.x3),
+        ToggleTile(
+          title: 'Usage Analytics',
+          subtitle: 'Help improve the app by sharing anonymous usage data',
+          icon: CustomIconWidget(
+            iconName: 'analytics',
+            color: colorScheme.onSurfaceVariant,
+            size: 24,
+          ),
+          value: analyticsEnabled,
+          onChanged: onAnalyticsChanged,
+        ),
+        const SizedBox(height: AppSpace.x3),
+        ToggleTile(
+          title: 'Crash Reporting',
+          subtitle: 'Automatically send crash reports to help fix issues',
+          icon: CustomIconWidget(
+            iconName: 'bug_report',
+            color: colorScheme.onSurfaceVariant,
+            size: 24,
+          ),
+          value: crashReportingEnabled,
+          onChanged: onCrashReportingChanged,
+        ),
+        const SizedBox(height: AppSpace.x4),
+        _buildPrivacyLinks(context, theme, colorScheme),
+      ],
     );
   }
 
-  Widget _buildPrivacyToggle(
-    ThemeData theme,
-    ColorScheme colorScheme,
-    String title,
-    String description,
-    String iconName,
-    bool value,
-    Function(bool) onChanged,
-  ) {
-    return Container(
-      padding: EdgeInsets.all(3.w),
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceContainer,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: colorScheme.outline.withOpacity( 0.2),
-          width: 1,
-        ),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: EdgeInsets.all(2.w),
-            decoration: BoxDecoration(
-              color: value
-                  ? colorScheme.primary.withOpacity( 0.2)
-                  : colorScheme.surfaceContainerHighest,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: CustomIconWidget(
-              iconName: iconName,
-              color: value ? colorScheme.primary : colorScheme.onSurfaceVariant,
-              size: 24,
-            ),
-          ),
-          SizedBox(width: 3.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    color: colorScheme.onSurface,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 0.5.h),
-                Text(
-                  description,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Switch(
-            value: value,
-            onChanged: onChanged,
-            activeColor: colorScheme.primary,
-            inactiveThumbColor: colorScheme.outline,
-            inactiveTrackColor: colorScheme.surfaceContainerHighest,
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buildPrivacyLinks(
       BuildContext context, ThemeData theme, ColorScheme colorScheme) {
@@ -182,7 +97,7 @@ class PrivacySectionWidget extends StatelessWidget {
           'policy',
           onViewPrivacyPolicy,
         ),
-        SizedBox(height: 2.h),
+        const SizedBox(height: AppSpace.x3),
         _buildLinkButton(
           context,
           theme,
@@ -208,7 +123,7 @@ class PrivacySectionWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(3.w),
+        padding: const EdgeInsets.all(AppSpace.x3),
         decoration: BoxDecoration(
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(12),
@@ -220,7 +135,7 @@ class PrivacySectionWidget extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(2.w),
+              padding: const EdgeInsets.all(AppSpace.x3),
               decoration: BoxDecoration(
                 color: colorScheme.primary.withOpacity( 0.1),
                 borderRadius: BorderRadius.circular(8),
@@ -231,7 +146,7 @@ class PrivacySectionWidget extends StatelessWidget {
                 size: 24,
               ),
             ),
-            SizedBox(width: 3.w),
+            const SizedBox(width: AppSpace.x3),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,7 +158,7 @@ class PrivacySectionWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  SizedBox(height: 0.5.h),
+                  const SizedBox(height: AppSpace.x1),
                   Text(
                     description,
                     style: theme.textTheme.bodySmall?.copyWith(

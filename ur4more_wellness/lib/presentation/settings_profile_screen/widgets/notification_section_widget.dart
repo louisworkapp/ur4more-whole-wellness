@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../core/app_export.dart';
 import '../../../widgets/custom_icon_widget.dart';
+import '../../../widgets/settings/setting_card.dart';
+import '../../../widgets/settings/toggle_tile.dart';
+import '../../../design/tokens.dart';
 
 class NotificationSectionWidget extends StatelessWidget {
   final bool notificationsEnabled;
@@ -27,51 +29,31 @@ class NotificationSectionWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-      child: Padding(
-        padding: EdgeInsets.all(4.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CustomIconWidget(
-                  iconName: 'notifications',
-                  color: colorScheme.primary,
-                  size: 24,
-                ),
-                SizedBox(width: 3.w),
-                Expanded(
-                  child: Text(
-                    'Notification Settings',
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: colorScheme.onSurface,
-                    ),
-                  ),
-                ),
-                Switch(
-                  value: notificationsEnabled,
-                  onChanged: onNotificationsToggled,
-                  activeColor: colorScheme.primary,
-                ),
-              ],
-            ),
-            SizedBox(height: 1.h),
-            Text(
-              'Receive daily reminders for check-ins and wellness activities',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
-            ),
-            if (notificationsEnabled) ...[
-              SizedBox(height: 3.h),
-              _buildTimeRangeSelector(context, theme, colorScheme),
-            ],
-          ],
-        ),
+    return SettingCard(
+      title: 'Notification Settings',
+      subtitle: 'Receive daily reminders for check-ins and wellness activities',
+      icon: CustomIconWidget(
+        iconName: 'notifications',
+        color: colorScheme.primary,
+        size: 24,
       ),
+      children: [
+        ToggleTile(
+          title: 'Enable Notifications',
+          subtitle: 'Receive daily wellness reminders and updates',
+          icon: CustomIconWidget(
+            iconName: 'notifications_active',
+            color: colorScheme.onSurfaceVariant,
+            size: 24,
+          ),
+          value: notificationsEnabled,
+          onChanged: onNotificationsToggled,
+        ),
+        if (notificationsEnabled) ...[
+          const SizedBox(height: AppSpace.x4),
+          _buildTimeRangeSelector(context, theme, colorScheme),
+        ],
+      ],
     );
   }
 
@@ -87,7 +69,7 @@ class NotificationSectionWidget extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        SizedBox(height: 2.h),
+        const SizedBox(height: AppSpace.x4),
         Row(
           children: [
             Expanded(
@@ -100,7 +82,7 @@ class NotificationSectionWidget extends StatelessWidget {
                 onStartTimeChanged,
               ),
             ),
-            SizedBox(width: 4.w),
+            const SizedBox(width: AppSpace.x4),
             Expanded(
               child: _buildTimeSelector(
                 context,
@@ -113,9 +95,9 @@ class NotificationSectionWidget extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 2.h),
+        const SizedBox(height: AppSpace.x4),
         Container(
-          padding: EdgeInsets.all(3.w),
+          padding: const EdgeInsets.all(AppSpace.x3),
           decoration: BoxDecoration(
             color: colorScheme.surfaceContainer,
             borderRadius: BorderRadius.circular(8),
@@ -127,7 +109,7 @@ class NotificationSectionWidget extends StatelessWidget {
                 color: colorScheme.primary,
                 size: 20,
               ),
-              SizedBox(width: 2.w),
+              const SizedBox(width: AppSpace.x3),
               Expanded(
                 child: Text(
                   'Notifications will only be sent between ${_formatTime(startTime)} and ${_formatTime(endTime)}',
@@ -161,7 +143,7 @@ class NotificationSectionWidget extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        SizedBox(height: 1.h),
+        const SizedBox(height: AppSpace.x2),
         GestureDetector(
           onTap: () async {
             final TimeOfDay? selectedTime = await showTimePicker(
@@ -192,7 +174,7 @@ class NotificationSectionWidget extends StatelessWidget {
           },
           child: Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x4),
             decoration: BoxDecoration(
               border:
                   Border.all(color: colorScheme.outline.withOpacity( 0.3)),

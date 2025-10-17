@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import '../../../core/app_export.dart';
 import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
+import '../../../widgets/settings/setting_card.dart';
+import '../../../widgets/settings/choice_tile.dart';
 
 enum AppThemeMode { light, dark, system }
 
 class ThemeSectionWidget extends StatelessWidget {
   final AppThemeMode themeMode;
-  final Function(AppThemeMode) onThemeModeChanged;
+  final ValueChanged<AppThemeMode?> onThemeModeChanged;
 
   const ThemeSectionWidget({
     super.key,
@@ -21,164 +23,55 @@ class ThemeSectionWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
-      child: Padding(
-        padding: Pad.card,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CustomIconWidget(
-                  iconName: 'palette',
-                  color: colorScheme.primary,
-                  size: 24,
-                ),
-                SizedBox(width: AppSpace.x3),
-                Text(
-                  'Theme Settings',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: colorScheme.onSurface,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: AppSpace.x1),
-            Text(
-              'Choose your preferred app appearance',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
-            ),
-            SizedBox(height: AppSpace.x3),
-            _buildThemeOptions(theme, colorScheme),
-          ],
-        ),
+    return SettingCard(
+      title: 'Theme Settings',
+      subtitle: 'Choose your preferred app appearance',
+      icon: CustomIconWidget(
+        iconName: 'palette',
+        color: colorScheme.primary,
+        size: 24,
       ),
-    );
-  }
-
-  Widget _buildThemeOptions(ThemeData theme, ColorScheme colorScheme) {
-    return Column(
       children: [
-        _buildThemeOption(
-          theme,
-          colorScheme,
-          'Light Theme',
-          'Clean and bright interface',
-          'light_mode',
-          AppThemeMode.light,
-          themeMode == AppThemeMode.light,
+        ChoiceTile<AppThemeMode>(
+          value: AppThemeMode.light,
+          groupValue: themeMode,
+          title: 'Light Mode',
+          subtitle: 'Clean and bright interface',
+          icon: Icon(
+            Icons.light_mode,
+            color: colorScheme.onSurfaceVariant,
+            size: 24,
+          ),
+          onChanged: onThemeModeChanged,
         ),
-        SizedBox(height: AppSpace.x2),
-        _buildThemeOption(
-          theme,
-          colorScheme,
-          'Dark Theme',
-          'Easy on the eyes in low light',
-          'dark_mode',
-          AppThemeMode.dark,
-          themeMode == AppThemeMode.dark,
+        const SizedBox(height: AppSpace.x3),
+        ChoiceTile<AppThemeMode>(
+          value: AppThemeMode.dark,
+          groupValue: themeMode,
+          title: 'Dark Theme',
+          subtitle: 'Easy on the eyes in low light',
+          icon: Icon(
+            Icons.dark_mode,
+            color: colorScheme.onSurfaceVariant,
+            size: 24,
+          ),
+          onChanged: onThemeModeChanged,
         ),
-        SizedBox(height: AppSpace.x2),
-        _buildThemeOption(
-          theme,
-          colorScheme,
-          'System Default',
-          'Follows your device settings',
-          'settings_brightness',
-          AppThemeMode.system,
-          themeMode == AppThemeMode.system,
+        const SizedBox(height: AppSpace.x3),
+        ChoiceTile<AppThemeMode>(
+          value: AppThemeMode.system,
+          groupValue: themeMode,
+          title: 'System Default',
+          subtitle: 'Follows your device settings',
+          icon: Icon(
+            Icons.settings_brightness,
+            color: colorScheme.onSurfaceVariant,
+            size: 24,
+          ),
+          onChanged: onThemeModeChanged,
         ),
       ],
     );
   }
 
-  Widget _buildThemeOption(
-    ThemeData theme,
-    ColorScheme colorScheme,
-    String title,
-    String description,
-    String iconName,
-    AppThemeMode mode,
-    bool isSelected,
-  ) {
-    return GestureDetector(
-      onTap: () => onThemeModeChanged(mode),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        curve: Curves.easeInOut,
-        padding: EdgeInsets.all(AppSpace.x3),
-        decoration: BoxDecoration(
-          color: isSelected
-              ? colorScheme.primary.withOpacity( 0.1)
-              : colorScheme.surface,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: isSelected
-                ? colorScheme.primary.withOpacity( 0.3)
-                : colorScheme.outline.withOpacity( 0.2),
-            width: isSelected ? 2 : 1,
-          ),
-        ),
-        child: Row(
-          children: [
-            Container(
-              padding: EdgeInsets.all(AppSpace.x2),
-              decoration: BoxDecoration(
-                color: isSelected
-                    ? colorScheme.primary.withOpacity( 0.2)
-                    : colorScheme.surfaceContainerHighest,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: CustomIconWidget(
-                iconName: iconName,
-                color: isSelected
-                    ? colorScheme.primary
-                    : colorScheme.onSurfaceVariant,
-                size: 24,
-              ),
-            ),
-            SizedBox(width: AppSpace.x3),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      color: colorScheme.onSurface,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(height: AppSpace.x1),
-                  Text(
-                    description,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            if (isSelected)
-              Container(
-                padding: EdgeInsets.all(AppSpace.x1),
-                decoration: BoxDecoration(
-                  color: colorScheme.primary,
-                  shape: BoxShape.circle,
-                ),
-                child: CustomIconWidget(
-                  iconName: 'check',
-                  color: colorScheme.onPrimary,
-                  size: 16,
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
 }

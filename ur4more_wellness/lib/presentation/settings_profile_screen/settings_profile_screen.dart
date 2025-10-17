@@ -143,7 +143,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
                 onRateApp: _rateApp,
               ),
 
-              SizedBox(height: AppSpace.x10), // Bottom padding for navigation bar
+              SizedBox(height: AppSpace.x12), // Bottom padding for navigation bar
             ],
           ),
         ),
@@ -197,7 +197,8 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
   }
 
   // Faith mode update method
-  void _updateFaithMode(FaithMode mode) {
+  void _updateFaithMode(FaithMode? mode) {
+    if (mode == null) return;
     setState(() {
       _faithMode = mode;
     });
@@ -249,7 +250,8 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
   }
 
   // Theme update method
-  void _updateThemeMode(AppThemeMode mode) {
+  void _updateThemeMode(AppThemeMode? mode) {
+    if (mode == null) return;
     setState(() {
       _themeMode = mode;
     });
