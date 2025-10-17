@@ -67,6 +67,15 @@ class CourseRepository {
     return null; // All other weeks are Disciple+ tier
   }
 
+  /// Check if a week is gated for a specific faith tier
+  bool isWeekGatedForTier(int week, FaithTier tier, Course course) {
+    if (tier != FaithTier.off || course.gate?.offTierHardGateWeek == null) {
+      return false;
+    }
+    
+    return week >= course.gate!.offTierHardGateWeek!;
+  }
+
   /// Mark a week as complete
   Future<void> persistWeekComplete(int week, bool value) async {
     final prefs = await SharedPreferences.getInstance();

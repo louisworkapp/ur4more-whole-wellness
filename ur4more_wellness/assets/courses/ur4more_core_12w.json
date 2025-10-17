@@ -2,6 +2,9 @@
   "id": "ur4more_core_12w",
   "title": "UR4MORE Discipleship Core (12 Weeks)",
   "description": "A practical 12-week journey to follow Jesus deeply and live on mission.",
+  "gate": {
+    "offTierHardGateWeek": 3
+  },
   "weeks": [
     {
       "week": 1,
