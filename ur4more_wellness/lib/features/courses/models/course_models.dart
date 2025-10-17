@@ -110,6 +110,7 @@ class Week {
   final String tierMin;
   final int estLessonMinutes;
   final int estWeekPracticeMinutes;
+  final Unlock? unlock;
 
   Week({
     required this.week,
@@ -125,6 +126,7 @@ class Week {
     required this.tierMin,
     required this.estLessonMinutes,
     required this.estWeekPracticeMinutes,
+    this.unlock,
   });
 
   factory Week.fromJson(Map<String, dynamic> json) {
@@ -146,6 +148,7 @@ class Week {
       tierMin: json['tierMin'] as String,
       estLessonMinutes: json['estLessonMinutes'] as int,
       estWeekPracticeMinutes: json['estWeekPracticeMinutes'] as int,
+      unlock: json['unlock'] != null ? Unlock.fromJson(json['unlock'] as Map<String, dynamic>) : null,
     );
   }
 
@@ -164,6 +167,7 @@ class Week {
       'tierMin': tierMin,
       'estLessonMinutes': estLessonMinutes,
       'estWeekPracticeMinutes': estWeekPracticeMinutes,
+      'unlock': unlock?.toJson(),
     };
   }
 
@@ -300,5 +304,63 @@ class CourseProgress {
       lastAccessed: DateTime.parse(json['lastAccessed'] as String),
       currentWeek: json['currentWeek'] as int,
     );
+  }
+}
+
+class VerseKJV {
+  final String ref;
+  final String text;
+
+  VerseKJV({
+    required this.ref,
+    required this.text,
+  });
+
+  factory VerseKJV.fromJson(Map<String, dynamic> json) {
+    return VerseKJV(
+      ref: json['ref'] as String,
+      text: json['text'] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'ref': ref,
+      'text': text,
+    };
+  }
+}
+
+class Unlock {
+  final String title;
+  final List<VerseKJV> versesKJV;
+  final String insight;
+  final List<String> deeperTruths;
+
+  Unlock({
+    required this.title,
+    required this.versesKJV,
+    required this.insight,
+    required this.deeperTruths,
+  });
+
+  factory Unlock.fromJson(Map<String, dynamic> json) {
+    return Unlock(
+      title: json['title'] as String,
+      versesKJV: (json['versesKJV'] as List)
+          .map((verseJson) => VerseKJV.fromJson(verseJson as Map<String, dynamic>))
+          .toList(),
+      insight: json['insight'] as String,
+      deeperTruths: List<String>.from(json['deeperTruths'] as List),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'versesKJV': versesKJV.map((verse) => verse.toJson()).toList(),
+      'insight': insight,
+      'deeperTruths': deeperTruths,
+    };
   }
 }

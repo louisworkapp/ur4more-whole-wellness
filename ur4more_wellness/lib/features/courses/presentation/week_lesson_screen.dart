@@ -4,6 +4,7 @@ import '../../../widgets/custom_app_bar.dart';
 import '../data/course_repository.dart';
 import '../models/course_models.dart';
 import '../../../services/scripture_service.dart';
+import '../widgets/unlock_scripture_card.dart';
 
 class WeekLessonScreen extends StatefulWidget {
   const WeekLessonScreen({super.key});
@@ -17,6 +18,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   Week? _week;
   bool _isCompleted = false;
   bool _isLoading = true;
+  bool _isUnlocked = false;
   final Map<String, bool> _expandedScriptures = {};
   final Map<int, bool> _expandedReflections = {};
   final ScriptureService _scriptureService = ScriptureService();
@@ -55,10 +57,12 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
         orElse: () => throw Exception('Week not found'),
       );
       final isCompleted = await _repository.isWeekComplete(weekNumber);
+      final isUnlocked = await _repository.isWeekUnlock(weekNumber);
 
       setState(() {
         _week = week;
         _isCompleted = isCompleted;
+        _isUnlocked = isUnlocked;
         _isLoading = false;
       });
     } catch (e) {
@@ -66,6 +70,22 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
       setState(() {
         _isLoading = false;
       });
+    }
+  }
+
+  Future<void> _onUnlock() async {
+    if (_week == null) return;
+    
+    try {
+      await _repository.setWeekUnlock(_week!.week, true);
+      setState(() {
+        _isUnlocked = true;
+      });
+    } catch (e) {
+      print('Error unlocking week: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to unlock deeper truths')),
+      );
     }
   }
 
@@ -140,6 +160,8 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                   _buildScriptureSection(theme, colorScheme),
                   SizedBox(height: AppSpace.x6),
                   _buildLessonSummary(theme, colorScheme),
+                  SizedBox(height: AppSpace.x6),
+                  _buildUnlockCard(theme, colorScheme),
                   SizedBox(height: AppSpace.x6),
                   _buildKeyIdeas(theme, colorScheme),
                   SizedBox(height: AppSpace.x6),
@@ -342,6 +364,16 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
           height: 1.5,
         ),
       ),
+    );
+  }
+
+  Widget _buildUnlockCard(ThemeData theme, ColorScheme colorScheme) {
+    if (_week == null || _week!.unlock == null) return SizedBox.shrink();
+
+    return UnlockScriptureCard(
+      unlock: _week!.unlock!,
+      unlocked: _isUnlocked,
+      onUnlock: _onUnlock,
     );
   }
 

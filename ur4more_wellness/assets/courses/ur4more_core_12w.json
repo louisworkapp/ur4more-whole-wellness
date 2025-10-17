@@ -30,7 +30,20 @@
       ],
       "tierMin": "Light",
       "estLessonMinutes": 12,
-      "estWeekPracticeMinutes": 40
+      "estWeekPracticeMinutes": 40,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "2 Corinthians 5:17", "text": "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new."},
+          {"ref": "Galatians 2:20", "text": "I am crucified with Christ: nevertheless I live; yet not I, but Christ liveth in me: and the life which I now live in the flesh I live by the faith of the Son of God, who loved me, and gave himself for me."}
+        ],
+        "insight": "New identity flows from union with Christ; the old life yields so His life can lead.",
+        "deeperTruths": [
+          "Identity is received, not achieved.",
+          "Dying to self makes room for love to lead.",
+          "We live from Christ in us, not for self‑validation."
+        ]
+      }
     },
     {
       "week": 2,
@@ -59,7 +72,21 @@
       ],
       "tierMin": "Light",
       "estLessonMinutes": 15,
-      "estWeekPracticeMinutes": 50
+      "estWeekPracticeMinutes": 50,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "Ephesians 2:8–9", "text": "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: Not of works, lest any man should boast."},
+          {"ref": "Ephesians 2:10", "text": "For we are his workmanship, created in Christ Jesus unto good works, which God hath before ordained that we should walk in them."},
+          {"ref": "James 2:17", "text": "Even so faith, if it hath not works, is dead, being alone."}
+        ],
+        "insight": "Grace saves us apart from works, yet true faith bears the fruit of good works God prepared.",
+        "deeperTruths": [
+          "Saved by grace → created for good works.",
+          "Obedience doesn't earn salvation; it evidences living faith.",
+          "The Spirit empowers the works grace points us toward."
+        ]
+      }
     },
     {
       "week": 3,
@@ -88,7 +115,20 @@
       ],
       "tierMin": "Disciple",
       "estLessonMinutes": 18,
-      "estWeekPracticeMinutes": 70
+      "estWeekPracticeMinutes": 70,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "Psalm 119:105", "text": "Thy word is a lamp unto my feet, and a light unto my path."},
+          {"ref": "James 1:22", "text": "But be ye doers of the word, and not hearers only, deceiving your own selves."}
+        ],
+        "insight": "The Word guides our steps and forms our lives as we practice what we hear.",
+        "deeperTruths": [
+          "Light to see; obedience to walk.",
+          "Application completes understanding.",
+          "Small steps of practice shape character."
+        ]
+      }
     },
     {
       "week": 4,
@@ -117,7 +157,20 @@
       ],
       "tierMin": "Disciple",
       "estLessonMinutes": 20,
-      "estWeekPracticeMinutes": 75
+      "estWeekPracticeMinutes": 75,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "Philippians 4:6", "text": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God."},
+          {"ref": "1 Thessalonians 5:17", "text": "Pray without ceasing."}
+        ],
+        "insight": "Prayer trades anxiety for thanksgiving and a continual posture of trust.",
+        "deeperTruths": [
+          "Bring everything; with thanksgiving.",
+          "Prayer is a rhythm, not a moment.",
+          "Peace grows where dependence deepens."
+        ]
+      }
     },
     {
       "week": 5,
@@ -146,7 +199,20 @@
       ],
       "tierMin": "Disciple",
       "estLessonMinutes": 22,
-      "estWeekPracticeMinutes": 80
+      "estWeekPracticeMinutes": 80,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "Galatians 5:16", "text": "This I say then, Walk in the Spirit, and ye shall not fulfil the lust of the flesh."},
+          {"ref": "Ephesians 5:18", "text": "And be not drunk with wine, wherein is excess; but be filled with the Spirit;"}
+        ],
+        "insight": "Spirit‑led living replaces old patterns with new power and desire.",
+        "deeperTruths": [
+          "Surrender to be filled.",
+          "Walk (daily) to overcome (daily).",
+          "Power to obey comes from the Spirit."
+        ]
+      }
     },
     {
       "week": 6,
@@ -175,7 +241,21 @@
       ],
       "tierMin": "Disciple",
       "estLessonMinutes": 25,
-      "estWeekPracticeMinutes": 90
+      "estWeekPracticeMinutes": 90,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "Hebrews 10:24", "text": "And let us consider one another to provoke unto love and to good works:"},
+          {"ref": "Hebrews 10:25", "text": "Not forsaking the assembling of ourselves together, as the manner of some is; but exhorting one another: and so much the more, as ye see the day approaching."},
+          {"ref": "John 13:35", "text": "By this shall all men know that ye are my disciples, if ye have love one to another."}
+        ],
+        "insight": "We gather to stir love and good works; our love marks us as His.",
+        "deeperTruths": [
+          "Presence builds perseverance.",
+          "Love proves discipleship.",
+          "We grow best together."
+        ]
+      }
     },
     {
       "week": 7,
@@ -204,7 +284,20 @@
       ],
       "tierMin": "Disciple",
       "estLessonMinutes": 28,
-      "estWeekPracticeMinutes": 100
+      "estWeekPracticeMinutes": 100,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "John 14:15", "text": "If ye love me, keep my commandments."},
+          {"ref": "Galatians 5:22–23", "text": "But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, Meekness, temperance: against such there is no law."}
+        ],
+        "insight": "Obedience springs from love; the Spirit bears the fruit of Christlike character.",
+        "deeperTruths": [
+          "Love motivates obedience.",
+          "Fruit reveals the root.",
+          "Character grows as we abide."
+        ]
+      }
     },
     {
       "week": 8,
@@ -233,7 +326,20 @@
       ],
       "tierMin": "Kingdom Builder",
       "estLessonMinutes": 30,
-      "estWeekPracticeMinutes": 110
+      "estWeekPracticeMinutes": 110,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "Mark 10:45", "text": "For even the Son of man came not to be ministered unto, but to minister, and to give his life a ransom for many."},
+          {"ref": "Galatians 5:13", "text": "For, brethren, ye have been called unto liberty; only use not liberty for an occasion to the flesh, but by love serve one another."}
+        ],
+        "insight": "Jesus' way is service; freedom expresses itself through loving service.",
+        "deeperTruths": [
+          "Greatness kneels to serve.",
+          "Freedom finds form in love.",
+          "Small acts, large love."
+        ]
+      }
     },
     {
       "week": 9,
@@ -262,7 +368,20 @@
       ],
       "tierMin": "Kingdom Builder",
       "estLessonMinutes": 32,
-      "estWeekPracticeMinutes": 120
+      "estWeekPracticeMinutes": 120,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "1 Peter 3:15", "text": "But sanctify the Lord God in your hearts: and be ready always to give an answer to every man that asketh you a reason of the hope that is in you with meekness and fear:"},
+          {"ref": "Matthew 28:19", "text": "Go ye therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost:"}
+        ],
+        "insight": "We carry hope with gentleness, joining Jesus' mission to make disciples.",
+        "deeperTruths": [
+          "Hope invites conversation.",
+          "Go with humility and courage.",
+          "God draws; we witness."
+        ]
+      }
     },
     {
       "week": 10,
@@ -291,7 +410,20 @@
       ],
       "tierMin": "Kingdom Builder",
       "estLessonMinutes": 35,
-      "estWeekPracticeMinutes": 130
+      "estWeekPracticeMinutes": 130,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "Ephesians 6:11", "text": "Put on the whole armour of God, that ye may be able to stand against the wiles of the devil."},
+          {"ref": "James 4:7", "text": "Submit yourselves therefore to God. Resist the devil, and he will flee from you."}
+        ],
+        "insight": "Strength to stand is found in God's armor, submission, and resistance.",
+        "deeperTruths": [
+          "Cover up (armor); bow down (submit); stand up (resist).",
+          "Truth disarms lies.",
+          "Victory is enforced, not earned."
+        ]
+      }
     },
     {
       "week": 11,
@@ -320,7 +452,20 @@
       ],
       "tierMin": "Kingdom Builder",
       "estLessonMinutes": 38,
-      "estWeekPracticeMinutes": 140
+      "estWeekPracticeMinutes": 140,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "James 1:2–3", "text": "My brethren, count it all joy when ye fall into divers temptations; Knowing this, that the trying of your faith worketh patience."},
+          {"ref": "Romans 5:3–4", "text": "And not only so, but we glory in tribulations also: knowing that tribulation worketh patience; And patience, experience; and experience, hope:"}
+        ],
+        "insight": "Trials grow patience and seasoned hope; God matures us through them.",
+        "deeperTruths": [
+          "Joy is chosen, not felt first.",
+          "Pressure can grow patience.",
+          "Hope is forged over time."
+        ]
+      }
     },
     {
       "week": 12,
@@ -349,7 +494,20 @@
       ],
       "tierMin": "Kingdom Builder",
       "estLessonMinutes": 40,
-      "estWeekPracticeMinutes": 150
+      "estWeekPracticeMinutes": 150,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {"ref": "Matthew 5:16", "text": "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven."},
+          {"ref": "Acts 1:8", "text": "But ye shall receive power, after that the Holy Ghost is come upon you: and ye shall be witnesses unto me both in Jerusalem, and in all Judaea, and in Samaria, and unto the uttermost part of the earth."}
+        ],
+        "insight": "Empowered by the Spirit, our good works point people to the Father's glory.",
+        "deeperTruths": [
+          "Shine and point up.",
+          "Power to witness, love to serve.",
+          "Mission is everyday life with Jesus."
+        ]
+      }
     }
   ]
 }
