@@ -19,7 +19,7 @@ class LessonScreen extends StatefulWidget {
 class _LessonScreenState extends State<LessonScreen> {
   final CourseRepository _repository = CourseRepository();
   
-  Map<String, dynamic>? _lessonData;
+  Week? _lessonData;
   Course? _course;
   bool _isLoading = true;
   bool _isCompleted = false;
@@ -49,11 +49,12 @@ class _LessonScreenState extends State<LessonScreen> {
       if (courseId == AppRoutes.ur4moreCoreId) {
         final courseData = await _repository.getUr4moreCoreData();
         if (courseData != null) {
-          final lessons = courseData['lessons'] as List<dynamic>;
-          _lessonData = lessons.firstWhere(
-            (lesson) => lesson['week'] == week,
-            orElse: () => lessons.first,
+          // Find the week data from the course
+          final weekData = courseData.weeks.firstWhere(
+            (w) => w.week == week,
+            orElse: () => courseData.weeks.first,
           );
+          _lessonData = weekData;
         }
       }
       
@@ -104,7 +105,7 @@ class _LessonScreenState extends State<LessonScreen> {
     return Scaffold(
       backgroundColor: colorScheme.surface,
       appBar: CustomAppBar(
-        title: "Week ${_lessonData!['week']}",
+        title: "Week ${_lessonData!.week}",
         backgroundColor: colorScheme.surface,
         actions: [
           if (_isCompleted)
@@ -196,14 +197,14 @@ class _LessonScreenState extends State<LessonScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      _lessonData!['title'],
+                      _lessonData!.title,
                       style: theme.textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     SizedBox(height: AppSpace.x1),
                     Text(
-                      _lessonData!['duration'] ?? '15 minutes',
+                      '${_lessonData!.estLessonMinutes} minutes',
                       style: theme.textTheme.bodyMedium?.copyWith(
                         color: colorScheme.onSurfaceVariant,
                       ),
@@ -217,17 +218,13 @@ class _LessonScreenState extends State<LessonScreen> {
                   vertical: AppSpace.x2,
                 ),
                 decoration: BoxDecoration(
-                  color: _lessonData!['type'] == 'foundation'
-                      ? AppTheme.primaryLight.withOpacity(0.2)
-                      : colorScheme.secondary.withOpacity(0.2),
+                  color: AppTheme.primaryLight.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  _lessonData!['type']?.toString().toUpperCase() ?? 'LESSON',
+                  'LESSON',
                   style: theme.textTheme.labelMedium?.copyWith(
-                    color: _lessonData!['type'] == 'foundation'
-                        ? AppTheme.primaryLight
-                        : colorScheme.secondary,
+                    color: AppTheme.primaryLight,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -236,7 +233,7 @@ class _LessonScreenState extends State<LessonScreen> {
           ),
           SizedBox(height: AppSpace.x3),
           Text(
-            _lessonData!['objective'],
+            _lessonData!.lessonSummary,
             style: theme.textTheme.bodyLarge?.copyWith(
               color: colorScheme.onSurfaceVariant,
               height: 1.4,
@@ -272,7 +269,7 @@ class _LessonScreenState extends State<LessonScreen> {
               theme,
               colorScheme,
               'This Week\'s Focus',
-              _lessonData!['objective'] ?? 'Building foundational discipleship habits and understanding your identity in Christ.',
+              _lessonData!.lessonSummary,
             ),
             SizedBox(height: AppSpace.x3),
             _buildContentSection(
@@ -288,7 +285,7 @@ class _LessonScreenState extends State<LessonScreen> {
               'Scripture Focus',
               _getScriptureFocus(),
             ),
-            if (_lessonData!['week'] <= 3) ...[
+            if (_lessonData!.week <= 3) ...[
               SizedBox(height: AppSpace.x3),
               _buildContentSection(
                 theme,
@@ -296,7 +293,7 @@ class _LessonScreenState extends State<LessonScreen> {
                 'Foundation Phase',
                 'This week is part of the foundation phase where we build core spiritual habits and understand what it means to follow Jesus.',
               ),
-            ] else if (_lessonData!['week'] <= 6) ...[
+            ] else if (_lessonData!.week <= 6) ...[
               SizedBox(height: AppSpace.x3),
               _buildContentSection(
                 theme,
@@ -304,7 +301,7 @@ class _LessonScreenState extends State<LessonScreen> {
                 'Growth Phase',
                 'You\'re now in the growth phase, developing emotional health and practical obedience in daily life.',
               ),
-            ] else if (_lessonData!['week'] <= 9) ...[
+            ] else if (_lessonData!.week <= 9) ...[
               SizedBox(height: AppSpace.x3),
               _buildContentSection(
                 theme,
@@ -356,7 +353,7 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   Widget _buildPracticeSection(ThemeData theme, ColorScheme colorScheme) {
-    final practices = _lessonData!['practices'] as List<dynamic>? ?? [];
+    final practices = _lessonData!.practice;
 
     return Card(
       elevation: 1,
@@ -421,7 +418,7 @@ class _LessonScreenState extends State<LessonScreen> {
                     SizedBox(width: AppSpace.x3),
                     Expanded(
                       child: Text(
-                        practice,
+                        practice.title,
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: colorScheme.onSurface,
                         ),
@@ -489,11 +486,10 @@ class _LessonScreenState extends State<LessonScreen> {
   void _completeLesson() async {
     try {
       // Update progress
-      final newProgress = (_currentWeek / 12).clamp(0.0, 1.0);
       await _repository.updateCourseProgress(
         AppRoutes.ur4moreCoreId,
-        newProgress,
         _currentWeek,
+        true, // Mark as completed
       );
 
       // Award points (simulate)
@@ -501,7 +497,7 @@ class _LessonScreenState extends State<LessonScreen> {
 
       setState(() {
         _isCompleted = true;
-        _progress = newProgress;
+        _progress = (_currentWeek / 12).clamp(0.0, 1.0);
       });
 
       ScaffoldMessenger.of(context).showSnackBar(
@@ -531,7 +527,7 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   String _getLearningObjectives() {
-    final week = _lessonData!['week'] as int;
+    final week = _lessonData!.week;
     switch (week) {
       case 1:
         return '• Understand the gospel message and God\'s grace\n• Learn what it means to follow Jesus\n• Discover the importance of baptism and church community\n• Begin your discipleship journey';
@@ -563,7 +559,7 @@ class _LessonScreenState extends State<LessonScreen> {
   }
 
   String _getScriptureFocus() {
-    final week = _lessonData!['week'] as int;
+    final week = _lessonData!.week;
     switch (week) {
       case 1:
         return 'John 3:16-17 - "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life. For God did not send his Son into the world to condemn the world, but to save the world through him."';
