@@ -34,6 +34,26 @@ enum FaithTier {
   }
 }
 
+class CourseGate {
+  final int? offTierHardGateWeek;
+
+  CourseGate({
+    this.offTierHardGateWeek,
+  });
+
+  factory CourseGate.fromJson(Map<String, dynamic> json) {
+    return CourseGate(
+      offTierHardGateWeek: json['offTierHardGateWeek'] as int?,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'offTierHardGateWeek': offTierHardGateWeek,
+    };
+  }
+}
+
 class Course {
   final String id;
   final String title;
@@ -45,6 +65,7 @@ class Course {
   final List<String> format;
   final List<String> tags;
   final List<Week> weeks;
+  final CourseGate? gate;
 
   Course({
     required this.id,
@@ -57,6 +78,7 @@ class Course {
     required this.format,
     required this.tags,
     required this.weeks,
+    this.gate,
   });
 
   factory Course.fromJson(Map<String, dynamic> json) {
@@ -73,6 +95,9 @@ class Course {
       weeks: (json['weeks'] as List)
           .map((weekJson) => Week.fromJson(weekJson as Map<String, dynamic>))
           .toList(),
+      gate: json['gate'] != null 
+          ? CourseGate.fromJson(json['gate'] as Map<String, dynamic>)
+          : null,
     );
   }
 
@@ -88,6 +113,7 @@ class Course {
       'format': format,
       'tags': tags,
       'weeks': weeks.map((week) => week.toJson()).toList(),
+      'gate': gate?.toJson(),
     };
   }
 

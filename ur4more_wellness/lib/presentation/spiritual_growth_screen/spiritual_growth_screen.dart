@@ -4,6 +4,10 @@ import '../../core/app_export.dart';
 import '../../design/tokens.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../features/spirit/widgets/discipleship_header.dart';
+import '../../features/spirit/widgets/offmode_intro_card.dart';
+import '../../features/spirit/widgets/world_spirit_card.dart';
+import '../../features/spirit/services/faith_mode_navigator.dart';
+import '../../features/courses/models/course_models.dart';
 import './widgets/devotional_card_widget.dart';
 import './widgets/devotional_history_widget.dart';
 import './widgets/faith_mode_banner_widget.dart';
@@ -21,7 +25,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
   int _currentBottomIndex = 3;
-  String _faithMode = "Full"; // Off, Light, Full
+  FaithTier _faithTier = FaithTier.disciple; // Default to disciple for now
   int _spiritualPoints = 1250;
   int _devotionStreak = 7;
 
@@ -143,6 +147,21 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _loadFaithTier();
+  }
+
+  Future<void> _loadFaithTier() async {
+    final currentTier = await FaithModeNavigator.getCurrentFaithTier();
+    setState(() {
+      _faithTier = currentTier;
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Reload faith tier when returning to this screen
+    _loadFaithTier();
   }
 
   @override
@@ -201,7 +220,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
           SizedBox(width: AppSpace.x2),
         ],
       ),
-      body: _faithMode == "Off"
+      body: _faithTier == FaithTier.off
           ? _buildOffModeContent(context, colorScheme)
           : _buildActiveContent(context, colorScheme),
     );
@@ -214,12 +233,16 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
           children: [
             SizedBox(height: AppSpace.x2),
             FaithModeBannerWidget(
-              faithMode: _faithMode,
+              faithMode: _faithTier.name,
               onSettingsTap: () =>
                   Navigator.pushNamed(context, AppRoutes.settings),
             ),
             SizedBox(height: AppSpace.x4),
-            _buildWelcomeBackMessage(context, colorScheme),
+            // Show WorldSpiritCard first, then OffModeIntroCard
+            const WorldSpiritCard(),
+            SizedBox(height: AppSpace.x3),
+            const OffModeIntroCard(),
+            SizedBox(height: AppSpace.x6),
           ],
         ),
       ),
@@ -235,7 +258,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
           children: [
             // Faith mode banner
             FaithModeBannerWidget(
-              faithMode: _faithMode,
+              faithMode: _faithTier.name,
               onSettingsTap: () =>
                   Navigator.pushNamed(context, AppRoutes.settings),
             ),

@@ -5,6 +5,7 @@ import '../data/course_repository.dart';
 import '../models/course_models.dart';
 import '../../../services/scripture_service.dart';
 import '../widgets/unlock_scripture_card.dart';
+import '../../spirit/services/faith_mode_navigator.dart';
 
 class WeekLessonScreen extends StatefulWidget {
   const WeekLessonScreen({super.key});
@@ -16,9 +17,13 @@ class WeekLessonScreen extends StatefulWidget {
 class _WeekLessonScreenState extends State<WeekLessonScreen> {
   final CourseRepository _repository = CourseRepository();
   Week? _week;
+  Course? _course;
   bool _isCompleted = false;
   bool _isLoading = true;
   bool _isUnlocked = false;
+  bool _isGated = false;
+  bool _isShowingPreview = false;
+  FaithTier _currentTier = FaithTier.off;
   final Map<String, bool> _expandedScriptures = {};
   final Map<int, bool> _expandedReflections = {};
   final ScriptureService _scriptureService = ScriptureService();
@@ -58,11 +63,16 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
       );
       final isCompleted = await _repository.isWeekComplete(weekNumber);
       final isUnlocked = await _repository.isWeekUnlock(weekNumber);
+      final currentTier = await FaithModeNavigator.getCurrentFaithTier();
+      final isGated = _repository.isWeekGatedForTier(weekNumber, currentTier, course);
 
       setState(() {
+        _course = course;
         _week = week;
         _isCompleted = isCompleted;
         _isUnlocked = isUnlocked;
+        _isGated = isGated;
+        _currentTier = currentTier;
         _isLoading = false;
       });
     } catch (e) {
@@ -87,6 +97,18 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
         const SnackBar(content: Text('Failed to unlock deeper truths')),
       );
     }
+  }
+
+  Future<void> _enableFaithMode() async {
+    await FaithModeNavigator.openFaithModeSelector(context);
+    // Reload data to check if gating is still active
+    _loadData();
+  }
+
+  void _showPreview() {
+    setState(() {
+      _isShowingPreview = true;
+    });
   }
 
   @override
@@ -157,22 +179,36 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                 children: [
                   _buildWeekHeader(theme, colorScheme),
                   SizedBox(height: AppSpace.x6),
-                  _buildScriptureSection(theme, colorScheme),
-                  SizedBox(height: AppSpace.x6),
-                  _buildLessonSummary(theme, colorScheme),
-                  SizedBox(height: AppSpace.x6),
-                  _buildUnlockCard(theme, colorScheme),
-                  SizedBox(height: AppSpace.x6),
-                  _buildKeyIdeas(theme, colorScheme),
-                  SizedBox(height: AppSpace.x6),
-                  _buildReflectionQuestions(theme, colorScheme),
-                  SizedBox(height: AppSpace.x6),
-                  _buildPracticeSection(theme, colorScheme),
-                  SizedBox(height: AppSpace.x6),
-                  _buildPrayerSection(theme, colorScheme),
-                  SizedBox(height: AppSpace.x6),
-                  _buildResourcesSection(theme, colorScheme),
-                  SizedBox(height: AppSpace.x8),
+                  
+                  // Show soft lock if gated and not showing preview
+                  if (_isGated && !_isShowingPreview) ...[
+                    _buildSoftLockSection(theme, colorScheme),
+                    SizedBox(height: AppSpace.x6),
+                  ],
+                  
+                  // Show content based on gating and preview state
+                  if (!_isGated || _isShowingPreview) ...[
+                    _buildScriptureSection(theme, colorScheme),
+                    SizedBox(height: AppSpace.x6),
+                    _buildLessonSummary(theme, colorScheme),
+                    SizedBox(height: AppSpace.x6),
+                    _buildUnlockCard(theme, colorScheme),
+                    SizedBox(height: AppSpace.x6),
+                    _buildKeyIdeas(theme, colorScheme),
+                    SizedBox(height: AppSpace.x6),
+                    _buildReflectionQuestions(theme, colorScheme),
+                    SizedBox(height: AppSpace.x6),
+                    _buildPracticeSection(theme, colorScheme),
+                    SizedBox(height: AppSpace.x6),
+                    _buildPrayerSection(theme, colorScheme),
+                    SizedBox(height: AppSpace.x6),
+                    _buildResourcesSection(theme, colorScheme),
+                    SizedBox(height: AppSpace.x8),
+                  ] else if (_isGated && _isShowingPreview) ...[
+                    // Show limited preview content
+                    _buildPreviewContent(theme, colorScheme),
+                    SizedBox(height: AppSpace.x8),
+                  ],
                 ],
               ),
             ),
@@ -374,6 +410,202 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
       unlock: _week!.unlock!,
       unlocked: _isUnlocked,
       onUnlock: _onUnlock,
+    );
+  }
+
+  Widget _buildSoftLockSection(ThemeData theme, ColorScheme colorScheme) {
+    return Container(
+      padding: EdgeInsets.all(AppSpace.x4),
+      decoration: BoxDecoration(
+        color: colorScheme.surfaceVariant.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(AppRadius.lg),
+        border: Border.all(
+          color: colorScheme.outlineVariant,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.lock_outline,
+                color: colorScheme.primary,
+                size: 24,
+              ),
+              SizedBox(width: AppSpace.x2),
+              Expanded(
+                child: Text(
+                  'Faith content locked',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: colorScheme.primary,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: AppSpace.x2),
+          Text(
+            'This week opens deeper guidance (Scripture, prayer, discernment). Enable Faith Mode to continue, or preview a tiny sample below.',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: colorScheme.onSurface.withOpacity(0.9),
+              height: 1.4,
+            ),
+          ),
+          SizedBox(height: AppSpace.x4),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: _enableFaithMode,
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(0, 48),
+                    backgroundColor: colorScheme.primary,
+                    foregroundColor: colorScheme.onPrimary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    'Enable Faith Mode',
+                    style: theme.textTheme.labelLarge?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: AppSpace.x3),
+              Expanded(
+                child: TextButton(
+                  onPressed: _showPreview,
+                  style: TextButton.styleFrom(
+                    minimumSize: Size(0, 48),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(AppRadius.md),
+                    ),
+                  ),
+                  child: Text(
+                    'Preview 60 seconds',
+                    style: theme.textTheme.labelLarge?.copyWith(
+                      color: colorScheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPreviewContent(ThemeData theme, ColorScheme colorScheme) {
+    if (_week == null) return SizedBox.shrink();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Show only title and theme
+        Container(
+          padding: EdgeInsets.all(AppSpace.x4),
+          decoration: BoxDecoration(
+            color: colorScheme.primaryContainer.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(AppRadius.md),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                _week!.title,
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: colorScheme.onSurface,
+                ),
+              ),
+              SizedBox(height: AppSpace.x2),
+              Text(
+                _week!.theme,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.onSurface.withOpacity(0.8),
+                  height: 1.4,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: AppSpace.x4),
+        
+        // Show first 1-2 key ideas
+        if (_week!.keyIdeas.isNotEmpty) ...[
+          _buildSection(
+            theme,
+            colorScheme,
+            'Key Ideas (Preview)',
+            Icons.key,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: _week!.keyIdeas.take(2).map((idea) => Padding(
+                padding: EdgeInsets.only(bottom: AppSpace.x2),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 6,
+                      height: 6,
+                      margin: EdgeInsets.only(top: 8, right: AppSpace.x3),
+                      decoration: BoxDecoration(
+                        color: colorScheme.primary,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    Expanded(
+                      child: Text(
+                        idea,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: colorScheme.onSurface.withOpacity(0.9),
+                          height: 1.4,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )).toList(),
+            ),
+          ),
+        ],
+        
+        SizedBox(height: AppSpace.x4),
+        
+        // Dimmed note at bottom
+        Container(
+          padding: EdgeInsets.all(AppSpace.x3),
+          decoration: BoxDecoration(
+            color: colorScheme.surfaceVariant.withOpacity(0.3),
+            borderRadius: BorderRadius.circular(AppRadius.md),
+          ),
+          child: Row(
+            children: [
+              Icon(
+                Icons.info_outline,
+                color: colorScheme.onSurfaceVariant,
+                size: 16,
+              ),
+              SizedBox(width: AppSpace.x2),
+              Expanded(
+                child: Text(
+                  'Full content available with Faith Mode.',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -753,11 +985,13 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
           children: [
             Expanded(
               child: ElevatedButton.icon(
-                onPressed: _isCompleted ? null : _markWeekComplete,
+                onPressed: (_isCompleted || _isGated) ? null : _markWeekComplete,
                 icon: Icon(_isCompleted ? Icons.check_circle : Icons.check),
                 label: Text(_isCompleted ? 'Completed' : 'Mark Week Complete'),
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(0, 56),
+                  backgroundColor: _isGated ? colorScheme.surfaceVariant : null,
+                  foregroundColor: _isGated ? colorScheme.onSurfaceVariant : null,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(AppRadius.md),
                   ),
