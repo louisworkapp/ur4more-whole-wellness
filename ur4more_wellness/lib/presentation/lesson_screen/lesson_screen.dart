@@ -6,7 +6,7 @@ import '../../design/tokens.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../widgets/custom_icon_widget.dart';
 import '../../features/courses/data/course_repository.dart';
-import '../../features/courses/models/course.dart';
+import '../../features/courses/models/course_models.dart';
 import '../../routes/app_routes.dart';
 
 class LessonScreen extends StatefulWidget {
