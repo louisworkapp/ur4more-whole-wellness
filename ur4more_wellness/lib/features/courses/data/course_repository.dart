@@ -221,4 +221,58 @@ class CourseRepository {
         .length;
     return '$completedWeeks of 12 weeks completed';
   }
+
+  /// Get courses for a specific faith tier
+  Future<List<Course>> getCoursesForTier(FaithTier tier) async {
+    // For now, return the UR4MORE Core course if tier allows it
+    if (tier == FaithTier.off) {
+      return [];
+    }
+    
+    final course = await getUr4moreCoreData();
+    return [course];
+  }
+
+  /// Get course by ID
+  Future<Course?> getCourseById(String courseId) async {
+    if (courseId == 'ur4more_core_12w' || courseId == 'ur4more_core_12wk') {
+      return await getUr4moreCoreData();
+    }
+    return null;
+  }
+
+  /// Get UR4MORE Core course data
+  Future<Course> getUr4moreCoreData() async {
+    // Create a mock BuildContext for loading assets
+    // In a real app, you'd pass the context from the calling widget
+    try {
+      final String jsonString = await rootBundle.loadString('assets/courses/ur4more_core_12w.json');
+      final Map<String, dynamic> jsonData = json.decode(jsonString);
+      return Course.fromJson(jsonData);
+    } catch (e) {
+      print('Error loading UR4MORE Core course: $e');
+      // Return a default course if loading fails
+      return Course(
+        id: 'ur4more_core_12w',
+        title: 'UR4MORE Discipleship Core (12 Weeks)',
+        description: 'A comprehensive 12-week discipleship journey',
+        summary: 'Transform your spiritual life through this foundational discipleship course',
+        provider: 'UR4MORE',
+        duration: '12 weeks',
+        cost: 'Free',
+        format: ['Self-paced'],
+        tags: ['foundations', 'discipleship'],
+        weeks: [],
+      );
+    }
+  }
+
+  /// Update course progress
+  Future<void> updateCourseProgress(String courseId, int week, bool completed) async {
+    if (completed) {
+      await markWeekComplete(week);
+    } else {
+      await persistWeekComplete(week, false);
+    }
+  }
 }

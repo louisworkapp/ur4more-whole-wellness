@@ -76,7 +76,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   Widget _buildErrorState(ThemeData theme, ColorScheme colorScheme) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(AppSpace.x6),
+        padding: EdgeInsets.all(AppSpace.x6),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -85,7 +85,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
               size: 64,
               color: colorScheme.error,
             ),
-            const SizedBox(height: AppSpace.x4),
+            SizedBox(height: AppSpace.x4),
             Text(
               'Unable to load lesson',
               style: theme.textTheme.titleLarge,
@@ -99,7 +99,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: AppSpace.x6),
+            SizedBox(height: AppSpace.x6),
             ElevatedButton(
               onPressed: _loadData,
               child: const Text('Retry'),
@@ -122,21 +122,21 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _buildWeekHeader(theme, colorScheme),
-                  const SizedBox(height: AppSpace.x6),
+                  SizedBox(height: AppSpace.x6),
                   _buildScriptureSection(theme, colorScheme),
-                  const SizedBox(height: AppSpace.x6),
+                  SizedBox(height: AppSpace.x6),
                   _buildLessonSummary(theme, colorScheme),
-                  const SizedBox(height: AppSpace.x6),
+                  SizedBox(height: AppSpace.x6),
                   _buildKeyIdeas(theme, colorScheme),
-                  const SizedBox(height: AppSpace.x6),
+                  SizedBox(height: AppSpace.x6),
                   _buildReflectionQuestions(theme, colorScheme),
-                  const SizedBox(height: AppSpace.x6),
+                  SizedBox(height: AppSpace.x6),
                   _buildPracticeSection(theme, colorScheme),
-                  const SizedBox(height: AppSpace.x6),
+                  SizedBox(height: AppSpace.x6),
                   _buildPrayerSection(theme, colorScheme),
-                  const SizedBox(height: AppSpace.x6),
+                  SizedBox(height: AppSpace.x6),
                   _buildResourcesSection(theme, colorScheme),
-                  const SizedBox(height: AppSpace.x8),
+                  SizedBox(height: AppSpace.x8),
                 ],
               ),
             ),
@@ -148,11 +148,11 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   }
 
   Widget _buildWeekHeader(ThemeData theme, ColorScheme colorScheme) {
-    if (_week == null) return const SizedBox.shrink();
+    if (_week == null) return SizedBox.shrink();
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(AppSpace.x5),
+      padding: EdgeInsets.all(AppSpace.x5),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -191,7 +191,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                         textAlign: TextAlign.center,
                       ),
               ),
-              const SizedBox(width: AppSpace.x3),
+              SizedBox(width: AppSpace.x3),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,7 +203,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(height: AppSpace.x1),
+                    SizedBox(height: AppSpace.x1),
                     Text(
                       _week!.title,
                       style: theme.textTheme.titleLarge?.copyWith(
@@ -230,7 +230,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   }
 
   Widget _buildScriptureSection(ThemeData theme, ColorScheme colorScheme) {
-    if (_week == null || _week!.scriptureRefs.isEmpty) return const SizedBox.shrink();
+    if (_week == null || _week!.scriptureRefs.isEmpty) return SizedBox.shrink();
 
     return _buildSection(
       theme,
@@ -242,7 +242,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
         runSpacing: AppSpace.x2,
         children: _week!.scriptureRefs.map((ref) {
           return Container(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
               horizontal: AppSpace.x3,
               vertical: AppSpace.x2,
             ),
@@ -264,7 +264,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   }
 
   Widget _buildLessonSummary(ThemeData theme, ColorScheme colorScheme) {
-    if (_week == null) return const SizedBox.shrink();
+    if (_week == null) return SizedBox.shrink();
 
     return _buildSection(
       theme,
@@ -282,7 +282,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   }
 
   Widget _buildKeyIdeas(ThemeData theme, ColorScheme colorScheme) {
-    if (_week == null || _week!.keyIdeas.isEmpty) return const SizedBox.shrink();
+    if (_week == null || _week!.keyIdeas.isEmpty) return SizedBox.shrink();
 
     return _buildSection(
       theme,
@@ -293,14 +293,14 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: _week!.keyIdeas.map((idea) {
           return Padding(
-            padding: const EdgeInsets.only(bottom: AppSpace.x2),
+            padding: EdgeInsets.only(bottom: AppSpace.x2),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   width: 6,
                   height: 6,
-                  margin: const EdgeInsets.only(
+                  margin: EdgeInsets.only(
                     top: AppSpace.x2,
                     right: AppSpace.x3,
                   ),
@@ -327,7 +327,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   }
 
   Widget _buildReflectionQuestions(ThemeData theme, ColorScheme colorScheme) {
-    if (_week == null || _week!.reflectionQs.isEmpty) return const SizedBox.shrink();
+    if (_week == null || _week!.reflectionQs.isEmpty) return SizedBox.shrink();
 
     return _buildSection(
       theme,
@@ -340,7 +340,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
           final index = entry.key;
           final question = entry.value;
           return Container(
-            margin: const EdgeInsets.only(bottom: AppSpace.x3),
+            margin: EdgeInsets.only(bottom: AppSpace.x3),
             padding: EdgeInsets.all(AppSpace.x4),
             decoration: BoxDecoration(
               color: colorScheme.surfaceVariant.withOpacity(0.3),
@@ -369,7 +369,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(width: AppSpace.x3),
+                SizedBox(width: AppSpace.x3),
                 Expanded(
                   child: Text(
                     question,
@@ -388,7 +388,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   }
 
   Widget _buildPracticeSection(ThemeData theme, ColorScheme colorScheme) {
-    if (_week == null || _week!.practice.isEmpty) return const SizedBox.shrink();
+    if (_week == null || _week!.practice.isEmpty) return SizedBox.shrink();
 
     return _buildSection(
       theme,
@@ -398,7 +398,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
       Column(
         children: _week!.practice.map((practice) {
           return Container(
-            margin: const EdgeInsets.only(bottom: AppSpace.x3),
+            margin: EdgeInsets.only(bottom: AppSpace.x3),
             padding: EdgeInsets.all(AppSpace.x4),
             decoration: BoxDecoration(
               color: colorScheme.tertiaryContainer.withOpacity(0.3),
@@ -454,7 +454,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   }
 
   Widget _buildPrayerSection(ThemeData theme, ColorScheme colorScheme) {
-    if (_week == null) return const SizedBox.shrink();
+    if (_week == null) return SizedBox.shrink();
 
     return _buildSection(
       theme,
@@ -480,7 +480,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   }
 
   Widget _buildResourcesSection(ThemeData theme, ColorScheme colorScheme) {
-    if (_week == null || _week!.resources.isEmpty) return const SizedBox.shrink();
+    if (_week == null || _week!.resources.isEmpty) return SizedBox.shrink();
 
     return _buildSection(
       theme,
@@ -564,10 +564,10 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   }
 
   Widget _buildBottomAction(ThemeData theme, ColorScheme colorScheme) {
-    if (_week == null) return const SizedBox.shrink();
+    if (_week == null) return SizedBox.shrink();
 
     return Container(
-      padding: const EdgeInsets.all(AppSpace.x4),
+      padding: EdgeInsets.all(AppSpace.x4),
       decoration: BoxDecoration(
         color: colorScheme.surface,
         border: Border(
