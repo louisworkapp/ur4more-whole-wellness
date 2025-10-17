@@ -249,6 +249,7 @@ class _MindWellnessScreenState extends State<MindWellnessScreen>
       floatingActionButton: ScaleTransition(
         scale: _fabAnimation,
         child: FloatingActionButton.extended(
+          heroTag: "mind_wellness_fab",
           onPressed: _createNewJournalEntry,
           backgroundColor: const Color(0xFF0FA97A),
           foregroundColor: Colors.white,

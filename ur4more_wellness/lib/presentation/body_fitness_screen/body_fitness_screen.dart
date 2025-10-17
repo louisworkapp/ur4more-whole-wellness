@@ -557,6 +557,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: "body_fitness_fab",
         onPressed: _showCreateWorkoutModal,
         backgroundColor: AppTheme.secondaryLight,
         child: CustomIconWidget(
