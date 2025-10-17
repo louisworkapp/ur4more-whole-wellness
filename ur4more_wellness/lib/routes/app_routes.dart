@@ -9,7 +9,6 @@ import '../features/courses/presentation/courses_screen.dart';
 import '../features/courses/presentation/course_detail_screen.dart';
 import '../features/courses/presentation/week_lesson_screen.dart';
 import '../presentation/discipleship_courses_screen/discipleship_courses_screen.dart';
-import '../presentation/lesson_screen/lesson_screen.dart';
 
 class AppRoutes {
   static const String splash = '/splash';
@@ -22,7 +21,6 @@ class AppRoutes {
   static const String courseDetail = '/courses/detail';
   static const String weekLesson = '/courses/week';
   static const String discipleshipCourses = '/discipleship-courses';
-  static const String lesson = '/lesson';
   
   // Special course IDs
   static const String ur4moreCoreId = 'ur4more_core_12w';
@@ -39,6 +37,5 @@ class AppRoutes {
     courseDetail: (context) => const CourseDetailScreen(),
     weekLesson: (context) => const WeekLessonScreen(),
     discipleshipCourses: (context) => const DiscipleshipCoursesScreen(),
-    lesson: (context) => const LessonScreen(),
   };
 }
