@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../courses/models/course_models.dart';
 import '../../../routes/app_routes.dart';
-import '../../../services/faith_service.dart';
 import '../../../design/tokens.dart';
 import '../../../theme/app_colors.dart';
 

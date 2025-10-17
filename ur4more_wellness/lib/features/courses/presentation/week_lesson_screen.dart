@@ -3,6 +3,7 @@ import '../../../design/tokens.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../data/course_repository.dart';
 import '../models/course_models.dart';
+import '../../../services/scripture_service.dart';
 
 class WeekLessonScreen extends StatefulWidget {
   const WeekLessonScreen({super.key});
@@ -13,10 +14,12 @@ class WeekLessonScreen extends StatefulWidget {
 
 class _WeekLessonScreenState extends State<WeekLessonScreen> {
   final CourseRepository _repository = CourseRepository();
-  Course? _course;
   Week? _week;
   bool _isCompleted = false;
   bool _isLoading = true;
+  final Map<String, bool> _expandedScriptures = {};
+  final Map<int, bool> _expandedReflections = {};
+  final ScriptureService _scriptureService = ScriptureService();
 
   @override
   void initState() {
@@ -27,8 +30,13 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (_isLoading) {
-      _loadData();
+      _initializeAndLoadData();
     }
+  }
+
+  Future<void> _initializeAndLoadData() async {
+    await _scriptureService.initialize();
+    _loadData();
   }
 
   Future<void> _loadData() async {
@@ -49,7 +57,6 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
       final isCompleted = await _repository.isWeekComplete(weekNumber);
 
       setState(() {
-        _course = course;
         _week = week;
         _isCompleted = isCompleted;
         _isLoading = false;
@@ -244,25 +251,75 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
       colorScheme,
       'Scripture Focus',
       Icons.menu_book,
-      Wrap(
-        spacing: AppSpace.x2,
-        runSpacing: AppSpace.x2,
+      Column(
         children: _week!.scriptureRefs.map((ref) {
+          final isExpanded = _expandedScriptures[ref] ?? false;
+          final scriptureText = _scriptureService.getScriptureText(ref);
+          
           return Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: AppSpace.x3,
-              vertical: AppSpace.x2,
-            ),
+            margin: EdgeInsets.only(bottom: AppSpace.x3),
             decoration: BoxDecoration(
               color: colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(AppRadius.md),
-            ),
-            child: Text(
-              ref,
-              style: theme.textTheme.labelMedium?.copyWith(
-                color: colorScheme.onSecondaryContainer,
-                fontWeight: FontWeight.w600,
+              border: Border.all(
+                color: colorScheme.outline.withOpacity(0.2),
               ),
+            ),
+            child: Column(
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      _expandedScriptures[ref] = !isExpanded;
+                    });
+                  },
+                  borderRadius: BorderRadius.circular(AppRadius.md),
+                  child: Padding(
+                    padding: EdgeInsets.all(AppSpace.x3),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.menu_book,
+                          color: colorScheme.onSecondaryContainer,
+                          size: 20,
+                        ),
+                        SizedBox(width: AppSpace.x2),
+                        Expanded(
+                          child: Text(
+                            ref,
+                            style: theme.textTheme.labelMedium?.copyWith(
+                              color: colorScheme.onSecondaryContainer,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                        Icon(
+                          isExpanded ? Icons.expand_less : Icons.expand_more,
+                          color: colorScheme.onSecondaryContainer,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                if (isExpanded && scriptureText != null)
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.fromLTRB(
+                      AppSpace.x3,
+                      0,
+                      AppSpace.x3,
+                      AppSpace.x3,
+                    ),
+                    child: Text(
+                      scriptureText,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSecondaryContainer.withOpacity(0.9),
+                        height: 1.5,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ),
+              ],
             ),
           );
         }).toList(),
@@ -346,9 +403,11 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
         children: _week!.reflectionQs.asMap().entries.map((entry) {
           final index = entry.key;
           final question = entry.value;
+          final isExpanded = _expandedReflections[index] ?? false;
+          final answer = _getReflectionAnswer(index);
+          
           return Container(
             margin: EdgeInsets.only(bottom: AppSpace.x3),
-            padding: EdgeInsets.all(AppSpace.x4),
             decoration: BoxDecoration(
               color: colorScheme.surfaceVariant.withOpacity(0.3),
               borderRadius: BorderRadius.circular(AppRadius.md),
@@ -356,42 +415,115 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                 color: colorScheme.outline.withOpacity(0.2),
               ),
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
               children: [
-                Container(
-                  width: 24,
-                  height: 24,
-                  decoration: BoxDecoration(
-                    color: colorScheme.primary,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      '${index + 1}',
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: colorScheme.onPrimary,
-                        fontWeight: FontWeight.w600,
-                      ),
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      _expandedReflections[index] = !isExpanded;
+                    });
+                  },
+                  borderRadius: BorderRadius.circular(AppRadius.md),
+                  child: Padding(
+                    padding: EdgeInsets.all(AppSpace.x4),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 24,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            color: colorScheme.primary,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Text(
+                              '${index + 1}',
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                color: colorScheme.onPrimary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: AppSpace.x3),
+                        Expanded(
+                          child: Text(
+                            question,
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.onSurface,
+                              height: 1.4,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: AppSpace.x2),
+                        Icon(
+                          isExpanded ? Icons.expand_less : Icons.expand_more,
+                          color: colorScheme.onSurface,
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                SizedBox(width: AppSpace.x3),
-                Expanded(
-                  child: Text(
-                    question,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: colorScheme.onSurface,
-                      height: 1.4,
+                if (isExpanded && answer != null)
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.fromLTRB(
+                      AppSpace.x4 + 24 + AppSpace.x3, // Align with question text
+                      AppSpace.x2,
+                      AppSpace.x4,
+                      AppSpace.x4,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.lightbulb_outline,
+                              size: 16,
+                              color: colorScheme.primary,
+                            ),
+                            SizedBox(width: AppSpace.x2),
+                            Text(
+                              'Reflection Guide:',
+                              style: theme.textTheme.labelMedium?.copyWith(
+                                color: colorScheme.primary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: AppSpace.x2),
+                        Text(
+                          answer,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: colorScheme.onSurface.withOpacity(0.8),
+                            height: 1.4,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
               ],
             ),
           );
         }).toList(),
       ),
     );
+  }
+
+  String? _getReflectionAnswer(int questionIndex) {
+    // Provide thoughtful reflection guides for each question
+    final answers = [
+      "Consider how this truth applies to your daily life. What specific situations come to mind? How might this change your perspective or actions?",
+      "Think about your personal experience with this concept. What challenges or victories have you faced? How has God shown Himself faithful?",
+      "Reflect on the practical implications of this teaching. What steps can you take to apply this in your relationships, work, or daily routines?",
+      "Consider the deeper meaning behind this principle. How does it connect to God's character and His plan for your life?",
+      "Think about the community aspect of this teaching. How might this impact your relationships with family, friends, or church community?",
+    ];
+    
+    return answers[questionIndex % answers.length];
   }
 
   Widget _buildPracticeSection(ThemeData theme, ColorScheme colorScheme) {

@@ -284,14 +284,20 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     final isCompleted = _progress!.isWeekComplete(week.week);
     final isUnlocked = _repository.isWeekUnlocked(week.week, _currentTier, _progress!);
     final isCurrentWeek = week.week == _progress!.nextIncompleteWeek;
+    final hasStartedCourse = _progress!.weekCompletion.values.any((completed) => completed);
 
     return Card(
       elevation: isCurrentWeek ? 4 : 1,
+      color: hasStartedCourse && isUnlocked 
+          ? const Color(0xFFFFD700).withOpacity(0.1) // Gold background
+          : null,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppRadius.lg),
         side: isCurrentWeek
-            ? BorderSide(color: colorScheme.primary, width: 2)
-            : BorderSide.none,
+            ? BorderSide(color: hasStartedCourse ? const Color(0xFFFFD700) : colorScheme.primary, width: 2)
+            : hasStartedCourse && isUnlocked
+                ? BorderSide(color: const Color(0xFFFFD700).withOpacity(0.3), width: 1)
+                : BorderSide.none,
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(AppRadius.lg),
@@ -308,9 +314,9 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                     height: 40,
                     decoration: BoxDecoration(
                       color: isCompleted
-                          ? colorScheme.primary
+                          ? (hasStartedCourse ? const Color(0xFFFFD700) : colorScheme.primary)
                           : isUnlocked
-                              ? colorScheme.primaryContainer
+                              ? (hasStartedCourse ? const Color(0xFFFFD700).withOpacity(0.8) : colorScheme.primaryContainer)
                               : colorScheme.surfaceVariant,
                       borderRadius: BorderRadius.circular(AppRadius.md),
                     ),
@@ -325,7 +331,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                                 '${week.week}',
                                 style: theme.textTheme.titleMedium?.copyWith(
                                   fontWeight: FontWeight.w600,
-                                  color: colorScheme.onPrimaryContainer,
+                                  color: hasStartedCourse ? Colors.white : colorScheme.onPrimaryContainer,
                                 ),
                                 textAlign: TextAlign.center,
                               )
