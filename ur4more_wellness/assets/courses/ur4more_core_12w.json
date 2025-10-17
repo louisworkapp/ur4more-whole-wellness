@@ -1,0 +1,355 @@
+{
+  "id": "ur4more_core_12w",
+  "title": "UR4MORE Discipleship Core (12 Weeks)",
+  "description": "A practical 12-week journey to follow Jesus deeply and live on mission.",
+  "weeks": [
+    {
+      "week": 1,
+      "title": "Identity in Christ",
+      "theme": "Discovering who you are in Christ and your new identity as a child of God.",
+      "scriptureRefs": ["2 Cor 5:17", "Eph 1:3–5", "John 1:12"],
+      "lessonSummary": "You are a new creation in Christ, chosen and adopted by God. This week you can explore what it means to live from your true identity rather than trying to earn your worth. When you understand who you are in Jesus, you can face life from a place of security and confidence.",
+      "keyIdeas": [
+        "You are a beloved child of God, not because of what you do, but because of who Jesus is",
+        "Your old self died with Christ; you now live as a new creation",
+        "You can fight from victory, not for victory - your worth is already secured in Christ",
+        "When you die to self, you make room for God's love to flow through you"
+      ],
+      "reflectionQs": [
+        "What does it mean to you that you're a child of God?",
+        "How might knowing your true identity change how you face challenges today?",
+        "What old identity patterns do you need to let go of?"
+      ],
+      "practice": [
+        {"title": "Daily Identity Read", "desc": "Read your identity statements each morning; note one word that stands out.", "estMinutes": 5},
+        {"title": "Gratitude Note", "desc": "Write a 2-line gratitude to God for one way you saw grace today.", "estMinutes": 3}
+      ],
+      "prayer": "Father, help me to see myself as You see me - as Your beloved child, chosen and secure in Christ. May I live from this truth today.",
+      "resources": [
+        {"title": "Identity in Christ (overview)", "kind": "article", "url": "https://example.com/identity-overview"}
+      ],
+      "tierMin": "Light",
+      "estLessonMinutes": 12,
+      "estWeekPracticeMinutes": 40
+    },
+    {
+      "week": 2,
+      "title": "The Gospel of Grace",
+      "theme": "Understanding salvation through Jesus and the assurance of new life by grace.",
+      "scriptureRefs": ["Eph 2:8-10", "Rom 5:8", "John 3:16"],
+      "lessonSummary": "The gospel isn't just how you get saved - it's how you live every day. You can rest in God's grace, knowing that Jesus has done everything needed for your salvation. This week you can explore how grace transforms your relationship with God and others.",
+      "keyIdeas": [
+        "Salvation is a free gift from God, not something you can earn",
+        "Grace means God loves you even when you don't deserve it",
+        "You can be confident in your salvation because it depends on Jesus, not you",
+        "Grace should overflow from you to others"
+      ],
+      "reflectionQs": [
+        "How does understanding grace change how you view your mistakes?",
+        "Where do you see grace at work in your life this week?",
+        "How can you extend grace to someone who has hurt you?"
+      ],
+      "practice": [
+        {"title": "Grace Journal", "desc": "Each evening, write down one way you experienced God's grace today.", "estMinutes": 5},
+        {"title": "Grace Conversation", "desc": "Have one conversation where you choose grace over judgment.", "estMinutes": 15}
+      ],
+      "prayer": "Thank You, God, for Your amazing grace that saves me and sustains me. Help me to live in the freedom of Your love and extend that same grace to others.",
+      "resources": [
+        {"title": "Understanding Grace", "kind": "article", "url": "https://example.com/grace-overview"}
+      ],
+      "tierMin": "Light",
+      "estLessonMinutes": 15,
+      "estWeekPracticeMinutes": 50
+    },
+    {
+      "week": 3,
+      "title": "The Word of God",
+      "theme": "Building the habit of Bible reading and learning to apply Scripture in daily life.",
+      "scriptureRefs": ["2 Tim 3:16-17", "Ps 119:105", "Josh 1:8"],
+      "lessonSummary": "The Bible isn't just a book - it's God's living word that can transform your life. You can develop a simple, sustainable habit of reading Scripture that fits your life. This week you can learn how to hear from God through His word and apply what you read.",
+      "keyIdeas": [
+        "Scripture is God's primary way of speaking to His people",
+        "You don't need to read huge amounts - consistency matters more than quantity",
+        "The Bible is meant to be applied, not just studied",
+        "God's word can guide your decisions and transform your thinking"
+      ],
+      "reflectionQs": [
+        "What's your current relationship with reading the Bible?",
+        "What time of day works best for you to connect with God through Scripture?",
+        "How can you apply one verse you've read this week?"
+      ],
+      "practice": [
+        {"title": "Daily Reading", "desc": "Read one chapter or passage each day; ask 'What is God saying to me?'", "estMinutes": 10},
+        {"title": "Scripture Memory", "desc": "Choose one verse from this week to memorize and meditate on.", "estMinutes": 5}
+      ],
+      "prayer": "Lord, open my heart to hear Your voice through Your word. Help me to not just read Scripture, but to let it change me and guide my life.",
+      "resources": [
+        {"title": "Bible Reading Guide", "kind": "article", "url": "https://example.com/bible-reading"}
+      ],
+      "tierMin": "Disciple",
+      "estLessonMinutes": 18,
+      "estWeekPracticeMinutes": 70
+    },
+    {
+      "week": 4,
+      "title": "Prayer and Devotion",
+      "theme": "Growing in prayer, listening to God, and developing a daily relationship with Him.",
+      "scriptureRefs": ["Phil 4:6-7", "Matt 6:6", "1 Thess 5:17"],
+      "lessonSummary": "Prayer is simply talking with God - it doesn't need to be complicated or formal. You can develop a rhythm of prayer that feels natural and life-giving. This week you can explore different ways to pray and learn to listen for God's voice.",
+      "keyIdeas": [
+        "Prayer is conversation with God, not a performance",
+        "You can pray anywhere, anytime, about anything",
+        "Listening is just as important as speaking in prayer",
+        "Prayer changes you even when circumstances don't change"
+      ],
+      "reflectionQs": [
+        "What does your current prayer life look like?",
+        "What would help you feel more comfortable talking with God?",
+        "How do you sense God speaking to you?"
+      ],
+      "practice": [
+        {"title": "Morning Prayer", "desc": "Start each day with 5 minutes of honest conversation with God.", "estMinutes": 5},
+        {"title": "Prayer Walk", "desc": "Take a 10-minute walk and pray for people and situations as they come to mind.", "estMinutes": 10}
+      ],
+      "prayer": "Father, thank You that You want to hear from me. Help me to be honest and open in our conversations, and teach me to listen for Your voice.",
+      "resources": [
+        {"title": "Prayer Basics", "kind": "article", "url": "https://example.com/prayer-guide"}
+      ],
+      "tierMin": "Disciple",
+      "estLessonMinutes": 20,
+      "estWeekPracticeMinutes": 75
+    },
+    {
+      "week": 5,
+      "title": "The Holy Spirit",
+      "theme": "Living by the Holy Spirit's power and understanding His guidance and gifts.",
+      "scriptureRefs": ["Acts 1:8", "Gal 5:22-23", "John 14:26"],
+      "lessonSummary": "The Holy Spirit isn't just a theological concept - He's your constant companion and helper. You can learn to recognize His voice and rely on His power in your daily life. This week you can explore how the Spirit wants to guide and empower you.",
+      "keyIdeas": [
+        "The Holy Spirit is God living in you, not just with you",
+        "You can learn to recognize the Spirit's voice through practice",
+        "The Spirit produces fruit in your life as you cooperate with Him",
+        "Every believer has spiritual gifts to use for God's kingdom"
+      ],
+      "reflectionQs": [
+        "How do you currently experience the Holy Spirit in your life?",
+        "What spiritual gifts do you think God has given you?",
+        "How can you be more sensitive to the Spirit's guidance today?"
+      ],
+      "practice": [
+        {"title": "Spirit Awareness", "desc": "Pause three times today and ask 'What is the Holy Spirit saying to me right now?'", "estMinutes": 5},
+        {"title": "Gift Discovery", "desc": "Ask two people who know you well what they see as your spiritual gifts.", "estMinutes": 20}
+      ],
+      "prayer": "Holy Spirit, thank You for living in me. Help me to be more aware of Your presence and more responsive to Your guidance in my daily life.",
+      "resources": [
+        {"title": "Understanding the Holy Spirit", "kind": "article", "url": "https://example.com/holy-spirit"}
+      ],
+      "tierMin": "Disciple",
+      "estLessonMinutes": 22,
+      "estWeekPracticeMinutes": 80
+    },
+    {
+      "week": 6,
+      "title": "Community and Fellowship",
+      "theme": "Connecting with the Body of Christ, the importance of church, and loving one another.",
+      "scriptureRefs": ["Heb 10:24-25", "1 Cor 12:27", "John 13:34-35"],
+      "lessonSummary": "You weren't meant to follow Jesus alone. God designed you to grow in community with other believers. This week you can explore what it means to be part of the church and how to build meaningful Christian friendships.",
+      "keyIdeas": [
+        "The church is God's family, not just a building or event",
+        "You need other believers to help you grow and stay accountable",
+        "Community requires vulnerability and commitment",
+        "You can be a source of encouragement and support for others"
+      ],
+      "reflectionQs": [
+        "What does Christian community look like in your life right now?",
+        "How can you be more intentional about connecting with other believers?",
+        "What would help you feel more comfortable being vulnerable in Christian community?"
+      ],
+      "practice": [
+        {"title": "Community Connection", "desc": "Reach out to one Christian friend this week for encouragement or support.", "estMinutes": 15},
+        {"title": "Serve Together", "desc": "Find one way to serve alongside other believers in your community.", "estMinutes": 30}
+      ],
+      "prayer": "God, thank You for placing me in Your family. Help me to be a good brother/sister to other believers and to receive the support and encouragement You provide through them.",
+      "resources": [
+        {"title": "Building Christian Community", "kind": "article", "url": "https://example.com/community"}
+      ],
+      "tierMin": "Disciple",
+      "estLessonMinutes": 25,
+      "estWeekPracticeMinutes": 90
+    },
+    {
+      "week": 7,
+      "title": "Obedience and Character",
+      "theme": "Pursuing Christlike character, holiness, and obeying Jesus in everyday life.",
+      "scriptureRefs": ["1 Pet 1:15-16", "Gal 5:22-23", "Matt 7:21"],
+      "lessonSummary": "Following Jesus means more than just believing - it means becoming like Him. You can grow in Christlike character through daily choices and habits. This week you can explore what it means to pursue holiness and integrity in your everyday life.",
+      "keyIdeas": [
+        "Holiness is about becoming like Jesus, not following rules",
+        "Character is built through small, consistent choices",
+        "You can't be holy on your own - you need God's help",
+        "Integrity means being the same person everywhere"
+      ],
+      "reflectionQs": [
+        "What areas of your character need the most growth right now?",
+        "How can you pursue holiness without becoming legalistic?",
+        "Where do you struggle most with integrity?"
+      ],
+      "practice": [
+        {"title": "Character Check", "desc": "At the end of each day, ask 'How did I reflect Jesus in my choices today?'", "estMinutes": 5},
+        {"title": "Integrity Moment", "desc": "Choose one situation this week where you'll prioritize integrity over convenience.", "estMinutes": 10}
+      ],
+      "prayer": "Lord, make me more like You. Help me to choose holiness in the small moments and to grow in character that honors You.",
+      "resources": [
+        {"title": "Growing in Character", "kind": "article", "url": "https://example.com/character"}
+      ],
+      "tierMin": "Disciple",
+      "estLessonMinutes": 28,
+      "estWeekPracticeMinutes": 100
+    },
+    {
+      "week": 8,
+      "title": "Serving Others",
+      "theme": "Using your spiritual gifts and time to serve God and people with humility and love.",
+      "scriptureRefs": ["Mark 10:45", "1 Pet 4:10", "Gal 5:13"],
+      "lessonSummary": "Jesus came to serve, and He calls you to do the same. You can discover how God wants to use your unique gifts and passions to bless others. This week you can explore what it means to serve with the right heart and find your place in God's kingdom work.",
+      "keyIdeas": [
+        "Serving others is how you serve God",
+        "Everyone has something valuable to contribute",
+        "Service should flow from love, not obligation",
+        "Small acts of service can have big impact"
+      ],
+      "reflectionQs": [
+        "What are your natural gifts and how could they serve others?",
+        "What causes or needs stir your heart?",
+        "How can you serve others without burning out?"
+      ],
+      "practice": [
+        {"title": "Daily Service", "desc": "Look for one opportunity each day to serve someone in a small way.", "estMinutes": 10},
+        {"title": "Gift Assessment", "desc": "Take time to reflect on your gifts and how you might use them to serve.", "estMinutes": 20}
+      ],
+      "prayer": "God, show me how You want to use my life to serve others. Give me a heart of humility and love as I look for ways to bless those around me.",
+      "resources": [
+        {"title": "Finding Your Place to Serve", "kind": "article", "url": "https://example.com/serving"}
+      ],
+      "tierMin": "Kingdom Builder",
+      "estLessonMinutes": 30,
+      "estWeekPracticeMinutes": 110
+    },
+    {
+      "week": 9,
+      "title": "Sharing Your Faith",
+      "theme": "Learning to share the gospel and your testimony, and living on mission in the world.",
+      "scriptureRefs": ["Matt 28:19-20", "1 Pet 3:15", "Acts 1:8"],
+      "lessonSummary": "Sharing your faith isn't about being pushy or having all the answers - it's about sharing the hope you've found in Jesus. You can learn to share your story naturally and compassionately. This week you can explore how to live on mission in your everyday world.",
+      "keyIdeas": [
+        "Your story is powerful - you don't need to be a theologian",
+        "Sharing faith starts with building relationships",
+        "You can be prepared without being pushy",
+        "Living like Jesus is the best way to share Jesus"
+      ],
+      "reflectionQs": [
+        "What's your story of how you came to know Jesus?",
+        "Who in your life might benefit from hearing about your faith?",
+        "How can you build relationships with people who don't know Jesus?"
+      ],
+      "practice": [
+        {"title": "Story Practice", "desc": "Write out your testimony in 2-3 minutes; practice sharing it with a friend.", "estMinutes": 15},
+        {"title": "Relationship Building", "desc": "Initiate one conversation this week with someone who doesn't share your faith.", "estMinutes": 20}
+      ],
+      "prayer": "Lord, give me courage and wisdom to share Your love with others. Help me to live in such a way that people want to know what makes me different.",
+      "resources": [
+        {"title": "Sharing Your Faith Naturally", "kind": "article", "url": "https://example.com/evangelism"}
+      ],
+      "tierMin": "Kingdom Builder",
+      "estLessonMinutes": 32,
+      "estWeekPracticeMinutes": 120
+    },
+    {
+      "week": 10,
+      "title": "Spiritual Warfare and Freedom",
+      "theme": "Understanding the battle against sin and evil, and how to stand firm in Christ's victory.",
+      "scriptureRefs": ["Eph 6:10-18", "2 Cor 10:4-5", "James 4:7"],
+      "lessonSummary": "There's a spiritual battle happening, but you don't have to be afraid - Jesus has already won. You can learn to recognize the enemy's tactics and stand firm in your identity in Christ. This week you can explore how to live in freedom and victory.",
+      "keyIdeas": [
+        "The battle is real, but the victory is already won",
+        "Your identity in Christ is your greatest weapon",
+        "You can recognize lies and replace them with truth",
+        "Prayer and Scripture are powerful weapons against spiritual attack"
+      ],
+      "reflectionQs": [
+        "What lies about yourself do you often believe?",
+        "How do you typically respond when you face spiritual opposition?",
+        "What truths from Scripture can help you stand firm?"
+      ],
+      "practice": [
+        {"title": "Truth Declaration", "desc": "Each morning, declare one truth from Scripture about your identity in Christ.", "estMinutes": 5},
+        {"title": "Lie Recognition", "desc": "When you notice negative thoughts, ask 'Is this from God or the enemy?'", "estMinutes": 10}
+      ],
+      "prayer": "Jesus, thank You that You have overcome the world. Help me to stand firm in Your victory and to recognize and reject the enemy's lies.",
+      "resources": [
+        {"title": "Spiritual Warfare Basics", "kind": "article", "url": "https://example.com/spiritual-warfare"}
+      ],
+      "tierMin": "Kingdom Builder",
+      "estLessonMinutes": 35,
+      "estWeekPracticeMinutes": 130
+    },
+    {
+      "week": 11,
+      "title": "Perseverance in Trials",
+      "theme": "Trusting God through challenges and cultivating faith, hope, and joy in difficult times.",
+      "scriptureRefs": ["James 1:2-4", "Rom 8:28", "2 Cor 4:17"],
+      "lessonSummary": "Life will have hard seasons, but God can use them to make you stronger and more like Jesus. You can learn to face trials with faith and hope. This week you can explore how to persevere and even find joy in difficult circumstances.",
+      "keyIdeas": [
+        "Trials are not a sign that God has abandoned you",
+        "God can use difficult times to strengthen your faith",
+        "You can choose joy even in the midst of pain",
+        "Perseverance builds character and hope"
+      ],
+      "reflectionQs": [
+        "How do you typically respond when life gets difficult?",
+        "What trials have helped you grow closer to God?",
+        "How can you support others who are going through hard times?"
+      ],
+      "practice": [
+        {"title": "Gratitude in Trials", "desc": "Each day, find one thing to be grateful for, even in difficult circumstances.", "estMinutes": 5},
+        {"title": "Support Others", "desc": "Reach out to someone who is going through a difficult time.", "estMinutes": 20}
+      ],
+      "prayer": "Father, help me to trust You even when life is hard. Give me the strength to persevere and the faith to see Your goodness in every season.",
+      "resources": [
+        {"title": "Finding Hope in Hard Times", "kind": "article", "url": "https://example.com/perseverance"}
+      ],
+      "tierMin": "Kingdom Builder",
+      "estLessonMinutes": 38,
+      "estWeekPracticeMinutes": 140
+    },
+    {
+      "week": 12,
+      "title": "Living on Mission",
+      "theme": "Continuing as a disciple: making disciples of others and embracing the Great Commission.",
+      "scriptureRefs": ["Matt 28:19-20", "2 Tim 2:2", "Matt 5:14-16"],
+      "lessonSummary": "This isn't the end of your journey - it's just the beginning. You're now equipped to help others discover the same life-changing relationship with Jesus. This week you can explore how to live as a disciple-maker and continue growing in your faith.",
+      "keyIdeas": [
+        "Making disciples is every believer's calling",
+        "You don't need to be perfect to help others grow",
+        "Discipleship happens best in relationships",
+        "Your mission field is wherever God has placed you"
+      ],
+      "reflectionQs": [
+        "Who in your life could benefit from what you've learned in this course?",
+        "How do you want to continue growing in your faith after these 12 weeks?",
+        "What would it look like for you to make disciples in your context?"
+      ],
+      "practice": [
+        {"title": "Share Your Journey", "desc": "Tell someone about what you've learned and how it's changed you.", "estMinutes": 20},
+        {"title": "Next Steps Planning", "desc": "Create a plan for how you'll continue growing as a disciple.", "estMinutes": 30}
+      ],
+      "prayer": "Lord, thank You for this journey of growth. Help me to continue following You and to share the hope I've found with others. Use my life to make disciples for Your kingdom.",
+      "resources": [
+        {"title": "Becoming a Disciple-Maker", "kind": "article", "url": "https://example.com/disciple-making"}
+      ],
+      "tierMin": "Kingdom Builder",
+      "estLessonMinutes": 40,
+      "estWeekPracticeMinutes": 150
+    }
+  ]
+}

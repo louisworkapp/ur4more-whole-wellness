@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../courses/models/course.dart';
+import '../../courses/models/course_models.dart';
 import '../../../routes/app_routes.dart';
 import '../../../services/faith_service.dart';
+import '../../../design/tokens.dart';
 
 class DiscipleshipHeader extends StatefulWidget {
-  const DiscipleshipHeader({super.key});
+  final FaithTier? tier;
+  
+  const DiscipleshipHeader({
+    super.key,
+    this.tier,
+  });
 
   @override
   State<DiscipleshipHeader> createState() => _DiscipleshipHeaderState();
@@ -21,176 +27,260 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
   void initState() {
     super.initState();
     _loadProgress();
-    _loadFaithTier();
   }
 
   Future<void> _loadProgress() async {
-    final prefs = await SharedPreferences.getInstance();
-    final pct = prefs.getDouble('course:${AppRoutes.ur4moreCoreId}:progress') ?? 0;
-    final w = prefs.getInt('course:${AppRoutes.ur4moreCoreId}:week') ?? 0;
-    setState(() {
-      _progress = pct.clamp(0, 1);
-      _week = w;
-      _hasStarted = _progress > 0;
-    });
-  }
-
-  Future<void> _loadFaithTier() async {
-    final faithMode = await FaithService.getFaithMode();
-    setState(() {
-      _tier = _getFaithTierFromMode(faithMode.toString().split('.').last);
-    });
-  }
-
-  FaithTier _getFaithTierFromMode(String faithMode) {
-    switch (faithMode.toLowerCase()) {
-      case 'off':
-        return FaithTier.off;
-      case 'light':
-        return FaithTier.light;
-      case 'disciple':
-        return FaithTier.disciple;
-      case 'kingdom':
-        return FaithTier.kingdomBuilder;
-      default:
-        return FaithTier.off;
-    }
-  }
-
-  void _goStartOrContinue() {
-    if (_hasStarted) {
-      Navigator.pushNamed(
-        context,
-        AppRoutes.courseDetail,
-        arguments: {'courseId': AppRoutes.ur4moreCoreId},
-      );
-    } else {
-      // For Light tier you might prefer courses list:
-      final goCore = _tier == FaithTier.disciple || _tier == FaithTier.kingdomBuilder;
-      if (goCore) {
-        Navigator.pushNamed(
-          context,
-          AppRoutes.courseDetail,
-          arguments: {'courseId': AppRoutes.ur4moreCoreId},
-        );
-      } else {
-        Navigator.pushNamed(context, AppRoutes.discipleshipCourses);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final tier = widget.tier ?? FaithTier.light; // Default to light tier
+      
+      // Load progress data
+      double progress = 0.0;
+      int completedWeeks = 0;
+      
+      for (int week = 1; week <= 12; week++) {
+        final key = 'course:ur4more_core_12w:week:$week:done';
+        if (prefs.getBool(key) ?? false) {
+          completedWeeks++;
+        }
       }
+      
+      progress = completedWeeks / 12;
+      final currentWeek = prefs.getInt('course:ur4more_core_12w:lastWeek') ?? 1;
+      final hasStarted = completedWeeks > 0;
+      
+      setState(() {
+        _progress = progress;
+        _week = currentWeek;
+        _hasStarted = hasStarted;
+        _tier = tier;
+      });
+    } catch (e) {
+      print('Error loading discipleship progress: $e');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_tier == FaithTier.off) return const SizedBox.shrink();
+    // Hide completely if tier is off
+    if (_tier == FaithTier.off) {
+      return const SizedBox.shrink();
+    }
 
     final theme = Theme.of(context);
-    final cs = theme.colorScheme;
+    final colorScheme = theme.colorScheme;
 
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            cs.primary.withOpacity(.14),
-            cs.primary.withOpacity(.06),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: cs.primary.withOpacity(.12)),
+      margin: const EdgeInsets.symmetric(
+        horizontal: AppSpace.x4,
+        vertical: AppSpace.x3,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // header icon + title
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: cs.primary,
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: Icon(Icons.auto_stories_rounded, color: cs.onPrimary),
+      child: Card(
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+        ),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+          onTap: _navigateToDiscipleship,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  colorScheme.primaryContainer,
+                  colorScheme.primaryContainer.withOpacity(0.8),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  'Start your Discipleship',
-                  style: theme.textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: .2,
-                  ),
+              borderRadius: BorderRadius.circular(AppRadius.lg),
+            ),
+            padding: const EdgeInsets.all(AppSpace.x5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: 56,
+                      height: 56,
+                      decoration: BoxDecoration(
+                        color: colorScheme.primary,
+                        borderRadius: BorderRadius.circular(AppRadius.lg),
+                      ),
+                      child: Icon(
+                        Icons.auto_stories_rounded,
+                        color: colorScheme.onPrimary,
+                        size: 28,
+                      ),
+                    ),
+                    const SizedBox(width: AppSpace.x4),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Start your Discipleship',
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.w700,
+                              color: colorScheme.onPrimaryContainer,
+                            ),
+                          ),
+                          const SizedBox(height: AppSpace.x1),
+                          Text(
+                            _getSubtitleText(),
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                              color: colorScheme.onPrimaryContainer.withOpacity(0.9),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (_hasStarted) ...[
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpace.x3,
+                          vertical: AppSpace.x2,
+                        ),
+                        decoration: BoxDecoration(
+                          color: colorScheme.onPrimaryContainer.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(AppRadius.md),
+                        ),
+                        child: Text(
+                          '${(_progress * 100).round()}%',
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            color: colorScheme.onPrimaryContainer,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
-              ),
-              if (_hasStarted)
-                _ProgressChip(progress: _progress, week: _week),
-            ],
-          ),
-          const SizedBox(height: 8),
-
-          // supportive copy
-          Text(
-            _tier == FaithTier.light
-                ? 'Explore Alpha and our Core track—gentle, practical steps to grow spiritually.'
-                : 'A 12-week journey to follow Jesus deeply and multiply impact.',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: cs.onSurfaceVariant,
+                if (_hasStarted) ...[
+                  const SizedBox(height: AppSpace.x4),
+                  _buildProgressSection(theme, colorScheme),
+                ],
+                const SizedBox(height: AppSpace.x4),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton.icon(
+                        onPressed: _navigateToDiscipleship,
+                        icon: Icon(
+                          _hasStarted ? Icons.play_arrow : Icons.launch,
+                          size: 20,
+                        ),
+                        label: Text(
+                          _hasStarted ? 'Continue' : 'Start Course',
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(0, 48),
+                          backgroundColor: colorScheme.primary,
+                          foregroundColor: colorScheme.onPrimary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(AppRadius.md),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: AppSpace.x3),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpace.x3,
+                        vertical: AppSpace.x2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: colorScheme.onPrimaryContainer.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(AppRadius.md),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.schedule,
+                            size: 16,
+                            color: colorScheme.onPrimaryContainer,
+                          ),
+                          const SizedBox(width: AppSpace.x1),
+                          Text(
+                            '12 weeks',
+                            style: theme.textTheme.labelMedium?.copyWith(
+                              color: colorScheme.onPrimaryContainer,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-
-          const SizedBox(height: 12),
-
-          // CTA row
-          Row(
-            children: [
-              ElevatedButton.icon(
-                onPressed: _goStartOrContinue,
-                icon: Icon(_hasStarted ? Icons.play_arrow_rounded : Icons.flag),
-                label: Text(_hasStarted ? 'Continue' : 'Start Discipleship'),
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14)),
-                ),
-              ),
-              const SizedBox(width: 12),
-              TextButton(
-                onPressed: () => Navigator.pushNamed(context, AppRoutes.courses),
-                child: const Text('Browse courses'),
-              ),
-            ],
-          ),
-        ],
+        ),
       ),
     );
   }
-}
 
-class _ProgressChip extends StatelessWidget {
-  final double progress;
-  final int week;
-  const _ProgressChip({required this.progress, required this.week});
-
-  @override
-  Widget build(BuildContext context) {
-    final pct = (progress * 100).round();
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withOpacity(.10),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Text(
-        'Week $week • $pct%',
-        style: Theme.of(context)
-            .textTheme
-            .labelMedium
-            ?.copyWith(fontWeight: FontWeight.w600),
-      ),
+  Widget _buildProgressSection(ThemeData theme, ColorScheme colorScheme) {
+    final completedWeeks = (_progress * 12).round();
+    
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Progress',
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: colorScheme.onPrimaryContainer.withOpacity(0.8),
+              ),
+            ),
+            Text(
+              'Week $_week of 12',
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: colorScheme.onPrimaryContainer.withOpacity(0.8),
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: AppSpace.x2),
+        LinearProgressIndicator(
+          value: _progress,
+          backgroundColor: colorScheme.onPrimaryContainer.withOpacity(0.2),
+          valueColor: AlwaysStoppedAnimation<Color>(
+            colorScheme.onPrimaryContainer,
+          ),
+          minHeight: 6,
+        ),
+      ],
     );
+  }
+
+  String _getSubtitleText() {
+    if (!_hasStarted) {
+      switch (_tier) {
+        case FaithTier.light:
+          return 'Begin your journey with foundational lessons';
+        case FaithTier.disciple:
+          return 'A practical 12-week journey to follow Jesus deeply';
+        case FaithTier.kingdomBuilder:
+          return 'Lead others as you grow in discipleship and service';
+        default:
+          return 'Start your discipleship journey';
+      }
+    } else {
+      return 'Continue your discipleship journey';
+    }
+  }
+
+  void _navigateToDiscipleship() {
+    Navigator.pushNamed(context, AppRoutes.courses);
   }
 }
