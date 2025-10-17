@@ -240,7 +240,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
               
               if (route == "/courses") {
                 // Navigate directly to courses screen
-                Navigator.pushNamed(context, AppRoutes.courses);
+                Navigator.pushNamed(context, AppRoutes.discipleshipCourses);
               } else {
                 // Navigate to main scaffold with specific tab
                 Navigator.pushNamedAndRemoveUntil(

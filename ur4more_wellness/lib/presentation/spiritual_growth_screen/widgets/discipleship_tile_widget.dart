@@ -19,7 +19,10 @@ class DiscipleshipTileWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Container(
+    return InkWell(
+      borderRadius: BorderRadius.circular(AppRadius.lg),
+      onTap: () => Navigator.pushNamed(context, AppRoutes.discipleshipCourses),
+      child: Container(
       margin: const EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
       padding: const EdgeInsets.all(AppSpace.x4),
       decoration: BoxDecoration(
@@ -160,6 +163,7 @@ class DiscipleshipTileWidget extends StatelessWidget {
             ),
           ),
         ],
+      ),
       ),
     );
   }

@@ -110,6 +110,10 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                 const SizedBox(height: AppSpace.x4),
                 _buildCourseInfo(theme, colorScheme),
                 const SizedBox(height: AppSpace.x4),
+                if (_course!.id == AppRoutes.ur4moreCoreId)
+                  _buildUr4moreJourney(theme, colorScheme),
+                if (_course!.id == AppRoutes.ur4moreCoreId)
+                  const SizedBox(height: AppSpace.x4),
                 _buildProgressSection(theme, colorScheme),
                 const SizedBox(height: AppSpace.x4),
                 _buildActionButton(theme, colorScheme),
@@ -122,20 +126,30 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   }
 
   Widget _buildCourseHeader(ThemeData theme, ColorScheme colorScheme) {
+    final isUr4moreCore = _course!.id == AppRoutes.ur4moreCoreId;
+    
     return Container(
       padding: const EdgeInsets.all(AppSpace.x4),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [
-            colorScheme.primary.withOpacity(0.1),
-            colorScheme.primary.withOpacity(0.05),
-          ],
+          colors: isUr4moreCore
+              ? [
+                  const Color(0xFF0FA97A).withOpacity(0.1),
+                  const Color(0xFF0FA97A).withOpacity(0.05),
+                ]
+              : [
+                  colorScheme.primary.withOpacity(0.1),
+                  colorScheme.primary.withOpacity(0.05),
+                ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: colorScheme.primary.withOpacity(0.2),
+          color: isUr4moreCore
+              ? const Color(0xFF0FA97A).withOpacity(0.3)
+              : colorScheme.primary.withOpacity(0.2),
+          width: isUr4moreCore ? 2 : 1,
         ),
       ),
       child: Column(
@@ -146,12 +160,16 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
               Container(
                 padding: const EdgeInsets.all(AppSpace.x3),
                 decoration: BoxDecoration(
-                  color: colorScheme.primary,
+                  color: isUr4moreCore
+                      ? const Color(0xFF0FA97A)
+                      : colorScheme.primary,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(
-                  Icons.auto_stories_rounded,
-                  color: colorScheme.onPrimary,
+                  isUr4moreCore
+                      ? Icons.auto_stories_rounded
+                      : Icons.auto_stories_rounded,
+                  color: Colors.white,
                   size: 32,
                 ),
               ),
@@ -164,6 +182,9 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                       _course!.title,
                       style: theme.textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.w700,
+                        color: isUr4moreCore
+                            ? const Color(0xFF0FA97A)
+                            : colorScheme.onSurface,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -431,6 +452,153 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     return const SizedBox.shrink();
   }
 
+  Widget _buildUr4moreJourney(ThemeData theme, ColorScheme colorScheme) {
+    return Card(
+      elevation: 1,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: const Color(0xFF0FA97A).withOpacity(0.2),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpace.x4),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.route,
+                  color: const Color(0xFF0FA97A),
+                  size: 24,
+                ),
+                const SizedBox(width: AppSpace.x2),
+                Text(
+                  'Your Discipleship Journey',
+                  style: theme.textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFF0FA97A),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpace.x3),
+            Text(
+              'This 12-week journey will transform your spiritual life through structured learning, practical application, and community engagement.',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+                height: 1.4,
+              ),
+            ),
+            const SizedBox(height: AppSpace.x3),
+            _buildJourneyPhase(
+              theme,
+              colorScheme,
+              'Weeks 1-3',
+              'Foundation',
+              'Building core spiritual habits and understanding your identity in Christ',
+              const Color(0xFF0FA97A),
+            ),
+            const SizedBox(height: AppSpace.x2),
+            _buildJourneyPhase(
+              theme,
+              colorScheme,
+              'Weeks 4-6',
+              'Growth',
+              'Developing emotional health and practical obedience in daily life',
+              const Color(0xFF0FA97A).withOpacity(0.7),
+            ),
+            const SizedBox(height: AppSpace.x2),
+            _buildJourneyPhase(
+              theme,
+              colorScheme,
+              'Weeks 7-9',
+              'Service',
+              'Learning to serve others and share your faith effectively',
+              const Color(0xFF0FA97A).withOpacity(0.5),
+            ),
+            const SizedBox(height: AppSpace.x2),
+            _buildJourneyPhase(
+              theme,
+              colorScheme,
+              'Weeks 10-12',
+              'Multiplication',
+              'Becoming a disciple-maker and spiritual leader in your community',
+              const Color(0xFF0FA97A).withOpacity(0.3),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildJourneyPhase(
+    ThemeData theme,
+    ColorScheme colorScheme,
+    String weeks,
+    String title,
+    String description,
+    Color accentColor,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(AppSpace.x3),
+      decoration: BoxDecoration(
+        color: accentColor.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: accentColor.withOpacity(0.3),
+        ),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(
+              color: accentColor,
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(width: AppSpace.x3),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      weeks,
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        color: accentColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(width: AppSpace.x2),
+                    Text(
+                      title,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSpace.x1),
+                Text(
+                  description,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildActionButton(ThemeData theme, ColorScheme colorScheme) {
     final isFirstParty = _course!.isFirstParty();
     final hasStarted = _progress?.hasStarted ?? false;
@@ -490,15 +658,13 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   }
 
   void _startOrContinueLesson(int week) {
-    // Update progress
-    final newProgress = (week / 12).clamp(0.0, 1.0);
-    _repository.updateCourseProgress(_course!.id, newProgress, week);
-    
-    // Show lesson content (placeholder for now)
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Starting Week $week - ${_ur4moreCoreData!['lessons'][week-1]['title']}'),
-      ),
+    Navigator.pushNamed(
+      context,
+      AppRoutes.lesson,
+      arguments: {
+        'week': week,
+        'courseId': _course!.id,
+      },
     );
   }
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../courses/data/course_repository.dart';
 import '../../courses/models/course.dart';
 import '../../../routes/app_routes.dart';
 import '../../../services/faith_service.dart';
@@ -75,7 +74,7 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
           arguments: {'courseId': AppRoutes.ur4moreCoreId},
         );
       } else {
-        Navigator.pushNamed(context, AppRoutes.courses);
+        Navigator.pushNamed(context, AppRoutes.discipleshipCourses);
       }
     }
   }
