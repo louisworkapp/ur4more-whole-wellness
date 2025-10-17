@@ -228,7 +228,7 @@ class CourseProgress {
 
   int get nextIncompleteWeek {
     for (int week = 1; week <= 12; week++) {
-      if (!weekCompletion[week] ?? false) {
+      if (!(weekCompletion[week] ?? false)) {
         return week;
       }
     }

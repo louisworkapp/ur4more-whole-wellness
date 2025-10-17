@@ -4,7 +4,6 @@ import '../../../widgets/custom_app_bar.dart';
 import '../data/course_repository.dart';
 import '../models/course_models.dart';
 import '../../../routes/app_routes.dart';
-import '../../../services/faith_service.dart';
 
 class CoursesScreen extends StatefulWidget {
   const CoursesScreen({super.key});
@@ -82,7 +81,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
               style: theme.textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: AppSpace.x2),
+            SizedBox(height: AppSpace.x2),
             Text(
               'Please check your connection and try again.',
               style: theme.textTheme.bodyMedium?.copyWith(
@@ -103,7 +102,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
 
   Widget _buildContent(ThemeData theme, ColorScheme colorScheme) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSpace.x4),
+        padding: EdgeInsets.all(AppSpace.x4),
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 430),
         child: Column(
@@ -129,7 +128,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
             color: colorScheme.onSurface,
           ),
         ),
-        const SizedBox(height: AppSpace.x2),
+        SizedBox(height: AppSpace.x2),
         Text(
           'Take your next step in following Jesus with structured discipleship courses designed for your journey.',
           style: theme.textTheme.bodyLarge?.copyWith(
@@ -319,14 +318,14 @@ class _CoursesScreenState extends State<CoursesScreen> {
             ),
           ],
         ),
-        const SizedBox(height: AppSpace.x2),
+        SizedBox(height: AppSpace.x2),
         LinearProgressIndicator(
           value: progressPercentage,
           backgroundColor: colorScheme.surfaceVariant,
           valueColor: AlwaysStoppedAnimation<Color>(colorScheme.primary),
           minHeight: 8,
         ),
-        const SizedBox(height: AppSpace.x2),
+        SizedBox(height: AppSpace.x2),
         Text(
           '$completedWeeks of 12 weeks completed',
           style: theme.textTheme.bodySmall?.copyWith(

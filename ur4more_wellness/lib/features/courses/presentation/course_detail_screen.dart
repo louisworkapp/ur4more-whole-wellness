@@ -4,7 +4,6 @@ import '../../../widgets/custom_app_bar.dart';
 import '../data/course_repository.dart';
 import '../models/course_models.dart';
 import '../../../routes/app_routes.dart';
-import '../../../services/faith_service.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   const CourseDetailScreen({super.key});
@@ -82,7 +81,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
               style: theme.textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: AppSpace.x2),
+            SizedBox(height: AppSpace.x2),
             Text(
               'Please try again later.',
               style: theme.textTheme.bodyMedium?.copyWith(
@@ -106,7 +105,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
       children: [
         Expanded(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(AppSpace.x4),
+            padding: EdgeInsets.all(AppSpace.x4),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 430),
               child: Column(
@@ -239,7 +238,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: AppSpace.x2),
+              SizedBox(height: AppSpace.x2),
               Text(
                 '$completedWeeks of 12 weeks completed',
                 style: theme.textTheme.bodySmall?.copyWith(
@@ -298,7 +297,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
         borderRadius: BorderRadius.circular(AppRadius.lg),
         onTap: isUnlocked ? () => _navigateToWeek(week) : null,
         child: Padding(
-          padding: const EdgeInsets.all(AppSpace.x4),
+          padding: EdgeInsets.all(AppSpace.x4),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
