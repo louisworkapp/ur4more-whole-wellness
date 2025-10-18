@@ -29,13 +29,13 @@ class AppRoutes {
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
     main: (context) => const MainScaffold(),
-    checkin: (context) => const DailyCheckInScreen(),
-    settings: (context) => const SettingsProfileScreen(),
+    // checkin: (context) => const DailyCheckInScreen(),
+    // settings: (context) => const SettingsProfileScreen(),
     authentication: (context) => const AuthenticationScreen(),
     home: (context) => const HomeScreen(),
     courses: (context) => const CoursesScreen(),
     courseDetail: (context) => const CourseDetailScreen(),
     weekLesson: (context) => const WeekLessonScreen(),
-    discipleshipCourses: (context) => const DiscipleshipCoursesScreen(),
+    // discipleshipCourses: (context) => const DiscipleshipCoursesScreen(),
   };
 }
