@@ -5,9 +5,16 @@ import 'package:sizer/sizer.dart';
 import '../core/app_export.dart';
 import '../widgets/custom_error_widget.dart';
 import 'design/tokens.dart';
+import 'core/settings/settings_controller.dart';
+import 'core/settings/settings_service.dart';
+import 'core/settings/settings_scope.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Create and hydrate settings controller
+  final controller = SettingsController(SettingsService());
+  await controller.hydrate();
 
   bool _hasShownError = false;
 
@@ -32,15 +39,20 @@ void main() async {
   Future.wait([
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
   ]).then((value) {
-    runApp(MyApp());
+    runApp(MyApp(controller: controller));
   });
 }
 
 class MyApp extends StatelessWidget {
+  final SettingsController controller;
+  const MyApp({super.key, required this.controller});
+
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (context, orientation, screenType) {
-      return MaterialApp(
+      return SettingsScope(
+        controller: controller,
+        child: MaterialApp(
         title: 'ur4more_wellness',
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
@@ -66,6 +78,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: AppRoutes.routes,
         initialRoute: AppRoutes.authentication,
+        ),
       );
     });
   }

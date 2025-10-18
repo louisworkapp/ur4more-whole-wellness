@@ -7,6 +7,8 @@ import '../../services/faith_service.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../routes/app_routes.dart';
+import '../../core/settings/settings_scope.dart';
+import '../../core/settings/settings_model.dart';
 import './widgets/account_section_widget.dart';
 import './widgets/app_info_section_widget.dart';
 import './widgets/equipment_section_widget.dart';
@@ -26,18 +28,8 @@ class SettingsProfileScreen extends StatefulWidget {
 class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
   // Profile settings
   String _fullName = 'Sarah Johnson';
-  String _timezone = 'Eastern Time (ET)';
-
-  // Equipment settings
-  bool _hasBodyweight = true;
-  bool _hasResistanceBands = false;
-  bool _hasPullupBar = true;
-
-  // Faith mode setting
-  FaithMode _faithMode = FaithMode.light;
 
   // Notification settings
-  bool _notificationsEnabled = true;
   TimeOfDay _notificationStartTime = const TimeOfDay(hour: 7, minute: 0);
   TimeOfDay _notificationEndTime = const TimeOfDay(hour: 21, minute: 0);
 
@@ -60,6 +52,10 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    
+    // Get current settings from SettingsController
+    final settingsCtl = SettingsScope.of(context);
+    final settings = settingsCtl.value;
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -78,16 +74,16 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
               // Profile Information Section
               ProfileSectionWidget(
                 fullName: _fullName,
-                timezone: _timezone,
+                timezone: settings.timezone,
                 onNameChanged: _updateFullName,
                 onTimezoneChanged: _updateTimezone,
               ),
 
               // Equipment Configuration Section
               EquipmentSectionWidget(
-                hasBodyweight: _hasBodyweight,
-                hasResistanceBands: _hasResistanceBands,
-                hasPullupBar: _hasPullupBar,
+                hasBodyweight: settings.equipmentBodyweight,
+                hasResistanceBands: settings.equipmentBands,
+                hasPullupBar: settings.equipmentPullup,
                 onBodyweightChanged: _updateBodyweightEquipment,
                 onResistanceBandsChanged: _updateResistanceBandsEquipment,
                 onPullupBarChanged: _updatePullupBarEquipment,
@@ -95,13 +91,13 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
 
               // Faith Mode Control Section
               FaithModeSectionWidget(
-                faithMode: _faithMode,
+                faithMode: _convertFaithTierToFaithMode(settings.faithTier),
                 onFaithModeChanged: _updateFaithMode,
               ),
 
               // Notification Settings Section
               NotificationSectionWidget(
-                notificationsEnabled: _notificationsEnabled,
+                notificationsEnabled: settings.notificationsEnabled,
                 startTime: _notificationStartTime,
                 endTime: _notificationEndTime,
                 onNotificationsToggled: _toggleNotifications,
@@ -151,6 +147,20 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
     );
   }
 
+  // Helper method to convert FaithTier to FaithMode
+  FaithMode _convertFaithTierToFaithMode(FaithTier tier) {
+    switch (tier) {
+      case FaithTier.off:
+        return FaithMode.off;
+      case FaithTier.light:
+        return FaithMode.light;
+      case FaithTier.disciple:
+        return FaithMode.disciple;
+      case FaithTier.kingdom:
+        return FaithMode.kingdom;
+    }
+  }
+
   // Profile update methods
   void _updateFullName(String name) {
     setState(() {
@@ -160,48 +170,57 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
     _syncUserData();
   }
 
-  void _updateTimezone(String timezone) {
-    setState(() {
-      _timezone = timezone;
-    });
+  void _updateTimezone(String timezone) async {
+    final settingsCtl = SettingsScope.of(context);
+    await settingsCtl.updateTimezone(timezone);
     _showSuccessToast('Timezone updated');
-    _syncUserData();
   }
 
   // Equipment update methods
-  void _updateBodyweightEquipment(bool enabled) {
-    setState(() {
-      _hasBodyweight = enabled;
-    });
+  void _updateBodyweightEquipment(bool enabled) async {
+    final settingsCtl = SettingsScope.of(context);
+    await settingsCtl.updateEquipment(bodyweight: enabled);
     _showSuccessToast(enabled
         ? 'Bodyweight exercises enabled'
         : 'Bodyweight exercises disabled');
-    _updateWorkoutPlans();
   }
 
-  void _updateResistanceBandsEquipment(bool enabled) {
-    setState(() {
-      _hasResistanceBands = enabled;
-    });
+  void _updateResistanceBandsEquipment(bool enabled) async {
+    final settingsCtl = SettingsScope.of(context);
+    await settingsCtl.updateEquipment(bands: enabled);
     _showSuccessToast(
         enabled ? 'Resistance bands enabled' : 'Resistance bands disabled');
-    _updateWorkoutPlans();
   }
 
-  void _updatePullupBarEquipment(bool enabled) {
-    setState(() {
-      _hasPullupBar = enabled;
-    });
+  void _updatePullupBarEquipment(bool enabled) async {
+    final settingsCtl = SettingsScope.of(context);
+    await settingsCtl.updateEquipment(pullup: enabled);
     _showSuccessToast(enabled ? 'Pullup bar enabled' : 'Pullup bar disabled');
-    _updateWorkoutPlans();
   }
 
   // Faith mode update method
-  void _updateFaithMode(FaithMode? mode) {
+  void _updateFaithMode(FaithMode? mode) async {
     if (mode == null) return;
-    setState(() {
-      _faithMode = mode;
-    });
+    
+    // Convert FaithMode to FaithTier
+    FaithTier tier;
+    switch (mode) {
+      case FaithMode.off:
+        tier = FaithTier.off;
+        break;
+      case FaithMode.light:
+        tier = FaithTier.light;
+        break;
+      case FaithMode.disciple:
+        tier = FaithTier.disciple;
+        break;
+      case FaithMode.kingdom:
+        tier = FaithTier.kingdom;
+        break;
+    }
+    
+    final settingsCtl = SettingsScope.of(context);
+    await settingsCtl.updateFaith(tier);
 
     String modeText = '';
     switch (mode) {
@@ -220,17 +239,14 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
     }
 
     _showSuccessToast(modeText);
-    _syncUserData();
   }
 
   // Notification update methods
-  void _toggleNotifications(bool enabled) {
-    setState(() {
-      _notificationsEnabled = enabled;
-    });
+  void _toggleNotifications(bool enabled) async {
+    final settingsCtl = SettingsScope.of(context);
+    await settingsCtl.updateNotifications(enabled);
     _showSuccessToast(
         enabled ? 'Notifications enabled' : 'Notifications disabled');
-    _updateNotificationSchedule();
   }
 
   void _updateNotificationStartTime(TimeOfDay time) {
@@ -365,17 +381,21 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
 
   void _updateWorkoutPlans() {
     // Update workout plans based on available equipment
+    final settingsCtl = SettingsScope.of(context);
+    final settings = settingsCtl.value;
     final availableEquipment = <String>[];
-    if (_hasBodyweight) availableEquipment.add('bodyweight');
-    if (_hasResistanceBands) availableEquipment.add('bands');
-    if (_hasPullupBar) availableEquipment.add('pullup_bar');
+    if (settings.equipmentBodyweight) availableEquipment.add('bodyweight');
+    if (settings.equipmentBands) availableEquipment.add('bands');
+    if (settings.equipmentPullup) availableEquipment.add('pullup_bar');
 
     // Store equipment preferences
     // Equipment preferences updated
   }
 
   void _updateNotificationSchedule() {
-    if (_notificationsEnabled) {
+    final settingsCtl = SettingsScope.of(context);
+    final settings = settingsCtl.value;
+    if (settings.notificationsEnabled) {
       // Schedule notifications between start and end time
       // Notifications scheduled
     } else {
@@ -384,21 +404,23 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
   }
 
   String _generateUserDataExport() {
+    final settingsCtl = SettingsScope.of(context);
+    final settings = settingsCtl.value;
     final exportData = {
       'profile': {
         'fullName': _fullName,
-        'timezone': _timezone,
+        'timezone': settings.timezone,
         'exportDate': DateTime.now().toIso8601String(),
       },
       'equipment': {
-        'bodyweight': _hasBodyweight,
-        'resistanceBands': _hasResistanceBands,
-        'pullupBar': _hasPullupBar,
+        'bodyweight': settings.equipmentBodyweight,
+        'resistanceBands': settings.equipmentBands,
+        'pullupBar': settings.equipmentPullup,
       },
       'preferences': {
-        'faithMode': _faithMode.toString(),
+        'faithMode': settings.faithTier.name,
         'themeMode': _themeMode.toString(),
-        'notificationsEnabled': _notificationsEnabled,
+        'notificationsEnabled': settings.notificationsEnabled,
       },
       'privacy': {
         'dataCollection': _dataCollectionEnabled,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/app_export.dart';
 import '../../design/tokens.dart';
@@ -6,8 +7,11 @@ import '../../widgets/custom_app_bar.dart';
 import '../../features/spirit/widgets/discipleship_header.dart';
 import '../../features/spirit/widgets/offmode_intro_card.dart';
 import '../../features/spirit/widgets/world_spirit_card.dart';
-import '../../features/spirit/services/faith_mode_navigator.dart';
-import '../../features/courses/models/course_models.dart';
+import '../../features/spirit/widgets/soul_vs_spirit_card.dart';
+import '../../features/spirit/widgets/alignment_preview_card.dart';
+import '../../features/spirit/widgets/faith_mode_banner.dart';
+import '../../core/settings/settings_scope.dart';
+import '../../core/settings/settings_model.dart';
 import './widgets/devotional_card_widget.dart';
 import './widgets/devotional_history_widget.dart';
 import './widgets/faith_mode_banner_widget.dart';
@@ -24,8 +28,11 @@ class SpiritualGrowthScreen extends StatefulWidget {
 class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
     with TickerProviderStateMixin {
   late TabController _tabController;
+  
+  // Collapsible card states
+  bool _soulCollapsed = true;
+  bool _alignCollapsed = true;
   int _currentBottomIndex = 3;
-  FaithTier _faithTier = FaithTier.disciple; // Default to disciple for now
   int _spiritualPoints = 1250;
   int _devotionStreak = 7;
 
@@ -147,22 +154,33 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    _loadFaithTier();
+    _loadCollapsedStates();
   }
 
-  Future<void> _loadFaithTier() async {
-    final currentTier = await FaithModeNavigator.getCurrentFaithTier();
+  Future<void> _loadCollapsedStates() async {
+    final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _faithTier = currentTier;
+      _soulCollapsed = prefs.getBool('spirit.soulCollapsed') ?? true;
+      _alignCollapsed = prefs.getBool('spirit.alignCollapsed') ?? true;
     });
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Reload faith tier when returning to this screen
-    _loadFaithTier();
+  void _toggleSoulCollapsed() async {
+    setState(() {
+      _soulCollapsed = !_soulCollapsed;
+    });
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('spirit.soulCollapsed', _soulCollapsed);
   }
+
+  void _toggleAlignCollapsed() async {
+    setState(() {
+      _alignCollapsed = !_alignCollapsed;
+    });
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('spirit.alignCollapsed', _alignCollapsed);
+  }
+
 
   @override
   void dispose() {
@@ -174,6 +192,10 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    
+    // Get current settings from SettingsController
+    final settings = SettingsScope.of(context).value;
+    final faithTier = settings.faithTier;
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -220,7 +242,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
           SizedBox(width: AppSpace.x2),
         ],
       ),
-      body: _faithTier == FaithTier.off
+      body: faithTier == FaithTier.off
           ? _buildOffModeContent(context, colorScheme)
           : _buildActiveContent(context, colorScheme),
     );
@@ -232,15 +254,19 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
         child: Column(
           children: [
             SizedBox(height: AppSpace.x2),
-            FaithModeBannerWidget(
-              faithMode: _faithTier.name,
-              onSettingsTap: () =>
-                  Navigator.pushNamed(context, AppRoutes.settings),
-            ),
-            SizedBox(height: AppSpace.x4),
-            // Show WorldSpiritCard first, then OffModeIntroCard
+            // New faith mode banner
+            const FaithModeBanner(),
+            SizedBox(height: AppSpace.x3),
+            // World Spirit card
             const WorldSpiritCard(),
             SizedBox(height: AppSpace.x3),
+            // Soul vs Spirit card (collapsible)
+            SoulVsSpiritCard(
+              collapsed: _soulCollapsed,
+              onToggle: _toggleSoulCollapsed,
+            ),
+            SizedBox(height: AppSpace.x3),
+            // Keep existing Off mode intro as final card
             const OffModeIntroCard(),
             SizedBox(height: AppSpace.x6),
           ],
@@ -251,6 +277,10 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
 
   Widget _buildActiveContent(BuildContext context, ColorScheme colorScheme) {
     final theme = Theme.of(context);
+    
+    // Get current settings from SettingsController
+    final settings = SettingsScope.of(context).value;
+    final faithTier = settings.faithTier;
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -258,7 +288,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
           children: [
             // Faith mode banner
             FaithModeBannerWidget(
-              faithMode: _faithTier.name,
+              faithMode: faithTier.name,
               onSettingsTap: () =>
                   Navigator.pushNamed(context, AppRoutes.settings),
             ),
@@ -620,3 +650,4 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
     );
   }
 }
+
