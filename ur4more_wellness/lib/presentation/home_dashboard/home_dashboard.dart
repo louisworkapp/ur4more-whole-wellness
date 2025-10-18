@@ -9,6 +9,8 @@ import './widgets/branded_header.dart';
 import './widgets/daily_checkin_cta.dart';
 import './widgets/points_progress_ring.dart';
 import './widgets/wellness_navigation_card.dart';
+import '../../widgets/media_card.dart';
+import '../../theme/tokens.dart';
 
 class HomeDashboard extends StatefulWidget {
   const HomeDashboard({super.key});
@@ -225,15 +227,56 @@ class _HomeDashboardState extends State<HomeDashboard> {
         })
         .map((activity) {
           final activityMap = activity as Map<String, dynamic>;
-          return WellnessNavigationCard(
+          final completionPercentage = activityMap["completionPercentage"] as double? ?? 0.0;
+          final isCompleted = activityMap["isCompleted"] as bool? ?? false;
+          
+          return MediaCard(
             title: activityMap["title"] as String? ?? 'Activity',
             subtitle: activityMap["subtitle"] as String? ?? 'Description',
-            iconName: activityMap["iconName"] as String? ?? 'help',
-            primaryColor: Theme.of(context).colorScheme.primary,
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            pointValue: activityMap["pointValue"] as int? ?? 0,
-            completionPercentage: activityMap["completionPercentage"] as double? ?? 0.0,
-            isCompleted: activityMap["isCompleted"] as bool? ?? false,
+            leading: Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: T.ink700,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                _getIconData(activityMap["iconName"] as String? ?? 'help'),
+                color: isCompleted ? T.mint : T.blue,
+                size: 24,
+              ),
+            ),
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  '${(completionPercentage * 100).round()}%',
+                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: isCompleted ? T.mint : T.blue,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: T.ink600,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                  child: FractionallySizedBox(
+                    alignment: Alignment.centerLeft,
+                    widthFactor: completionPercentage,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: isCompleted ? T.mint : T.blue,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             onTap: () {
               final routeIndex = activityMap["routeIndex"] as int? ?? 0;
               final route = activityMap["route"] as String? ?? "/";
@@ -251,10 +294,24 @@ class _HomeDashboardState extends State<HomeDashboard> {
                 );
               }
             },
-            onLongPress: () => _showQuickActions(context, activityMap),
           );
         })
         .toList();
+  }
+
+  IconData _getIconData(String iconName) {
+    switch (iconName) {
+      case 'fitness_center':
+        return Icons.fitness_center;
+      case 'psychology':
+        return Icons.psychology;
+      case 'auto_awesome':
+        return Icons.auto_awesome;
+      case 'auto_stories':
+        return Icons.auto_stories;
+      default:
+        return Icons.help;
+    }
   }
 
   bool _shouldShowSpiritualContent() {
