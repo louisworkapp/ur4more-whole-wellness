@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/app_export.dart';
 import '../../design/tokens.dart';
+import '../../theme/tokens.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../features/courses/presentation/courses_screen.dart';
 import '../../features/courses/data/course_repository.dart';
@@ -110,7 +111,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
             margin: EdgeInsets.only(right: AppSpace.x2),
             padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
             decoration: BoxDecoration(
-              color: AppTheme.secondaryLight,
+              color: T.gold,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
@@ -186,9 +187,9 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
               Tab(text: "All Courses"),
               Tab(text: "Progress"),
             ],
-            labelColor: AppTheme.primaryLight,
+            labelColor: T.blue,
             unselectedLabelColor: colorScheme.onSurfaceVariant,
-            indicatorColor: AppTheme.primaryLight,
+            indicatorColor: T.blue,
             indicatorSize: TabBarIndicatorSize.tab,
             labelStyle: theme.textTheme.labelLarge?.copyWith(
               fontWeight: FontWeight.w600,
@@ -218,7 +219,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
   Widget _buildFeaturedTab(BuildContext context, ColorScheme colorScheme) {
     return RefreshIndicator(
       onRefresh: _loadData,
-      color: AppTheme.primaryLight,
+      color: T.blue,
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
@@ -241,7 +242,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
   Widget _buildAllCoursesTab(BuildContext context, ColorScheme colorScheme) {
     return RefreshIndicator(
       onRefresh: _loadData,
-      color: AppTheme.primaryLight,
+      color: T.blue,
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
@@ -266,7 +267,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
 
     return RefreshIndicator(
       onRefresh: _loadData,
-      color: AppTheme.primaryLight,
+      color: T.blue,
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
@@ -280,15 +281,15 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
-                    AppTheme.primaryLight.withOpacity(0.1),
-                    AppTheme.primaryLight.withOpacity(0.05),
+                    T.blue.withOpacity(0.1),
+                    T.blue.withOpacity(0.05),
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: AppTheme.primaryLight.withOpacity(0.2),
+                  color: T.blue.withOpacity(0.2),
                 ),
               ),
               child: Column(
@@ -298,7 +299,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
                     "Learning Journey",
                     style: theme.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w700,
-                      color: AppTheme.primaryLight,
+                      color: T.blue,
                     ),
                   ),
                   SizedBox(height: AppSpace.x2),
@@ -355,7 +356,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
         children: [
           Icon(
             icon,
-            color: AppTheme.primaryLight,
+            color: T.blue,
             size: 24,
           ),
           SizedBox(height: AppSpace.x1),
@@ -363,7 +364,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
             value,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w700,
-              color: AppTheme.primaryLight,
+              color: T.blue,
             ),
           ),
           Text(
@@ -386,8 +387,8 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
         gradient: isUr4moreCore
             ? LinearGradient(
                 colors: [
-                  AppTheme.primaryLight.withOpacity(0.1),
-                  AppTheme.primaryLight.withOpacity(0.05),
+                  T.blue.withOpacity(0.1),
+                  T.blue.withOpacity(0.05),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -396,7 +397,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
         borderRadius: BorderRadius.circular(16),
         border: isUr4moreCore
             ? Border.all(
-                color: AppTheme.primaryLight.withOpacity(0.3),
+                color: T.blue.withOpacity(0.3),
                 width: 2,
               )
             : Border.all(
@@ -426,7 +427,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
                       height: 48,
                       decoration: BoxDecoration(
                         color: isUr4moreCore
-                            ? AppTheme.primaryLight
+                            ? T.blue
                             : colorScheme.primary,
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -453,7 +454,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
                                   style: theme.textTheme.titleMedium?.copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: isUr4moreCore
-                                        ? AppTheme.primaryLight
+                                        ? T.blue
                                         : colorScheme.onSurface,
                                   ),
                                   maxLines: 2,
@@ -468,7 +469,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
                                   ),
                                   decoration: BoxDecoration(
                                     color: isUr4moreCore
-                                        ? AppTheme.primaryLight.withOpacity(0.2)
+                                        ? T.blue.withOpacity(0.2)
                                         : colorScheme.primary.withOpacity(0.1),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
@@ -476,7 +477,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
                                     'In-App',
                                     style: theme.textTheme.labelSmall?.copyWith(
                                       color: isUr4moreCore
-                                          ? AppTheme.primaryLight
+                                          ? T.blue
                                           : colorScheme.primary,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -529,7 +530,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
                             course.cost,
                             style: theme.textTheme.labelSmall?.copyWith(
                               color: course.cost.toLowerCase().contains('free')
-                                  ? AppTheme.primaryLight
+                                  ? T.blue
                                   : colorScheme.onSurfaceVariant,
                               fontWeight: FontWeight.w600,
                             ),
@@ -546,7 +547,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
                       label: Text(course.isFirstParty() ? 'Start' : 'View'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: isUr4moreCore
-                            ? AppTheme.primaryLight
+                            ? T.blue
                             : colorScheme.primary,
                         foregroundColor: Colors.white,
                         padding: EdgeInsets.symmetric(

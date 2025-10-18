@@ -450,8 +450,8 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
-      backgroundColor: AppTheme.lightTheme.colorScheme.tertiary,
-      textColor: AppTheme.lightTheme.colorScheme.onTertiary,
+      backgroundColor: const Color(0xFFF5C542),
+      textColor: Colors.black,
       fontSize: 14.0,
     );
   }
