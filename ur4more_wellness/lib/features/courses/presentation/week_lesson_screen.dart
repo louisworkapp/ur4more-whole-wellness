@@ -359,7 +359,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                     ),
                   ),
                 ),
-                if (isExpanded && scriptureText != null)
+                if (isExpanded)
                   Container(
                     width: double.infinity,
                     padding: EdgeInsets.fromLTRB(
@@ -368,14 +368,23 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                       AppSpace.x3,
                       AppSpace.x3,
                     ),
-                    child: Text(
-                      scriptureText,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onSecondaryContainer.withOpacity(0.9),
-                        height: 1.5,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
+                    child: scriptureText != null 
+                      ? Text(
+                          scriptureText,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.onSecondaryContainer.withOpacity(0.9),
+                            height: 1.5,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        )
+                      : Text(
+                          'Scripture text not found for: $ref',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: colorScheme.error,
+                            height: 1.5,
+                            fontStyle: FontStyle.italic,
+                          ),
+                        ),
                   ),
               ],
             ),

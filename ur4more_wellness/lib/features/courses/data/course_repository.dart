@@ -17,7 +17,7 @@ class CourseRepository {
   /// Load the core discipleship course from assets
   Future<Course> loadCoreFromAssets(BuildContext context) async {
     try {
-      final String jsonString = await rootBundle.loadString('assets/courses/ur4more_core_12w.json');
+      final String jsonString = await rootBundle.loadString('assets/courses/discipleship_12w.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
       return Course.fromJson(jsonData);
     } catch (e) {
@@ -256,7 +256,7 @@ class CourseRepository {
     // Create a mock BuildContext for loading assets
     // In a real app, you'd pass the context from the calling widget
     try {
-      final String jsonString = await rootBundle.loadString('assets/courses/ur4more_core_12w.json');
+      final String jsonString = await rootBundle.loadString('assets/courses/discipleship_12w.json');
       final Map<String, dynamic> jsonData = json.decode(jsonString);
       return Course.fromJson(jsonData);
     } catch (e) {
