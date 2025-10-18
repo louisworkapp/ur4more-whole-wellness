@@ -82,6 +82,9 @@ class Course {
   });
 
   factory Course.fromJson(Map<String, dynamic> json) {
+    // Handle both old format (weeks) and new format (units)
+    final weeksData = json['weeks'] ?? json['units'];
+    
     return Course(
       id: json['id'] as String,
       title: json['title'] as String,
@@ -92,7 +95,7 @@ class Course {
       cost: json['cost'] as String? ?? 'Free',
       format: List<String>.from(json['format'] as List? ?? ['Self-paced']),
       tags: List<String>.from(json['tags'] as List? ?? ['foundations']),
-      weeks: (json['weeks'] as List)
+      weeks: (weeksData as List)
           .map((weekJson) => Week.fromJson(weekJson as Map<String, dynamic>))
           .toList(),
       gate: json['gate'] != null 
@@ -156,25 +159,55 @@ class Week {
   });
 
   factory Week.fromJson(Map<String, dynamic> json) {
+    // Handle both old format and new format
+    final practiceData = json['practice'];
+    List<Practice> practices = [];
+    
+    if (practiceData is List) {
+      if (practiceData.isNotEmpty && practiceData.first is String) {
+        // New format: list of strings
+        practices = practiceData.map((p) => Practice(
+          title: p as String,
+          desc: '',
+          estMinutes: 5,
+        )).toList();
+      } else {
+        // Old format: list of Practice objects
+        practices = practiceData
+            .map((practiceJson) => Practice.fromJson(practiceJson as Map<String, dynamic>))
+            .toList();
+      }
+    }
+    
     return Week(
       week: json['week'] as int,
       title: json['title'] as String,
-      theme: json['theme'] as String,
-      scriptureRefs: List<String>.from(json['scriptureRefs'] as List),
-      lessonSummary: json['lessonSummary'] as String,
-      keyIdeas: List<String>.from(json['keyIdeas'] as List),
-      reflectionQs: List<String>.from(json['reflectionQs'] as List),
-      practice: (json['practice'] as List)
-          .map((practiceJson) => Practice.fromJson(practiceJson as Map<String, dynamic>))
-          .toList(),
-      prayer: json['prayer'] as String,
-      resources: (json['resources'] as List)
+      theme: json['theme'] as String? ?? json['summary'] as String? ?? '',
+      scriptureRefs: List<String>.from(json['scriptureRefs'] as List? ?? json['key_scriptures_kjv'] as List? ?? []),
+      lessonSummary: json['lessonSummary'] as String? ?? json['summary'] as String? ?? '',
+      keyIdeas: List<String>.from(json['keyIdeas'] as List? ?? []),
+      reflectionQs: List<String>.from(json['reflectionQs'] as List? ?? json['reflection_questions'] as List? ?? []),
+      practice: practices,
+      prayer: json['prayer'] as String? ?? '',
+      resources: (json['resources'] as List? ?? [])
           .map((resourceJson) => Resource.fromJson(resourceJson as Map<String, dynamic>))
           .toList(),
-      tierMin: json['tierMin'] as String,
-      estLessonMinutes: json['estLessonMinutes'] as int,
-      estWeekPracticeMinutes: json['estWeekPracticeMinutes'] as int,
-      unlock: json['unlock'] != null ? Unlock.fromJson(json['unlock'] as Map<String, dynamic>) : null,
+      tierMin: json['tierMin'] as String? ?? 'Disciple',
+      estLessonMinutes: json['estLessonMinutes'] as int? ?? 45,
+      estWeekPracticeMinutes: json['estWeekPracticeMinutes'] as int? ?? 30,
+      unlock: json['unlock'] != null 
+          ? Unlock.fromJson(json['unlock'] as Map<String, dynamic>)
+          : (json['unlock_scripture_card'] != null 
+              ? Unlock(
+                  title: json['unlock_scripture_card']['title'] as String? ?? '',
+                  versesKJV: [VerseKJV(
+                    ref: 'Scripture',
+                    text: json['unlock_scripture_card']['verse_kjv'] as String? ?? '',
+                  )],
+                  insight: json['unlock_scripture_card']['layer'] as String? ?? '',
+                  deeperTruths: [],
+                )
+              : null),
     );
   }
 
