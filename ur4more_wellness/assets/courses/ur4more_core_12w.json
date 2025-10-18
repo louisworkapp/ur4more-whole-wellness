@@ -9,8 +9,8 @@
     {
       "week": 1,
       "title": "New Life by Grace (Regeneration & the Two Adams)",
-      "summary": "By grace we are saved and made new: not merely forgiven, but born from above. In Adam all die; in Christ we are made alive. Regeneration (new birth) is the Spirit's work that gives a new heart and begins a life of joyful obedience.",
-      "key_scriptures_kjv": [
+      "theme": "By grace we are saved and made new: not merely forgiven, but born from above. In Adam all die; in Christ we are made alive. Regeneration (new birth) is the Spirit's work that gives a new heart and begins a life of joyful obedience.",
+      "scriptureRefs": [
         "Ephesians 2:8-9",
         "2 Corinthians 5:17",
         "John 3:3-8",
@@ -20,26 +20,60 @@
         "1 Corinthians 15:22",
         "1 Corinthians 15:45-49"
       ],
-      "unlock_scripture_card": {
-        "title": "From Adam to Christ",
-        "verse_kjv": "1 Corinthians 15:22 — For as in Adam all die, even so in Christ shall all be made alive.",
-        "layer": "Adam's headship brought sin and death to all; Christ, the last Adam, brings righteousness and life. Regeneration is the Spirit's gift of a new heart, making us new creatures who now walk in obedience by grace."
-      },
-      "objectives": [
+      "lessonSummary": "By grace we are saved and made new: not merely forgiven, but born from above. In Adam all die; in Christ we are made alive. Regeneration (new birth) is the Spirit's work that gives a new heart and begins a life of joyful obedience.",
+      "keyIdeas": [
         "Grasp that salvation is by grace through faith—and that grace includes the Spirit's regenerating work.",
         "Understand Adam/Christ headship: why we needed new birth and how union with Christ gives life.",
         "Rest your assurance in Christ's finished work, not performance."
       ],
-      "practice": [
-        "Daily thanksgiving prayer: Thank God specifically for new birth and a new heart (Ezekiel 36:26–27).",
-        "Memorize: Ephesians 2:8–9 (KJV) and 1 Corinthians 15:22 (KJV).",
-        "Read once this week: John 3:1–8 slowly; write one sentence: \"What new life means for me.\""
-      ],
-      "reflection_questions": [
+      "reflectionQs": [
         "Where have I seen my 'old Adam' habits still leading me?",
         "What changes because I have been made alive in Christ (new heart, new desires)?",
         "How does regeneration reshape my view of obedience (as response of a new nature, not earning)?"
-      ]
+      ],
+      "practice": [
+        {
+          "title": "Daily Thanksgiving Prayer",
+          "desc": "Thank God specifically for new birth and a new heart (Ezekiel 36:26–27).",
+          "estMinutes": 5
+        },
+        {
+          "title": "Scripture Memorization",
+          "desc": "Memorize: Ephesians 2:8–9 (KJV) and 1 Corinthians 15:22 (KJV).",
+          "estMinutes": 10
+        },
+        {
+          "title": "Lectio Divina",
+          "desc": "Read once this week: John 3:1–8 slowly; write one sentence: \"What new life means for me.\"",
+          "estMinutes": 15
+        }
+      ],
+      "prayer": "Father, thank You for the gift of new birth through Your Spirit. Help me to understand what it means to be made alive in Christ and to walk in the newness of life You have given me.",
+      "resources": [
+        {
+          "title": "New Life by Grace (overview)",
+          "kind": "article",
+          "url": "https://example.com/new-life-grace"
+        }
+      ],
+      "tierMin": "Light",
+      "estLessonMinutes": 15,
+      "estWeekPracticeMinutes": 30,
+      "unlock": {
+        "title": "Unlock Scripture (KJV)",
+        "versesKJV": [
+          {
+            "ref": "1 Corinthians 15:22",
+            "text": "For as in Adam all die, even so in Christ shall all be made alive."
+          }
+        ],
+        "insight": "Adam's headship brought sin and death to all; Christ, the last Adam, brings righteousness and life. Regeneration is the Spirit's gift of a new heart, making us new creatures who now walk in obedience by grace.",
+        "deeperTruths": [
+          "In Adam we inherit death; in Christ we receive life.",
+          "Regeneration is the Spirit's work, not our achievement.",
+          "New birth gives us a new heart and new desires."
+        ]
+      }
     },
     {
       "week": 2,

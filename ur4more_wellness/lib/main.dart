@@ -11,6 +11,7 @@ import 'core/settings/settings_scope.dart';
 import 'core/settings/settings_model.dart';
 import 'theme/dark_theme.dart';
 import 'theme/light_theme.dart';
+import 'theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -62,7 +63,7 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               title: 'UR4MORE',
               theme: buildLightTheme(),
-              darkTheme: buildDarkTheme(),
+              darkTheme: darkFrameTheme(context),
               themeMode: themeMode,
         // 🚨 CRITICAL: NEVER REMOVE OR MODIFY
         builder: (context, child) {
