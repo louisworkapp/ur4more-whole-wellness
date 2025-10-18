@@ -8,7 +8,9 @@ import 'design/tokens.dart';
 import 'core/settings/settings_controller.dart';
 import 'core/settings/settings_service.dart';
 import 'core/settings/settings_scope.dart';
+import 'core/settings/settings_model.dart';
 import 'theme/dark_theme.dart';
+import 'theme/light_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,11 +55,15 @@ class MyApp extends StatelessWidget {
     return Sizer(builder: (context, orientation, screenType) {
       return SettingsScope(
         controller: controller,
-        child: MaterialApp(
-        title: 'UR4MORE',
-        theme: buildDarkTheme(),
-        darkTheme: buildDarkTheme(),
-        themeMode: ThemeMode.dark,
+        child: Builder(
+          builder: (context) {
+            final settings = SettingsScope.of(context);
+            final themeMode = _getThemeMode(settings.value.themeMode);
+            return MaterialApp(
+              title: 'UR4MORE',
+              theme: buildLightTheme(),
+              darkTheme: buildDarkTheme(),
+              themeMode: themeMode,
         // 🚨 CRITICAL: NEVER REMOVE OR MODIFY
         builder: (context, child) {
           // Normalize desktop/web layout with centered content and max width
@@ -79,8 +85,21 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: AppRoutes.routes,
         initialRoute: AppRoutes.authentication,
+            );
+          },
         ),
       );
     });
+  }
+
+  ThemeMode _getThemeMode(AppThemeMode appThemeMode) {
+    switch (appThemeMode) {
+      case AppThemeMode.light:
+        return ThemeMode.light;
+      case AppThemeMode.dark:
+        return ThemeMode.dark;
+      case AppThemeMode.system:
+        return ThemeMode.system;
+    }
   }
 }

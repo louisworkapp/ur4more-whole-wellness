@@ -8,6 +8,7 @@ class SettingsService {
   static const _kEqBand = 'settings.eq.band';
   static const _kEqPull = 'settings.eq.pull';
   static const _kTz = 'settings.timezone';
+  static const _kTheme = 'settings.themeMode';
 
   Future<AppSettings> load() async {
     final p = await SharedPreferences.getInstance();
@@ -17,6 +18,7 @@ class SettingsService {
     final eqBand = p.getBool(_kEqBand) ?? AppSettings.defaults.equipmentBands;
     final eqPull = p.getBool(_kEqPull) ?? AppSettings.defaults.equipmentPullup;
     final tz = p.getString(_kTz) ?? AppSettings.defaults.timezone;
+    final theme = _parseThemeMode(p.getString(_kTheme));
     return AppSettings(
       faithTier: faith,
       notificationsEnabled: notif,
@@ -24,6 +26,7 @@ class SettingsService {
       equipmentBands: eqBand,
       equipmentPullup: eqPull,
       timezone: tz,
+      themeMode: theme,
     );
   }
 
@@ -35,5 +38,23 @@ class SettingsService {
     await p.setBool(_kEqBand, s.equipmentBands);
     await p.setBool(_kEqPull, s.equipmentPullup);
     await p.setString(_kTz, s.timezone);
+    await p.setString(_kTheme, _themeModeToString(s.themeMode));
+  }
+
+  AppThemeMode _parseThemeMode(String? raw) {
+    switch (raw) {
+      case 'light': return AppThemeMode.light;
+      case 'dark': return AppThemeMode.dark;
+      case 'system': return AppThemeMode.system;
+      default: return AppSettings.defaults.themeMode;
+    }
+  }
+
+  String _themeModeToString(AppThemeMode mode) {
+    switch (mode) {
+      case AppThemeMode.light: return 'light';
+      case AppThemeMode.dark: return 'dark';
+      case AppThemeMode.system: return 'system';
+    }
   }
 }

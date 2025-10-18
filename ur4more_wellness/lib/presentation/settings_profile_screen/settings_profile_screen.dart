@@ -9,6 +9,7 @@ import '../../widgets/custom_app_bar.dart';
 import '../../routes/app_routes.dart';
 import '../../core/settings/settings_scope.dart';
 import '../../core/settings/settings_model.dart';
+import './widgets/theme_section_widget.dart';
 import './widgets/account_section_widget.dart';
 import './widgets/app_info_section_widget.dart';
 import './widgets/equipment_section_widget.dart';
@@ -109,7 +110,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
 
               // Theme Settings Section
               ThemeSectionWidget(
-                themeMode: _themeMode,
+                themeMode: settings.themeMode,
                 onThemeModeChanged: _updateThemeMode,
               ),
 
@@ -268,11 +269,9 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
   }
 
   // Theme update method
-  void _updateThemeMode(AppThemeMode? mode) {
-    if (mode == null) return;
-    setState(() {
-      _themeMode = mode;
-    });
+  void _updateThemeMode(AppThemeMode mode) async {
+    final settingsCtl = SettingsScope.of(context);
+    await settingsCtl.updateThemeMode(mode);
 
     String modeText;
     switch (mode) {
