@@ -44,7 +44,7 @@ class AppSettings {
     equipmentBodyweight: true,
     equipmentBands: false,
     equipmentPullup: false,
-    timezone: 'ET',
+    timezone: 'Eastern Time (ET)',
   );
 
   AppSettings copyWith({
