@@ -37,16 +37,16 @@ class OffModeIntroCard extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  width: 40,
-                  height: 40,
+                  width: 28,
+                  height: 28,
                   decoration: BoxDecoration(
-                    color: colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(12),
+                    color: colorScheme.surfaceTint.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(14),
                   ),
                   child: Icon(
                     Icons.explore_outlined,
-                    color: colorScheme.onPrimaryContainer,
-                    size: 20,
+                    color: colorScheme.onSurface,
+                    size: 18,
                   ),
                 ),
                 SizedBox(width: AppSpace.x3),
@@ -54,41 +54,18 @@ class OffModeIntroCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              'Soul vs Spirit (Intro)',
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w700,
-                                color: colorScheme.onSurface,
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: AppSpace.x2,
-                              vertical: AppSpace.x1,
-                            ),
-                            decoration: BoxDecoration(
-                              color: colorScheme.surfaceVariant,
-                              borderRadius: BorderRadius.circular(AppRadius.sm),
-                            ),
-                            child: Text(
-                              'Off mode',
-                              style: theme.textTheme.labelSmall?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ],
+                      Text(
+                        'Ready to explore more?',
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: colorScheme.onSurface,
+                        ),
                       ),
                       SizedBox(height: AppSpace.x1),
                       Text(
-                        'A fast way to notice what\'s driving your choices.',
+                        'Enable Faith Mode to unlock Scripture, prayer prompts, and guided next steps.',
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurface.withOpacity(0.8),
+                          color: colorScheme.onSurface.withOpacity(0.7),
                         ),
                       ),
                     ],
@@ -99,43 +76,15 @@ class OffModeIntroCard extends StatelessWidget {
             
             SizedBox(height: AppSpace.x4),
             
-            // Section A: SOUL
-            _buildSection(
-              theme,
-              colorScheme,
-              'SOUL — "my will"',
-              'The soul is the seat of my thoughts, feelings, and preferences. Left alone, I naturally choose what I want, now.',
-            ),
-            
-            SizedBox(height: AppSpace.x3),
-            
-            // Section B: SPIRIT
-            _buildSection(
-              theme,
-              colorScheme,
-              'SPIRIT — "God\'s will"',
-              'The Christian claim: life works best aligned with God\'s will. That guidance becomes clear when Faith Mode is on.',
-            ),
-            
-            SizedBox(height: AppSpace.x3),
-            
-            // Section C: Today's experiment
-            _buildSection(
-              theme,
-              colorScheme,
-              'Today\'s 60-second experiment',
-              '• Pause before a choice.\n• Ask: "What\'s the wisest next step?"\n• Note how \'my will\' differs from a better, higher way.',
-              footer: 'Turn on Faith Mode to see Scripture, prayer prompts, and guided next steps.',
-            ),
-            
-            SizedBox(height: AppSpace.x5),
-            
             // CTA buttons
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () => FaithModeNavigator.openFaithModeSelector(context),
+                    onPressed: () async {
+                      await FaithModeNavigator.openFaithModeSelector(context);
+                      // The screen will automatically rebuild when faith mode changes
+                    },
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(0, 56),
                       backgroundColor: colorScheme.primary,
@@ -179,45 +128,6 @@ class OffModeIntroCard extends StatelessWidget {
     );
   }
 
-  Widget _buildSection(
-    ThemeData theme,
-    ColorScheme colorScheme,
-    String label,
-    String body, {
-    String? footer,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: theme.textTheme.labelLarge?.copyWith(
-            color: colorScheme.primary,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        SizedBox(height: AppSpace.x2),
-        Text(
-          body,
-          style: theme.textTheme.bodyMedium?.copyWith(
-            color: colorScheme.onSurface.withOpacity(0.9),
-            height: 1.4,
-          ),
-        ),
-        if (footer != null) ...[
-          SizedBox(height: AppSpace.x2),
-          Text(
-            footer,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: colorScheme.onSurface.withOpacity(0.7),
-              fontStyle: FontStyle.italic,
-              height: 1.3,
-            ),
-          ),
-        ],
-      ],
-    );
-  }
 
   void _showLearnMoreSheet(BuildContext context) {
     showModalBottomSheet(

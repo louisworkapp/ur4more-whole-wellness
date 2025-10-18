@@ -22,8 +22,8 @@ class _WorldSpiritCardState extends State<WorldSpiritCard> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            colorScheme.primary.withOpacity(0.10),
-            colorScheme.surfaceVariant.withOpacity(0.30),
+            colorScheme.surface,
+            colorScheme.surfaceTint.withOpacity(0.06),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -43,16 +43,16 @@ class _WorldSpiritCardState extends State<WorldSpiritCard> {
             Row(
               children: [
                 Container(
-                  width: 40,
-                  height: 40,
+                  width: 28,
+                  height: 28,
                   decoration: BoxDecoration(
-                    color: colorScheme.primaryContainer,
-                    borderRadius: BorderRadius.circular(12),
+                    color: colorScheme.surfaceTint.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(14),
                   ),
                   child: Icon(
                     Icons.public,
-                    color: colorScheme.onPrimaryContainer,
-                    size: 20,
+                    color: colorScheme.onSurface,
+                    size: 18,
                   ),
                 ),
                 SizedBox(width: AppSpace.x3),
@@ -61,9 +61,9 @@ class _WorldSpiritCardState extends State<WorldSpiritCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'World Spirit',
+                        'Worldly Spirit',
                         style: theme.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w600,
                           color: colorScheme.onSurface,
                         ),
                       ),
@@ -71,7 +71,7 @@ class _WorldSpiritCardState extends State<WorldSpiritCard> {
                       Text(
                         'Is there more to you than thoughts and feelings?',
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: colorScheme.onSurface.withOpacity(0.8),
+                          color: colorScheme.onSurface.withOpacity(0.7),
                         ),
                       ),
                     ],
@@ -95,12 +95,18 @@ class _WorldSpiritCardState extends State<WorldSpiritCard> {
                 colorScheme,
                 'People report moments of guidance that feel \'higher\' than impulse.',
               ),
-              SizedBox(height: AppSpace.x2),
-              _buildBulletPoint(
-                theme,
-                colorScheme,
-                'What if your life could align with a will wiser than your own?',
+              SizedBox(height: AppSpace.x3),
+              
+              // Filter chips
+              Wrap(
+                spacing: AppSpace.x2,
+                runSpacing: AppSpace.x1,
+                children: [
+                  _buildFilterChip(theme, colorScheme, 'Clarity'),
+                  _buildFilterChip(theme, colorScheme, 'Perspective'),
+                ],
               ),
+              
               SizedBox(height: AppSpace.x4),
             ],
             
@@ -108,14 +114,12 @@ class _WorldSpiritCardState extends State<WorldSpiritCard> {
             Row(
               children: [
                 Expanded(
-                  child: ElevatedButton(
+                  child: FilledButton(
                     onPressed: _isExpanded 
                         ? () => _showIntroSheet(context)
                         : () => setState(() => _isExpanded = true),
-                    style: ElevatedButton.styleFrom(
+                    style: FilledButton.styleFrom(
                       minimumSize: Size(0, 56),
-                      backgroundColor: colorScheme.primary,
-                      foregroundColor: colorScheme.onPrimary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(AppRadius.md),
                       ),
@@ -173,13 +177,41 @@ class _WorldSpiritCardState extends State<WorldSpiritCard> {
         Expanded(
           child: Text(
             text,
-            style: theme.textTheme.bodyMedium?.copyWith(
+            style: theme.textTheme.bodySmall?.copyWith(
               color: colorScheme.onSurface.withOpacity(0.9),
               height: 1.4,
             ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildFilterChip(ThemeData theme, ColorScheme colorScheme, String label) {
+    return FilterChip(
+      label: Text(
+        label,
+        style: theme.textTheme.bodySmall?.copyWith(
+          color: colorScheme.onSurfaceVariant,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      selected: false,
+      onSelected: (selected) {
+        // Handle chip selection if needed
+      },
+      backgroundColor: colorScheme.surfaceVariant.withOpacity(0.3),
+      selectedColor: colorScheme.primaryContainer,
+      checkmarkColor: colorScheme.onPrimaryContainer,
+      side: BorderSide(
+        color: colorScheme.outlineVariant,
+        width: 1,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppRadius.sm),
+      ),
     );
   }
 

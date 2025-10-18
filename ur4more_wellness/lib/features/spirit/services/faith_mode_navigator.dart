@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../design/tokens.dart';
 import '../../../routes/app_routes.dart';
 import '../../courses/models/course_models.dart';
+import '../../../core/services/settings_service.dart';
 
 class FaithModeNavigator {
   static const String _faithTierKey = 'faith_tier';
@@ -29,20 +30,57 @@ class FaithModeNavigator {
     );
   }
 
-  /// Gets the current faith tier from SharedPreferences
+  /// Gets the current faith tier from settings service
   static Future<FaithTier> getCurrentFaithTier() async {
-    final prefs = await SharedPreferences.getInstance();
-    final tierString = prefs.getString(_faithTierKey) ?? 'Off';
-    return FaithTier.values.firstWhere(
-      (tier) => tier.name.toLowerCase() == tierString.toLowerCase(),
-      orElse: () => FaithTier.off,
-    );
+    final settings = await SettingsService.loadSettings();
+    return _convertFaithModeToTier(settings.faithMode);
   }
 
-  /// Sets the faith tier in SharedPreferences
+  /// Sets the faith tier using settings service
   static Future<void> setFaithTier(FaithTier tier) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_faithTierKey, tier.name);
+    final faithMode = _convertTierToFaithMode(tier);
+    await SettingsService.updateFaithMode(faithMode);
+  }
+
+  /// Convert FaithMode to FaithTier
+  static FaithTier _convertFaithModeToTier(FaithMode faithMode) {
+    switch (faithMode) {
+      case FaithMode.off:
+        return FaithTier.off;
+      case FaithMode.light:
+        return FaithTier.light;
+      case FaithMode.disciple:
+        return FaithTier.disciple;
+      case FaithMode.kingdom:
+        return FaithTier.kingdomBuilder;
+    }
+  }
+
+  /// Convert FaithTier to FaithMode
+  static FaithMode _convertTierToFaithMode(FaithTier tier) {
+    switch (tier) {
+      case FaithTier.off:
+        return FaithMode.off;
+      case FaithTier.light:
+        return FaithMode.light;
+      case FaithTier.disciple:
+        return FaithMode.disciple;
+      case FaithTier.kingdomBuilder:
+        return FaithMode.kingdom;
+    }
+  }
+
+  /// Sets the faith tier and notifies listeners
+  static Future<void> setFaithTierAndNotify(FaithTier tier, BuildContext context) async {
+    await setFaithTier(tier);
+    // Trigger a rebuild of the current screen to reflect the change
+    if (context.mounted) {
+      // Find the nearest StatefulWidget and trigger a rebuild
+      final state = context.findAncestorStateOfType<State>();
+      if (state != null && state.mounted) {
+        state.setState(() {});
+      }
+    }
   }
 }
 
@@ -76,7 +114,7 @@ class _FaithModeSelectorDialogState extends State<FaithModeSelectorDialog> {
     });
 
     try {
-      await FaithModeNavigator.setFaithTier(_selectedTier);
+      await FaithModeNavigator.setFaithTierAndNotify(_selectedTier, context);
       if (mounted) {
         Navigator.pop(context);
         // Show success message
