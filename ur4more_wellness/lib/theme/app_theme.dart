@@ -86,8 +86,12 @@ ThemeData darkFrameTheme(BuildContext ctx) {
       indicatorColor: T.blue.withOpacity(.2),
       elevation: 0,
       height: 64,
-      iconTheme: WidgetStatePropertyAll(IconThemeData(color: T.ink300)),
-      selectedIconTheme: WidgetStatePropertyAll(IconThemeData(color: T.blue)),
+      iconTheme: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return IconThemeData(color: T.blue);
+        }
+        return IconThemeData(color: T.ink300);
+      }),
       labelTextStyle: WidgetStatePropertyAll(
         text.labelMedium!.copyWith(
           color: T.ink300,
