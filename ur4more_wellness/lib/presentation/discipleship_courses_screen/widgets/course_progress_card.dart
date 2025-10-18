@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../design/tokens.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/tokens.dart';
 
 class CourseProgressCard extends StatelessWidget {
   final int currentWeek;
@@ -31,15 +31,15 @@ class CourseProgressCard extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                AppTheme.primaryLight.withOpacity(0.1),
-                AppTheme.primaryLight.withOpacity(0.05),
+                T.blue.withOpacity(0.1),
+                T.blue.withOpacity(0.05),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: AppTheme.primaryLight.withOpacity(0.3),
+              color: T.blue.withOpacity(0.3),
               width: 2,
             ),
           ),
@@ -52,11 +52,11 @@ class CourseProgressCard extends StatelessWidget {
                     width: 56,
                     height: 56,
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryLight,
+                      color: T.blue,
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: AppTheme.primaryLight.withOpacity(0.3),
+                          color: T.blue.withOpacity(0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),
@@ -79,7 +79,7 @@ class CourseProgressCard extends StatelessWidget {
                           'UR4MORE Discipleship Core',
                           style: theme.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w700,
-                            color: AppTheme.primaryLight,
+                            color: T.blue,
                           ),
                         ),
                         SizedBox(height: AppSpace.x1),
@@ -99,14 +99,14 @@ class CourseProgressCard extends StatelessWidget {
                                 child: LinearProgressIndicator(
                                   value: progress,
                                   backgroundColor: colorScheme.surfaceContainerHighest,
-                                  valueColor: AlwaysStoppedAnimation<Color>(AppTheme.primaryLight),
+                                  valueColor: AlwaysStoppedAnimation<Color>(T.blue),
                                 ),
                               ),
                               SizedBox(width: AppSpace.x2),
                               Text(
                                 '${(progress * 100).round()}%',
                                 style: theme.textTheme.labelMedium?.copyWith(
-                                  color: AppTheme.primaryLight,
+                                  color: T.blue,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -137,13 +137,13 @@ class CourseProgressCard extends StatelessWidget {
                           '$discipleshipPoints',
                           style: theme.textTheme.titleLarge?.copyWith(
                             fontWeight: FontWeight.w800,
-                            color: AppTheme.primaryLight,
+                            color: T.blue,
                           ),
                         ),
                         Text(
                           'Points',
                           style: theme.textTheme.labelSmall?.copyWith(
-                            color: AppTheme.primaryLight,
+                            color: T.blue,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -158,14 +158,14 @@ class CourseProgressCard extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x2),
                   decoration: BoxDecoration(
-                    color: AppTheme.primaryLight.withOpacity(0.1),
+                    color: T.blue.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
                     children: [
                       Icon(
                         Icons.trending_up,
-                        color: AppTheme.primaryLight,
+                        color: T.blue,
                         size: 20,
                       ),
                       SizedBox(width: AppSpace.x2),
@@ -173,7 +173,7 @@ class CourseProgressCard extends StatelessWidget {
                         child: Text(
                           'Keep up the great work! You\'re building strong spiritual foundations.',
                           style: theme.textTheme.bodySmall?.copyWith(
-                            color: AppTheme.primaryLight,
+                            color: T.blue,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

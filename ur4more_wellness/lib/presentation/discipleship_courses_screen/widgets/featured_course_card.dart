@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../design/tokens.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/tokens.dart';
 import '../../../features/courses/models/course_models.dart';
 
 class FeaturedCourseCard extends StatelessWidget {
@@ -28,15 +28,15 @@ class FeaturedCourseCard extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                AppTheme.secondaryLight.withOpacity(0.1),
-                AppTheme.secondaryLight.withOpacity(0.05),
+                T.gold.withOpacity(0.1),
+                T.gold.withOpacity(0.05),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: AppTheme.secondaryLight.withOpacity(0.3),
+              color: T.gold.withOpacity(0.3),
             ),
           ),
           child: Column(
@@ -48,7 +48,7 @@ class FeaturedCourseCard extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: AppSpace.x2, vertical: AppSpace.x1),
                     decoration: BoxDecoration(
-                      color: AppTheme.secondaryLight,
+                      color: T.gold,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -81,7 +81,7 @@ class FeaturedCourseCard extends StatelessWidget {
                       course.cost,
                       style: theme.textTheme.labelSmall?.copyWith(
                         color: course.cost.toLowerCase().contains('free')
-                            ? AppTheme.secondaryLight
+                            ? T.gold
                             : colorScheme.onSurfaceVariant,
                         fontWeight: FontWeight.w600,
                       ),
@@ -99,7 +99,7 @@ class FeaturedCourseCard extends StatelessWidget {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: AppTheme.secondaryLight,
+                      color: T.gold,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Icon(
@@ -180,7 +180,7 @@ class FeaturedCourseCard extends StatelessWidget {
                     ),
                     label: Text(course.isFirstParty() ? 'Start' : 'View'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppTheme.secondaryLight,
+                      backgroundColor: T.gold,
                       foregroundColor: Colors.white,
                       padding: EdgeInsets.symmetric(
                         horizontal: AppSpace.x3,

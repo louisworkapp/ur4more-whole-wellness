@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../design/tokens.dart';
-import '../../../theme/app_theme.dart';
+import '../../../theme/tokens.dart';
 
 class DiscipleshipHeader extends StatelessWidget {
   const DiscipleshipHeader({super.key});
@@ -16,8 +16,8 @@ class DiscipleshipHeader extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppTheme.secondaryLight,
-            AppTheme.secondaryLight.withOpacity(0.8),
+            T.gold,
+            T.gold.withOpacity(0.8),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -25,7 +25,7 @@ class DiscipleshipHeader extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.secondaryLight.withOpacity(0.3),
+            color: T.gold.withOpacity(0.3),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
