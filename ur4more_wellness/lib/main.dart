@@ -8,6 +8,7 @@ import 'design/tokens.dart';
 import 'core/settings/settings_controller.dart';
 import 'core/settings/settings_service.dart';
 import 'core/settings/settings_scope.dart';
+import 'theme/dark_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,10 +54,10 @@ class MyApp extends StatelessWidget {
       return SettingsScope(
         controller: controller,
         child: MaterialApp(
-        title: 'ur4more_wellness',
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.light,
+        title: 'UR4MORE',
+        theme: buildDarkTheme(),
+        darkTheme: buildDarkTheme(),
+        themeMode: ThemeMode.dark,
         // 🚨 CRITICAL: NEVER REMOVE OR MODIFY
         builder: (context, child) {
           // Normalize desktop/web layout with centered content and max width

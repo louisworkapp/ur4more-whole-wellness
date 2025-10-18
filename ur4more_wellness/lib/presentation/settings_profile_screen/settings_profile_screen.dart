@@ -58,7 +58,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
     final settings = settingsCtl.value;
 
     return Scaffold(
-      backgroundColor: colorScheme.surface,
+      backgroundColor: colorScheme.background,
       appBar: const CustomAppBar(
         title: 'Settings & Profile',
         variant: CustomAppBarVariant.centered,
@@ -67,7 +67,9 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(height: AppSpace.x2),
 
