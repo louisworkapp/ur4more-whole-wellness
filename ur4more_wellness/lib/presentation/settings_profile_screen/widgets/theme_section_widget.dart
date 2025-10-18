@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-
-import '../../../core/app_export.dart';
-import '../../../design/tokens.dart';
-import '../../../widgets/custom_icon_widget.dart';
-import '../../../widgets/settings/setting_card.dart';
-import '../../../widgets/settings/choice_tile.dart';
-
-enum AppThemeMode { light, dark, system }
+import '../../../../core/settings/settings_model.dart';
+import '../../../../design/tokens.dart';
 
 class ThemeSectionWidget extends StatelessWidget {
   final AppThemeMode themeMode;
-  final ValueChanged<AppThemeMode?> onThemeModeChanged;
+  final Function(AppThemeMode) onThemeModeChanged;
 
   const ThemeSectionWidget({
     super.key,
@@ -23,55 +17,136 @@ class ThemeSectionWidget extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return SettingCard(
-      title: 'Theme Settings',
-      subtitle: 'Choose your preferred app appearance',
-      icon: CustomIconWidget(
-        iconName: 'palette',
-        color: colorScheme.primary,
-        size: 24,
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: colorScheme.outline.withOpacity(0.2),
+          width: 1,
+        ),
       ),
-      children: [
-        ChoiceTile<AppThemeMode>(
-          value: AppThemeMode.light,
-          groupValue: themeMode,
-          title: 'Light Mode',
-          subtitle: 'Clean and bright interface',
-          icon: Icon(
-            Icons.light_mode,
-            color: colorScheme.onSurfaceVariant,
-            size: 24,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.palette_outlined,
+                color: colorScheme.primary,
+                size: 24,
+              ),
+              const SizedBox(width: 12),
+              Text(
+                'Theme',
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface,
+                ),
+              ),
+            ],
           ),
-          onChanged: onThemeModeChanged,
-        ),
-        const SizedBox(height: AppSpace.x3),
-        ChoiceTile<AppThemeMode>(
-          value: AppThemeMode.dark,
-          groupValue: themeMode,
-          title: 'Dark Theme',
-          subtitle: 'Easy on the eyes in low light',
-          icon: Icon(
-            Icons.dark_mode,
-            color: colorScheme.onSurfaceVariant,
-            size: 24,
+          const SizedBox(height: 16),
+          _buildThemeOption(
+            context,
+            AppThemeMode.light,
+            'Light',
+            'Use the light theme',
+            Icons.light_mode_outlined,
           ),
-          onChanged: onThemeModeChanged,
-        ),
-        const SizedBox(height: AppSpace.x3),
-        ChoiceTile<AppThemeMode>(
-          value: AppThemeMode.system,
-          groupValue: themeMode,
-          title: 'System Default',
-          subtitle: 'Follows your device settings',
-          icon: Icon(
-            Icons.settings_brightness,
-            color: colorScheme.onSurfaceVariant,
-            size: 24,
+          const SizedBox(height: 12),
+          _buildThemeOption(
+            context,
+            AppThemeMode.dark,
+            'Dark',
+            'Use the dark theme',
+            Icons.dark_mode_outlined,
           ),
-          onChanged: onThemeModeChanged,
-        ),
-      ],
+          const SizedBox(height: 12),
+          _buildThemeOption(
+            context,
+            AppThemeMode.system,
+            'System',
+            'Follow system setting',
+            Icons.settings_suggest_outlined,
+          ),
+        ],
+      ),
     );
   }
 
+  Widget _buildThemeOption(
+    BuildContext context,
+    AppThemeMode mode,
+    String title,
+    String subtitle,
+    IconData icon,
+  ) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final isSelected = themeMode == mode;
+
+    return InkWell(
+      onTap: () => onThemeModeChanged(mode),
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: isSelected 
+              ? colorScheme.primary.withOpacity(0.1)
+              : colorScheme.surface,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isSelected 
+                ? colorScheme.primary
+                : colorScheme.outline.withOpacity(0.2),
+            width: isSelected ? 2 : 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: isSelected 
+                  ? colorScheme.primary
+                  : colorScheme.onSurface.withOpacity(0.6),
+              size: 24,
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: isSelected 
+                          ? colorScheme.primary
+                          : colorScheme.onSurface,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: colorScheme.onSurface.withOpacity(0.7),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (isSelected)
+              Icon(
+                Icons.check_circle,
+                color: colorScheme.primary,
+                size: 24,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
 }

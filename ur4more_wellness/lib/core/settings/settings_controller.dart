@@ -44,4 +44,10 @@ class SettingsController extends ChangeNotifier {
     notifyListeners();
     await _service.save(_settings);
   }
+
+  Future<void> updateThemeMode(AppThemeMode mode) async {
+    _settings = _settings.copyWith(themeMode: mode);
+    notifyListeners();
+    await _service.save(_settings);
+  }
 }

@@ -20,6 +20,8 @@ String faithTierToString(FaithTier tier) {
   }
 }
 
+enum AppThemeMode { light, dark, system }
+
 @immutable
 class AppSettings {
   final FaithTier faithTier;
@@ -28,6 +30,7 @@ class AppSettings {
   final bool equipmentBands;
   final bool equipmentPullup;
   final String timezone;
+  final AppThemeMode themeMode;
 
   const AppSettings({
     required this.faithTier,
@@ -36,6 +39,7 @@ class AppSettings {
     required this.equipmentBands,
     required this.equipmentPullup,
     required this.timezone,
+    required this.themeMode,
   });
 
   static const defaults = AppSettings(
@@ -45,6 +49,7 @@ class AppSettings {
     equipmentBands: false,
     equipmentPullup: false,
     timezone: 'Eastern Time (ET)',
+    themeMode: AppThemeMode.dark,
   );
 
   AppSettings copyWith({
@@ -54,6 +59,7 @@ class AppSettings {
     bool? equipmentBands,
     bool? equipmentPullup,
     String? timezone,
+    AppThemeMode? themeMode,
   }) {
     return AppSettings(
       faithTier: faithTier ?? this.faithTier,
@@ -62,6 +68,7 @@ class AppSettings {
       equipmentBands: equipmentBands ?? this.equipmentBands,
       equipmentPullup: equipmentPullup ?? this.equipmentPullup,
       timezone: timezone ?? this.timezone,
+      themeMode: themeMode ?? this.themeMode,
     );
   }
 }
