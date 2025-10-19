@@ -181,7 +181,8 @@ assets/
 ├── mind/
 │   ├── coach_prompts.json          # Core coach content
 │   ├── week_completion_invites.json # Conversion copy
-│   └── faith_mode_modal.json       # Modal content
+│   ├── faith_mode_modal.json       # Modal content
+│   └── go_deeper_card.json         # Faith mode invitation
 └── courses/
     ├── mind_aim_up_8w.json         # Dual-mode course
     ├── light_onramp_7d.json        # 7-day sampler
@@ -232,6 +233,31 @@ assets/
         }
       ]
     }
+  }
+}
+```
+
+### Go Deeper Card Schema
+```json
+{
+  "version": 1,
+  "off": {
+    "title": "Go deeper",
+    "body": "Order and truth change your life. We believe their deepest end is found in Jesus Christ.",
+    "bullets": [
+      "Same tools you know",
+      "Gentle faith overlays (optional)",
+      "Short KJV verses (≤ 2 sentences)"
+    ],
+    "primaryCta": { "label": "Explore Faith Mode", "action": "activate_light" },
+    "secondaryCta": { "label": "Keep Secular Tools", "action": "dismiss" },
+    "rateLimit": { "cooldownHours": 24, "snoozeDaysOnDismiss": 7 },
+    "showContexts": ["week_complete", "values_milestone", "urge_resolved", "coach_home_idle"]
+  },
+  "activated": {
+    "title": "Walk in the Light",
+    "body": "You can show or hide faith overlays any time in Settings.",
+    "primaryCta": { "label": "Manage Faith Settings", "action": "open_settings" }
   }
 }
 ```
@@ -347,6 +373,31 @@ assets/
 - **Micro-nudges**: Contextual encouragement and next steps
 - **Daily Inspiration**: Mode-appropriate quotes or scripture
 - **Reframe Success**: TruthService integration - "Aligned to truth" (OFF) / "Aligned to Christ's truth — John 14:6" (Activated)
+- **Go Deeper Card**: Faith mode invitation system (OFF mode only)
+
+#### Go Deeper Card
+**Purpose**: Respectful invitation to explore Faith Mode after users have engaged with secular tools.
+
+**Copy Rules**:
+- **OFF Mode Only**: No scripture or religious content in the invitation itself
+- **Consent-Driven**: Clear primary and secondary CTAs
+- **Transparent**: Honest about what Faith Mode offers
+
+**Show Contexts**:
+- `week_complete`: After completing a Mind course week
+- `values_milestone`: When user adds service/legacy/sacrifice values
+- `urge_resolved`: After resolving high-urge events (≥7) using OFF tools
+- `coach_home_idle`: When user visits Coach tab without specific action
+
+**Rate Limits**:
+- **24-hour cooldown**: Between invitations
+- **7-day snooze**: When user dismisses with "Keep Secular Tools"
+- **Context-aware**: Only show when user has demonstrated engagement
+
+**Analytics Events**:
+- `go_deeper_shown`: {context, faith_mode: 'off'}
+- `invite_accepted`: {context, path: 'go_deeper_card'}
+- `invite_dismissed`: {context}
 
 ### Exercises Tab
 Core tools available in both modes:
@@ -411,6 +462,44 @@ class SwitchToFaithModeDialog extends StatelessWidget {
   final VoidCallback? onLearnMore;
   final VoidCallback? onNotNow;
 }
+```
+
+#### GoDeeperCard
+```dart
+class GoDeeperCard extends StatelessWidget {
+  final FaithMode mode;
+  final Future<bool> Function(Duration cooldown) onExplore;
+  final Future<void> Function(Duration snooze) onDismiss;
+  final VoidCallback? onOpenSettings;
+  final List<String> contextTags;
+  final bool eligible;
+}
+```
+
+**Integration Example**:
+```dart
+// In Coach tab
+GoDeeperCard(
+  mode: faithMode,
+  contextTags: ['coach_home_idle'],
+  eligible: _eligibleForInvite(app),
+  onExplore: (cooldown) async {
+    await app.setFaithMode(FaithMode.light);
+    await app.markInviteShown(cooldown);
+    app.analytics.track('invite_accepted', {
+      'context': 'coach_home_idle',
+      'path': 'go_deeper_card'
+    });
+    return true;
+  },
+  onDismiss: (snooze) async {
+    await app.snoozeInvitesUntil(snooze);
+    app.analytics.track('invite_dismissed', {
+      'context': 'coach_home_idle'
+    });
+  },
+  onOpenSettings: () => _openFaithSettings(context),
+)
 ```
 
 ### Motion & Interaction
