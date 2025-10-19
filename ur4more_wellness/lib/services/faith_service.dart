@@ -5,6 +5,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// 4-tier Faith Mode system with XP progression
 enum FaithMode { off, light, disciple, kingdom }
 
+/// Extension for FaithMode with convenient flags
+extension FaithFlags on FaithMode {
+  bool get isOff => this == FaithMode.off;
+  bool get isActivated => this != FaithMode.off;
+  bool get isDeep => this == FaithMode.disciple || this == FaithMode.kingdom;
+}
+
 /// Faith progress tracking with XP and streaks
 class FaithProgress {
   final int xp;
