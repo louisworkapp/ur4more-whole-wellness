@@ -3,8 +3,8 @@
   "metadata": {
     "shard_index": 0,
     "total_shards": 1,
-    "quote_count": 221,
-    "created": "2025-10-19 16:00:05.586646"
+    "quote_count": 289,
+    "created": "2025-10-19 16:07:53.277825"
   },
   "quotes": [
     {
@@ -5751,6 +5751,1842 @@
         "text": ""
       },
       "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_john_3_16",
+      "text": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
+      "author": "Holy Bible (KJV)",
+      "work": "John 3:16",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "John 3:16",
+        "text": "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_romans_8_28",
+      "text": "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.",
+      "author": "Holy Bible (KJV)",
+      "work": "Romans 8:28",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Romans 8:28",
+        "text": "And we know that all things work together for good to them that love God, to them who are the called according to his purpose."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_jeremiah_29_11",
+      "text": "For I know the thoughts that I think toward you, saith the Lord, thoughts of peace, and not of evil, to give you an expected end.",
+      "author": "Holy Bible (KJV)",
+      "work": "Jeremiah 29:11",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "peace",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Jeremiah 29:11",
+        "text": "For I know the thoughts that I think toward you, saith the Lord, thoughts of peace, and not of evil, to give you an expected end."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_philippians_4_13",
+      "text": "I can do all things through Christ which strengtheneth me.",
+      "author": "Holy Bible (KJV)",
+      "work": "Philippians 4:13",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Philippians 4:13",
+        "text": "I can do all things through Christ which strengtheneth me."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_proverbs_3_5_6",
+      "text": "Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.",
+      "author": "Holy Bible (KJV)",
+      "work": "Proverbs 3:5-6",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Proverbs 3:5-6",
+        "text": "Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_ephesians_2_8_9",
+      "text": "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: Not of works, lest any man should boast.",
+      "author": "Holy Bible (KJV)",
+      "work": "Ephesians 2:8-9",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "grace",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Ephesians 2:8-9",
+        "text": "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: Not of works, lest any man should boast."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_2_corinthians_5_21",
+      "text": "For he hath made him to be sin for us, who knew no sin; that we might be made the righteousness of God in him.",
+      "author": "Holy Bible (KJV)",
+      "work": "2 Corinthians 5:21",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "2 Corinthians 5:21",
+        "text": "For he hath made him to be sin for us, who knew no sin; that we might be made the righteousness of God in him."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_titus_3_5",
+      "text": "Not by works of righteousness which we have done, but according to his mercy he saved us, by the washing of regeneration, and renewing of the Holy Ghost;",
+      "author": "Holy Bible (KJV)",
+      "work": "Titus 3:5",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "salvation",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Titus 3:5",
+        "text": "Not by works of righteousness which we have done, but according to his mercy he saved us, by the washing of regeneration, and renewing of the Holy Ghost;"
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_2_corinthians_5_17",
+      "text": "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.",
+      "author": "Holy Bible (KJV)",
+      "work": "2 Corinthians 5:17",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "2 Corinthians 5:17",
+        "text": "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_1_corinthians_15_22",
+      "text": "For as in Adam all die, even so in Christ shall all be made alive.",
+      "author": "Holy Bible (KJV)",
+      "work": "1 Corinthians 15:22",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "1 Corinthians 15:22",
+        "text": "For as in Adam all die, even so in Christ shall all be made alive."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_mark_1_15",
+      "text": "And saying, The time is fulfilled, and the kingdom of God is at hand: repent ye, and believe the gospel.",
+      "author": "Holy Bible (KJV)",
+      "work": "Mark 1:15",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Mark 1:15",
+        "text": "And saying, The time is fulfilled, and the kingdom of God is at hand: repent ye, and believe the gospel."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_acts_3_19",
+      "text": "Repent ye therefore, and be converted, that your sins may be blotted out, when the times of refreshing shall come from the presence of the Lord;",
+      "author": "Holy Bible (KJV)",
+      "work": "Acts 3:19",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "repentance",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Acts 3:19",
+        "text": "Repent ye therefore, and be converted, that your sins may be blotted out, when the times of refreshing shall come from the presence of the Lord;"
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_1_john_1_9",
+      "text": "If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness.",
+      "author": "Holy Bible (KJV)",
+      "work": "1 John 1:9",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "1 John 1:9",
+        "text": "If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_john_14_15",
+      "text": "If ye love me, keep my commandments.",
+      "author": "Holy Bible (KJV)",
+      "work": "John 14:15",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "John 14:15",
+        "text": "If ye love me, keep my commandments."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_james_2_17",
+      "text": "Even so faith, if it hath not works, is dead, being alone.",
+      "author": "Holy Bible (KJV)",
+      "work": "James 2:17",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "James 2:17",
+        "text": "Even so faith, if it hath not works, is dead, being alone."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_galatians_5_6",
+      "text": "For in Jesus Christ neither circumcision availeth any thing, nor uncircumcision; but faith which worketh by love.",
+      "author": "Holy Bible (KJV)",
+      "work": "Galatians 5:6",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Galatians 5:6",
+        "text": "For in Jesus Christ neither circumcision availeth any thing, nor uncircumcision; but faith which worketh by love."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_1_thessalonians_5_17",
+      "text": "Pray without ceasing.",
+      "author": "Holy Bible (KJV)",
+      "work": "1 Thessalonians 5:17",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "1 Thessalonians 5:17",
+        "text": "Pray without ceasing."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_1_peter_2_9",
+      "text": "But ye are a chosen generation, a royal priesthood, an holy nation, a peculiar people; that ye should shew forth the praises of him who hath called you out of darkness into his marvellous light:",
+      "author": "Holy Bible (KJV)",
+      "work": "1 Peter 2:9",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "worship",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "1 Peter 2:9",
+        "text": "But ye are a chosen generation, a royal priesthood, an holy nation, a peculiar people; that ye should shew forth the praises of him who hath called you out of darkness into his marvellous light:"
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_1_thessalonians_4_3",
+      "text": "For this is the will of God, even your sanctification, that ye should abstain from fornication:",
+      "author": "Holy Bible (KJV)",
+      "work": "1 Thessalonians 4:3",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "1 Thessalonians 4:3",
+        "text": "For this is the will of God, even your sanctification, that ye should abstain from fornication:"
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_acts_2_42",
+      "text": "And they continued stedfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers.",
+      "author": "Holy Bible (KJV)",
+      "work": "Acts 2:42",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Acts 2:42",
+        "text": "And they continued stedfastly in the apostles' doctrine and fellowship, and in breaking of bread, and in prayers."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_james_5_16",
+      "text": "Confess your faults one to another, and pray one for another, that ye may be healed. The effectual fervent prayer of a righteous man availeth much.",
+      "author": "Holy Bible (KJV)",
+      "work": "James 5:16",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "James 5:16",
+        "text": "Confess your faults one to another, and pray one for another, that ye may be healed. The effectual fervent prayer of a righteous man availeth much."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_1_peter_3_15",
+      "text": "But sanctify the Lord God in your hearts: and be ready always to give an answer to every man that asketh you a reason of the hope that is in you with meekness and fear:",
+      "author": "Holy Bible (KJV)",
+      "work": "1 Peter 3:15",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "hope",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "1 Peter 3:15",
+        "text": "But sanctify the Lord God in your hearts: and be ready always to give an answer to every man that asketh you a reason of the hope that is in you with meekness and fear:"
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_mark_10_45",
+      "text": "For even the Son of man came not to be ministered unto, but to minister, and to give his life a ransom for many.",
+      "author": "Holy Bible (KJV)",
+      "work": "Mark 10:45",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Mark 10:45",
+        "text": "For even the Son of man came not to be ministered unto, but to minister, and to give his life a ransom for many."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_matthew_5_16",
+      "text": "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.",
+      "author": "Holy Bible (KJV)",
+      "work": "Matthew 5:16",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "salvation",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Matthew 5:16",
+        "text": "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_john_15_5",
+      "text": "I am the vine, ye are the branches: He that abideth in me, and I in him, the same bringeth forth much fruit: for without me ye can do nothing.",
+      "author": "Holy Bible (KJV)",
+      "work": "John 15:5",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "grace",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "John 15:5",
+        "text": "I am the vine, ye are the branches: He that abideth in me, and I in him, the same bringeth forth much fruit: for without me ye can do nothing."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_colossians_2_6_7",
+      "text": "As ye have therefore received Christ Jesus the Lord, so walk ye in him: Rooted and built up in him, and stablished in the faith, as ye have been taught, abounding therein with thanksgiving.",
+      "author": "Holy Bible (KJV)",
+      "work": "Colossians 2:6-7",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Colossians 2:6-7",
+        "text": "As ye have therefore received Christ Jesus the Lord, so walk ye in him: Rooted and built up in him, and stablished in the faith, as ye have been taught, abounding therein with thanksgiving."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_psalm_90_12",
+      "text": "So teach us to number our days, that we may apply our hearts unto wisdom.",
+      "author": "Holy Bible (KJV)",
+      "work": "Psalm 90:12",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Psalm 90:12",
+        "text": "So teach us to number our days, that we may apply our hearts unto wisdom."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_galatians_5_22_23",
+      "text": "But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, Meekness, temperance: against such there is no law.",
+      "author": "Holy Bible (KJV)",
+      "work": "Galatians 5:22-23",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Galatians 5:22-23",
+        "text": "But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith, Meekness, temperance: against such there is no law."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_2_cor_5_17",
+      "text": "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.",
+      "author": "Holy Bible (KJV)",
+      "work": "2 Cor 5:17",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "2 Cor 5:17",
+        "text": "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_john_1_12",
+      "text": "But as many as received him, to them gave he power to become the sons of God, even to them that believe on his name.",
+      "author": "Holy Bible (KJV)",
+      "work": "John 1:12",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "John 1:12",
+        "text": "But as many as received him, to them gave he power to become the sons of God, even to them that believe on his name."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_rom_5_8",
+      "text": "But God commendeth his love toward us, in that, while we were yet sinners, Christ died for us.",
+      "author": "Holy Bible (KJV)",
+      "work": "Rom 5:8",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Rom 5:8",
+        "text": "But God commendeth his love toward us, in that, while we were yet sinners, Christ died for us."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_matt_6_33",
+      "text": "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.",
+      "author": "Holy Bible (KJV)",
+      "work": "Matt 6:33",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Matt 6:33",
+        "text": "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_1_thess_5_17",
+      "text": "Pray without ceasing.",
+      "author": "Holy Bible (KJV)",
+      "work": "1 Thess 5:17",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "1 Thess 5:17",
+        "text": "Pray without ceasing."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_ps_119_105",
+      "text": "Thy word is a lamp unto my feet, and a light unto my path.",
+      "author": "Holy Bible (KJV)",
+      "work": "Ps 119:105",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Ps 119:105",
+        "text": "Thy word is a lamp unto my feet, and a light unto my path."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_matt_28_19",
+      "text": "Go ye therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost:",
+      "author": "Holy Bible (KJV)",
+      "work": "Matt 28:19",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Matt 28:19",
+        "text": "Go ye therefore, and teach all nations, baptizing them in the name of the Father, and of the Son, and of the Holy Ghost:"
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_1_pet_4_10",
+      "text": "As every man hath received the gift, even so minister the same one to another, as good stewards of the manifold grace of God.",
+      "author": "Holy Bible (KJV)",
+      "work": "1 Pet 4:10",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "grace",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "1 Pet 4:10",
+        "text": "As every man hath received the gift, even so minister the same one to another, as good stewards of the manifold grace of God."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_gal_6_2",
+      "text": "Bear ye one another's burdens, and so fulfil the law of Christ.",
+      "author": "Holy Bible (KJV)",
+      "work": "Gal 6:2",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Gal 6:2",
+        "text": "Bear ye one another's burdens, and so fulfil the law of Christ."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_1_cor_9_19",
+      "text": "For though I be free from all men, yet have I made myself servant unto all, that I might gain the more.",
+      "author": "Holy Bible (KJV)",
+      "work": "1 Cor 9:19",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "1 Cor 9:19",
+        "text": "For though I be free from all men, yet have I made myself servant unto all, that I might gain the more."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_matt_5_16",
+      "text": "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.",
+      "author": "Holy Bible (KJV)",
+      "work": "Matt 5:16",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Matt 5:16",
+        "text": "Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_rom_12_1",
+      "text": "I beseech you therefore, brethren, by the mercies of God, that ye present your bodies a living sacrifice, holy, acceptable unto God, which is your reasonable service.",
+      "author": "Holy Bible (KJV)",
+      "work": "Rom 12:1",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Rom 12:1",
+        "text": "I beseech you therefore, brethren, by the mercies of God, that ye present your bodies a living sacrifice, holy, acceptable unto God, which is your reasonable service."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_ps_46_10",
+      "text": "Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth.",
+      "author": "Holy Bible (KJV)",
+      "work": "Ps 46:10",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Ps 46:10",
+        "text": "Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_mark_1_35",
+      "text": "And in the morning, rising up a great while before day, he went out, and departed into a solitary place, and there prayed.",
+      "author": "Holy Bible (KJV)",
+      "work": "Mark 1:35",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Mark 1:35",
+        "text": "And in the morning, rising up a great while before day, he went out, and departed into a solitary place, and there prayed."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_luke_5_16",
+      "text": "And he withdrew himself into the wilderness, and prayed.",
+      "author": "Holy Bible (KJV)",
+      "work": "Luke 5:16",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Luke 5:16",
+        "text": "And he withdrew himself into the wilderness, and prayed."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_rom_8_37",
+      "text": "Nay, in all these things we are more than conquerors through him that loved us.",
+      "author": "Holy Bible (KJV)",
+      "work": "Rom 8:37",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Rom 8:37",
+        "text": "Nay, in all these things we are more than conquerors through him that loved us."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_1_john_4_4",
+      "text": "Ye are of God, little children, and have overcome them: because greater is he that is in you, than he that is in the world.",
+      "author": "Holy Bible (KJV)",
+      "work": "1 John 4:4",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "1 John 4:4",
+        "text": "Ye are of God, little children, and have overcome them: because greater is he that is in you, than he that is in the world."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_ps_23_4",
+      "text": "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.",
+      "author": "Holy Bible (KJV)",
+      "work": "Ps 23:4",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Ps 23:4",
+        "text": "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_isa_41_10",
+      "text": "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.",
+      "author": "Holy Bible (KJV)",
+      "work": "Isa 41:10",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Isa 41:10",
+        "text": "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_josh_1_9",
+      "text": "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the Lord thy God is with thee whithersoever thou goest.",
+      "author": "Holy Bible (KJV)",
+      "work": "Josh 1:9",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Josh 1:9",
+        "text": "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the Lord thy God is with thee whithersoever thou goest."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_deut_31_6",
+      "text": "Be strong and of a good courage, fear not, nor be afraid of them: for the Lord thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee.",
+      "author": "Holy Bible (KJV)",
+      "work": "Deut 31:6",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Deut 31:6",
+        "text": "Be strong and of a good courage, fear not, nor be afraid of them: for the Lord thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_luke_12_15",
+      "text": "And he said unto them, Take heed, and beware of covetousness: for a man's life consisteth not in the abundance of the things which he possesseth.",
+      "author": "Holy Bible (KJV)",
+      "work": "Luke 12:15",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "hope",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Luke 12:15",
+        "text": "And he said unto them, Take heed, and beware of covetousness: for a man's life consisteth not in the abundance of the things which he possesseth."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_2_cor_9_7",
+      "text": "Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver.",
+      "author": "Holy Bible (KJV)",
+      "work": "2 Cor 9:7",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "2 Cor 9:7",
+        "text": "Every man according as he purposeth in his heart, so let him give; not grudgingly, or of necessity: for God loveth a cheerful giver."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_prov_3_9_10",
+      "text": "Honour the Lord with thy substance, and with the firstfruits of all thine increase: So shall thy barns be filled with plenty, and thy presses shall burst out with new wine.",
+      "author": "Holy Bible (KJV)",
+      "work": "Prov 3:9-10",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Prov 3:9-10",
+        "text": "Honour the Lord with thy substance, and with the firstfruits of all thine increase: So shall thy barns be filled with plenty, and thy presses shall burst out with new wine."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_acts_20_35",
+      "text": "I have shewed you all things, how that so labouring ye ought to support the weak, and to remember the words of the Lord Jesus, how he said, It is more blessed to give than to receive.",
+      "author": "Holy Bible (KJV)",
+      "work": "Acts 20:35",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Acts 20:35",
+        "text": "I have shewed you all things, how that so labouring ye ought to support the weak, and to remember the words of the Lord Jesus, how he said, It is more blessed to give than to receive."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_1_tim_3_1",
+      "text": "This is a true saying, If a man desire the office of a bishop, he desireth a good work.",
+      "author": "Holy Bible (KJV)",
+      "work": "1 Tim 3:1",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "1 Tim 3:1",
+        "text": "This is a true saying, If a man desire the office of a bishop, he desireth a good work."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_2_tim_2_2",
+      "text": "And the things that thou hast heard of me among many witnesses, the same commit thou to faithful men, who shall be able to teach others also.",
+      "author": "Holy Bible (KJV)",
+      "work": "2 Tim 2:2",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "2 Tim 2:2",
+        "text": "And the things that thou hast heard of me among many witnesses, the same commit thou to faithful men, who shall be able to teach others also."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_matt_9_37_38",
+      "text": "Then saith he unto his disciples, The harvest truly is plenteous, but the labourers are few; Pray ye therefore the Lord of the harvest, that he will send forth labourers into his harvest.",
+      "author": "Holy Bible (KJV)",
+      "work": "Matt 9:37-38",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Matt 9:37-38",
+        "text": "Then saith he unto his disciples, The harvest truly is plenteous, but the labourers are few; Pray ye therefore the Lord of the harvest, that he will send forth labourers into his harvest."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_eph_4_12",
+      "text": "For the perfecting of the saints, for the work of the ministry, for the edifying of the body of Christ:",
+      "author": "Holy Bible (KJV)",
+      "work": "Eph 4:12",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Eph 4:12",
+        "text": "For the perfecting of the saints, for the work of the ministry, for the edifying of the body of Christ:"
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_col_1_28",
+      "text": "Whom we preach, warning every man, and teaching every man in all wisdom; that we may present every man perfect in Christ Jesus:",
+      "author": "Holy Bible (KJV)",
+      "work": "Col 1:28",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Col 1:28",
+        "text": "Whom we preach, warning every man, and teaching every man in all wisdom; that we may present every man perfect in Christ Jesus:"
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_2_tim_4_2",
+      "text": "Preach the word; be instant in season, out of season; reprove, rebuke, exhort with all longsuffering and doctrine.",
+      "author": "Holy Bible (KJV)",
+      "work": "2 Tim 4:2",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "2 Tim 4:2",
+        "text": "Preach the word; be instant in season, out of season; reprove, rebuke, exhort with all longsuffering and doctrine."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_james_1_22",
+      "text": "But be ye doers of the word, and not hearers only, deceiving your own selves.",
+      "author": "Holy Bible (KJV)",
+      "work": "James 1:22",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "James 1:22",
+        "text": "But be ye doers of the word, and not hearers only, deceiving your own selves."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_galatians_5_16",
+      "text": "This I say then, Walk in the Spirit, and ye shall not fulfil the lust of the flesh.",
+      "author": "Holy Bible (KJV)",
+      "work": "Galatians 5:16",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Galatians 5:16",
+        "text": "This I say then, Walk in the Spirit, and ye shall not fulfil the lust of the flesh."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_ephesians_5_18",
+      "text": "And be not drunk with wine, wherein is excess; but be filled with the Spirit;",
+      "author": "Holy Bible (KJV)",
+      "work": "Ephesians 5:18",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "grace",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Ephesians 5:18",
+        "text": "And be not drunk with wine, wherein is excess; but be filled with the Spirit;"
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_john_13_35",
+      "text": "By this shall all men know that ye are my disciples, if ye have love one to another.",
+      "author": "Holy Bible (KJV)",
+      "work": "John 13:35",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "John 13:35",
+        "text": "By this shall all men know that ye are my disciples, if ye have love one to another."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_galatians_5_13",
+      "text": "For, brethren, ye have been called unto liberty; only use not liberty for an occasion to the flesh, but by love serve one another.",
+      "author": "Holy Bible (KJV)",
+      "work": "Galatians 5:13",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Galatians 5:13",
+        "text": "For, brethren, ye have been called unto liberty; only use not liberty for an occasion to the flesh, but by love serve one another."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_ephesians_6_11",
+      "text": "Put on the whole armour of God, that ye may be able to stand against the wiles of the devil.",
+      "author": "Holy Bible (KJV)",
+      "work": "Ephesians 6:11",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "grace",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Ephesians 6:11",
+        "text": "Put on the whole armour of God, that ye may be able to stand against the wiles of the devil."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_james_4_7",
+      "text": "Submit yourselves therefore to God. Resist the devil, and he will flee from you.",
+      "author": "Holy Bible (KJV)",
+      "work": "James 4:7",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "James 4:7",
+        "text": "Submit yourselves therefore to God. Resist the devil, and he will flee from you."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_james_1_2_3",
+      "text": "My brethren, count it all joy when ye fall into divers temptations; Knowing this, that the trying of your faith worketh patience.",
+      "author": "Holy Bible (KJV)",
+      "work": "James 1:2-3",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "James 1:2-3",
+        "text": "My brethren, count it all joy when ye fall into divers temptations; Knowing this, that the trying of your faith worketh patience."
+      },
+      "attribution": "KJV",
+      "checksum": ""
+    },
+    {
+      "id": "kjv_romans_5_3_4",
+      "text": "And not only so, but we glory in tribulations also: knowing that tribulation worketh patience; And patience, experience; and experience, hope:",
+      "author": "Holy Bible (KJV)",
+      "work": "Romans 5:3-4",
+      "year_approx": 1611,
+      "source": "KJV",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "hope",
+        "scripture",
+        "bible"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": true,
+        "ref": "Romans 5:3-4",
+        "text": "And not only so, but we glory in tribulations also: knowing that tribulation worketh patience; And patience, experience; and experience, hope:"
+      },
+      "attribution": "KJV",
       "checksum": ""
     }
   ]
