@@ -1,10 +1,9 @@
 {
   "version": 1,
   "metadata": {
-    "shard_index": 0,
-    "total_shards": 1,
-    "quote_count": 20,
-    "created": "2025-01-27T00:00:00.000Z"
+    "total_quotes": 20,
+    "created": "2025-01-27T00:00:00.000Z",
+    "source_files": ["2025-01_truth_001.json", "2025-01_responsibility_001.json", "2025-01_courage_001.json"]
   },
   "quotes": [
     {
