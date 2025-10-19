@@ -61,6 +61,12 @@ The Mind Coach is a dual-mode mental wellness system that provides evidence-base
 - Content Governance SOP with SLAs: 48h hotfix, 7d minor updates (SLAs apply when an external advisor is engaged)
 - Risk levels and sign-off templates for quality assurance
 
+### NEW: Truth Axis Integration
+- TruthService: Maps secular concepts to biblical roots across all app branches
+- Creed Integration: Two Powers framework (Light vs Darkness) with KJV verses ≤2 sentences
+- Per-Branch Placements: Home callout, Mind reframe success, Body habit footer, Spirit creed, Rewards light streak
+- Consent-First: All faith overlays optional with user control and rate-limited invitations
+
 ### NEW: Crisis & Safety Posture
 - Geo-aware crisis resources (US 988, international lookups)
 - Always-visible Help link in Coach interface
@@ -340,6 +346,7 @@ assets/
 - **Quick Actions**: One-tap access to common tools
 - **Micro-nudges**: Contextual encouragement and next steps
 - **Daily Inspiration**: Mode-appropriate quotes or scripture
+- **Reframe Success**: TruthService integration - "Aligned to truth" (OFF) / "Aligned to Christ's truth — John 14:6" (Activated)
 
 ### Exercises Tab
 Core tools available in both modes:

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "creed": {
+    "short": "Two powers shape our lives—Light and Darkness. We believe the true Light is God the Father, and Jesus Christ His Son is Lord of all, King of kings. All truth flows from Him.",
+    "hero": "We live in a world of Light and Darkness. God the Father created all things, and Jesus Christ His Son is Lord of all. He is the Way, the Truth, and the Life. In Him we find the true end of order, truth, and meaning.",
+    "full": [
+      "We confess that two powers contend for the human heart—Light and Darkness. We wrestle not against flesh and blood, but against spiritual powers that twist our thoughts and desires.",
+      "We believe God the Father created all things, and that His Son, Jesus Christ, is Lord of all and King of kings. All truth, wisdom, and goodness flow from Him; every lesser truth must finally align to Him.",
+      "Jesus is the Way, the Truth, and the Life. Through His cross and resurrection He brings forgiveness, new birth, and a kingdom that cannot be shaken. In Him, minds are renewed, lives are reordered, and love labors for the good of others.",
+      "Therefore we aim up—out of darkness into His marvelous light—choosing honesty, responsibility, courage, service, and worship, until every knee shall bow and every tongue confess that Jesus Christ is Lord, to the glory of God the Father."
+    ],
+    "kvs": [
+      { "ref": "Ephesians 6:12", "text": "For we wrestle not against flesh and blood, but against principalities, against powers, against the rulers of the darkness of this world..." },
+      { "ref": "John 1:5", "text": "And the light shineth in darkness; and the darkness comprehended it not." },
+      { "ref": "John 14:6", "text": "Jesus saith unto him, I am the way, the truth, and the life: no man cometh unto the Father, but by me." },
+      { "ref": "Colossians 1:16-17", "text": "For by him were all things created... And he is before all things, and by him all things consist." },
+      { "ref": "Philippians 2:10-11", "text": "That at the name of Jesus every knee should bow... And that every tongue should confess that Jesus Christ is Lord..." }
+    ],
+    "ui": {
+      "maxVerseSentences": 2,
+      "showConsentForFaithOverlays": true
+    }
+  }
+}
