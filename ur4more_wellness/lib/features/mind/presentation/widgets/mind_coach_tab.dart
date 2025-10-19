@@ -6,6 +6,7 @@ import '../../../../design/tokens.dart';
 import '../../../../widgets/custom_icon_widget.dart';
 import '../../services/conversion_funnel_service.dart';
 import '../../widgets/go_deeper_card.dart';
+import '../../widgets/daily_inspiration.dart';
 import '../../../../core/settings/settings_scope.dart';
 import '../../../../core/settings/settings_model.dart';
 
@@ -23,7 +24,6 @@ class MindCoachTab extends StatefulWidget {
 
 class _MindCoachTabState extends State<MindCoachTab> {
   MindCoachCopy? _coachCopy;
-  String _currentQuote = '';
   bool _isLoading = true;
 
   @override
@@ -45,11 +45,9 @@ class _MindCoachTabState extends State<MindCoachTab> {
     
     try {
       final coachCopy = await MindCoachRepository.getCoachCopy(widget.faithMode);
-      final quote = await MindCoachRepository.getRandomQuote(widget.faithMode);
       
       setState(() {
         _coachCopy = coachCopy;
-        _currentQuote = quote;
         _isLoading = false;
       });
     } catch (e) {
@@ -89,8 +87,11 @@ class _MindCoachTabState extends State<MindCoachTab> {
           
           SizedBox(height: AppSpace.x6),
           
-          // Daily Quote
-          _buildDailyQuote(theme, colorScheme),
+          // Daily Inspiration
+          DailyInspiration(
+            mode: widget.faithMode,
+            hideFaithOverlaysInMind: false, // TODO: Get from settings
+          ),
           
           SizedBox(height: AppSpace.x6),
           
@@ -215,62 +216,6 @@ class _MindCoachTabState extends State<MindCoachTab> {
     );
   }
 
-  Widget _buildDailyQuote(ThemeData theme, ColorScheme colorScheme) {
-    return Container(
-      padding: EdgeInsets.all(AppSpace.x4),
-      decoration: BoxDecoration(
-        color: colorScheme.surfaceVariant.withOpacity(0.3),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              CustomIconWidget(
-                iconName: 'format_quote',
-                color: colorScheme.primary,
-                size: 20,
-              ),
-              SizedBox(width: AppSpace.x2),
-              Text(
-                'Daily Inspiration',
-                style: theme.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.onSurface,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: AppSpace.x3),
-          Text(
-            _currentQuote,
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
-              height: 1.5,
-              fontStyle: FontStyle.italic,
-            ),
-          ),
-          SizedBox(height: AppSpace.x3),
-          Align(
-            alignment: Alignment.centerRight,
-            child: TextButton.icon(
-              onPressed: _loadCoachContent,
-              icon: CustomIconWidget(
-                iconName: 'refresh',
-                color: colorScheme.primary,
-                size: 16,
-              ),
-              label: Text('New Quote'),
-              style: TextButton.styleFrom(
-                foregroundColor: colorScheme.primary,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 
   Widget _buildQuickActions(ThemeData theme, ColorScheme colorScheme) {
     return Column(

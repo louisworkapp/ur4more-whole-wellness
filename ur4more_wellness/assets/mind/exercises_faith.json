@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "gates": { "faith_mode": ["light", "disciple", "kingdom"] },
+  "settings_respect": { "hide_faith_overlays_in_mind": true, "light_requires_consent_per_session": true },
+  "exercises": [
+    {
+      "id": "verse_breath_60",
+      "title": "Verse + Breathing (60s)",
+      "summary": "Steady your mind with a one-minute breath and a short KJV verse.",
+      "categories": ["regulation", "anxiety"],
+      "timerSeconds": 60,
+      "steps": [
+        "Inhale for 4, hold 4, exhale 4, hold 4 — repeat.",
+        "On each exhale, read the verse quietly."
+      ],
+      "scriptureKJV": [{ "ref": "Philippians 4:6–7", "text": "Be careful for nothing... the peace of God... shall keep your hearts and minds through Christ Jesus." }],
+      "prayer": "Lord, steady my mind and guard my heart with Your peace.",
+      "xp": 10
+    },
+    {
+      "id": "identity_reframe",
+      "title": "Identity-in-Christ Reframe",
+      "summary": "Challenge the lie; replace it with Scripture-rooted identity.",
+      "categories": ["cognition", "self-talk"],
+      "steps": [
+        "Write the troubling thought in one sentence.",
+        "List evidence for/against it.",
+        "Choose one identity verse and craft a 1-sentence reframe."
+      ],
+      "scriptureKJV": [{ "ref": "2 Corinthians 5:17", "text": "Therefore if any man be in Christ, he is a new creature..." }],
+      "prayer": "Father, let me live from who I am in Christ, not from fear.",
+      "xp": 15,
+      "templates": {
+        "reframeTemplate": "Because {verse_ref}, I will believe: {reframe_sentence}"
+      }
+    },
+    {
+      "id": "confession_truth_step",
+      "title": "Confession & Truth Step",
+      "summary": "Tell the truth to God and take one concrete act of obedience.",
+      "categories": ["repentance", "behavior"],
+      "steps": [
+        "Name one thing to confess in one line.",
+        "Receive forgiveness by faith; write a single next step.",
+        "Schedule the step (today or tomorrow)."
+      ],
+      "scriptureKJV": [{ "ref": "1 John 1:9", "text": "If we confess our sins, he is faithful and just to forgive us our sins..." }],
+      "prayer": "Merciful Lord, I confess honestly. Cleanse me and help me walk in truth.",
+      "xp": 15,
+      "scheduler": { "allowToday": true, "allowTomorrow": true }
+    },
+    {
+      "id": "serve_someone_today",
+      "title": "Serve Someone Today",
+      "summary": "Choose one unseen act of love; do it within 24 hours.",
+      "categories": ["service", "values"],
+      "steps": [
+        "Pick one person and one helpful, humble act.",
+        "Decide where and when you'll do it (≤24h).",
+        "After completion, log how it changed your mood."
+      ],
+      "scriptureKJV": [{ "ref": "Galatians 5:13", "text": "By love serve one another." }],
+      "prayer": "Jesus, open my eyes to serve with humility and joy.",
+      "xp": 20,
+      "deadlineHours": 24
+    },
+    {
+      "id": "scripture_meditation_5",
+      "title": "Scripture Meditation (5m)",
+      "summary": "Slow, attentive reading (lectio) to anchor mind and will.",
+      "categories": ["meditation", "focus"],
+      "timerSeconds": 300,
+      "steps": [
+        "Read the verse slowly 3 times.",
+        "Note one word/phrase that stands out.",
+        "Ask: What obedience does this invite today?"
+      ],
+      "scriptureKJV": [{ "ref": "John 14:6", "text": "I am the way, the truth, and the life..." }],
+      "prayer": "Speak, Lord; I will listen and obey.",
+      "xp": 20
+    }
+  ]
+}
