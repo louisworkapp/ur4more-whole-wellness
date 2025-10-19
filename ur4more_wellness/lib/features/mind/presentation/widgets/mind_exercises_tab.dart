@@ -4,6 +4,8 @@ import '../../repositories/mind_coach_repository.dart';
 import '../../../../services/faith_service.dart';
 import '../../../../design/tokens.dart';
 import '../../services/conversion_funnel_service.dart';
+import '../../../../data/mind_faith_exercises_repository.dart';
+import '../../../../widgets/verse_reveal_chip.dart';
 
 class MindExercisesTab extends StatefulWidget {
   final FaithMode faithMode;
@@ -35,10 +37,42 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
     }
   }
 
-  void _loadExercises() {
+  void _loadExercises() async {
     setState(() => _isLoading = true);
     
     final exercises = MindCoachRepository.getExercises(widget.faithMode);
+    
+    // Add faith exercises if faith mode is activated
+    if (widget.faithMode.isActivated) {
+      try {
+        final faithExercises = await MindFaithExercisesRepository().load();
+        // Convert FaithExercise to Exercise format
+        final convertedFaithExercises = faithExercises.map((fe) => Exercise(
+          id: fe.id,
+          title: fe.title,
+          descriptionOff: fe.summary,
+          descriptionFaith: fe.prayer != null ? ' ${fe.prayer}' : null,
+          icon: 'favorite', // Use a faith-related icon
+          estimatedMinutes: fe.timerSeconds != null ? (fe.timerSeconds! / 60).round() : 5,
+          tags: fe.categories,
+        )).toList();
+        
+        // Remove overlapping regular exercises to avoid duplication
+        final overlappingIds = [
+          'breathing_exercise', // Overlaps with verse_breath_60
+          'thought_reframe',    // Overlaps with identity_reframe
+          'values_clarification', // Overlaps with serve_someone_today
+          'meditation',         // Overlaps with scripture_meditation_5
+        ];
+        
+        exercises.removeWhere((exercise) => overlappingIds.contains(exercise.id));
+        
+        exercises.addAll(convertedFaithExercises);
+      } catch (e) {
+        // If faith exercises fail to load, continue with regular exercises
+        print('Failed to load faith exercises: $e');
+      }
+    }
     
     setState(() {
       _exercises = exercises;
@@ -151,6 +185,13 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
     ColorScheme colorScheme, {
     bool isCompact = false,
   }) {
+    // Check if this is a faith exercise
+    final isFaithExercise = exercise.id.startsWith('verse_') ||
+                           exercise.id.startsWith('identity_') ||
+                           exercise.id.startsWith('confession_') ||
+                           exercise.id.startsWith('serve_') ||
+                           exercise.id.startsWith('scripture_');
+    
     return InkWell(
       onTap: () => _startExercise(exercise),
       borderRadius: BorderRadius.circular(12),
@@ -222,6 +263,11 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
                   height: 1.4,
                 ),
               ),
+              // Add verse display for faith exercises
+              if (isFaithExercise && widget.faithMode.isActivated) ...[
+                SizedBox(height: AppSpace.x2),
+                _buildFaithExerciseVerse(exercise),
+              ],
               SizedBox(height: AppSpace.x3),
               Wrap(
                 spacing: AppSpace.x2,
@@ -248,6 +294,27 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildFaithExerciseVerse(Exercise exercise) {
+    // Map exercise IDs to their corresponding verses
+    final verseMap = {
+      'verse_breath_60': {'ref': 'Philippians 4:6–7', 'text': 'Be careful for nothing... the peace of God... shall keep your hearts and minds through Christ Jesus.'},
+      'identity_reframe': {'ref': '2 Corinthians 5:17', 'text': 'Therefore if any man be in Christ, he is a new creature...'},
+      'confession_truth_step': {'ref': '1 John 1:9', 'text': 'If we confess our sins, he is faithful and just to forgive us our sins...'},
+      'serve_someone_today': {'ref': 'Galatians 5:13', 'text': 'By love serve one another.'},
+      'scripture_meditation_5': {'ref': 'John 14:6', 'text': 'I am the way, the truth, and the life...'},
+    };
+    
+    final verse = verseMap[exercise.id];
+    if (verse == null) return const SizedBox.shrink();
+    
+    return VerseRevealChip(
+      mode: widget.faithMode,
+      ref: verse['ref']!,
+      text: verse['text']!,
+      askConsentLight: true,
     );
   }
 
