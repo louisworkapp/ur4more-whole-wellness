@@ -1,5 +1,6 @@
 {
   "version": 1,
   "shard_count": 1,
-  "files": ["assets/quotes/shards/quotes_000.json"]
+  "files": ["assets/quotes/shards/quotes_000.json"],
+  "last_updated": "2025-01-27T00:00:00.000Z"
 }
