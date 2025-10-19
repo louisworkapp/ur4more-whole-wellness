@@ -8,6 +8,7 @@ import json
 import sys
 from pathlib import Path
 from typing import List, Dict, Any
+from datetime import datetime
 
 def load_quotes_file(filepath: str) -> List[Dict[str, Any]]:
     """Load quotes from a JSON file"""

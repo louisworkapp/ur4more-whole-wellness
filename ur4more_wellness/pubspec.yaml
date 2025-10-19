@@ -54,7 +54,7 @@ flutter:
     - assets/mind/
     - assets/core/
     - assets/quotes/manifest.json
-    - assets/quotes/shards/quotes_000.json
+    - assets\quotes\shards\quotes_000.json
 
 flutter_native_splash:
   color: "#0E1420"

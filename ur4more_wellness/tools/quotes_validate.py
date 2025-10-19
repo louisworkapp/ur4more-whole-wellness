@@ -54,7 +54,7 @@ def validate_quote(quote: dict) -> list:
     # Validate year
     if 'year_approx' in quote:
         year = quote['year_approx']
-        if not isinstance(year, int) or year < 1000 or year > 2024:
+        if not isinstance(year, int) or year < 100 or year > 2024:
             errors.append(f"Invalid year: {year}")
     
     return errors
@@ -66,35 +66,35 @@ def validate_quotes_file(filepath: str) -> bool:
             data = json.load(f)
         
         if 'quotes' not in data:
-            print(f"❌ {filepath}: Missing 'quotes' field")
+            print(f"[ERROR] {filepath}: Missing 'quotes' field")
             return False
         
         quotes = data['quotes']
         if not isinstance(quotes, list):
-            print(f"❌ {filepath}: 'quotes' must be a list")
+            print(f"[ERROR] {filepath}: 'quotes' must be a list")
             return False
         
         total_errors = 0
         for i, quote in enumerate(quotes):
             errors = validate_quote(quote)
             if errors:
-                print(f"❌ {filepath}: Quote {i+1} ({quote.get('id', 'unknown')}):")
+                print(f"[ERROR] {filepath}: Quote {i+1} ({quote.get('id', 'unknown')}):")
                 for error in errors:
                     print(f"   - {error}")
                 total_errors += len(errors)
         
         if total_errors == 0:
-            print(f"✅ {filepath}: {len(quotes)} quotes validated successfully")
+            print(f"[SUCCESS] {filepath}: {len(quotes)} quotes validated successfully")
             return True
         else:
-            print(f"❌ {filepath}: {total_errors} validation errors found")
+            print(f"[ERROR] {filepath}: {total_errors} validation errors found")
             return False
             
     except json.JSONDecodeError as e:
-        print(f"❌ {filepath}: JSON decode error - {e}")
+        print(f"[ERROR] {filepath}: JSON decode error - {e}")
         return False
     except Exception as e:
-        print(f"❌ {filepath}: Error - {e}")
+        print(f"[ERROR] {filepath}: Error - {e}")
         return False
 
 if __name__ == "__main__":
@@ -111,8 +111,8 @@ if __name__ == "__main__":
             all_valid = False
     
     if all_valid:
-        print("\n🎉 All files validated successfully!")
+        print("\n[SUCCESS] All files validated successfully!")
         sys.exit(0)
     else:
-        print("\n❌ Some files failed validation")
+        print("\n[ERROR] Some files failed validation")
         sys.exit(1)
