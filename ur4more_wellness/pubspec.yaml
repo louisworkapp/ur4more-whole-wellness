@@ -52,6 +52,7 @@ flutter:
     - assets/icons/
     - assets/splash/
     - assets/mind/
+    - assets/core/
 
 flutter_native_splash:
   color: "#0E1420"

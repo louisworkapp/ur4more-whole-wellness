@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "anchors": [
+    {
+      "concept": "Objective truth",
+      "summaryOff": "Tell the truth to reduce cognitive dissonance.",
+      "summaryOn": "Truth is grounded in God; lies enslave.",
+      "scriptureKJV": [{ "ref": "John 14:6", "text": "I am the way, the truth, and the life." }]
+    },
+    {
+      "concept": "Spiritual conflict",
+      "summaryOff": "Some thoughts and cultures push us off-course.",
+      "summaryOn": "We wrestle not against flesh and blood.",
+      "scriptureKJV": [{ "ref": "Ephesians 6:12", "text": "For we wrestle not against flesh and blood..." }]
+    },
+    {
+      "concept": "Responsibility",
+      "summaryOff": "Shoulder weight to gain meaning and stability.",
+      "summaryOn": "Stewardship under Christ; faith works by love.",
+      "scriptureKJV": [{ "ref": "Galatians 5:6", "text": "Faith which worketh by love." }]
+    },
+    {
+      "concept": "Service",
+      "summaryOff": "Help others to find purpose and connection.",
+      "summaryOn": "Love your neighbor as yourself; serve Christ in all.",
+      "scriptureKJV": [{ "ref": "Matthew 22:39", "text": "Thou shalt love thy neighbour as thyself." }]
+    },
+    {
+      "concept": "Hope",
+      "summaryOff": "Optimism grounded in evidence and action.",
+      "summaryOn": "Hope in Christ; He is our anchor and strength.",
+      "scriptureKJV": [{ "ref": "Hebrews 6:19", "text": "Which hope we have as an anchor of the soul." }]
+    },
+    {
+      "concept": "Order",
+      "summaryOff": "Structure and routine create stability and agency.",
+      "summaryOn": "All things done decently and in order under Christ.",
+      "scriptureKJV": [{ "ref": "1 Corinthians 14:40", "text": "Let all things be done decently and in order." }]
+    },
+    {
+      "concept": "Courage",
+      "summaryOff": "Face fears with evidence and small steps.",
+      "summaryOn": "Be strong and of good courage; the Lord is with thee.",
+      "scriptureKJV": [{ "ref": "Joshua 1:9", "text": "Be strong and of a good courage; be not afraid, neither be thou dismayed: for the Lord thy God is with thee." }]
+    },
+    {
+      "concept": "Wisdom",
+      "summaryOff": "Learn from experience and seek good counsel.",
+      "summaryOn": "The fear of the Lord is the beginning of wisdom.",
+      "scriptureKJV": [{ "ref": "Proverbs 9:10", "text": "The fear of the Lord is the beginning of wisdom." }]
+    }
+  ]
+}
