@@ -611,7 +611,9 @@ class _ReframeDialogState extends State<_ReframeDialog> {
                       'What\'s a more balanced way to think about this?',
                       _reframeController,
                     ),
-                    if (widget.faithMode.isActivated && widget.coachCopy.faithOptional != null) ...[
+                    // Faith integration based on mode
+                    if (widget.faithMode.isOff) ...[
+                      // OFF mode: Ask for permission to show faith content
                       SizedBox(height: AppSpace.x3),
                       Container(
                         padding: EdgeInsets.all(AppSpace.x3),
@@ -619,25 +621,62 @@ class _ReframeDialogState extends State<_ReframeDialog> {
                           color: colorScheme.primary.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Row(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(
-                              Icons.auto_awesome,
-                              color: colorScheme.primary,
-                              size: 20,
-                            ),
-                            SizedBox(width: AppSpace.x2),
-                            Expanded(
-                              child: Text(
-                                widget.coachCopy.faithOptional!,
-                                style: theme.textTheme.bodySmall?.copyWith(
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.auto_awesome,
                                   color: colorScheme.primary,
+                                  size: 20,
                                 ),
-                              ),
+                                SizedBox(width: AppSpace.x2),
+                                Expanded(
+                                  child: Text(
+                                    'Would you like to see how this reframe connects to a deeper hope?',
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: colorScheme.primary,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: AppSpace.x2),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: OutlinedButton.icon(
+                                    onPressed: () => _showVerseDialog(),
+                                    icon: Icon(Icons.menu_book, size: 16),
+                                    label: Text('Short Verse'),
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor: colorScheme.primary,
+                                      side: BorderSide(color: colorScheme.primary),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: AppSpace.x2),
+                                Expanded(
+                                  child: OutlinedButton.icon(
+                                    onPressed: () => _showPrayerDialog(),
+                                    icon: Icon(Icons.favorite, size: 16),
+                                    label: Text('Prayer'),
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor: colorScheme.primary,
+                                      side: BorderSide(color: colorScheme.primary),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
+                    ] else if (widget.faithMode.isActivated) ...[
+                      // Light, Disciple, Kingdom Builder: Hard-wired faith integration
+                      SizedBox(height: AppSpace.x3),
+                      _buildHardWiredFaithSection(theme, colorScheme),
                     ],
                   ],
                 ),
@@ -662,6 +701,219 @@ class _ReframeDialogState extends State<_ReframeDialog> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildHardWiredFaithSection(ThemeData theme, ColorScheme colorScheme) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Verse Section
+        Container(
+          padding: EdgeInsets.all(AppSpace.x3),
+          decoration: BoxDecoration(
+            color: colorScheme.primary.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: colorScheme.primary.withOpacity(0.3),
+              width: 1,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.menu_book,
+                    color: colorScheme.primary,
+                    size: 20,
+                  ),
+                  SizedBox(width: AppSpace.x2),
+                  Text(
+                    'Scripture for Strength',
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.primary,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: AppSpace.x2),
+              Text(
+                'Philippians 4:13',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: colorScheme.primary,
+                ),
+              ),
+              SizedBox(height: AppSpace.x1),
+              Text(
+                'I can do all things through Christ which strengtheneth me.',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontStyle: FontStyle.italic,
+                  height: 1.4,
+                ),
+              ),
+              SizedBox(height: AppSpace.x1),
+              Text(
+                'Let this truth anchor your reframe. Christ gives you strength to think clearly and act wisely.',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: AppSpace.x2),
+        // Prayer Section
+        Container(
+          padding: EdgeInsets.all(AppSpace.x3),
+          decoration: BoxDecoration(
+            color: colorScheme.secondary.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(8),
+            border: Border.all(
+              color: colorScheme.secondary.withOpacity(0.3),
+              width: 1,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(
+                    Icons.favorite,
+                    color: colorScheme.secondary,
+                    size: 20,
+                  ),
+                  SizedBox(width: AppSpace.x2),
+                  Text(
+                    'Prayer for Clarity',
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: colorScheme.secondary,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: AppSpace.x2),
+              Text(
+                'Lord, help me see this situation clearly through Your eyes. Give me wisdom to reframe my thoughts according to Your truth. Strengthen me to act in love and faith. Amen.',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  height: 1.4,
+                ),
+              ),
+              SizedBox(height: AppSpace.x1),
+              Text(
+                'Take a moment to pray this before completing your reframe.',
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _showVerseDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Short Verse for Strength'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Philippians 4:13',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            SizedBox(height: AppSpace.x2),
+            Text(
+              'I can do all things through Christ which strengtheneth me.',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                fontStyle: FontStyle.italic,
+                height: 1.4,
+              ),
+            ),
+            SizedBox(height: AppSpace.x2),
+            Text(
+              'Use this truth to anchor your reframe. Christ gives you strength to think clearly and act wisely.',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Close'),
+          ),
+          FilledButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Verse added to your reframe!'),
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            },
+            child: Text('Use This Verse'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showPrayerDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Prayer for Clarity'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'Lord, help me see this situation clearly through Your eyes. Give me wisdom to reframe my thoughts according to Your truth. Strengthen me to act in love and faith. Amen.',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                height: 1.4,
+              ),
+            ),
+            SizedBox(height: AppSpace.x2),
+            Text(
+              'Take a moment to pray this or your own prayer before completing your reframe.',
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Close'),
+          ),
+          FilledButton(
+            onPressed: () {
+              Navigator.pop(context);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Prayer completed. Continue with your reframe.'),
+                  behavior: SnackBarBehavior.floating,
+                ),
+              );
+            },
+            child: Text('Prayed'),
+          ),
+        ],
       ),
     );
   }
