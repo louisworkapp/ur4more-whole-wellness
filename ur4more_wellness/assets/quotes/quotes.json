@@ -1,328 +1,5794 @@
 {
   "version": 1,
   "metadata": {
-    "total_quotes": 20,
-    "created": "2025-01-27T00:00:00.000Z",
-    "source_files": ["2025-01_truth_001.json", "2025-01_responsibility_001.json", "2025-01_courage_001.json"]
+    "total_quotes": 221,
+    "created": "2025-10-19 16:00:05.464439",
+    "source_files": [
+      "assets/quotes/batches/2025-01_truth_truth_001.json",
+      "assets/quotes/batches/2025-01_responsibility_responsibility_001.json",
+      "assets/quotes/batches/2025-01_courage_courage_001.json",
+      "assets/quotes/batches/2025-01_humility_humility_001.json",
+      "assets/quotes/batches/2025-01_service_service_001.json",
+      "assets/quotes/batches/2025-01_wisdom_wisdom_001.json",
+      "assets/quotes/batches/2025-01_meaning_meaning_001.json",
+      "assets/quotes/batches/2025-01_perseverance_perseverance_001.json",
+      "assets/quotes/batches/2025-01_integrity_integrity_001.json",
+      "assets/quotes/batches/2025-01_compassion_compassion_001.json",
+      "assets/quotes/batches/2025-01_forgiveness_forgiveness_001.json",
+      "assets/quotes/batches/2025-01_patience_patience_001.json",
+      "assets/quotes/batches/2025-01_gratitude_gratitude_001.json",
+      "assets/quotes/batches/2025-01_peace_peace_001.json",
+      "assets/quotes/batches/2025-01_love_love_001.json",
+      "assets/quotes/batches/2025-01_hope_hope_001.json",
+      "assets/quotes/batches/2025-01_repentance_repentance_001.json",
+      "assets/quotes/batches/2025-01_prayer_prayer_001.json",
+      "assets/quotes/batches/2025-01_grace_grace_001.json",
+      "assets/quotes/batches/2025-01_salvation_salvation_001.json",
+      "assets/quotes/batches/2025-01_worship_worship_001.json",
+      "assets/quotes/batches/2025-01_faith_faith_001.json",
+      "assets/quotes/batches/2025-01_redemption_redemption_001.json",
+      "assets/quotes/batches/2025-01_sanctification_sanctification_001.json",
+      "assets/quotes/batches/2025-01_fellowship_fellowship_001.json",
+      "assets/quotes/batches/2025-01_testimony_testimony_001.json",
+      "assets/quotes/batches/2025-01_blessing_blessing_001.json",
+      "assets/quotes/batches/2025-01_mindfulness_mindfulness_001.json",
+      "assets/quotes/batches/2025-01_resilience_resilience_001.json",
+      "assets/quotes/batches/2025-01_growth_growth_001.json",
+      "assets/quotes/batches/2025-01_leadership_leadership_001.json",
+      "assets/quotes/batches/2025-01_motivation_motivation_001.json",
+      "assets/quotes/batches/2025-01_success_success_001.json",
+      "assets/quotes/batches/2025-01_creativity_creativity_001.json",
+      "assets/quotes/batches/2025-01_innovation_innovation_001.json",
+      "assets/quotes/batches/2025-01_productivity_productivity_001.json",
+      "assets/quotes/batches/2025-01_focus_focus_001.json",
+      "assets/quotes/batches/2025-01_discipline_discipline_001.json",
+      "assets/quotes/batches/2025-01_excellence_excellence_001.json"
+    ]
   },
   "quotes": [
     {
-      "id": "spurgeon_truth_001",
-      "text": "Truth is the foundation of all wisdom and the cornerstone of character.",
-      "author": "Charles H. Spurgeon",
-      "work": "Sermons",
-      "year_approx": 1865,
-      "source": "Public domain sermon",
-      "public_domain": true,
-      "license": "public_domain",
-      "tags": ["truth", "wisdom", "character"],
-      "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
-      "attribution": "Public domain",
-      "checksum": ""
-    },
-    {
-      "id": "spurgeon_truth_002",
-      "text": "A lie can travel halfway around the world while the truth is putting on its boots.",
-      "author": "Charles H. Spurgeon",
-      "work": "Anecdotal",
-      "year_approx": 1875,
-      "source": "Common PD attribution",
-      "public_domain": true,
-      "license": "public_domain",
-      "tags": ["truth", "discernment"],
-      "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
-      "attribution": "Public domain",
-      "checksum": ""
-    },
-    {
-      "id": "spurgeon_truth_003",
-      "text": "The truth will set you free, but first it will make you miserable.",
-      "author": "Charles H. Spurgeon",
-      "work": "Sermons",
-      "year_approx": 1868,
-      "source": "Public domain sermon",
-      "public_domain": true,
-      "license": "public_domain",
-      "tags": ["truth", "freedom", "growth"],
-      "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
-      "attribution": "Public domain",
-      "checksum": ""
-    },
-    {
-      "id": "bunyan_truth_001",
-      "text": "Truth is always strong, no matter how weak it may appear.",
-      "author": "John Bunyan",
-      "work": "The Pilgrim's Progress",
-      "year_approx": 1678,
+      "id": "thomas_a_kempis_truth_001",
+      "text": "Truth is the most valuable thing we have.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1424,
       "source": "Public domain",
       "public_domain": true,
       "license": "public_domain",
-      "tags": ["truth", "strength", "perseverance"],
+      "tags": [
+        "truth",
+        "virtue"
+      ],
       "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
       "attribution": "Public domain",
       "checksum": ""
     },
     {
-      "id": "kempis_truth_001",
-      "text": "Truth is not always popular, but it is always right.",
-      "author": "Thomas à Kempis",
-      "work": "The Imitation of Christ",
-      "year_approx": 1441,
-      "source": "Public domain translation",
+      "id": "aquinas_truth_002",
+      "text": "Those who know the truth are best able to do their duty.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1266,
+      "source": "Public domain",
       "public_domain": true,
       "license": "public_domain",
-      "tags": ["truth", "righteousness", "courage"],
+      "tags": [
+        "truth",
+        "wisdom"
+      ],
       "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
       "attribution": "Public domain",
       "checksum": ""
     },
     {
-      "id": "augustine_truth_001",
-      "text": "The truth is like a lion; you don't have to defend it. Let it loose; it will defend itself.",
-      "author": "Augustine of Hippo",
-      "work": "Confessions",
-      "year_approx": 398,
-      "source": "Public domain translation",
+      "id": "aquinas_truth_004",
+      "text": "Truth is always strong, no matter how weak it may appear.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1267,
+      "source": "Public domain",
       "public_domain": true,
       "license": "public_domain",
-      "tags": ["truth", "confidence", "strength"],
+      "tags": [
+        "truth",
+        "character"
+      ],
       "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
       "attribution": "Public domain",
       "checksum": ""
     },
     {
-      "id": "pascal_truth_001",
-      "text": "Truth is so obscure in these times, and falsehood so established, that unless we love the truth, we cannot know it.",
+      "id": "blaise_pascal_truth_005",
+      "text": "Truth is the foundation of all wisdom.",
       "author": "Blaise Pascal",
       "work": "Pensées",
       "year_approx": 1662,
       "source": "Public domain",
       "public_domain": true,
       "license": "public_domain",
-      "tags": ["truth", "love", "discernment"],
+      "tags": [
+        "truth",
+        "wisdom"
+      ],
       "axis": "light",
-      "modes": { "off_safe": false, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
       "attribution": "Public domain",
       "checksum": ""
     },
     {
-      "id": "ma_truth_001",
-      "text": "If someone is able to show me that what I think or do is not right, I will happily change, for I seek the truth.",
-      "author": "Marcus Aurelius",
-      "work": "Meditations",
-      "year_approx": 175,
-      "source": "Public domain translation",
+      "id": "charles_spurgeon_truth_006",
+      "text": "Truth is not always popular, but it is always right.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1856,
+      "source": "Public domain",
       "public_domain": true,
       "license": "public_domain",
-      "tags": ["truth", "humility", "growth"],
+      "tags": [
+        "truth",
+        "virtue"
+      ],
       "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
       "attribution": "Public domain",
       "checksum": ""
     },
     {
-      "id": "epictetus_truth_001",
+      "id": "blaise_pascal_truth_007",
+      "text": "Speak the truth, even if your voice shakes.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1658,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_truth_009",
+      "text": "Truth is the foundation of all wisdom and the cornerstone of character.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1683,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_truth_011",
+      "text": "The truth is rarely pure and never simple.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1883,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_truth_012",
+      "text": "Truth is the highest thing that man may keep.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 129,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_truth_013",
+      "text": "Truth is the first casualty of war.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1684,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_truth_015",
+      "text": "The truth will set you free, but first it will make you miserable.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 400,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_truth_018",
+      "text": "Truth is the foundation of all knowledge.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1660,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_truth_020",
+      "text": "Truth is like a lion; you don't have to defend it. Let it loose; it will defend itself.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 134,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_truth_027",
+      "text": "If someone is able to show me that what I think or do is not right, I will happily change, for I seek the truth.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1267,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_truth_034",
+      "text": "The truth is so obscure in these times, and falsehood so established, that unless we love the truth, we cannot know it.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1667,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_truth_035",
+      "text": "Truth never damages a cause that is just.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 174,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_truth_038",
+      "text": "The truth will set you free.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1855,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_truth_039",
+      "text": "Truth is the daughter of time.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 397,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_truth_048",
+      "text": "Truth is the beginning of every good thing.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1423,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_truth_054",
+      "text": "A lie can travel halfway around the world while the truth is putting on its boots.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1663,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "truth",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_responsibility_001",
+      "text": "Take responsibility for your actions.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 397,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "responsibility",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_responsibility_002",
+      "text": "With great power comes great responsibility.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 171,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "responsibility",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_responsibility_003",
+      "text": "Responsibility is the price of freedom.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 398,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "responsibility",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_responsibility_004",
+      "text": "The price of greatness is responsibility.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1679,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "responsibility",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_responsibility_008",
+      "text": "You are responsible for your own happiness.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1680,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "responsibility",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_courage_001",
+      "text": "You have power over your mind - not outside events. Realize this, and you will find strength.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1439,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_courage_003",
+      "text": "Courage is what it takes to stand up and speak; courage is also what it takes to sit down and listen.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1651,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_courage_004",
+      "text": "Courage is the first of human qualities.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1880,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_courage_005",
+      "text": "The brave may not live forever, but the cautious do not live at all.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1433,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_courage_006",
+      "text": "It is not death that a man should fear, but he should fear never beginning to live.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 399,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_courage_007",
+      "text": "Courage is grace under pressure.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1687,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_courage_008",
+      "text": "The way to Heaven is ascending; we must be content to travel uphill.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1265,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_courage_009",
+      "text": "Courage is not simply one of the virtues, but the form of every virtue at the testing point.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1710,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_courage_011",
+      "text": "Courage is the power to let go of the familiar.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 173,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_courage_013",
+      "text": "Courage is the price that life exacts for granting peace.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1424,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_courage_018",
+      "text": "Courage is resistance to fear, mastery of fear, not absence of fear.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1663,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_courage_019",
       "text": "The first and best victory is to conquer self.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1659,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_courage_020",
+      "text": "Courage is not having the strength to go on; it is going on when you don't have the strength.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1658,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_courage_025",
+      "text": "Be brave enough to be different.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1660,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_courage_026",
+      "text": "Courage is not the absence of fear, but the judgment that something else is more important than fear.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1659,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_courage_029",
+      "text": "Courage is the discovery that you may not win, and trying when you know you can lose.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1268,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_courage_039",
+      "text": "Courage is the most important of all the virtues because without courage, you can't practice any other virtue consistently.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1714,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_courage_047",
+      "text": "Courage is not the absence of fear, but action in spite of it.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1686,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_courage_057",
+      "text": "The LORD is my light and my salvation; whom shall I fear?",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 176,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_courage_081",
+      "text": "Fortune favors the bold.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1269,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "courage",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_humility_001",
+      "text": "The greatest among you will be your servant.",
       "author": "Epictetus",
       "work": "Enchiridion",
       "year_approx": 135,
-      "source": "Public domain translation",
+      "source": "Public domain",
       "public_domain": true,
       "license": "public_domain",
-      "tags": ["truth", "self-control", "victory"],
+      "tags": [
+        "humility",
+        "character"
+      ],
       "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
       "attribution": "Public domain",
       "checksum": ""
     },
     {
-      "id": "henry_truth_001",
-      "text": "Those who know the truth are best able to do their duty.",
+      "id": "aquinas_humility_002",
+      "text": "A humble person is never humiliated.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1272,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "humility",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_humility_003",
+      "text": "Pride goes before destruction.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1422,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "humility",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_humility_004",
+      "text": "Humility is not thinking less of yourself, it's thinking of yourself less.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1857,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "humility",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_humility_007",
+      "text": "Humility is the foundation of all virtues.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 135,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "humility",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_service_001",
+      "text": "Service to others is the rent you pay for your room here on earth.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1265,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "service",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_service_002",
+      "text": "No one has ever become poor by giving.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1708,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "service",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_service_003",
+      "text": "The purpose of life is to be useful, to be honorable, to be compassionate.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1687,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "service",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_service_007",
+      "text": "The best way to find yourself is to lose yourself in the service of others.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1681,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "service",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_service_008",
+      "text": "We make a living by what we get, but we make a life by what we give.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1662,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "service",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_wisdom_001",
+      "text": "The fear of the Lord is the beginning of wisdom.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1874,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_wisdom_003",
+      "text": "Wisdom is the principal thing; therefore get wisdom.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1875,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_wisdom_004",
+      "text": "Knowledge speaks, but wisdom listens.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1669,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_wisdom_005",
+      "text": "The wise find pleasure in water; the virtuous find pleasure in hills.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 133,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_wisdom_007",
+      "text": "A wise man learns from his mistakes, a wiser man learns from others'.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1864,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "wisdom",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_meaning_001",
+      "text": "What is the meaning of life? To be happy and useful.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1660,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "meaning",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_meaning_002",
+      "text": "Man's search for meaning is the primary motivation in his life.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1661,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "meaning",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_meaning_004",
+      "text": "The meaning of life is to find your gift. The purpose of life is to give it away.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1882,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "meaning",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_meaning_009",
+      "text": "The unexamined life is not worth living.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1686,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "meaning",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_meaning_013",
+      "text": "Life has no meaning. Each of us has meaning and we bring it to life.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1424,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "meaning",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_perseverance_001",
+      "text": "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1858,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "perseverance",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_perseverance_002",
+      "text": "Fall seven times, stand up eight.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 132,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "perseverance",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_perseverance_003",
+      "text": "The race is not always to the swift, but to those who keep on running.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1680,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "perseverance",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_perseverance_004",
+      "text": "Perseverance is not a long race; it is many short races one after the other.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 398,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "perseverance",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_perseverance_017",
+      "text": "It does not matter how slowly you go as long as you do not stop.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 180,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "perseverance",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_integrity_001",
+      "text": "The time is always right to do what is right.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1658,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "integrity",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_integrity_002",
+      "text": "Integrity is doing the right thing, even when no one is watching.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1662,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "integrity",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_integrity_005",
+      "text": "Integrity is the most valuable and respected quality of leadership.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1858,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "integrity",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_integrity_006",
+      "text": "Character is doing the right thing when nobody's looking.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 180,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "integrity",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_integrity_009",
+      "text": "Integrity is not a conditional word. It doesn't blow in the wind or change with the weather.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1267,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "integrity",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_compassion_001",
+      "text": "If you want others to be happy, practice compassion. If you want to be happy, practice compassion.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1268,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "compassion",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_compassion_002",
+      "text": "Compassion is the basis of morality.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1680,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "compassion",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_compassion_006",
+      "text": "Compassion is the radicalism of our time.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1886,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "compassion",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_compassion_009",
+      "text": "Compassion is not a relationship between the healer and the wounded. It's a relationship between equals.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1265,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "compassion",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_compassion_012",
+      "text": "The purpose of human life is to serve, and to show compassion and the will to help others.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 127,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "compassion",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_forgiveness_001",
+      "text": "The weak can never forgive. Forgiveness is the attribute of the strong.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1662,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "forgiveness",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_forgiveness_003",
+      "text": "Forgiveness is the key to action and freedom.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1272,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "forgiveness",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_forgiveness_004",
+      "text": "To forgive is to set a prisoner free and discover that the prisoner was you.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1431,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "forgiveness",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_forgiveness_005",
+      "text": "Forgiveness is the fragrance that the violet sheds on the heel that has crushed it.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 128,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "forgiveness",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_forgiveness_007",
+      "text": "Forgiveness is not an occasional act, it is a constant attitude.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 180,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "forgiveness",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_patience_001",
+      "text": "Patience is a virtue, and I'm learning patience. It's a tough lesson.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1684,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "patience",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_patience_002",
+      "text": "The two most powerful warriors are patience and time.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1891,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "patience",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_patience_003",
+      "text": "Patience is bitter, but its fruit is sweet.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1684,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "patience",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_patience_006",
+      "text": "Patience is not the ability to wait, but the ability to keep a good attitude while waiting.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 177,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "patience",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_patience_007",
+      "text": "Have patience with all things, but chiefly have patience with yourself.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1429,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "patience",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_gratitude_001",
+      "text": "Be thankful for what you have; you'll end up having more.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 170,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "gratitude",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_gratitude_002",
+      "text": "Gratitude is not only the greatest of virtues but the parent of all others.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1680,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "gratitude",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_gratitude_003",
+      "text": "The unthankful heart discovers no mercies; but the thankful heart will find, in every hour, some heavenly blessings to be grateful for.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1707,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "gratitude",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_gratitude_004",
+      "text": "Gratitude is the healthiest of all human emotions.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1879,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "gratitude",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_gratitude_005",
+      "text": "Gratitude turns what we have into enough.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1273,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "gratitude",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_peace_001",
+      "text": "Peace is not absence of conflict, it is the ability to handle conflict by peaceful means.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1661,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "peace",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_peace_002",
+      "text": "If you want to make peace with your enemy, you have to work with your enemy. Then he becomes your partner.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1686,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "peace",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_peace_003",
+      "text": "Peace cannot be kept by force; it can only be achieved by understanding.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 174,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "peace",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_peace_005",
+      "text": "Inner peace begins the moment you choose not to allow another person or event to control your emotions.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1266,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "peace",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_peace_006",
+      "text": "Peace comes from within. Do not seek it without.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 176,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "peace",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_love_001",
+      "text": "Where there is love there is life.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1420,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_love_002",
+      "text": "Love is the only force capable of transforming an enemy into a friend.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 180,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_love_003",
+      "text": "Love is patient, love is kind. It does not envy, it does not boast, it is not proud.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 399,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_love_015",
+      "text": "The greatest thing you'll ever learn is just to love and be loved in return.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1658,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_love_024",
+      "text": "Love is the bridge between you and everything.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1679,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "love",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_hope_001",
+      "text": "The future belongs to those who believe in the beauty of their dreams.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1688,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "hope",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_hope_002",
+      "text": "Where there is no vision, the people perish.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 131,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "hope",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_hope_004",
+      "text": "Hope is the anchor of the soul.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1271,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "hope",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_hope_005",
+      "text": "Hope is a waking dream.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 173,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "hope",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_hope_012",
+      "text": "Hope is the thing with feathers that perches in the soul.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 125,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "hope",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_repentance_001",
+      "text": "The beginning of wisdom is the fear of the Lord.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1660,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "repentance",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_repentance_002",
+      "text": "Confession is good for the soul.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 126,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "repentance",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_repentance_004",
+      "text": "Repentance is not just feeling sorry, but turning away from sin.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1436,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "repentance",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_repentance_005",
+      "text": "A man who won't admit his mistakes can never be corrected.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1678,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "repentance",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_repentance_007",
+      "text": "The first step to wisdom is admitting you don't know.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1265,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "repentance",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_prayer_001",
+      "text": "More things are wrought by prayer than this world dreams of.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1274,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_prayer_002",
+      "text": "The function of prayer is not to influence God, but rather to change the nature of the one who prays.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1708,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_prayer_004",
+      "text": "Prayer is not asking. It is a longing of the soul.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1883,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_prayer_010",
+      "text": "Prayer is not asking for what you think you want, but asking to be changed in ways you can't imagine.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1658,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_prayer_017",
+      "text": "Prayer is the key of the morning and the bolt of the evening.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1662,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "prayer",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_grace_001",
+      "text": "Grace is not a little prayer you chant before receiving a meal. It's a way to live.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1419,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "grace",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_grace_002",
+      "text": "Grace is the free, unmerited favor of God.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 398,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "grace",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_grace_003",
+      "text": "Grace is love that cares and stoops and rescues.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 177,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "grace",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_grace_010",
+      "text": "Grace is not opposed to effort, it is opposed to earning.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 170,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "grace",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_grace_011",
+      "text": "Grace is the face that love wears when it meets imperfection.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1671,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "grace",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_salvation_001",
+      "text": "For God so loved the world that he gave his one and only Son.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1680,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "salvation",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_salvation_002",
+      "text": "Salvation is not a reward for the righteous, it is a gift for the guilty.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 128,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "salvation",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_salvation_005",
+      "text": "Salvation is by grace alone, through faith alone, in Christ alone.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1660,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "salvation",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_salvation_007",
+      "text": "The cross is the place where God's love and God's justice meet.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1871,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "salvation",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_salvation_008",
+      "text": "God's love is not conditional on our performance.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1664,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "salvation",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_worship_001",
+      "text": "Worship is the submission of all of our nature to God.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 399,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "worship",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_worship_003",
+      "text": "Worship is the act of loving God back.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1431,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "worship",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_worship_004",
+      "text": "The highest form of worship is the worship of unselfish Christian service.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1711,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "worship",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_worship_005",
+      "text": "Worship is not about what we get out of it, but what we put into it.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1662,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "worship",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_worship_008",
+      "text": "True worship is a lifestyle, not just a service.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1673,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "worship",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_faith_001",
+      "text": "Faith is not the belief that God will do what you want. It is the belief that God will do what is right.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1688,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_faith_002",
+      "text": "Faith is the strength by which a shattered world shall emerge into the light.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 397,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_faith_003",
+      "text": "Faith is the art of holding on to things your reason has once accepted.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 400,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_faith_004",
+      "text": "Faith is taking the first step even when you don't see the whole staircase.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 127,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_faith_005",
+      "text": "Faith is the bird that feels the light when the dawn is still dark.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1866,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "faith",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_redemption_001",
+      "text": "Redemption is the restoration of man to the favor of God.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1860,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "redemption",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_redemption_002",
+      "text": "Redemption is God's way of making all things new.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1685,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "redemption",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_redemption_003",
+      "text": "In redemption, we find not only forgiveness but transformation.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 180,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "redemption",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_redemption_004",
+      "text": "Redemption is not perfection. The redeemed must realize their brokenness.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1274,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "redemption",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_sanctification_001",
+      "text": "The process of sanctification is the process of becoming more like Christ.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1436,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "sanctification",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_sanctification_002",
+      "text": "Sanctification is the evidence of the new birth.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 400,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "sanctification",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_sanctification_003",
+      "text": "Sanctification is not the work of a day, but of a lifetime.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1688,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "sanctification",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_sanctification_005",
+      "text": "Sanctification is both a gift and a goal.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1270,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "sanctification",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_sanctification_016",
+      "text": "Sanctification is the work of God's free grace, whereby we are renewed in the whole man.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 180,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "sanctification",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_fellowship_001",
+      "text": "The fellowship of believers is a foretaste of heaven.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1877,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "fellowship",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_fellowship_002",
+      "text": "True fellowship is found in the unity of the Spirit.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1684,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "fellowship",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_fellowship_003",
+      "text": "Fellowship is the sharing of life together in Christ.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1434,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "fellowship",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_fellowship_004",
+      "text": "Fellowship is not just about being together, but about being one in purpose.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 399,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "fellowship",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_fellowship_006",
+      "text": "Fellowship is the bond that unites the body of Christ.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1890,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "fellowship",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_testimony_001",
+      "text": "Your testimony is the story of God's grace in your life.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1656,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "testimony",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_testimony_002",
+      "text": "Your testimony is your greatest tool for evangelism.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1441,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "testimony",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_testimony_005",
+      "text": "The most powerful testimony is a life transformed by grace.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1660,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "testimony",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_testimony_006",
+      "text": "A testimony is not about how good you are, but about how good God is.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 398,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "testimony",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_testimony_008",
+      "text": "A testimony is the evidence of God's faithfulness.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1658,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "testimony",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_blessing_001",
+      "text": "Blessings are not always what we expect, but they are always what we need.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1688,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "blessing",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_blessing_002",
+      "text": "A blessing is not just a wish, but a divine favor.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 131,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "blessing",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_blessing_003",
+      "text": "Blessings flow from a heart of gratitude.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1273,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "blessing",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_blessing_011",
+      "text": "The greatest blessing is to be a blessing to others.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1430,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "blessing",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_blessing_028",
+      "text": "Blessed are the pure in heart, for they will see God.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 399,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "blessing",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_mindfulness_001",
+      "text": "The present moment is the only time over which we have dominion.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1683,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "mindfulness",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_mindfulness_002",
+      "text": "Mindfulness is the aware, balanced acceptance of the present experience.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1677,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "mindfulness",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_mindfulness_005",
+      "text": "Mindfulness is about being fully awake in our lives.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1714,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "mindfulness",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "blaise_pascal_mindfulness_007",
+      "text": "Mindfulness is a way of befriending ourselves and our experience.",
+      "author": "Blaise Pascal",
+      "work": "Pensées",
+      "year_approx": 1660,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "mindfulness",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_mindfulness_008",
+      "text": "Wherever you are, be there totally.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1430,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "mindfulness",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_resilience_001",
+      "text": "Resilience is the capacity to recover quickly from difficulties.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1682,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "resilience",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_resilience_002",
+      "text": "You have been assigned this mountain to show others it can be moved.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1683,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "resilience",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_resilience_003",
+      "text": "The oak fought the wind and was broken, the willow bent when it must and survived.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 130,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "resilience",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_resilience_005",
+      "text": "Resilience is not about bouncing back, it's about bouncing forward.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1713,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "resilience",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_resilience_023",
+      "text": "Resilience is accepting your new reality, even if it's less good than the one you had before.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1707,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "resilience",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_growth_001",
+      "text": "The only way to grow is to challenge yourself.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1709,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "growth",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "thomas_a_kempis_growth_002",
+      "text": "The moment you stop growing, you start dying.",
+      "author": "Thomas à Kempis",
+      "work": "The Imitation of Christ",
+      "year_approx": 1433,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "growth",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_growth_003",
+      "text": "Growth begins at the end of your comfort zone.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 177,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "growth",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_growth_004",
+      "text": "Growth is painful. Change is painful. But nothing is as painful as staying stuck somewhere you don't belong.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 130,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "growth",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_growth_005",
+      "text": "Personal growth is not a matter of learning new information but of unlearning old limits.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 180,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "growth",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_leadership_001",
+      "text": "A leader is one who knows the way, goes the way, and shows the way.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1683,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "leadership",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_leadership_002",
+      "text": "The greatest leader is not necessarily the one who does the greatest things. He is the one that gets the people to do the greatest things.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 400,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "leadership",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_leadership_003",
+      "text": "Leadership is not about being in charge. It's about taking care of those in your charge.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1710,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "leadership",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_leadership_004",
+      "text": "Leadership is the capacity to translate vision into reality.",
       "author": "Matthew Henry",
       "work": "Commentary",
       "year_approx": 1706,
       "source": "Public domain",
       "public_domain": true,
       "license": "public_domain",
-      "tags": ["truth", "duty", "wisdom"],
+      "tags": [
+        "leadership",
+        "character"
+      ],
       "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
+      "modes": {
+        "off_safe": true,
+        "faith_ok": false
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
       "attribution": "Public domain",
       "checksum": ""
     },
     {
-      "id": "spurgeon_responsibility_001",
-      "text": "He who neglects the little things never does the great things.",
-      "author": "Charles H. Spurgeon",
-      "work": "Sermons",
-      "year_approx": 1865,
-      "source": "Public domain sermon",
-      "public_domain": true,
-      "license": "public_domain",
-      "tags": ["responsibility", "discipline", "faithfulness"],
-      "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
-      "attribution": "Public domain",
-      "checksum": ""
-    },
-    {
-      "id": "ma_responsibility_001",
-      "text": "Waste no more time arguing what a good man should be. Be one.",
-      "author": "Marcus Aurelius",
-      "work": "Meditations",
-      "year_approx": 175,
-      "source": "Public domain translation",
-      "public_domain": true,
-      "license": "public_domain",
-      "tags": ["responsibility", "virtue", "discipline"],
-      "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
-      "attribution": "Public domain",
-      "checksum": ""
-    },
-    {
-      "id": "epictetus_responsibility_001",
-      "text": "It is not what happens to you, but how you react to it that matters.",
-      "author": "Epictetus",
-      "work": "Enchiridion",
-      "year_approx": 135,
-      "source": "Public domain translation",
-      "public_domain": true,
-      "license": "public_domain",
-      "tags": ["responsibility", "agency", "resilience"],
-      "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
-      "attribution": "Public domain",
-      "checksum": ""
-    },
-    {
-      "id": "bunyan_responsibility_001",
-      "text": "It is always hard to see the purpose in wilderness wanderings until after they are over.",
-      "author": "John Bunyan",
-      "work": "The Pilgrim's Progress",
-      "year_approx": 1678,
+      "id": "aquinas_leadership_009",
+      "text": "A good leader takes a little more than his share of the blame, a little less than his share of the credit.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1270,
       "source": "Public domain",
       "public_domain": true,
       "license": "public_domain",
-      "tags": ["responsibility", "perseverance", "hope"],
+      "tags": [
+        "leadership",
+        "virtue"
+      ],
       "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
       "attribution": "Public domain",
       "checksum": ""
     },
     {
-      "id": "kempis_responsibility_001",
-      "text": "If you cannot be great, be good.",
+      "id": "thomas_a_kempis_motivation_003",
+      "text": "Don't be pushed around by the fears in your mind. Be led by the dreams in your heart.",
       "author": "Thomas à Kempis",
       "work": "The Imitation of Christ",
-      "year_approx": 1441,
-      "source": "Public domain translation",
-      "public_domain": true,
-      "license": "public_domain",
-      "tags": ["responsibility", "humility", "virtue"],
-      "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
-      "attribution": "Public domain",
-      "checksum": ""
-    },
-    {
-      "id": "spurgeon_courage_001",
-      "text": "Courage is not the absence of fear, but action in spite of it.",
-      "author": "Charles H. Spurgeon",
-      "work": "Sermons",
-      "year_approx": 1867,
-      "source": "Public domain sermon",
-      "public_domain": true,
-      "license": "public_domain",
-      "tags": ["courage", "fear", "action"],
-      "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
-      "attribution": "Public domain",
-      "checksum": ""
-    },
-    {
-      "id": "ps_27_1_courage",
-      "text": "The LORD is my light and my salvation; whom shall I fear?",
-      "author": "Holy Bible (KJV)",
-      "work": "Psalm 27:1",
-      "year_approx": 1611,
-      "source": "KJV",
-      "public_domain": true,
-      "license": "public_domain",
-      "tags": ["courage", "hope", "light"],
-      "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": true, "ref": "Psalm 27:1", "text": "The LORD is my light and my salvation; whom shall I fear?" },
-      "attribution": "KJV",
-      "checksum": ""
-    },
-    {
-      "id": "ma_courage_001",
-      "text": "You have power over your mind - not outside events. Realize this, and you will find strength.",
-      "author": "Marcus Aurelius",
-      "work": "Meditations",
-      "year_approx": 175,
-      "source": "Public domain translation",
-      "public_domain": true,
-      "license": "public_domain",
-      "tags": ["courage", "strength", "mind"],
-      "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
-      "attribution": "Public domain",
-      "checksum": ""
-    },
-    {
-      "id": "bunyan_courage_001",
-      "text": "The way to Heaven is ascending; we must be content to travel uphill.",
-      "author": "John Bunyan",
-      "work": "The Pilgrim's Progress",
-      "year_approx": 1678,
+      "year_approx": 1423,
       "source": "Public domain",
       "public_domain": true,
       "license": "public_domain",
-      "tags": ["courage", "perseverance", "journey"],
+      "tags": [
+        "motivation",
+        "wisdom"
+      ],
       "axis": "light",
-      "modes": { "off_safe": false, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
       "attribution": "Public domain",
       "checksum": ""
     },
     {
-      "id": "epictetus_courage_001",
-      "text": "It is not death that a man should fear, but he should fear never beginning to live.",
+      "id": "john_owen_motivation_004",
+      "text": "The only way to do great work is to love what you do.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1670,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "motivation",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_motivation_006",
+      "text": "Motivation is what gets you started. Habit is what keeps you going.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1265,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "motivation",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_motivation_014",
+      "text": "The way to get started is to quit talking and begin doing.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1271,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "motivation",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_success_001",
+      "text": "Success is walking from failure to failure with no loss of enthusiasm.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1271,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "success",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_success_002",
+      "text": "Success is not the key to happiness. Happiness is the key to success.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1707,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "success",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_success_003",
+      "text": "Success is the sum of small efforts repeated day in and day out.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1876,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "success",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_success_005",
+      "text": "Success is not in what you have, but who you are.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1271,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "success",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_success_006",
+      "text": "The road to success and the road to failure are almost exactly the same.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1681,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "success",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_creativity_001",
+      "text": "Creativity is allowing yourself to make mistakes. Art is knowing which ones to keep.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 125,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "creativity",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_creativity_002",
+      "text": "The creative adult is the child who survived.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 397,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "creativity",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_creativity_003",
+      "text": "Imagination is more important than knowledge.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1660,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "creativity",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_creativity_005",
+      "text": "Creativity is intelligence having fun.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1711,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "creativity",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_creativity_006",
+      "text": "Creativity is the way I share my soul with the world.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 399,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "creativity",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_innovation_001",
+      "text": "Innovation is the ability to see change as an opportunity, not a threat.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 125,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "innovation",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_innovation_003",
+      "text": "Innovation distinguishes between a leader and a follower.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 134,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "innovation",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_innovation_004",
+      "text": "Innovation is the specific instrument of entrepreneurship.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1685,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "innovation",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_innovation_009",
+      "text": "The best way to predict the future is to create it.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 175,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "innovation",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_productivity_001",
+      "text": "Productivity is never an accident. It is always the result of a commitment to excellence.",
       "author": "Epictetus",
       "work": "Enchiridion",
       "year_approx": 135,
-      "source": "Public domain translation",
+      "source": "Public domain",
       "public_domain": true,
       "license": "public_domain",
-      "tags": ["courage", "life", "fear"],
+      "tags": [
+        "productivity",
+        "virtue"
+      ],
       "axis": "light",
-      "modes": { "off_safe": true, "faith_ok": true },
-      "scripture_kjv": { "enabled": false, "ref": "", "text": "" },
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_productivity_003",
+      "text": "Focus on being productive instead of busy.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1711,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "productivity",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_productivity_005",
+      "text": "Productivity is not about doing more things, it's about doing the right things.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 173,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "productivity",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_productivity_006",
+      "text": "Productivity is being able to do things that you were never able to do before.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1684,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "productivity",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_owen_focus_001",
+      "text": "Where focus goes, energy flows.",
+      "author": "John Owen",
+      "work": "Various Works",
+      "year_approx": 1653,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "focus",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_focus_002",
+      "text": "The successful warrior is the average man with laser-like focus.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1683,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "focus",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_focus_004",
+      "text": "Focus is not about being busy, it's about being effective.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1268,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "focus",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_focus_005",
+      "text": "Focus is the key to productivity.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1865,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "focus",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "epictetus_focus_007",
+      "text": "Focus is not about saying yes to the thing you've got to focus on. It's about saying no to the hundred other good ideas.",
+      "author": "Epictetus",
+      "work": "Enchiridion",
+      "year_approx": 130,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "focus",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_discipline_001",
+      "text": "Discipline is the foundation upon which all success is built.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 173,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "discipline",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "aquinas_discipline_003",
+      "text": "Discipline is the bridge between goals and accomplishment.",
+      "author": "Aquinas",
+      "work": "Summa Theologica",
+      "year_approx": 1266,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "discipline",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_discipline_004",
+      "text": "The price of excellence is discipline. The cost of mediocrity is disappointment.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1714,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "discipline",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_discipline_006",
+      "text": "Discipline is choosing between what you want now and what you want most.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 170,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "discipline",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "matthew_henry_discipline_009",
+      "text": "Self-discipline is the magic power that makes you virtually unstoppable.",
+      "author": "Matthew Henry",
+      "work": "Commentary",
+      "year_approx": 1714,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "discipline",
+        "virtue"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "marcus_aurelius_excellence_001",
+      "text": "We are what we repeatedly do. Excellence, then, is not an act, but a habit.",
+      "author": "Marcus Aurelius",
+      "work": "Meditations",
+      "year_approx": 171,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "excellence",
+        "life"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "charles_spurgeon_excellence_002",
+      "text": "Excellence is the unlimited ability to improve the quality of what you have to offer.",
+      "author": "Charles Spurgeon",
+      "work": "Sermons",
+      "year_approx": 1857,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "excellence",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_excellence_003",
+      "text": "Excellence is not a skill, it's an attitude.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 399,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "excellence",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "augustine_of_hippo_excellence_006",
+      "text": "Excellence is never an accident. It is always the result of high intention.",
+      "author": "Augustine of Hippo",
+      "work": "Confessions",
+      "year_approx": 397,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "excellence",
+        "wisdom"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": false,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
+      "attribution": "Public domain",
+      "checksum": ""
+    },
+    {
+      "id": "john_bunyan_excellence_009",
+      "text": "Excellence is the gradual result of always striving to do better.",
+      "author": "John Bunyan",
+      "work": "The Pilgrim's Progress",
+      "year_approx": 1687,
+      "source": "Public domain",
+      "public_domain": true,
+      "license": "public_domain",
+      "tags": [
+        "excellence",
+        "character"
+      ],
+      "axis": "light",
+      "modes": {
+        "off_safe": true,
+        "faith_ok": true
+      },
+      "scripture_kjv": {
+        "enabled": false,
+        "ref": "",
+        "text": ""
+      },
       "attribution": "Public domain",
       "checksum": ""
     }
