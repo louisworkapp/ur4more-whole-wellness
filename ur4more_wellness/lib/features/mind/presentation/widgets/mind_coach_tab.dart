@@ -5,6 +5,9 @@ import '../../../../services/faith_service.dart';
 import '../../../../design/tokens.dart';
 import '../../../../widgets/custom_icon_widget.dart';
 import '../../services/conversion_funnel_service.dart';
+import '../../widgets/go_deeper_card.dart';
+import '../../../../core/settings/settings_scope.dart';
+import '../../../../core/settings/settings_model.dart';
 
 class MindCoachTab extends StatefulWidget {
   final FaithMode faithMode;
@@ -99,9 +102,47 @@ class _MindCoachTabState extends State<MindCoachTab> {
           // Reframe Exercise
           _buildReframeExercise(theme, colorScheme),
           
+          SizedBox(height: AppSpace.x6),
+          
+          // Go Deeper Card (only show in OFF mode)
+          if (widget.faithMode.isOff) ...[
+            GoDeeperCard(
+              mode: widget.faithMode,
+              contextTags: ['coach_home_idle'],
+              eligible: true, // For demo purposes, always show as eligible
+              onExplore: (cooldown) async {
+                // Actually activate Faith Mode: Light
+                final settings = SettingsScope.of(context);
+                await settings.updateFaith(FaithTier.light);
+                
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Faith Mode: Light activated!'),
+                      behavior: SnackBarBehavior.floating,
+                    ),
+                  );
+                }
+                return true;
+              },
+              onDismiss: (snooze) async {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('We\'ll keep the secular tools front and center.'),
+                    behavior: SnackBarBehavior.floating,
+                  ),
+                );
+              },
+              onOpenSettings: () {
+                // Navigate to settings screen
+                Navigator.of(context).pushNamed('/settings');
+              },
+            ),
+            SizedBox(height: AppSpace.x4),
+          ],
+          
           // Demo conversion trigger (only show in OFF mode)
           if (widget.faithMode.isOff) ...[
-            SizedBox(height: AppSpace.x4),
             _buildDemoConversionTrigger(theme, colorScheme),
           ],
         ],
