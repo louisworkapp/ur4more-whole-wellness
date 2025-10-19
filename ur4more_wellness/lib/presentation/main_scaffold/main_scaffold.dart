@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../home_dashboard/home_dashboard.dart';
 import '../body_fitness_screen/body_fitness_screen.dart';
-import '../mind_wellness_screen/mind_wellness_screen.dart';
+import '../../features/mind/presentation/mind_coach_screen.dart';
 import '../spiritual_growth_screen/spiritual_growth_screen.dart';
 import '../rewards_marketplace_screen/rewards_marketplace_screen.dart';
 import '../../widgets/brand_glyph_text.dart';
@@ -19,7 +19,7 @@ class _MainScaffoldState extends State<MainScaffold> {
   final _pages = const [
     HomeDashboard(),
     BodyFitnessScreen(),
-    MindWellnessScreen(),
+    MindCoachScreen(),
     SpiritualGrowthScreen(),
     RewardsMarketplaceScreen(),
   ];

@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "coach": {
+    "off": {
+      "greeting": "I'm your Mind Coach. We'll use evidence-based tools to steady your thoughts.",
+      "reframeIntro": "Let's catch the thought, test the evidence, and craft a balanced reframe.",
+      "nudgeSmallStep": "What's one tiny step you can take in the next 10 minutes?",
+      "quotes": [
+        "Between stimulus and response there is a space. In that space is our power to choose our response. — Viktor Frankl",
+        "We are what we repeatedly do. Excellence, then, is not an act, but a habit. — Will Durant",
+        "The mind is everything. What you think you become. — Buddha",
+        "You have power over your mind - not outside events. Realize this, and you will find strength. — Marcus Aurelius"
+      ]
+    },
+    "activated": {
+      "greeting": "I'm your Mind Coach. We'll steady your thoughts and, if you wish, invite God into the process.",
+      "reframeIntro": "Let's test the thought against truth and craft a faith-filled, balanced reframe.",
+      "nudgeSmallStep": "What's one faithful step you can take in the next 10 minutes?",
+      "faithOptional": "Would you like a short verse or prayer added?",
+      "quotes": [
+        "Between stimulus and response there is a space. In that space is our power to choose our response. — Viktor Frankl",
+        "We are what we repeatedly do. Excellence, then, is not an act, but a habit. — Will Durant",
+        "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. — Philippians 4:6",
+        "And be not conformed to this world: but be ye transformed by the renewing of your mind. — Romans 12:2",
+        "I can do all things through Christ which strengtheneth me. — Philippians 4:13",
+        "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind. — 2 Timothy 1:7"
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "Philippians 4:6-7",
+          "text": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus."
+        },
+        {
+          "ref": "Romans 12:2",
+          "text": "And be not conformed to this world: but be ye transformed by the renewing of your mind, that ye may prove what is that good, and acceptable, and perfect, will of God."
+        },
+        {
+          "ref": "Philippians 4:13",
+          "text": "I can do all things through Christ which strengtheneth me."
+        },
+        {
+          "ref": "2 Timothy 1:7",
+          "text": "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind."
+        },
+        {
+          "ref": "Isaiah 26:3",
+          "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee."
+        },
+        {
+          "ref": "Matthew 11:28",
+          "text": "Come unto me, all ye that labour and are heavy laden, and I will give you rest."
+        }
+      ]
+    }
+  }
+}

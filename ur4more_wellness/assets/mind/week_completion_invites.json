@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "weekInvites": {
+    "week1": {
+      "headline": "Order is a beginning, not the end.",
+      "body": "Micro-order restores agency. We believe the deepest peace behind order is found in Jesus Christ."
+    },
+    "week2": {
+      "headline": "Truth points somewhere.",
+      "body": "Honest thinking heals. We believe Truth with a capital T is a Person—Jesus Christ."
+    },
+    "week3": {
+      "headline": "Shouldering weight reveals calling.",
+      "body": "Responsibility makes you stronger. We believe true calling is found under Christ's lordship."
+    },
+    "week4": {
+      "headline": "Meaning through pain—what's the source?",
+      "body": "Endurance grows in challenge. We believe redemptive meaning is anchored in Jesus Christ."
+    },
+    "week5": {
+      "headline": "Aim higher than success.",
+      "body": "Goals shape your life. We believe the highest aim is seeking Christ as true north."
+    },
+    "week6": {
+      "headline": "Commitment needs a worthy object.",
+      "body": "Resolve changes futures. We believe the surest anchor for courage is Jesus Christ."
+    },
+    "week7": {
+      "headline": "Joy points beyond itself.",
+      "body": "Desire can be trained—but its horizon remains. We believe lasting joy is found in Jesus Christ."
+    },
+    "week8": {
+      "headline": "Decide your end.",
+      "body": "Perseverance needs a finish line. We believe the true end is found in Jesus Christ—step into Faith Mode."
+    }
+  },
+  "crisisInvites": {
+    "highUrgeResolved": {
+      "headline": "You steadied the storm",
+      "body": "Would you like a peace that keeps watch over your mind? Explore Faith Mode: Light for gentle faith integration."
+    }
+  },
+  "valuesInvites": {
+    "serviceLegacy": {
+      "headline": "Your values aim higher than comfort",
+      "body": "Explore the calling that outlasts you. Try Faith Mode: Light to discover purpose beyond yourself."
+    }
+  }
+}
