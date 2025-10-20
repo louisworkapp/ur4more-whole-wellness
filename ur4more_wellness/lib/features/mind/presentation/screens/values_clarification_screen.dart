@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../widgets/box_breathing_widget.dart';
+import '../widgets/values_clarification_widget.dart';
 import '../../../../design/tokens.dart';
 import '../../../../services/faith_service.dart';
 
-class BoxBreathingScreen extends StatelessWidget {
+class ValuesClarificationScreen extends StatelessWidget {
   final FaithMode faithMode;
 
-  const BoxBreathingScreen({
+  const ValuesClarificationScreen({
     Key? key,
     required this.faithMode,
   }) : super(key: key);
@@ -18,7 +18,7 @@ class BoxBreathingScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: theme.colorScheme.background,
       appBar: AppBar(
-        title: const Text('Box Breathing'),
+        title: const Text('Values Clarification'),
         backgroundColor: theme.colorScheme.surface,
         foregroundColor: theme.colorScheme.onSurface,
         elevation: 0,
@@ -60,34 +60,32 @@ class BoxBreathingScreen extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: BoxBreathingWidget(
-            isFaithMode: faithMode.isActivated,
-            onComplete: () {
-              // Show completion message
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: const Row(
-                    children: [
-                      Icon(Icons.check_circle, color: Colors.white),
-                      SizedBox(width: 8),
-                      Text('Great job! You completed 4 cycles of box breathing.'),
-                    ],
-                  ),
-                  backgroundColor: Colors.green.shade600,
-                  duration: const Duration(seconds: 2),
-                  behavior: SnackBarBehavior.floating,
+        child: ValuesClarificationWidget(
+          isFaithMode: faithMode.isActivated,
+          onComplete: () {
+            // Show completion message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Row(
+                  children: [
+                    Icon(Icons.check_circle, color: Colors.white),
+                    SizedBox(width: 8),
+                    Text('Excellent! You\'ve clarified your core values.'),
+                  ],
                 ),
-              );
-              
-              // Optional: Navigate back after a delay
-              Future.delayed(const Duration(seconds: 1), () {
-                if (Navigator.of(context).canPop()) {
-                  Navigator.of(context).pop();
-                }
-              });
-            },
-          ),
+                backgroundColor: Colors.green.shade600,
+                duration: const Duration(seconds: 2),
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+            
+            // Navigate back after a delay
+            Future.delayed(const Duration(seconds: 1), () {
+              if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();
+              }
+            });
+          },
         ),
       ),
     );
