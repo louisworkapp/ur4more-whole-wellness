@@ -50,4 +50,10 @@ class SettingsController extends ChangeNotifier {
     notifyListeners();
     await _service.save(_settings);
   }
+
+  Future<void> updateHideFaithOverlaysInMind(bool hide) async {
+    _settings = _settings.copyWith(hideFaithOverlaysInMind: hide);
+    notifyListeners();
+    await _service.save(_settings);
+  }
 }
