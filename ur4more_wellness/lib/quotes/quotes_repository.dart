@@ -60,4 +60,18 @@ class QuotesRepository {
         .difference(DateTime.utc(now.year, 1, 1)).inDays;
     return ((now.year * 1000) + yday) % (shardCount == 0 ? 1 : shardCount);
   }
+
+  /// Load all quotes from all shards
+  Future<List<Map<String, dynamic>>> loadAll() async {
+    final manifest = await QuotesManifest.load();
+    final allQuotes = <Map<String, dynamic>>[];
+    
+    for (final shardPath in manifest.files) {
+      final data = json.decode(await rootBundle.loadString(shardPath)) as Map<String, dynamic>;
+      final quotes = (data['quotes'] as List).cast<Map<String, dynamic>>();
+      allQuotes.addAll(quotes);
+    }
+    
+    return allQuotes;
+  }
 }

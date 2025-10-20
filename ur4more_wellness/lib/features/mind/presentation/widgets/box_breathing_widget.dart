@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import '../../data/box_breathing_content.dart';
 import '../../../../design/tokens.dart';
+import '../../../../quotes/quotes_repository.dart';
 
 class BoxBreathingWidget extends StatefulWidget {
   final bool isFaithMode;
@@ -71,19 +72,79 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
     ));
   }
 
-  void _loadContent() {
-    if (_selectedCategory == 'all') {
-      _availableContent = BoxBreathingData.getContentForMode(widget.isFaithMode);
+  void _loadContent() async {
+    if (widget.isFaithMode) {
+      // In faith mode, load scripture quotes from the quote library
+      await _loadScriptureQuotes();
     } else {
-      _availableContent = BoxBreathingData.getContentByCategory(
-        _selectedCategory, 
-        widget.isFaithMode
-      );
+      // In secular mode, use the existing content
+      if (_selectedCategory == 'all') {
+        _availableContent = BoxBreathingData.getContentForMode(widget.isFaithMode);
+      } else {
+        _availableContent = BoxBreathingData.getContentByCategory(
+          _selectedCategory, 
+          widget.isFaithMode
+        );
+      }
     }
     
     if (_availableContent.isNotEmpty) {
       _currentContentIndex = 0;
     }
+  }
+
+  Future<void> _loadScriptureQuotes() async {
+    // Load scripture quotes from the quote library
+    final quotesRepo = QuotesRepository();
+    final allQuotes = await quotesRepo.loadAll();
+    
+    // Filter for scripture quotes that are suitable for breathing exercises
+    List<Map<String, dynamic>> scriptureQuotes = allQuotes.where((quote) {
+      final modes = quote['modes'] as Map<String, dynamic>?;
+      final hasScripture = quote['scripture_kjv'] != null;
+      final isFaithOk = modes?['faith_ok'] == true;
+      
+      return hasScripture && isFaithOk;
+    }).toList();
+    
+    // If a specific category is selected (not 'all'), filter by theme
+    if (_selectedCategory != 'all') {
+      scriptureQuotes = _filterQuotesByCategory(scriptureQuotes, _selectedCategory);
+    }
+    
+    // Convert to BoxBreathingContent format
+    _availableContent = scriptureQuotes.map((quote) {
+      final scripture = quote['scripture_kjv'] as Map<String, dynamic>?;
+      return BoxBreathingContent(
+        text: scripture?['text'] ?? quote['text'] ?? '',
+        reference: scripture?['ref'] ?? '',
+        type: 'verse',
+        category: _selectedCategory == 'all' ? 'scripture' : _selectedCategory,
+        isFaithContent: true,
+      );
+    }).toList();
+  }
+
+  List<Map<String, dynamic>> _filterQuotesByCategory(List<Map<String, dynamic>> quotes, String category) {
+    // Map categories to relevant themes/keywords
+    final categoryKeywords = {
+      'peace': ['peace', 'calm', 'still', 'rest', 'quiet'],
+      'strength': ['strength', 'power', 'might', 'strong', 'courage'],
+      'trust': ['trust', 'faith', 'believe', 'hope', 'confidence'],
+      'rest': ['rest', 'peace', 'calm', 'quiet', 'still'],
+      'hope': ['hope', 'future', 'promise', 'light', 'joy'],
+      'love': ['love', 'beloved', 'cherish', 'care', 'compassion'],
+      'protection': ['protect', 'shield', 'guard', 'shelter', 'refuge'],
+    };
+    
+    final keywords = categoryKeywords[category] ?? [];
+    
+    return quotes.where((quote) {
+      final scripture = quote['scripture_kjv'] as Map<String, dynamic>?;
+      final text = (scripture?['text'] ?? quote['text'] ?? '').toLowerCase();
+      
+      return keywords.any((keyword) => text.contains(keyword));
+    }).toList();
   }
 
   void _startBreathing() {
@@ -176,6 +237,16 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
       _selectedCategory = category;
     });
     _loadContent();
+  }
+
+  List<String> _getAvailableCategories() {
+    if (widget.isFaithMode) {
+      // In faith mode, show scripture-related categories
+      return ['scripture', 'peace', 'strength', 'trust', 'rest', 'hope', 'love', 'protection'];
+    } else {
+      // In secular mode, show the original categories
+      return BoxBreathingData.getCategories(widget.isFaithMode);
+    }
   }
 
   @override
@@ -380,7 +451,7 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
                 children: [
                   _buildCategoryChip('all', 'All'),
                   SizedBox(width: AppSpace.x2),
-                  ...BoxBreathingData.getCategories(widget.isFaithMode).map(
+                  ..._getAvailableCategories().map(
                     (category) => Padding(
                       padding: EdgeInsets.only(right: AppSpace.x2),
                       child: _buildCategoryChip(category, category),

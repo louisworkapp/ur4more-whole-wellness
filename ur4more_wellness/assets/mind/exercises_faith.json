@@ -1,83 +1,858 @@
 {
-  "version": 1,
-  "gates": { "faith_mode": ["light", "disciple", "kingdom"] },
-  "settings_respect": { "hide_faith_overlays_in_mind": true, "light_requires_consent_per_session": true },
+  "version": 2,
+  "gates": {
+    "faith_mode": [
+      "light",
+      "disciple",
+      "kingdomBuilder"
+    ]
+  },
+  "settings_respect": {
+    "hide_faith_overlays_in_mind": true,
+    "light_requires_consent_per_session": true
+  },
   "exercises": [
     {
-      "id": "verse_breath_60",
-      "title": "Verse + Breathing (60s)",
-      "summary": "Steady your mind with a one-minute breath and a short KJV verse.",
-      "categories": ["regulation", "anxiety"],
-      "timerSeconds": 60,
-      "steps": [
-        "Inhale for 4, hold 4, exhale 4, hold 4 — repeat.",
-        "On each exhale, read the verse quietly."
+      "id": "identity_reframe_l1",
+      "title": "Identity-in-Christ Reframe (L1)",
+      "summary": "Replace the lie with Scripture-rooted identity.",
+      "categories": [
+        "cognition",
+        "identity"
       ],
-      "scriptureKJV": [{ "ref": "Philippians 4:6–7", "text": "Be careful for nothing... the peace of God... shall keep your hearts and minds through Christ Jesus." }],
-      "prayer": "Lord, steady my mind and guard my heart with Your peace.",
-      "xp": 10
-    },
-    {
-      "id": "identity_reframe",
-      "title": "Identity-in-Christ Reframe",
-      "summary": "Challenge the lie; replace it with Scripture-rooted identity.",
-      "categories": ["cognition", "self-talk"],
+      "level": "L1",
+      "expectedSeconds": 180,
       "steps": [
         "Write the troubling thought in one sentence.",
-        "List evidence for/against it.",
-        "Choose one identity verse and craft a 1-sentence reframe."
+        "List evidence for/against.",
+        "Choose one identity verse; write a 1-sentence reframe."
       ],
-      "scriptureKJV": [{ "ref": "2 Corinthians 5:17", "text": "Therefore if any man be in Christ, he is a new creature..." }],
-      "prayer": "Father, let me live from who I am in Christ, not from fear.",
-      "xp": 15,
+      "scriptureKJV": [
+        {
+          "ref": "2 Corinthians 5:17",
+          "text": "Therefore if any man be in Christ, he is a new creature..."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Father, let me live from who I am in Christ.",
       "templates": {
-        "reframeTemplate": "Because {verse_ref}, I will believe: {reframe_sentence}"
+        "reframe": "Because {verse_ref}, I will believe: {reframe_sentence}"
+      },
+      "capture": {
+        "pre": [
+          "mood",
+          "urge"
+        ],
+        "post": [
+          "mood",
+          "urge",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Aim at truth; identity guides action.",
+      "xp": 15,
+      "analytics": {
+        "start": "faith_identity_started",
+        "complete": "faith_identity_completed",
+        "verse": "verse_revealed"
       }
     },
     {
-      "id": "confession_truth_step",
-      "title": "Confession & Truth Step",
-      "summary": "Tell the truth to God and take one concrete act of obedience.",
-      "categories": ["repentance", "behavior"],
+      "id": "confession_truth_step_l1",
+      "title": "Confession & Truth Step (L1)",
+      "summary": "Tell the truth to God and take one concrete step.",
+      "categories": [
+        "repentance",
+        "behavior"
+      ],
+      "level": "L1",
+      "expectedSeconds": 180,
       "steps": [
         "Name one thing to confess in one line.",
         "Receive forgiveness by faith; write a single next step.",
         "Schedule the step (today or tomorrow)."
       ],
-      "scriptureKJV": [{ "ref": "1 John 1:9", "text": "If we confess our sins, he is faithful and just to forgive us our sins..." }],
-      "prayer": "Merciful Lord, I confess honestly. Cleanse me and help me walk in truth.",
-      "xp": 15,
-      "scheduler": { "allowToday": true, "allowTomorrow": true }
-    },
-    {
-      "id": "serve_someone_today",
-      "title": "Serve Someone Today",
-      "summary": "Choose one unseen act of love; do it within 24 hours.",
-      "categories": ["service", "values"],
-      "steps": [
-        "Pick one person and one helpful, humble act.",
-        "Decide where and when you'll do it (≤24h).",
-        "After completion, log how it changed your mood."
+      "scriptureKJV": [
+        {
+          "ref": "1 John 1:9",
+          "text": "If we confess our sins, he is faithful and just to forgive us our sins..."
+        }
       ],
-      "scriptureKJV": [{ "ref": "Galatians 5:13", "text": "By love serve one another." }],
-      "prayer": "Jesus, open my eyes to serve with humility and joy.",
-      "xp": 20,
-      "deadlineHours": 24
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Merciful Lord, cleanse me and help me walk in truth.",
+      "scheduler": {
+        "allowToday": true,
+        "allowTomorrow": true,
+        "reminderHours": 4
+      },
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Honesty first; then obedience.",
+      "xp": 15,
+      "analytics": {
+        "start": "faith_confession_started",
+        "complete": "faith_confession_completed",
+        "scheduled": "faith_confession_scheduled"
+      }
     },
     {
-      "id": "scripture_meditation_5",
-      "title": "Scripture Meditation (5m)",
-      "summary": "Slow, attentive reading (lectio) to anchor mind and will.",
-      "categories": ["meditation", "focus"],
+      "id": "serve_someone_today_l1",
+      "title": "Serve Someone Today (L1)",
+      "summary": "Choose one unseen act of love within 24 hours.",
+      "categories": [
+        "service",
+        "values"
+      ],
+      "level": "L1",
+      "expectedSeconds": 120,
+      "steps": [
+        "Pick one person and one humble act.",
+        "Decide where/when you'll do it (≤24h).",
+        "After, log how it affected your mood."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "Galatians 5:13",
+          "text": "By love serve one another."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Jesus, open my eyes to serve with humility and joy.",
+      "deadlineHours": 24,
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Responsibility and love reshape the day.",
+      "xp": 20,
+      "analytics": {
+        "start": "faith_service_started",
+        "complete": "faith_service_completed",
+        "done": "faith_service_done"
+      }
+    },
+    {
+      "id": "scripture_meditation_5_l1",
+      "title": "Scripture Meditation 5m (L1)",
+      "summary": "Slow, attentive reading to anchor mind and will.",
+      "categories": [
+        "meditation",
+        "focus"
+      ],
+      "level": "L1",
       "timerSeconds": 300,
       "steps": [
         "Read the verse slowly 3 times.",
         "Note one word/phrase that stands out.",
-        "Ask: What obedience does this invite today?"
+        "What obedience does this invite today?"
       ],
-      "scriptureKJV": [{ "ref": "John 14:6", "text": "I am the way, the truth, and the life..." }],
+      "scriptureKJV": [
+        {
+          "ref": "John 14:6",
+          "text": "I am the way, the truth, and the life..."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
       "prayer": "Speak, Lord; I will listen and obey.",
-      "xp": 20
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Attend to truth; then act.",
+      "xp": 20,
+      "analytics": {
+        "start": "faith_meditation_started",
+        "complete": "faith_meditation_completed",
+        "verse": "verse_revealed"
+      }
+    },
+    {
+      "id": "gratitude_3x30_l1",
+      "title": "Gratitude 3×30s (L1)",
+      "summary": "Three half-minute notes of thanks; optional 1-line prayer.",
+      "categories": [
+        "gratitude",
+        "mood"
+      ],
+      "level": "L1",
+      "timerSeconds": 90,
+      "steps": [
+        "30s: write one thing you're thankful for.",
+        "30s: another—be specific.",
+        "30s: one more—name the good source."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "1 Thessalonians 5:18",
+          "text": "In every thing give thanks: for this is the will of God in Christ Jesus concerning you."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Thank You, Lord, for these gifts today.",
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood"
+        ]
+      },
+      "petersonAimUp": "Noticing good strengthens meaning.",
+      "xp": 10,
+      "analytics": {
+        "start": "faith_gratitude_started",
+        "complete": "faith_gratitude_completed",
+        "verse": "verse_revealed"
+      }
+    },
+    {
+      "id": "truth_audit_l1",
+      "title": "Truth Audit (L1)",
+      "summary": "Identify one lie → one truth → one action.",
+      "categories": [
+        "discernment",
+        "cognition"
+      ],
+      "level": "L1",
+      "expectedSeconds": 120,
+      "steps": [
+        "Write the lie in 1 short sentence.",
+        "Write the truth that counters it.",
+        "One action that lives the truth today."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "John 8:32",
+          "text": "And ye shall know the truth, and the truth shall make you free."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Spirit of truth, guide me today.",
+      "capture": {
+        "pre": [
+          "mood",
+          "urge"
+        ],
+        "post": [
+          "mood",
+          "urge",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Aim at truth; walk it out.",
+      "xp": 15,
+      "analytics": {
+        "start": "faith_truth_audit_started",
+        "complete": "faith_truth_audit_completed",
+        "verse": "verse_revealed"
+      }
+    },
+    {
+      "id": "identity_reframe_l2",
+      "title": "Identity-in-Christ Reframe (L2)",
+      "summary": "Replace the lie with Scripture-rooted identity.",
+      "categories": [
+        "cognition",
+        "identity"
+      ],
+      "level": "L2",
+      "expectedSeconds": 252,
+      "steps": [
+        "Write the troubling thought in one sentence.",
+        "List evidence for/against.",
+        "Choose one identity verse; write a 1-sentence reframe.",
+        "Plan a 5-minute action to live that identity today."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "2 Corinthians 5:17",
+          "text": "Therefore if any man be in Christ, he is a new creature..."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Father, let me live from who I am in Christ.",
+      "templates": {
+        "reframe": "Because {verse_ref}, I will believe: {reframe_sentence}"
+      },
+      "capture": {
+        "pre": [
+          "mood",
+          "urge"
+        ],
+        "post": [
+          "mood",
+          "urge",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Identity → action → habit.",
+      "xp": 20,
+      "analytics": {
+        "start": "faith_identity_started",
+        "complete": "faith_identity_completed",
+        "verse": "verse_revealed"
+      },
+      "prerequisites": [
+        "identity_reframe_l1"
+      ]
+    },
+    {
+      "id": "identity_reframe_l3",
+      "title": "Identity-in-Christ Reframe (L3)",
+      "summary": "Replace the lie with Scripture-rooted identity.",
+      "categories": [
+        "cognition",
+        "identity"
+      ],
+      "level": "L3",
+      "expectedSeconds": 324,
+      "steps": [
+        "Write the troubling thought in one sentence.",
+        "List evidence for/against.",
+        "Choose one identity verse; write a 1-sentence reframe.",
+        "Speak it aloud once.",
+        "Send it to a trusted friend; live one action today."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "2 Corinthians 5:17",
+          "text": "Therefore if any man be in Christ, he is a new creature..."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Father, let me live from who I am in Christ.",
+      "templates": {
+        "reframe": "Because {verse_ref}, I will believe: {reframe_sentence}"
+      },
+      "capture": {
+        "pre": [
+          "mood",
+          "urge"
+        ],
+        "post": [
+          "mood",
+          "urge",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Confessed truth strengthens identity.",
+      "xp": 25,
+      "analytics": {
+        "start": "faith_identity_started",
+        "complete": "faith_identity_completed",
+        "verse": "verse_revealed"
+      },
+      "prerequisites": [
+        "identity_reframe_l2"
+      ]
+    },
+    {
+      "id": "confession_truth_step_l2",
+      "title": "Confession & Truth Step (L2)",
+      "summary": "Tell the truth to God and take one concrete step.",
+      "categories": [
+        "repentance",
+        "behavior"
+      ],
+      "level": "L2",
+      "expectedSeconds": 252,
+      "steps": [
+        "Name one thing to confess in one line.",
+        "Receive forgiveness by faith; write a single next step.",
+        "Schedule the step (today or tomorrow).",
+        "If repair is needed, plan a small restitution step."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "1 John 1:9",
+          "text": "If we confess our sins, he is faithful and just to forgive us our sins..."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Merciful Lord, cleanse me and help me walk in truth.",
+      "scheduler": {
+        "allowToday": true,
+        "allowTomorrow": true,
+        "reminderHours": 4
+      },
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Repentance restores order.",
+      "xp": 20,
+      "analytics": {
+        "start": "faith_confession_started",
+        "complete": "faith_confession_completed",
+        "scheduled": "faith_confession_scheduled"
+      },
+      "prerequisites": [
+        "confession_truth_step_l1"
+      ]
+    },
+    {
+      "id": "confession_truth_step_l3",
+      "title": "Confession & Truth Step (L3)",
+      "summary": "Tell the truth to God and take one concrete step.",
+      "categories": [
+        "repentance",
+        "behavior"
+      ],
+      "level": "L3",
+      "expectedSeconds": 324,
+      "steps": [
+        "Name one thing to confess in one line.",
+        "Receive forgiveness by faith; write a single next step.",
+        "Schedule the step (today or tomorrow).",
+        "Ask a mentor to check in within 48h."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "1 John 1:9",
+          "text": "If we confess our sins, he is faithful and just to forgive us our sins..."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Merciful Lord, cleanse me and help me walk in truth.",
+      "scheduler": {
+        "allowToday": true,
+        "allowTomorrow": true,
+        "reminderHours": 4
+      },
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Truth + accountability = growth.",
+      "xp": 25,
+      "analytics": {
+        "start": "faith_confession_started",
+        "complete": "faith_confession_completed",
+        "scheduled": "faith_confession_scheduled"
+      },
+      "prerequisites": [
+        "confession_truth_step_l2"
+      ]
+    },
+    {
+      "id": "serve_someone_today_l2",
+      "title": "Serve Someone Today (L2)",
+      "summary": "Choose one unseen act of love within 24 hours.",
+      "categories": [
+        "service",
+        "values"
+      ],
+      "level": "L2",
+      "expectedSeconds": 168,
+      "steps": [
+        "Pick one person and one humble act.",
+        "Decide where/when you'll do it (≤24h).",
+        "After, log how it affected your mood.",
+        "Choose a verse motive.",
+        "Do it within 24h; log mood change."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "Galatians 5:13",
+          "text": "By love serve one another."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Jesus, open my eyes to serve with humility and joy.",
+      "deadlineHours": 24,
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Service lifts both giver and world.",
+      "xp": 25,
+      "analytics": {
+        "start": "faith_service_started",
+        "complete": "faith_service_completed",
+        "done": "faith_service_done"
+      },
+      "prerequisites": [
+        "serve_someone_today_l1"
+      ]
+    },
+    {
+      "id": "serve_someone_today_l3",
+      "title": "Serve Someone Today (L3)",
+      "summary": "Choose one unseen act of love within 24 hours.",
+      "categories": [
+        "service",
+        "values"
+      ],
+      "level": "L3",
+      "expectedSeconds": 216,
+      "steps": [
+        "Pick one person and one humble act.",
+        "Decide where/when you'll do it (≤24h).",
+        "After, log how it affected your mood.",
+        "Plan 7 days of small service acts (1/day).",
+        "Schedule the first two days now."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "Galatians 5:13",
+          "text": "By love serve one another."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Jesus, open my eyes to serve with humility and joy.",
+      "deadlineHours": 24,
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Habits of love build mission.",
+      "xp": 30,
+      "analytics": {
+        "start": "faith_service_started",
+        "complete": "faith_service_completed",
+        "done": "faith_service_done"
+      },
+      "prerequisites": [
+        "serve_someone_today_l2"
+      ]
+    },
+    {
+      "id": "scripture_meditation_5_l2",
+      "title": "Scripture Meditation 5m (L2)",
+      "summary": "Slow, attentive reading to anchor mind and will.",
+      "categories": [
+        "meditation",
+        "focus"
+      ],
+      "level": "L2",
+      "timerSeconds": 420,
+      "steps": [
+        "Read slowly 3x.",
+        "What stirs? One word/phrase.",
+        "What obedience does this call for today?"
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "John 14:6",
+          "text": "I am the way, the truth, and the life..."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Speak, Lord; I will listen and obey.",
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Attend longer; be shaped deeper.",
+      "xp": 25,
+      "analytics": {
+        "start": "faith_meditation_started",
+        "complete": "faith_meditation_completed",
+        "verse": "verse_revealed"
+      },
+      "prerequisites": [
+        "scripture_meditation_5_l1"
+      ]
+    },
+    {
+      "id": "scripture_meditation_5_l3",
+      "title": "Scripture Meditation 5m (L3)",
+      "summary": "Slow, attentive reading to anchor mind and will.",
+      "categories": [
+        "meditation",
+        "focus"
+      ],
+      "level": "L3",
+      "timerSeconds": 540,
+      "steps": [
+        "Read slowly 3x.",
+        "What stirs? One word/phrase.",
+        "What obedience does this call for today?"
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "John 14:6",
+          "text": "I am the way, the truth, and the life..."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Speak, Lord; I will listen and obey.",
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Attend longer; be shaped deeper.",
+      "xp": 30,
+      "analytics": {
+        "start": "faith_meditation_started",
+        "complete": "faith_meditation_completed",
+        "verse": "verse_revealed"
+      },
+      "prerequisites": [
+        "scripture_meditation_5_l2"
+      ]
+    },
+    {
+      "id": "gratitude_3x30_l2",
+      "title": "Gratitude 3×30s (L2)",
+      "summary": "Three half-minute notes of thanks; optional 1-line prayer.",
+      "categories": [
+        "gratitude",
+        "mood"
+      ],
+      "level": "L2",
+      "timerSeconds": 126,
+      "steps": [
+        "30s: write one thing you're thankful for.",
+        "30s: another—be specific.",
+        "30s: one more—name the good source.",
+        "Plan 1 repeat before noon tomorrow."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "1 Thessalonians 5:18",
+          "text": "In every thing give thanks: for this is the will of God in Christ Jesus concerning you."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Thank You, Lord, for these gifts today.",
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood"
+        ]
+      },
+      "petersonAimUp": "Rehearse good to multiply it.",
+      "xp": 15,
+      "analytics": {
+        "start": "faith_gratitude_started",
+        "complete": "faith_gratitude_completed",
+        "verse": "verse_revealed"
+      },
+      "prerequisites": [
+        "gratitude_3x30_l1"
+      ]
+    },
+    {
+      "id": "gratitude_3x30_l3",
+      "title": "Gratitude 3×30s (L3)",
+      "summary": "Three half-minute notes of thanks; optional 1-line prayer.",
+      "categories": [
+        "gratitude",
+        "mood"
+      ],
+      "level": "L3",
+      "timerSeconds": 162,
+      "steps": [
+        "30s: write one thing you're thankful for.",
+        "30s: another—be specific.",
+        "30s: one more—name the good source.",
+        "Pick one joy you can create for someone else tomorrow.",
+        "Schedule it."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "1 Thessalonians 5:18",
+          "text": "In every thing give thanks: for this is the will of God in Christ Jesus concerning you."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Thank You, Lord, for these gifts today.",
+      "capture": {
+        "pre": [
+          "mood"
+        ],
+        "post": [
+          "mood"
+        ]
+      },
+      "petersonAimUp": "Joy grows when shared.",
+      "xp": 20,
+      "analytics": {
+        "start": "faith_gratitude_started",
+        "complete": "faith_gratitude_completed",
+        "verse": "verse_revealed"
+      },
+      "prerequisites": [
+        "gratitude_3x30_l2"
+      ]
+    },
+    {
+      "id": "truth_audit_l2",
+      "title": "Truth Audit (L2)",
+      "summary": "Identify one lie → one truth → one action.",
+      "categories": [
+        "discernment",
+        "cognition"
+      ],
+      "level": "L2",
+      "expectedSeconds": 168,
+      "steps": [
+        "Write the lie in 1 short sentence.",
+        "Write the truth that counters it.",
+        "One action that lives the truth today.",
+        "One action today; share truth with a trusted person."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "John 8:32",
+          "text": "And ye shall know the truth, and the truth shall make you free."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Spirit of truth, guide me today.",
+      "capture": {
+        "pre": [
+          "mood",
+          "urge"
+        ],
+        "post": [
+          "mood",
+          "urge",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Truth shared strengthens resolve.",
+      "xp": 20,
+      "analytics": {
+        "start": "faith_truth_audit_started",
+        "complete": "faith_truth_audit_completed",
+        "verse": "verse_revealed"
+      },
+      "prerequisites": [
+        "truth_audit_l1"
+      ]
+    },
+    {
+      "id": "truth_audit_l3",
+      "title": "Truth Audit (L3)",
+      "summary": "Identify one lie → one truth → one action.",
+      "categories": [
+        "discernment",
+        "cognition"
+      ],
+      "level": "L3",
+      "expectedSeconds": 216,
+      "steps": [
+        "Write the lie in 1 short sentence.",
+        "Write the truth that counters it.",
+        "One action that lives the truth today.",
+        "Share truth with a trusted person."
+      ],
+      "scriptureKJV": [
+        {
+          "ref": "John 8:32",
+          "text": "And ye shall know the truth, and the truth shall make you free."
+        }
+      ],
+      "consent": {
+        "askInLight": true
+      },
+      "prayer": "Spirit of truth, guide me today.",
+      "capture": {
+        "pre": [
+          "mood",
+          "urge"
+        ],
+        "post": [
+          "mood",
+          "urge",
+          "confidence"
+        ]
+      },
+      "petersonAimUp": "Truth shared strengthens resolve.",
+      "xp": 25,
+      "analytics": {
+        "start": "faith_truth_audit_started",
+        "complete": "faith_truth_audit_completed",
+        "verse": "verse_revealed"
+      },
+      "prerequisites": [
+        "truth_audit_l2"
+      ]
     }
   ]
 }

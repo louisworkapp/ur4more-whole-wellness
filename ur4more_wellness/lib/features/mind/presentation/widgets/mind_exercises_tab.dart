@@ -6,6 +6,7 @@ import '../../../../design/tokens.dart';
 import '../../services/conversion_funnel_service.dart';
 import '../../../../data/mind_faith_exercises_repository.dart';
 import '../../../../widgets/verse_reveal_chip.dart';
+import '../../services/exercise_progression_service.dart';
 import 'box_breathing_widget.dart';
 import '../screens/box_breathing_screen.dart';
 import '../screens/thought_record_screen.dart';
@@ -29,6 +30,7 @@ class MindExercisesTab extends StatefulWidget {
 class _MindExercisesTabState extends State<MindExercisesTab> {
   List<Exercise> _exercises = [];
   bool _isLoading = true;
+  Set<String> _completedExercises = {};
 
   @override
   void initState() {
@@ -66,7 +68,6 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
         
         // Remove overlapping regular exercises to avoid duplication
         final overlappingIds = [
-          'breathing_exercise', // Overlaps with verse_breath_60
           'thought_reframe',    // Overlaps with identity_reframe
           'values_clarification', // Overlaps with serve_someone_today
           'meditation',         // Overlaps with scripture_meditation_5
@@ -81,10 +82,35 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
       }
     }
     
+    final completed = await ExerciseProgressionService.getCompletedExercises();
+    
     setState(() {
       _exercises = exercises;
+      _completedExercises = completed.toSet();
       _isLoading = false;
     });
+  }
+
+  /// Check if an exercise is unlocked (prerequisites met)
+  bool _isExerciseUnlocked(Exercise exercise) {
+    // L1 exercises are always unlocked
+    if (exercise.id.endsWith('_l1')) return true;
+    
+    // Check prerequisites for L2/L3 exercises
+    final prerequisites = _getPrerequisites(exercise.id);
+    if (prerequisites.isEmpty) return true;
+    
+    return prerequisites.every((prereq) => _completedExercises.contains(prereq));
+  }
+  
+  /// Get prerequisites for an exercise based on its ID
+  List<String> _getPrerequisites(String exerciseId) {
+    if (exerciseId.endsWith('_l2')) {
+      return [exerciseId.replaceAll('_l2', '_l1')];
+    } else if (exerciseId.endsWith('_l3')) {
+      return [exerciseId.replaceAll('_l3', '_l2')];
+    }
+    return [];
   }
 
   @override
@@ -199,16 +225,18 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
                            exercise.id.startsWith('serve_') ||
                            exercise.id.startsWith('scripture_');
     
+    final isUnlocked = _isExerciseUnlocked(exercise);
+    
     return InkWell(
-      onTap: () => _startExercise(exercise),
+      onTap: isUnlocked ? () => _startExercise(exercise) : null,
       borderRadius: BorderRadius.circular(12),
       child: Container(
         padding: EdgeInsets.all(isCompact ? AppSpace.x3 : AppSpace.x4),
         decoration: BoxDecoration(
-          color: colorScheme.surface,
+          color: isUnlocked ? colorScheme.surface : colorScheme.surface.withOpacity(0.5),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: colorScheme.outline.withOpacity(0.2),
+            color: isUnlocked ? colorScheme.outline.withOpacity(0.2) : colorScheme.outline.withOpacity(0.1),
             width: 1,
           ),
         ),
@@ -235,12 +263,26 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        exercise.title,
-                        style: theme.textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: colorScheme.onSurface,
-                        ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              exercise.title,
+                              style: theme.textTheme.titleSmall?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: isUnlocked ? colorScheme.onSurface : colorScheme.onSurface.withOpacity(0.5),
+                              ),
+                            ),
+                          ),
+                          if (!isUnlocked) ...[
+                            SizedBox(width: AppSpace.x1),
+                            Icon(
+                              Icons.lock,
+                              size: 16,
+                              color: colorScheme.onSurfaceVariant.withOpacity(0.5),
+                            ),
+                          ],
+                        ],
                       ),
                       if (!isCompact) ...[
                         SizedBox(height: AppSpace.x1),
@@ -266,7 +308,7 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
               Text(
                 exercise.getDescription(widget.faithMode),
                 style: theme.textTheme.bodyMedium?.copyWith(
-                  color: colorScheme.onSurfaceVariant,
+                  color: isUnlocked ? colorScheme.onSurfaceVariant : colorScheme.onSurfaceVariant.withOpacity(0.5),
                   height: 1.4,
                 ),
               ),
@@ -347,11 +389,14 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
   void _startExercise(Exercise exercise) {
     // Special handling for exercises with full screens
     switch (exercise.id) {
-      case 'breathing':
+      case 'breathing_60_l1':
+      case 'breathing_60_l2':
+      case 'breathing_60_l3':
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => BoxBreathingScreen(
               faithMode: widget.faithMode,
+              exerciseId: exercise.id,
             ),
           ),
         );
@@ -582,7 +627,9 @@ class _ExerciseDialogState extends State<_ExerciseDialog> {
     switch (widget.exercise.id) {
       case 'thought_record':
         return _buildThoughtRecordContent();
-      case 'breathing':
+      case 'breathing_60_l1':
+      case 'breathing_60_l2':
+      case 'breathing_60_l3':
         return _buildBreathingContent();
       case 'values_clarification':
         return _buildValuesContent();

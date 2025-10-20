@@ -67,10 +67,13 @@ class ThoughtRecordScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: const Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(Icons.check_circle, color: Colors.white),
                     SizedBox(width: 8),
-                    Text('Great job! You completed your thought record.'),
+                    Expanded(
+                      child: Text('Great job! You completed your thought record.'),
+                    ),
                   ],
                 ),
                 backgroundColor: Colors.green.shade600,
