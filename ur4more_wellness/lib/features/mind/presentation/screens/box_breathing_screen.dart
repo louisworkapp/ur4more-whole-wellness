@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import '../widgets/box_breathing_widget.dart';
 import '../../../../design/tokens.dart';
 import '../../../../services/faith_service.dart';
+import '../../services/exercise_progression_service.dart';
 
 class BoxBreathingScreen extends StatelessWidget {
   final FaithMode faithMode;
+  final String exerciseId;
 
   const BoxBreathingScreen({
     Key? key,
     required this.faithMode,
+    required this.exerciseId,
   }) : super(key: key);
 
   @override
@@ -63,15 +66,21 @@ class BoxBreathingScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: BoxBreathingWidget(
             isFaithMode: faithMode.isActivated,
-            onComplete: () {
+            onComplete: () async {
+              // Mark exercise as completed
+              await ExerciseProgressionService.markExerciseCompleted(exerciseId);
+              
               // Show completion message
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: const Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(Icons.check_circle, color: Colors.white),
                       SizedBox(width: 8),
-                      Text('Great job! You completed 4 cycles of box breathing.'),
+                      Expanded(
+                        child: Text('Great job! You completed 4 cycles of box breathing.'),
+                      ),
                     ],
                   ),
                   backgroundColor: Colors.green.shade600,

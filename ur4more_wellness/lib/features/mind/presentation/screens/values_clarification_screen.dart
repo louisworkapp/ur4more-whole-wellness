@@ -67,10 +67,13 @@ class ValuesClarificationScreen extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: const Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(Icons.check_circle, color: Colors.white),
                     SizedBox(width: 8),
-                    Text('Excellent! You\'ve clarified your core values.'),
+                    Expanded(
+                      child: Text('Excellent! You\'ve clarified your core values.'),
+                    ),
                   ],
                 ),
                 backgroundColor: Colors.green.shade600,

@@ -27,6 +27,8 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
   final TextEditingController _evidenceForController = TextEditingController();
   final TextEditingController _evidenceAgainstController = TextEditingController();
   final TextEditingController _balancedThoughtController = TextEditingController();
+  final TextEditingController _rerateEmotionController = TextEditingController();
+  final TextEditingController _goDeeperController = TextEditingController();
   final TextEditingController _notesController = TextEditingController();
   
   // Emotion ratings
@@ -44,7 +46,8 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
     'Evidence For',
     'Evidence Against',
     'Balanced Thought',
-    'Review'
+    'Re-rate Emotion',
+    'Go Deeper'
   ];
 
   @override
@@ -128,7 +131,8 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
       3: 'evidence_for',
       4: 'evidence_against',
       5: 'balanced_thought',
-      6: 'balanced_thought', // Review step - keep the last meaningful category
+      6: 'balanced_thought', // Re-rate emotion step
+      7: 'go_deeper', // Go deeper step
     };
     
     final category = stepToCategory[step];
@@ -153,6 +157,8 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
     _evidenceForController.dispose();
     _evidenceAgainstController.dispose();
     _balancedThoughtController.dispose();
+    _rerateEmotionController.dispose();
+    _goDeeperController.dispose();
     _notesController.dispose();
     super.dispose();
   }
@@ -326,8 +332,7 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
               _buildCategoryChip('evidence_for', 'Evidence For'),
               _buildCategoryChip('evidence_against', 'Evidence Against'),
               _buildCategoryChip('balanced_thought', 'Balanced'),
-              if (widget.isFaithMode)
-                _buildCategoryChip('go_deeper', 'Go Deeper'),
+              _buildCategoryChip('go_deeper', 'Go Deeper'),
             ],
           ),
           
@@ -345,7 +350,8 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
                 _buildEvidenceForStep(),
                 _buildEvidenceAgainstStep(),
                 _buildBalancedThoughtStep(),
-                _buildReviewStep(),
+                _buildRerateEmotionStep(),
+                _buildGoDeeperStep(),
               ],
             ),
           ),
@@ -515,9 +521,10 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
   }
 
   Widget _buildBalancedThoughtStep() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
         Text(
           'What\'s a more balanced way to think?',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -581,6 +588,7 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
           ),
         ],
       ],
+      ),
     );
   }
 
@@ -661,6 +669,112 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildRerateEmotionStep() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+        Text(
+          'Rate your emotion again (1-10):',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        SizedBox(height: AppSpace.x3),
+        Text(
+          'Now that you\'ve worked through the evidence and created a balanced thought, how intense is your emotion?',
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        SizedBox(height: AppSpace.x3),
+        TextField(
+          controller: _rerateEmotionController,
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            hintText: 'Rate 1-10',
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+      ],
+      ),
+    );
+  }
+
+  Widget _buildGoDeeperStep() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+        Text(
+          'Go Deeper: Connect to Your Values',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        SizedBox(height: AppSpace.x3),
+        Text(
+          'How does this situation connect to your deeper values? What would you tell a friend in this situation?',
+          style: Theme.of(context).textTheme.bodyMedium,
+        ),
+        SizedBox(height: AppSpace.x3),
+        TextField(
+          controller: _goDeeperController,
+          maxLines: 4,
+          decoration: InputDecoration(
+            hintText: 'Reflect on your values and what matters most...',
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
+        if (widget.isFaithMode) ...[
+          SizedBox(height: AppSpace.x3),
+          Container(
+            padding: EdgeInsets.all(AppSpace.x3),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Icon(
+                      Icons.favorite,
+                      color: Theme.of(context).colorScheme.primary,
+                      size: 20,
+                    ),
+                    SizedBox(width: AppSpace.x2),
+                    Text(
+                      'Faith Reflection',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: AppSpace.x2),
+                Text(
+                  'How does your identity in Christ change how you view this situation?',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ],
       ),
     );
   }
