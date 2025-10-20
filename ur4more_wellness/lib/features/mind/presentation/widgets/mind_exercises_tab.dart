@@ -12,8 +12,6 @@ import '../../../../widgets/faith_invitation_card.dart';
 import '../../services/exercise_progression_service.dart';
 import '../../widgets/lesson_card.dart';
 import '../../routines/walk_in_light_routine.dart';
-import 'box_breathing_widget.dart';
-import '../screens/box_breathing_screen.dart';
 import '../screens/thought_record_screen.dart';
 import '../screens/values_clarification_screen.dart';
 import '../screens/implementation_intention_screen.dart';
@@ -238,12 +236,7 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
           
           SizedBox(height: AppSpace.x6),
           
-          // Quick Access
-          _buildQuickAccess(theme, colorScheme),
-          
-          SizedBox(height: AppSpace.x6),
-          
-          // All Exercises
+          // All Exercises (excluding breathing exercises)
           _buildAllExercises(theme, colorScheme),
         ],
       ),
@@ -330,40 +323,14 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
     );
   }
 
-  Widget _buildQuickAccess(ThemeData theme, ColorScheme colorScheme) {
-    final quickExercises = _exercises.where((e) => e.estimatedMinutes < 10).toList();
-    
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Quick Access (Under 10 min)',
-          style: theme.textTheme.titleMedium?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: colorScheme.onSurface,
-          ),
-        ),
-        SizedBox(height: AppSpace.x3),
-        SizedBox(
-          height: 120,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: quickExercises.length,
-            itemBuilder: (context, index) {
-              final exercise = quickExercises[index];
-              return Container(
-                width: 200,
-                margin: EdgeInsets.only(right: AppSpace.x3),
-                child: _buildExerciseCard(exercise, theme, colorScheme, isCompact: true),
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
 
   Widget _buildAllExercises(ThemeData theme, ColorScheme colorScheme) {
+    // Filter out breathing exercises since we have Breath Coach v2
+    final nonBreathingExercises = _exercises.where((exercise) => 
+      !exercise.id.contains('breathing') && 
+      exercise.id != 'breathing'
+    ).toList();
+    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -375,7 +342,7 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
           ),
         ),
         SizedBox(height: AppSpace.x3),
-        ..._exercises.map((exercise) => Padding(
+        ...nonBreathingExercises.map((exercise) => Padding(
           padding: EdgeInsets.only(bottom: AppSpace.x3),
           child: _buildExerciseCard(exercise, theme, colorScheme),
         )),
@@ -561,23 +528,6 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
     print('DEBUG: Starting exercise with ID: ${exercise.id}');
     // Special handling for exercises with full screens
     switch (exercise.id) {
-      case 'breathing':
-      case 'breathing_60_l1':
-      case 'breathing_60_l2':
-      case 'breathing_60_l3':
-        print('DEBUG: Navigating to BoxBreathingScreen for ${exercise.id}');
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => BoxBreathingScreen(
-              faithMode: widget.faithMode,
-              exerciseId: exercise.id,
-            ),
-          ),
-        ).then((_) {
-          // Show faith invitation for secular users after completing the exercise
-          _showFaithInvitationForExercise(exercise.id);
-        });
-        return;
       case 'thought_record':
         Navigator.of(context).push(
           MaterialPageRoute(
@@ -810,10 +760,6 @@ class _ExerciseDialogState extends State<_ExerciseDialog> {
     switch (widget.exercise.id) {
       case 'thought_record':
         return _buildThoughtRecordContent();
-      case 'breathing_60_l1':
-      case 'breathing_60_l2':
-      case 'breathing_60_l3':
-        return _buildBreathingContent();
       case 'values_clarification':
         return _buildValuesContent();
       case 'implementation_intention':
@@ -849,20 +795,6 @@ class _ExerciseDialogState extends State<_ExerciseDialog> {
     );
   }
 
-  Widget _buildBreathingContent() {
-    return BoxBreathingWidget(
-      isFaithMode: widget.faithMode.isActivated,
-      onComplete: () {
-        // Optional: Add completion logic here
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Great job! You completed 4 cycles of box breathing.'),
-            duration: Duration(seconds: 2),
-          ),
-        );
-      },
-    );
-  }
 
   Widget _buildValuesContent() {
     final theme = Theme.of(context);
