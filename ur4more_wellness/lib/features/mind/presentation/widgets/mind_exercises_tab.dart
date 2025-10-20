@@ -6,6 +6,8 @@ import '../../../../design/tokens.dart';
 import '../../services/conversion_funnel_service.dart';
 import '../../../../data/mind_faith_exercises_repository.dart';
 import '../../../../widgets/verse_reveal_chip.dart';
+import 'box_breathing_widget.dart';
+import '../screens/box_breathing_screen.dart';
 
 class MindExercisesTab extends StatefulWidget {
   final FaithMode faithMode;
@@ -338,6 +340,19 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
   }
 
   void _startExercise(Exercise exercise) {
+    // Special handling for box breathing - open in full screen
+    if (exercise.id == 'breathing') {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => BoxBreathingScreen(
+            faithMode: widget.faithMode,
+          ),
+        ),
+      );
+      return;
+    }
+    
+    // Default behavior for other exercises - show in dialog
     showDialog(
       context: context,
       builder: (context) => _ExerciseDialog(
@@ -554,39 +569,17 @@ class _ExerciseDialogState extends State<_ExerciseDialog> {
   }
 
   Widget _buildBreathingContent() {
-    final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Box Breathing Technique:',
-          style: theme.textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.w600,
+    return BoxBreathingWidget(
+      isFaithMode: widget.faithMode.isActivated,
+      onComplete: () {
+        // Optional: Add completion logic here
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Great job! You completed 4 cycles of box breathing.'),
+            duration: Duration(seconds: 2),
           ),
-        ),
-        SizedBox(height: AppSpace.x2),
-        _buildStep('1. Inhale', 'Count to 4 while breathing in'),
-        _buildStep('2. Hold', 'Hold your breath for 4 counts'),
-        _buildStep('3. Exhale', 'Count to 4 while breathing out'),
-        _buildStep('4. Hold', 'Hold empty for 4 counts'),
-        _buildStep('5. Repeat', 'Continue for 4-8 cycles'),
-        if (widget.faithMode.isActivated) ...[
-          SizedBox(height: AppSpace.x3),
-          Container(
-            padding: EdgeInsets.all(AppSpace.x3),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              '💡 Faith Tip: You can add a calming verse or prayer during the hold phases.',
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: Theme.of(context).colorScheme.primary,
-              ),
-            ),
-          ),
-        ],
-      ],
+        );
+      },
     );
   }
 
