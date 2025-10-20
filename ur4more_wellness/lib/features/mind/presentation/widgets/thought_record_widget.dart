@@ -5,11 +5,13 @@ import '../../../../design/tokens.dart';
 class ThoughtRecordWidget extends StatefulWidget {
   final bool isFaithMode;
   final VoidCallback? onComplete;
+  final Map<String, dynamic>? exerciseData;
 
   const ThoughtRecordWidget({
     Key? key,
     required this.isFaithMode,
     this.onComplete,
+    this.exerciseData,
   }) : super(key: key);
 
   @override
@@ -39,16 +41,36 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
   int _currentContentIndex = 0;
   String _selectedCategory = 'situation';
 
-  final List<String> _steps = [
-    'Situation',
-    'Automatic Thought',
-    'Emotion',
-    'Evidence For',
-    'Evidence Against',
-    'Balanced Thought',
-    'Re-rate Emotion',
-    'Go Deeper'
-  ];
+  List<String> get _steps {
+    print('DEBUG: isFaithMode = ${widget.isFaithMode}');
+    print('DEBUG: exerciseData = ${widget.exerciseData}');
+    
+    if (widget.exerciseData != null) {
+      print('DEBUG: stepsFaith = ${widget.exerciseData!['stepsFaith']}');
+      print('DEBUG: steps = ${widget.exerciseData!['steps']}');
+      
+      if (widget.isFaithMode && widget.exerciseData!['stepsFaith'] != null) {
+        print('DEBUG: Using faith steps');
+        return List<String>.from(widget.exerciseData!['stepsFaith']);
+      } else if (widget.exerciseData!['steps'] != null) {
+        print('DEBUG: Using regular steps');
+        return List<String>.from(widget.exerciseData!['steps']);
+      }
+    }
+    
+    print('DEBUG: Using fallback steps');
+    // Fallback to default steps
+    return [
+      'Situation',
+      'Automatic Thought',
+      'Emotion',
+      'Evidence For',
+      'Evidence Against',
+      'Balanced Thought',
+      'Re-rate Emotion',
+      'Go Deeper'
+    ];
+  }
 
   @override
   void initState() {

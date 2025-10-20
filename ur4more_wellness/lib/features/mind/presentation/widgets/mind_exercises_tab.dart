@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import '../../models/mind_coach_copy.dart';
 import '../../repositories/mind_coach_repository.dart';
 import '../../../../services/faith_service.dart';
@@ -6,7 +8,10 @@ import '../../../../design/tokens.dart';
 import '../../services/conversion_funnel_service.dart';
 import '../../../../data/mind_faith_exercises_repository.dart';
 import '../../../../widgets/verse_reveal_chip.dart';
+import '../../../../widgets/faith_invitation_card.dart';
 import '../../services/exercise_progression_service.dart';
+import '../../widgets/lesson_card.dart';
+import '../../routines/walk_in_light_routine.dart';
 import 'box_breathing_widget.dart';
 import '../screens/box_breathing_screen.dart';
 import '../screens/thought_record_screen.dart';
@@ -113,6 +118,59 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
     return [];
   }
 
+  /// Show faith invitation for secular users after completing an exercise
+  Future<void> _showFaithInvitationForExercise(String exerciseId) async {
+    if (widget.faithMode.isActivated) return; // Don't show for faith users
+    
+    try {
+      final String jsonString = await rootBundle.loadString('assets/mind/exercises_core.json');
+      final Map<String, dynamic> data = json.decode(jsonString);
+      final List<dynamic> exercises = data['exercises'] ?? [];
+      
+      // Find the exercise
+      final exercise = exercises.firstWhere(
+        (ex) => ex['id'] == exerciseId,
+        orElse: () => null,
+      );
+      
+      if (exercise != null && exercise['faithInvitation'] != null) {
+        final invitation = exercise['faithInvitation'] as Map<String, dynamic>;
+        
+        showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (context) => Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: SingleChildScrollView(
+              child: FaithInvitationCard(
+                title: invitation['title'] ?? 'Want to go deeper?',
+                message: invitation['message'] ?? 'Try a faith-enhanced version of this exercise.',
+                verse: invitation['verse'] ?? '',
+                onAccept: () {
+                  Navigator.of(context).pop();
+                  // TODO: Navigate to faith mode activation
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Faith mode activation coming soon!'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                },
+                onDecline: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error showing faith invitation: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -143,6 +201,33 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
             style: theme.textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),
+          ),
+          
+          SizedBox(height: AppSpace.x4),
+
+          // Walk in the Light Lesson Card
+          LessonCard(
+            title: 'Walk in the Light',
+            subtitle: 'Renew your mind and set your aim for the day with a 5-minute routine: breath + truth + gratitude.',
+            footnote: widget.faithMode.isActivated 
+                ? 'Faith mode: Scripture-enhanced exercises with verse reveals.'
+                : 'OFF mode: Secular exercises with optional faith invitations.',
+            onStart: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                return WalkInLightRoutine(
+                  isFaithActivated: widget.faithMode.isActivated,
+                  hideFaithOverlaysInMind: false, // TODO: Get from settings
+                  analytics: (event, props) async {
+                    // TODO: Implement analytics tracking
+                    print('Analytics: $event - $props');
+                  },
+                  onAwardXp: (xp) {
+                    // TODO: Implement XP system
+                    print('XP Awarded: $xp');
+                  },
+                );
+              }));
+            },
           ),
           
           SizedBox(height: AppSpace.x6),
@@ -387,11 +472,14 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
   }
 
   void _startExercise(Exercise exercise) {
+    print('DEBUG: Starting exercise with ID: ${exercise.id}');
     // Special handling for exercises with full screens
     switch (exercise.id) {
+      case 'breathing':
       case 'breathing_60_l1':
       case 'breathing_60_l2':
       case 'breathing_60_l3':
+        print('DEBUG: Navigating to BoxBreathingScreen for ${exercise.id}');
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => BoxBreathingScreen(
@@ -399,7 +487,10 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
               exerciseId: exercise.id,
             ),
           ),
-        );
+        ).then((_) {
+          // Show faith invitation for secular users after completing the exercise
+          _showFaithInvitationForExercise(exercise.id);
+        });
         return;
       case 'thought_record':
         Navigator.of(context).push(
@@ -408,7 +499,10 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
               faithMode: widget.faithMode,
             ),
           ),
-        );
+        ).then((_) {
+          // Show faith invitation for secular users after completing the exercise
+          _showFaithInvitationForExercise('thought_record_l1');
+        });
         return;
       case 'values_clarification':
         Navigator.of(context).push(
@@ -417,7 +511,10 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
               faithMode: widget.faithMode,
             ),
           ),
-        );
+        ).then((_) {
+          // Show faith invitation for secular users after completing the exercise
+          _showFaithInvitationForExercise('values_clarity_l1');
+        });
         return;
       case 'implementation_intention':
         Navigator.of(context).push(

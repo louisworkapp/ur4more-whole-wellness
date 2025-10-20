@@ -13,14 +13,24 @@
       "level": "L1",
       "expectedSeconds": 240,
       "steps": [
-        "Describe the situation in one sentence.",
-        "Write your automatic thought.",
-        "Rate emotion 1–10.",
-        "List 2 pieces of evidence for and 2 against.",
-        "Write a balanced alternative thought.",
-        "Rate your emotion again 1–10.",
-        "What would you tell a friend in this situation?",
-        "Go deeper: How does this connect to your values?"
+        "Describe the situation in one sentence. (Want deeper peace? Try praying: 'Lord, help me see this clearly.')",
+        "Write your automatic thought. (Consider: What would God say about this? 'For God hath not given us the spirit of fear.')",
+        "Rate emotion 1–10. (Need calm? 'Be still, and know that I am God.' - Psalm 46:10)",
+        "List 2 pieces of evidence for and 2 against. (Seek truth: 'Whatsoever things are true... think on these things.' - Philippians 4:8)",
+        "Write a balanced alternative thought. (Want wisdom? 'If any of you lack wisdom, let him ask of God.' - James 1:5)",
+        "Rate your emotion again 1–10. (Feeling better? 'The peace of God... shall keep your hearts and minds.' - Philippians 4:7)",
+        "What would you tell a friend in this situation? (Share hope: 'For I know the thoughts that I think toward you, saith the LORD, thoughts of peace.' - Jeremiah 29:11)",
+        "Go deeper: How does this connect to your values? (Want purpose? 'Seek ye first the kingdom of God, and his righteousness.' - Matthew 6:33)"
+      ],
+      "stepsFaith": [
+        "Describe the situation in one sentence. (Pray: 'Lord, help me see this clearly.')",
+        "Write your automatic thought. (Consider: 'What would God say about this?')",
+        "Rate emotion 1–10. (Pray: 'Jesus, calm my heart.')",
+        "List 2 pieces of evidence for and 2 against. (Ask: 'What does Scripture say?')",
+        "Write a balanced alternative thought. (Pray: 'Help me think like Christ.')",
+        "Rate your emotion again 1–10. (Thank God for His peace.)",
+        "What would you tell a friend in this situation? (Share God's truth with them.)",
+        "Go deeper: How does this connect to your values? (Pray: 'Align my heart with Yours, Lord.')"
       ],
       "capture": {
         "pre": [
@@ -38,6 +48,11 @@
       "analytics": {
         "start": "core_thought_record_started",
         "complete": "core_thought_record_completed"
+      },
+      "faithInvitation": {
+        "title": "Want deeper peace?",
+        "message": "Many find that prayer and Scripture bring lasting calm. Would you like to try a faith-enhanced version of this exercise?",
+        "verse": "Philippians 4:7 - 'And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.'"
       }
     },
     {
@@ -51,10 +66,16 @@
       "level": "L1",
       "timerSeconds": 60,
       "steps": [
-        "Inhale 4",
-        "Hold 4",
-        "Exhale 4",
-        "Hold 4 (repeat)"
+        "Inhale 4 (Want deeper calm? 'The LORD is my shepherd; I shall not want.' - Psalm 23:1)",
+        "Hold 4 (Need peace? 'Be still, and know that I am God.' - Psalm 46:10)",
+        "Exhale 4 (Release worry: 'Cast all your anxiety on him because he cares for you.' - 1 Peter 5:7)",
+        "Hold 4 (Rest in hope: 'In his presence is fullness of joy.' - Psalm 16:11)"
+      ],
+      "stepsFaith": [
+        "Inhale 4 (Pray: 'Lord, fill me with Your Spirit.')",
+        "Hold 4 (Meditate: 'Be still and know that I am God.')",
+        "Exhale 4 (Release: 'Cast all your anxiety on Him.')",
+        "Hold 4 (Rest: 'In His presence is fullness of joy.')"
       ],
       "capture": {
         "pre": [
@@ -71,6 +92,11 @@
       "analytics": {
         "start": "core_breath_started",
         "complete": "core_breath_completed"
+      },
+      "faithInvitation": {
+        "title": "Want deeper calm?",
+        "message": "Breathing with prayer and Scripture can bring profound peace. Would you like to try a faith-enhanced version?",
+        "verse": "Psalm 46:10 - 'Be still, and know that I am God.'"
       }
     },
     {
@@ -84,10 +110,16 @@
       "level": "L1",
       "expectedSeconds": 180,
       "steps": [
-        "Choose 5 values that matter today.",
-        "Star your top 2.",
-        "Name one area out of alignment.",
-        "One tiny step to realign today."
+        "Choose 5 values that matter today. (Want deeper purpose? 'Seek ye first the kingdom of God, and his righteousness.' - Matthew 6:33)",
+        "Star your top 2. (Which align with God's heart? 'Love the Lord your God with all your heart.' - Matthew 22:37)",
+        "Name one area out of alignment. (Need help? 'If we confess our sins, he is faithful and just to forgive us.' - 1 John 1:9)",
+        "One tiny step to realign today. (Want strength? 'I can do all things through Christ which strengtheneth me.' - Philippians 4:13)"
+      ],
+      "stepsFaith": [
+        "Choose 5 values that matter today. (Pray: 'Lord, show me what You value.')",
+        "Star your top 2. (Ask: 'Which align with God's heart?')",
+        "Name one area out of alignment. (Confess: 'Lord, I need Your help here.')",
+        "One tiny step to realign today. (Pray: 'Give me strength to obey.')"
       ],
       "capture": {
         "pre": [],
@@ -100,6 +132,11 @@
       "analytics": {
         "start": "core_values_started",
         "complete": "core_values_completed"
+      },
+      "faithInvitation": {
+        "title": "Want deeper purpose?",
+        "message": "Discovering God's values can give your life profound meaning. Would you like to try a faith-enhanced version?",
+        "verse": "Matthew 6:33 - 'But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.'"
       }
     },
     {
@@ -113,9 +150,9 @@
       "level": "L1",
       "expectedSeconds": 90,
       "steps": [
-        "Name a likely obstacle.",
-        "If ___ happens, then I will ___ (specific, tiny).",
-        "Schedule it today or tomorrow."
+        "Name a likely obstacle. (Want wisdom? 'If any of you lack wisdom, let him ask of God.' - James 1:5)",
+        "If ___ happens, then I will ___ (specific, tiny). (Need strength? 'I can do all things through Christ which strengtheneth me.' - Philippians 4:13)",
+        "Schedule it today or tomorrow. (Want guidance? 'Trust in the LORD with all thine heart; and lean not unto thine own understanding.' - Proverbs 3:5)"
       ],
       "capture": {
         "pre": [],
@@ -201,9 +238,9 @@
       "level": "L1",
       "expectedSeconds": 120,
       "steps": [
-        "List 3 good moments from today.",
-        "What made each possible?",
-        "One thing to repeat tomorrow."
+        "List 3 good moments from today. (Want deeper joy? 'In every thing give thanks: for this is the will of God.' - 1 Thessalonians 5:18)",
+        "What made each possible? (Recognize the source: 'Every good gift and every perfect gift is from above.' - James 1:17)",
+        "One thing to repeat tomorrow. (Want hope? 'For I know the thoughts that I think toward you, saith the LORD, thoughts of peace.' - Jeremiah 29:11)"
       ],
       "capture": {
         "pre": [
