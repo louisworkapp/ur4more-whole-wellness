@@ -1,0 +1,134 @@
+{
+  "id": "renewing_mind_kjv_v1",
+  "title": "Renewing the Mind — KJV",
+  "description": "Short KJV verses for thought renewal, focus, identity, and peace. For use in Mind Coach verse-reveal chips.",
+  "version": 1,
+  "verses": [
+    {
+      "id": "rom12_2",
+      "ref": "Romans 12:2",
+      "text": "And be not conformed to this world: but be ye transformed by the renewing of your mind… that ye may prove what is that good, and acceptable, and perfect, will of God.",
+      "theme": "renewal"
+    },
+    {
+      "id": "eph4_23",
+      "ref": "Ephesians 4:23",
+      "text": "And be renewed in the spirit of your mind;",
+      "theme": "renewal"
+    },
+    {
+      "id": "col3_10",
+      "ref": "Colossians 3:10",
+      "text": "And have put on the new man, which is renewed in knowledge after the image of him that created him:",
+      "theme": "renewal"
+    },
+    {
+      "id": "tit3_5",
+      "ref": "Titus 3:5",
+      "text": "Not by works of righteousness which we have done, but according to his mercy he saved us, by the washing of regeneration, and renewing of the Holy Ghost;",
+      "theme": "renewal"
+    },
+    {
+      "id": "ps51_10",
+      "ref": "Psalm 51:10",
+      "text": "Create in me a clean heart, O God; and renew a right spirit within me.",
+      "theme": "renewal"
+    },
+    {
+      "id": "php4_8",
+      "ref": "Philippians 4:8",
+      "text": "Finally, brethren, whatsoever things are true… think on these things.",
+      "theme": "focus"
+    },
+    {
+      "id": "col3_2",
+      "ref": "Colossians 3:2",
+      "text": "Set your affection on things above, not on things on the earth.",
+      "theme": "focus"
+    },
+    {
+      "id": "jos1_8",
+      "ref": "Joshua 1:8",
+      "text": "This book of the law shall not depart out of thy mouth; but thou shalt meditate therein day and night… for then thou shalt make thy way prosperous, and then thou shalt have good success.",
+      "theme": "word"
+    },
+    {
+      "id": "ps119_11",
+      "ref": "Psalm 119:11",
+      "text": "Thy word have I hid in mine heart, that I might not sin against thee.",
+      "theme": "word"
+    },
+    {
+      "id": "ps19_14",
+      "ref": "Psalm 19:14",
+      "text": "Let the words of my mouth, and the meditation of my heart, be acceptable in thy sight, O LORD, my strength, and my redeemer.",
+      "theme": "word"
+    },
+    {
+      "id": "php2_5",
+      "ref": "Philippians 2:5",
+      "text": "Let this mind be in you, which was also in Christ Jesus:",
+      "theme": "identity"
+    },
+    {
+      "id": "1co2_16",
+      "ref": "1 Corinthians 2:16",
+      "text": "For who hath known the mind of the Lord, that he may instruct him? But we have the mind of Christ.",
+      "theme": "identity"
+    },
+    {
+      "id": "rom8_6",
+      "ref": "Romans 8:6",
+      "text": "For to be carnally minded is death; but to be spiritually minded is life and peace.",
+      "theme": "identity"
+    },
+    {
+      "id": "2co10_5",
+      "ref": "2 Corinthians 10:5",
+      "text": "Casting down imaginations, and every high thing that exalteth itself against the knowledge of God, and bringing into captivity every thought to the obedience of Christ;",
+      "theme": "warfare"
+    },
+    {
+      "id": "1pe1_13",
+      "ref": "1 Peter 1:13",
+      "text": "Wherefore gird up the loins of your mind, be sober, and hope to the end…",
+      "theme": "discipline"
+    },
+    {
+      "id": "jas1_8",
+      "ref": "James 1:8",
+      "text": "A double minded man is unstable in all his ways.",
+      "theme": "discipline"
+    },
+    {
+      "id": "php4_6_7",
+      "ref": "Philippians 4:6–7",
+      "text": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God… shall keep your hearts and minds through Christ Jesus.",
+      "theme": "peace"
+    },
+    {
+      "id": "isa26_3",
+      "ref": "Isaiah 26:3",
+      "text": "Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee.",
+      "theme": "peace"
+    },
+    {
+      "id": "2ti1_7",
+      "ref": "2 Timothy 1:7",
+      "text": "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.",
+      "theme": "peace"
+    },
+    {
+      "id": "heb8_10",
+      "ref": "Hebrews 8:10",
+      "text": "I will put my laws into their mind, and write them in their hearts: and I will be to them a God, and they shall be to me a people:",
+      "theme": "covenant"
+    },
+    {
+      "id": "col3_16",
+      "ref": "Colossians 3:16",
+      "text": "Let the word of Christ dwell in you richly in all wisdom…",
+      "theme": "word"
+    }
+  ]
+}

@@ -25,10 +25,13 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
   late Animation<double> _opacityAnimation;
   
   Timer? _breathingTimer;
+  Timer? _workoutTimer;
   int _currentPhase = 0; // 0: inhale, 1: hold, 2: exhale, 3: hold
   int _currentCount = 0;
   bool _isRunning = false;
   int _cycleCount = 0;
+  int _totalSeconds = 0;
+  int _workoutDuration = 60; // Default 60 seconds
   
   List<BoxBreathingContent> _availableContent = [];
   int _currentContentIndex = 0;
@@ -150,14 +153,37 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
   void _startBreathing() {
     if (_isRunning) return;
     
+    print('DEBUG: Starting breathing exercise');
+    
     setState(() {
       _isRunning = true;
       _currentPhase = 0;
       _currentCount = 0;
       _cycleCount = 0;
+      _totalSeconds = 0;
     });
     
+    _animationController.repeat();
     _nextPhase();
+    _startWorkoutTimer();
+  }
+
+  void _startWorkoutTimer() {
+    _workoutTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (!_isRunning) {
+        timer.cancel();
+        return;
+      }
+      
+      setState(() {
+        _totalSeconds++;
+      });
+      
+      // Check if workout duration is reached
+      if (_totalSeconds >= _workoutDuration) {
+        _stopBreathing();
+      }
+    });
   }
 
   void _stopBreathing() {
@@ -166,11 +192,19 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
     });
     
     _breathingTimer?.cancel();
+    _workoutTimer?.cancel();
     _animationController.stop();
+    
+    // Call onComplete if workout is finished
+    if (_totalSeconds >= _workoutDuration) {
+      widget.onComplete?.call();
+    }
   }
 
   void _nextPhase() {
     if (!_isRunning) return;
+    
+    print('DEBUG: Next phase - Phase: $_currentPhase, Count: $_currentCount, Cycle: $_cycleCount');
     
     setState(() {
       _currentCount = 0;
@@ -187,6 +221,8 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
         _currentCount++;
       });
       
+      print('DEBUG: Timer tick - Phase: $_currentPhase, Count: $_currentCount');
+      
       if (_currentCount >= 4) {
         timer.cancel();
         setState(() {
@@ -196,7 +232,10 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
           }
         });
         
+        print('DEBUG: Phase complete - New Phase: $_currentPhase, Cycle: $_cycleCount');
+        
         if (_cycleCount >= 4) {
+          print('DEBUG: All cycles complete, stopping');
           _stopBreathing();
           widget.onComplete?.call();
         } else {
@@ -252,6 +291,7 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
   @override
   void dispose() {
     _breathingTimer?.cancel();
+    _workoutTimer?.cancel();
     _animationController.dispose();
     super.dispose();
   }
@@ -350,6 +390,74 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
                 ),
               );
             },
+          ),
+          
+          SizedBox(height: AppSpace.x4),
+          
+          // Timer and Workout Info
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              // Workout Timer
+              Column(
+                children: [
+                  Text(
+                    'Workout Time',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  SizedBox(height: AppSpace.x1),
+                  Text(
+                    '${_totalSeconds}s',
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: theme.colorScheme.primary,
+                    ),
+                  ),
+                ],
+              ),
+              // Workout Countdown
+              Column(
+                children: [
+                  Text(
+                    'Remaining',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  SizedBox(height: AppSpace.x1),
+                  Text(
+                    '${_workoutDuration - _totalSeconds}s',
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: _workoutDuration - _totalSeconds <= 10 
+                          ? Colors.red 
+                          : theme.colorScheme.secondary,
+                    ),
+                  ),
+                ],
+              ),
+              // Cycle Count
+              Column(
+                children: [
+                  Text(
+                    'Cycles',
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  SizedBox(height: AppSpace.x1),
+                  Text(
+                    '$_cycleCount',
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: theme.colorScheme.tertiary,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
           
           SizedBox(height: AppSpace.x4),
@@ -464,6 +572,41 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
             SizedBox(height: AppSpace.x4),
           ],
           
+          // Workout Duration Selector
+          if (!_isRunning) ...[
+            SizedBox(height: AppSpace.x4),
+            Container(
+              padding: EdgeInsets.all(AppSpace.x3),
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: theme.colorScheme.outline.withOpacity(0.2),
+                ),
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    'Workout Duration',
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: AppSpace.x2),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildDurationButton('1 min', 60, theme),
+                      _buildDurationButton('2 min', 120, theme),
+                      _buildDurationButton('3 min', 180, theme),
+                      _buildDurationButton('5 min', 300, theme),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+          
           // Control Buttons
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -549,6 +692,40 @@ class _BoxBreathingWidgetState extends State<BoxBreathingWidget>
       onSelected: (selected) => _changeCategory(category),
       selectedColor: theme.colorScheme.primary.withOpacity(0.2),
       checkmarkColor: theme.colorScheme.primary,
+    );
+  }
+
+  Widget _buildDurationButton(String label, int seconds, ThemeData theme) {
+    final isSelected = _workoutDuration == seconds;
+    return OutlinedButton(
+      onPressed: () {
+        setState(() {
+          _workoutDuration = seconds;
+        });
+      },
+      style: OutlinedButton.styleFrom(
+        backgroundColor: isSelected 
+            ? theme.colorScheme.primary.withOpacity(0.1)
+            : null,
+        side: BorderSide(
+          color: isSelected 
+              ? theme.colorScheme.primary
+              : theme.colorScheme.outline,
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpace.x2,
+          vertical: AppSpace.x1,
+        ),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: isSelected 
+              ? theme.colorScheme.primary
+              : theme.colorScheme.onSurface,
+          fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+        ),
+      ),
     );
   }
 }
