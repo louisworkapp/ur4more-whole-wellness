@@ -9,6 +9,7 @@ class SettingsService {
   static const _kEqPull = 'settings.eq.pull';
   static const _kTz = 'settings.timezone';
   static const _kTheme = 'settings.themeMode';
+  static const _kHideFaith = 'settings.hideFaithOverlaysInMind';
 
   Future<AppSettings> load() async {
     final p = await SharedPreferences.getInstance();
@@ -19,6 +20,7 @@ class SettingsService {
     final eqPull = p.getBool(_kEqPull) ?? AppSettings.defaults.equipmentPullup;
     final tz = p.getString(_kTz) ?? AppSettings.defaults.timezone;
     final theme = _parseThemeMode(p.getString(_kTheme));
+    final hideFaith = p.getBool(_kHideFaith) ?? AppSettings.defaults.hideFaithOverlaysInMind;
     return AppSettings(
       faithTier: faith,
       notificationsEnabled: notif,
@@ -27,6 +29,7 @@ class SettingsService {
       equipmentPullup: eqPull,
       timezone: tz,
       themeMode: theme,
+      hideFaithOverlaysInMind: hideFaith,
     );
   }
 
@@ -39,6 +42,7 @@ class SettingsService {
     await p.setBool(_kEqPull, s.equipmentPullup);
     await p.setString(_kTz, s.timezone);
     await p.setString(_kTheme, _themeModeToString(s.themeMode));
+    await p.setBool(_kHideFaith, s.hideFaithOverlaysInMind);
   }
 
   AppThemeMode _parseThemeMode(String? raw) {

@@ -31,6 +31,7 @@ class AppSettings {
   final bool equipmentPullup;
   final String timezone;
   final AppThemeMode themeMode;
+  final bool hideFaithOverlaysInMind;
 
   const AppSettings({
     required this.faithTier,
@@ -40,6 +41,7 @@ class AppSettings {
     required this.equipmentPullup,
     required this.timezone,
     required this.themeMode,
+    required this.hideFaithOverlaysInMind,
   });
 
   static const defaults = AppSettings(
@@ -50,6 +52,7 @@ class AppSettings {
     equipmentPullup: false,
     timezone: 'Eastern Time (ET)',
     themeMode: AppThemeMode.dark,
+    hideFaithOverlaysInMind: false,
   );
 
   AppSettings copyWith({
@@ -60,6 +63,7 @@ class AppSettings {
     bool? equipmentPullup,
     String? timezone,
     AppThemeMode? themeMode,
+    bool? hideFaithOverlaysInMind,
   }) {
     return AppSettings(
       faithTier: faithTier ?? this.faithTier,
@@ -69,6 +73,7 @@ class AppSettings {
       equipmentPullup: equipmentPullup ?? this.equipmentPullup,
       timezone: timezone ?? this.timezone,
       themeMode: themeMode ?? this.themeMode,
+      hideFaithOverlaysInMind: hideFaithOverlaysInMind ?? this.hideFaithOverlaysInMind,
     );
   }
 }

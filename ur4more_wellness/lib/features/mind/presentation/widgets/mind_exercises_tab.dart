@@ -19,6 +19,7 @@ import '../screens/values_clarification_screen.dart';
 import '../screens/implementation_intention_screen.dart';
 import '../screens/mindful_observation_screen.dart';
 import '../screens/gratitude_practice_screen.dart';
+import '../../../../routes/app_routes.dart';
 
 class MindExercisesTab extends StatefulWidget {
   final FaithMode faithMode;
@@ -232,6 +233,11 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
           
           SizedBox(height: AppSpace.x6),
           
+          // Breath Coach v2
+          _buildBreathCoachCard(theme, colorScheme),
+          
+          SizedBox(height: AppSpace.x6),
+          
           // Quick Access
           _buildQuickAccess(theme, colorScheme),
           
@@ -240,6 +246,86 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
           // All Exercises
           _buildAllExercises(theme, colorScheme),
         ],
+      ),
+    );
+  }
+
+  Widget _buildBreathCoachCard(ThemeData theme, ColorScheme colorScheme) {
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).pushNamed(AppRoutes.breathPresets);
+        },
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              // Icon
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: Colors.blue.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.air,
+                  color: Colors.blue,
+                  size: 24,
+                ),
+              ),
+              
+              const SizedBox(width: 16),
+              
+              // Content
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Breath Coach v2',
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: colorScheme.onSurface,
+                      ),
+                    ),
+                    
+                    const SizedBox(height: 4),
+                    
+                    Text(
+                      '4 presets: Quick Calm, HRV, Focus, Sleep',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    
+                    const SizedBox(height: 8),
+                    
+                    Text(
+                      'Advanced breathing patterns with faith-aware quotes and calm tracking',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                        height: 1.3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              
+              // Arrow
+              Icon(
+                Icons.arrow_forward_ios,
+                color: colorScheme.onSurfaceVariant,
+                size: 16,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
