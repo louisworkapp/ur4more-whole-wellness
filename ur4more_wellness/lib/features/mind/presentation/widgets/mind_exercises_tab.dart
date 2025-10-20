@@ -8,6 +8,11 @@ import '../../../../data/mind_faith_exercises_repository.dart';
 import '../../../../widgets/verse_reveal_chip.dart';
 import 'box_breathing_widget.dart';
 import '../screens/box_breathing_screen.dart';
+import '../screens/thought_record_screen.dart';
+import '../screens/values_clarification_screen.dart';
+import '../screens/implementation_intention_screen.dart';
+import '../screens/mindful_observation_screen.dart';
+import '../screens/gratitude_practice_screen.dart';
 
 class MindExercisesTab extends StatefulWidget {
   final FaithMode faithMode;
@@ -340,16 +345,62 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
   }
 
   void _startExercise(Exercise exercise) {
-    // Special handling for box breathing - open in full screen
-    if (exercise.id == 'breathing') {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => BoxBreathingScreen(
-            faithMode: widget.faithMode,
+    // Special handling for exercises with full screens
+    switch (exercise.id) {
+      case 'breathing':
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => BoxBreathingScreen(
+              faithMode: widget.faithMode,
+            ),
           ),
-        ),
-      );
-      return;
+        );
+        return;
+      case 'thought_record':
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ThoughtRecordScreen(
+              faithMode: widget.faithMode,
+            ),
+          ),
+        );
+        return;
+      case 'values_clarification':
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ValuesClarificationScreen(
+              faithMode: widget.faithMode,
+            ),
+          ),
+        );
+        return;
+      case 'implementation_intention':
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ImplementationIntentionScreen(
+              faithMode: widget.faithMode,
+            ),
+          ),
+        );
+        return;
+      case 'mindful_observation':
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => MindfulObservationScreen(
+              faithMode: widget.faithMode,
+            ),
+          ),
+        );
+        return;
+      case 'gratitude_practice':
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => GratitudePracticeScreen(
+              faithMode: widget.faithMode,
+            ),
+          ),
+        );
+        return;
     }
     
     // Default behavior for other exercises - show in dialog
