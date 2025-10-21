@@ -554,7 +554,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                             style: GoogleFonts.inter(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
-                              color: Theme.of(context).colorScheme.onSurface,
+                              color: Colors.black87,
                             ),
                           ),
                           SizedBox(height: AppSpace.x1),
@@ -563,7 +563,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                             style: GoogleFonts.inter(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
+                              color: Colors.black54,
                             ),
                           ),
                         ],
@@ -631,7 +631,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                           style: GoogleFonts.inter(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
-                            color: Theme.of(context).colorScheme.onSurface,
+                            color: Colors.black87,
                           ),
                         ),
                         SizedBox(height: AppSpace.x1),
@@ -640,7 +640,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                           style: GoogleFonts.inter(
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
-                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            color: Colors.black54,
                           ),
                         ),
                       ],
@@ -658,7 +658,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
             style: GoogleFonts.inter(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.onSurface,
+              color: Colors.black87,
             ),
           ),
 

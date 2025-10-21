@@ -270,7 +270,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                           iconName: mood['icon'],
                           color: isSelected
                               ? (mood['color'] as Color)
-                              : theme.colorScheme.onSurfaceVariant,
+                              : theme.colorScheme.onSurface,
                           size: 20,
                         ),
                         SizedBox(height: AppSpace.x1),
@@ -279,7 +279,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                           style: theme.textTheme.bodySmall?.copyWith(
                             color: isSelected
                                 ? (mood['color'] as Color)
-                                : theme.colorScheme.onSurfaceVariant,
+                                : theme.colorScheme.onSurface,
                             fontWeight:
                                 isSelected ? FontWeight.w600 : FontWeight.w400,
                           ),
@@ -336,7 +336,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                               CustomIconWidget(
                                 iconName: 'auto_awesome',
                                 color: _faithPromptUsedToday
-                                    ? theme.colorScheme.onSurfaceVariant
+                                    ? theme.colorScheme.onSurface
                                     : theme.colorScheme.primary,
                                 size: 16,
                               ),
@@ -346,7 +346,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                                   prompt,
                                   style: theme.textTheme.bodySmall?.copyWith(
                                     color: _faithPromptUsedToday
-                                        ? theme.colorScheme.onSurfaceVariant
+                                        ? theme.colorScheme.onSurface
                                         : theme.colorScheme.onPrimaryContainer,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -415,7 +415,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: characterCount >= 120
                       ? Colors.amber.shade700 // Gold when qualifying for bonus
-                      : theme.colorScheme.onSurfaceVariant,
+                      : theme.colorScheme.onSurface,
                   fontWeight:
                       characterCount >= 120 ? FontWeight.w600 : FontWeight.w400,
                 ),
@@ -436,7 +436,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                   'Share your thoughts, feelings, challenges, victories, or anything on your mind...',
               hintStyle: theme.textTheme.bodyMedium?.copyWith(
                 color:
-                    theme.colorScheme.onSurfaceVariant.withOpacity(0.7),
+                    theme.colorScheme.onSurface.withOpacity(0.7),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -567,7 +567,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                 children: [
                   CustomIconWidget(
                     iconName: 'info',
-                    color: theme.colorScheme.onSurfaceVariant,
+                    color: theme.colorScheme.onSurface,
                     size: 16,
                   ),
                   SizedBox(width: AppSpace.x2),
@@ -575,7 +575,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                     child: Text(
                       'Write at least 120 characters for +10 bonus points.',
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
+                        color: theme.colorScheme.onSurface,
                       ),
                     ),
                   ),
