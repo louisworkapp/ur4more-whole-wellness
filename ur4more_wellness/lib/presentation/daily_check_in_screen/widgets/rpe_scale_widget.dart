@@ -131,21 +131,21 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
               Text(
                 '1',
                 style: theme.textTheme.labelMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: theme.colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 '5',
                 style: theme.textTheme.labelMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: theme.colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 '10',
                 style: theme.textTheme.labelMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: theme.colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -162,7 +162,7 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
               children: [
                 CustomIconWidget(
                   iconName: 'info',
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: theme.colorScheme.onSurface,
                   size: 16,
                 ),
                 SizedBox(width: AppSpace.x2),
@@ -170,7 +170,7 @@ class _RpeScaleWidgetState extends State<RpeScaleWidget> {
                   child: Text(
                     'RPE tracking helps monitor your recovery - no points awarded',
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
+                      color: theme.colorScheme.onSurface,
                     ),
                   ),
                 ),

@@ -19,7 +19,7 @@ class PainLevelWidget extends StatefulWidget {
 }
 
 class _PainLevelWidgetState extends State<PainLevelWidget> {
-  bool _showDetailedView = false;
+  bool _showDetailedView = true;
 
   String _getPainDescription(double value) {
     if (value == 0) return "No pain";
@@ -129,19 +129,19 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
               Text(
                 '0',
                 style: theme.textTheme.labelMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: theme.colorScheme.onSurface,
                 ),
               ),
               Text(
                 '5',
                 style: theme.textTheme.labelMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: theme.colorScheme.onSurface,
                 ),
               ),
               Text(
                 '10',
                 style: theme.textTheme.labelMedium?.copyWith(
-                  color: theme.colorScheme.onSurfaceVariant,
+                  color: theme.colorScheme.onSurface,
                 ),
               ),
             ],
@@ -269,14 +269,14 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
         children: [
           CustomIconWidget(
             iconName: iconName,
-            color: theme.colorScheme.onSurfaceVariant,
+            color: theme.colorScheme.onSurface,
             size: 18,
           ),
           SizedBox(width: AppSpace.x2),
           Text(
             region,
             style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurfaceVariant,
+              color: theme.colorScheme.onSurface,
             ),
           ),
         ],

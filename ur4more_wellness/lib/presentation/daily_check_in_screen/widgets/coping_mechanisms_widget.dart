@@ -377,7 +377,7 @@ class CopingTile extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: 12, // Same as body fitness
                               fontWeight: FontWeight.w400,
-                              color: cs.onSurfaceVariant,
+                              color: cs.onSurface,
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -406,7 +406,7 @@ class CopingTile extends StatelessWidget {
                             height: 48,
                             color: cs.surfaceContainerHighest,
                             alignment: Alignment.center,
-                            child: Icon(Icons.image_not_supported_outlined, size: 24, color: cs.onSurfaceVariant),
+                            child: Icon(Icons.image_not_supported_outlined, size: 24, color: cs.onSurface),
                           ),
                         ),
                       ),
