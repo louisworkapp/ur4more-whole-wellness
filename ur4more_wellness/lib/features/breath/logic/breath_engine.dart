@@ -63,7 +63,8 @@ class BreathEngine {
     // Calculate step progress based on current phase duration
     final phaseDuration = _getPhaseDuration(_currentPhase);
     if (phaseDuration > 0) {
-      final elapsedInPhase = _config.totalSeconds - _totalRemaining - _getPhaseStartTime();
+      // More precise calculation using elapsed time within current phase
+      final elapsedInPhase = phaseDuration - _stepRemaining;
       _stepProgress = (elapsedInPhase / phaseDuration).clamp(0.0, 1.0);
       stepProgress.value = _stepProgress;
     }
@@ -244,6 +245,12 @@ class BreathEngine {
         return 'Hold';
     }
   }
+
+  /// Get current phase duration
+  int get currentPhaseDuration => _getPhaseDuration(_currentPhase);
+
+  /// Get current phase progress (0.0 to 1.0)
+  double get currentPhaseProgress => _stepProgress;
 
   /// Get current configuration
   BreathEngineConfig get config => _config;

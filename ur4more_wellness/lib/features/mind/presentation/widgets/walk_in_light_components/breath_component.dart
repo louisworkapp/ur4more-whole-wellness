@@ -5,6 +5,9 @@ import 'package:flutter/services.dart';
 import '../../../../../core/app_export.dart';
 import '../../../../../design/tokens.dart';
 import '../../../../../services/faith_service.dart';
+import '../../../../breath/logic/breath_engine.dart';
+import '../../../../breath/logic/presets.dart';
+import '../../../../breath/widgets/animated_circle.dart';
 
 class BreathComponent extends StatefulWidget {
   final FaithMode faithMode;
@@ -26,84 +29,82 @@ class BreathComponent extends StatefulWidget {
 
 class _BreathComponentState extends State<BreathComponent>
     with TickerProviderStateMixin {
-  late AnimationController _breathController;
-  late AnimationController _pulseController;
-  late Animation<double> _breathAnimation;
-  late Animation<double> _pulseAnimation;
+  late BreathEngine _breathEngine;
   
   Timer? _timer;
   int _timeRemaining = 0;
   bool _isActive = false;
   bool _isCompleted = false;
+  bool _showCadenceSelector = true;
   
   // Breath cycle data
   int _breathCount = 0;
   double _averageBreathRate = 0.0;
   String _breathQuality = '';
+  BreathPreset _selectedPreset = Presets.fourSevenEight;
 
   @override
   void initState() {
     super.initState();
-    _timeRemaining = widget.duration;
-    
-    _breathController = AnimationController(
-      duration: const Duration(seconds: 4), // 4-second breath cycle
-      vsync: this,
+    _initializeBreathEngine();
+    _timeRemaining = _breathEngine.totalRemaining.value;
+  }
+  
+  void _initializeBreathEngine() {
+    _breathEngine = BreathEngine(
+      _selectedPreset.config,
+      onStep: _onBreathStep,
+      onFinish: _onBreathComplete,
     );
-    
-    _pulseController = AnimationController(
-      duration: const Duration(milliseconds: 1000),
-      vsync: this,
-    );
-    
-    _breathAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _breathController, curve: Curves.easeInOut),
-    );
-    
-    _pulseAnimation = Tween<double>(begin: 0.8, end: 1.2).animate(
-      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
-    );
-    
-    _breathController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _breathCount++;
-        _breathController.reset();
-        _breathController.forward();
-      }
-    });
+  }
+  
+  void _onBreathStep() {
+    _breathCount++;
+  }
+  
+  void _onBreathComplete() {
+    _completeBreathing();
   }
 
   @override
   void dispose() {
     _timer?.cancel();
-    _breathController.dispose();
-    _pulseController.dispose();
+    _breathEngine.dispose();
     super.dispose();
   }
 
   void _startBreathing() {
     setState(() {
       _isActive = true;
+      _showCadenceSelector = false;
     });
     
-    _breathController.forward();
-    _pulseController.repeat(reverse: true);
+    _breathEngine.start();
     
+    // Use the engine's timing instead of our own timer
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-        _timeRemaining--;
+        // Update our local timer to match the engine's total remaining
+        _timeRemaining = _breathEngine.totalRemaining.value;
       });
       
-      if (_timeRemaining <= 0) {
+      if (_breathEngine.totalRemaining.value <= 0) {
         _completeBreathing();
       }
     });
   }
+  
+  void _selectPreset(BreathPreset preset) {
+    setState(() {
+      _selectedPreset = preset;
+    });
+    _initializeBreathEngine();
+    _timeRemaining = _breathEngine.totalRemaining.value;
+  }
 
   void _completeBreathing() {
     _timer?.cancel();
-    _breathController.stop();
-    _pulseController.stop();
+    _breathEngine.pause();
     
     setState(() {
       _isActive = false;
@@ -135,28 +136,36 @@ class _BreathComponentState extends State<BreathComponent>
   }
 
   String _getBreathInstruction() {
-    if (!_isActive) return 'Tap to begin your breathing practice';
+    if (!_isActive) return 'Choose your breathing pattern and tap to begin';
     
-    final progress = _breathAnimation.value;
-    if (progress < 0.25) return 'Breathe in slowly...';
-    if (progress < 0.5) return 'Hold your breath...';
-    if (progress < 0.75) return 'Breathe out gently...';
-    return 'Rest and prepare...';
+    return _breathEngine.phaseLabel;
   }
 
-  Color _getBreathColor() {
-    if (!_isActive) return Theme.of(context).colorScheme.primary;
-    
-    final progress = _breathAnimation.value;
-    if (progress < 0.25) return Colors.blue.shade400; // Inhale
-    if (progress < 0.5) return Colors.blue.shade600; // Hold
-    if (progress < 0.75) return Colors.blue.shade300; // Exhale
-    return Colors.blue.shade200; // Rest
+  Color _getPhaseColor(Phase phase) {
+    switch (phase) {
+      case Phase.inhale:
+        return Colors.blue.shade400;
+      case Phase.hold1:
+        return Colors.blue.shade600;
+      case Phase.exhale:
+        return Colors.blue.shade300;
+      case Phase.hold2:
+        return Colors.blue.shade200;
+    }
+  }
+  
+  String _getPatternText(BreathEngineConfig config) {
+    final parts = <String>[];
+    if (config.inhale > 0) parts.add('${config.inhale}');
+    if (config.hold1 > 0) parts.add('${config.hold1}');
+    if (config.exhale > 0) parts.add('${config.exhale}');
+    if (config.hold2 > 0) parts.add('${config.hold2}');
+    return parts.join('-');
   }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.all(24.0),
       child: Column(
         children: [
@@ -198,54 +207,256 @@ class _BreathComponentState extends State<BreathComponent>
             ],
           ),
           
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
           
-          // Timer display
-          if (_isActive || _isCompleted)
+          // Cadence selector
+          if (_showCadenceSelector)
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceVariant,
-                borderRadius: BorderRadius.circular(20),
+                color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(16),
               ),
-              child: Text(
-                '${_timeRemaining}s remaining',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  fontWeight: FontWeight.w600,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Choose Your Breathing Pattern',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  ...Presets.all.map((preset) => 
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: InkWell(
+                        onTap: () => _selectPreset(preset),
+                        borderRadius: BorderRadius.circular(12),
+                        child: Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: _selectedPreset == preset 
+                                ? Theme.of(context).colorScheme.primaryContainer
+                                : Theme.of(context).colorScheme.surface,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: _selectedPreset == preset 
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: _selectedPreset == preset 
+                                      ? Theme.of(context).colorScheme.primary
+                                      : Colors.transparent,
+                                  border: Border.all(
+                                    color: _selectedPreset == preset 
+                                        ? Theme.of(context).colorScheme.primary
+                                        : Theme.of(context).colorScheme.outline,
+                                  ),
+                                ),
+                                child: _selectedPreset == preset 
+                                    ? Icon(
+                                        Icons.check,
+                                        size: 14,
+                                        color: Theme.of(context).colorScheme.onPrimary,
+                                      )
+                                    : null,
+                              ),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      preset.name,
+                                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        color: _selectedPreset == preset 
+                                            ? Theme.of(context).colorScheme.onPrimaryContainer
+                                            : null,
+                                      ),
+                                    ),
+                                    Text(
+                                      preset.subtitle,
+                                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                        color: _selectedPreset == preset 
+                                            ? Theme.of(context).colorScheme.onPrimaryContainer.withOpacity(0.8)
+                                            : Theme.of(context).colorScheme.onSurfaceVariant,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                '${preset.config.inhale}-${preset.config.hold1}-${preset.config.exhale}${preset.config.hold2 > 0 ? '-${preset.config.hold2}' : ''}',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: _selectedPreset == preset 
+                                      ? Theme.of(context).colorScheme.onPrimaryContainer
+                                      : Theme.of(context).colorScheme.onSurfaceVariant,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ).toList(),
+                ],
               ),
             ),
           
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
           
-          // Breathing circle
-          Expanded(
+          // Enhanced timer display with phase countdown
+          if (_isActive || _isCompleted)
+            Column(
+              children: [
+                // Phase countdown and label
+                ValueListenableBuilder<Phase>(
+                  valueListenable: _breathEngine.phase,
+                  builder: (context, phase, child) {
+                    return ValueListenableBuilder<int>(
+                      valueListenable: _breathEngine.stepRemaining,
+                      builder: (context, stepRemaining, child) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                          decoration: BoxDecoration(
+                            color: _getPhaseColor(phase).withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: _getPhaseColor(phase).withOpacity(0.3),
+                              width: 2,
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              // Large countdown number
+                              Text(
+                                stepRemaining.toString(),
+                                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                                  fontWeight: FontWeight.w800,
+                                  color: _getPhaseColor(phase),
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              // Phase label
+                              Text(
+                                _breathEngine.phaseLabel,
+                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                  color: _getPhaseColor(phase),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
+                
+                const SizedBox(height: 16),
+                
+                // Total timer and pattern info
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Total timer
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Total ',
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                          ValueListenableBuilder<int>(
+                            valueListenable: _breathEngine.totalRemaining,
+                            builder: (context, totalRemaining, child) {
+                              return Text(
+                                '${totalRemaining}s',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    
+                    // Pattern info
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Pattern ',
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            ),
+                          ),
+                          Text(
+                            _getPatternText(_selectedPreset.config),
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          
+          const SizedBox(height: 24),
+          
+          // Breathing circle - using the same AnimatedBreathCircle as Breath Coach V2
+          SizedBox(
+            height: 300,
             child: Center(
               child: GestureDetector(
                 onTap: _isActive ? null : _startBreathing,
-                child: AnimatedBuilder(
-                  animation: Listenable.merge([_breathAnimation, _pulseAnimation]),
-                  builder: (context, child) {
-                    final size = 200.0 * (1.0 + _breathAnimation.value * 0.5) * _pulseAnimation.value;
-                    return Container(
-                      width: size,
-                      height: size,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: _getBreathColor().withOpacity(0.3),
-                        border: Border.all(
-                          color: _getBreathColor(),
-                          width: 3,
-                        ),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.air,
-                          size: size * 0.3,
-                          color: _getBreathColor(),
-                        ),
-                      ),
+                child: ValueListenableBuilder<Phase>(
+                  valueListenable: _breathEngine.phase,
+                  builder: (context, phase, child) {
+                    return ValueListenableBuilder<double>(
+                      valueListenable: _breathEngine.stepProgress,
+                      builder: (context, progress, child) {
+                        return AnimatedBreathCircle(
+                          progress: progress,
+                          phase: phase,
+                          dimUi: _selectedPreset.dimUi,
+                        );
+                      },
                     );
                   },
                 ),
