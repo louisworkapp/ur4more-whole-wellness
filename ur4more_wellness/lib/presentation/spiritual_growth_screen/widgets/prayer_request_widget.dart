@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/app_export.dart';
 import '../../../design/tokens.dart';
+import '../../../widgets/universal_speech_text_field.dart';
 
 class PrayerRequestWidget extends StatefulWidget {
   final Function(String)? onSubmit;
@@ -128,10 +129,10 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
                 width: _focusNode.hasFocus ? 2 : 1,
               ),
             ),
-            child: TextField(
+            child: UniversalSpeechTextField(
               controller: _prayerController,
-              focusNode: _focusNode,
               maxLines: 4,
+              showSpeechButton: true,
               decoration: InputDecoration(
                 hintText: "Share your prayer request or thanksgiving...",
                 hintStyle: theme.textTheme.bodyMedium?.copyWith(
@@ -139,10 +140,6 @@ class _PrayerRequestWidgetState extends State<PrayerRequestWidget> {
                 ),
                 border: InputBorder.none,
                 contentPadding: Pad.card,
-              ),
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurface,
-                height: 1.4,
               ),
               onChanged: (value) => setState(() {}),
             ),

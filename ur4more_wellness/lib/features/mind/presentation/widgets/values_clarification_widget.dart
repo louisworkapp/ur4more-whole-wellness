@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../data/values_clarification_content.dart';
 import '../../../../design/tokens.dart';
+import '../../../../widgets/universal_speech_text_field.dart';
 
 class ValuesClarificationWidget extends StatefulWidget {
   final bool isFaithMode;
@@ -429,9 +430,10 @@ class _ValuesClarificationWidgetState extends State<ValuesClarificationWidget> {
           ),
         ),
         SizedBox(height: AppSpace.x2),
-        TextField(
+        UniversalSpeechTextField(
           controller: _coreValuesController,
           maxLines: 2,
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'Add any other values that are important to you...',
             border: OutlineInputBorder(),
@@ -452,9 +454,10 @@ class _ValuesClarificationWidgetState extends State<ValuesClarificationWidget> {
           ),
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _valuesInActionController,
           maxLines: 6,
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'Describe activities, situations, or moments when you feel most authentic and fulfilled...',
             border: OutlineInputBorder(),
@@ -475,9 +478,10 @@ class _ValuesClarificationWidgetState extends State<ValuesClarificationWidget> {
           ),
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _decisionMakingController,
           maxLines: 6,
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'Think of a recent decision. How did your values influence your choice?',
             border: OutlineInputBorder(),
@@ -498,9 +502,10 @@ class _ValuesClarificationWidgetState extends State<ValuesClarificationWidget> {
           ),
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _conflictingValuesController,
           maxLines: 6,
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'Describe a time when you had to choose between competing values...',
             border: OutlineInputBorder(),
@@ -521,9 +526,10 @@ class _ValuesClarificationWidgetState extends State<ValuesClarificationWidget> {
           ),
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _legacyController,
           maxLines: 4,
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'How do you want to be remembered? What impact do you want to have?',
             border: OutlineInputBorder(),
@@ -565,8 +571,10 @@ class _ValuesClarificationWidgetState extends State<ValuesClarificationWidget> {
                   ),
                 ),
                 SizedBox(height: AppSpace.x2),
-                TextField(
+                UniversalSpeechTextField(
+                  controller: TextEditingController(),
                   maxLines: 3,
+                  showSpeechButton: true,
                   decoration: const InputDecoration(
                     hintText: 'How does your relationship with God influence your purpose and legacy?',
                     border: OutlineInputBorder(),
@@ -650,9 +658,10 @@ class _ValuesClarificationWidgetState extends State<ValuesClarificationWidget> {
                   ),
                 ),
                 SizedBox(height: AppSpace.x2),
-                TextField(
+                UniversalSpeechTextField(
                   controller: _notesController,
                   maxLines: 3,
+                  showSpeechButton: true,
                   decoration: const InputDecoration(
                     hintText: 'Any additional insights about your values...',
                     border: OutlineInputBorder(),

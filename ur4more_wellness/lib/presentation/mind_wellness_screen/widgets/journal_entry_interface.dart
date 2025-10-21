@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/app_export.dart';
 import '../../../design/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
+import '../../../widgets/universal_speech_text_field.dart';
 
 class JournalEntryInterface extends StatefulWidget {
   final Function(String) onEntryChanged;
@@ -109,32 +110,30 @@ class _JournalEntryInterfaceState extends State<JournalEntryInterface> {
                   minHeight: _isExpanded ? 200 : 120,
                   maxHeight: _isExpanded ? 300 : 120,
                 ),
-                child: TextField(
+                child: UniversalSpeechTextField(
                   controller: _textController,
-                  focusNode: _focusNode,
+                  hintText: 'Share your thoughts, feelings, and reflections...',
                   maxLines: null,
                   maxLength: _maxCharacters,
-                  textInputAction: TextInputAction.newline,
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurface,
-                    height: 1.5,
-                  ),
+                  onChanged: (text) {
+                    widget.onEntryChanged(text);
+                  },
+                  showSpeechButton: true,
+                  textCapitalization: TextCapitalization.sentences,
                   decoration: InputDecoration(
-                    hintText:
-                        'Share your thoughts, feelings, and reflections...',
                     hintStyle: theme.textTheme.bodyMedium?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
-                        color: colorScheme.outline.withOpacity( 0.3),
+                        color: colorScheme.outline.withOpacity(0.3),
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
                       borderSide: BorderSide(
-                        color: colorScheme.outline.withOpacity( 0.3),
+                        color: colorScheme.outline.withOpacity(0.3),
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(

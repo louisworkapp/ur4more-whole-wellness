@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design/tokens.dart';
 import '../../../../services/faith_service.dart';
+import '../../../../widgets/universal_speech_text_field.dart';
 
 class ImplementationIntentionScreen extends StatefulWidget {
   final FaithMode faithMode;
@@ -102,9 +103,10 @@ class _ImplementationIntentionScreenState extends State<ImplementationIntentionS
                         ),
                       ),
                       SizedBox(height: AppSpace.x2),
-                      TextField(
+                      UniversalSpeechTextField(
                         controller: _situationController,
                         maxLines: 3,
+                        showSpeechButton: true,
                         decoration: const InputDecoration(
                           hintText: 'Describe the challenging situation...',
                           border: OutlineInputBorder(),
@@ -120,9 +122,10 @@ class _ImplementationIntentionScreenState extends State<ImplementationIntentionS
                         ),
                       ),
                       SizedBox(height: AppSpace.x2),
-                      TextField(
+                      UniversalSpeechTextField(
                         controller: _responseController,
                         maxLines: 3,
+                        showSpeechButton: true,
                         decoration: const InputDecoration(
                           hintText: 'What will you do when this happens?',
                           border: OutlineInputBorder(),
@@ -166,9 +169,10 @@ class _ImplementationIntentionScreenState extends State<ImplementationIntentionS
                                 ),
                               ),
                               SizedBox(height: AppSpace.x2),
-                              TextField(
+                              UniversalSpeechTextField(
                                 controller: _faithResponseController,
                                 maxLines: 3,
+                                showSpeechButton: true,
                                 decoration: const InputDecoration(
                                   hintText: 'What would God want you to do in this situation?',
                                   border: OutlineInputBorder(),
@@ -187,9 +191,10 @@ class _ImplementationIntentionScreenState extends State<ImplementationIntentionS
                         ),
                       ),
                       SizedBox(height: AppSpace.x2),
-                      TextField(
+                      UniversalSpeechTextField(
                         controller: _notesController,
                         maxLines: 3,
+                        showSpeechButton: true,
                         decoration: const InputDecoration(
                           hintText: 'Any additional thoughts or strategies...',
                           border: OutlineInputBorder(),

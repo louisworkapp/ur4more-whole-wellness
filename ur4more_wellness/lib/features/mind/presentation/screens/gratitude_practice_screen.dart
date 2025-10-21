@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design/tokens.dart';
 import '../../../../services/faith_service.dart';
+import '../../../../widgets/universal_speech_text_field.dart';
 
 class GratitudePracticeScreen extends StatefulWidget {
   final FaithMode faithMode;
@@ -126,9 +127,10 @@ class _GratitudePracticeScreenState extends State<GratitudePracticeScreen> {
                               ],
                             ),
                             SizedBox(height: AppSpace.x2),
-                            TextField(
+                            UniversalSpeechTextField(
                               controller: _gratitude1Controller,
                               maxLines: 2,
+                              showSpeechButton: true,
                               decoration: const InputDecoration(
                                 hintText: 'What are you grateful for today?',
                                 border: OutlineInputBorder(),
@@ -171,9 +173,10 @@ class _GratitudePracticeScreenState extends State<GratitudePracticeScreen> {
                               ],
                             ),
                             SizedBox(height: AppSpace.x2),
-                            TextField(
+                            UniversalSpeechTextField(
                               controller: _gratitude2Controller,
                               maxLines: 2,
+                              showSpeechButton: true,
                               decoration: const InputDecoration(
                                 hintText: 'What else brings you joy?',
                                 border: OutlineInputBorder(),
@@ -216,9 +219,10 @@ class _GratitudePracticeScreenState extends State<GratitudePracticeScreen> {
                               ],
                             ),
                             SizedBox(height: AppSpace.x2),
-                            TextField(
+                            UniversalSpeechTextField(
                               controller: _gratitude3Controller,
                               maxLines: 2,
+                              showSpeechButton: true,
                               decoration: const InputDecoration(
                                 hintText: 'What makes you feel blessed?',
                                 border: OutlineInputBorder(),
@@ -265,10 +269,11 @@ class _GratitudePracticeScreenState extends State<GratitudePracticeScreen> {
                                 ),
                               ),
                               SizedBox(height: AppSpace.x2),
-                              TextField(
+                              UniversalSpeechTextField(
                                 controller: _faithGratitudeController,
-                                maxLines: 3,
-                                decoration: const InputDecoration(
+                              maxLines: 3,
+                              showSpeechButton: true,
+                              decoration: const InputDecoration(
                                   hintText: 'How has God blessed you today?',
                                   border: OutlineInputBorder(),
                                 ),
@@ -286,10 +291,11 @@ class _GratitudePracticeScreenState extends State<GratitudePracticeScreen> {
                         ),
                       ),
                       SizedBox(height: AppSpace.x2),
-                      TextField(
+                      UniversalSpeechTextField(
                         controller: _notesController,
-                        maxLines: 3,
-                        decoration: const InputDecoration(
+                              maxLines: 3,
+                              showSpeechButton: true,
+                              decoration: const InputDecoration(
                           hintText: 'How does practicing gratitude make you feel?',
                           border: OutlineInputBorder(),
                         ),
