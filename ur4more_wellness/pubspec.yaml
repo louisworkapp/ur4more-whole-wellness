@@ -57,6 +57,7 @@ flutter:
     - assets/mind/scripture_sets/
     - assets/mind/lessons/
     - assets/mind/quotes/
+    - assets/mind/exercises/
     - assets/core/
     - assets/quotes/manifest.json
     - assets\quotes\shards\quotes_000.json
