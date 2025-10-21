@@ -446,45 +446,91 @@ class _BreathSessionScreenState extends State<BreathSessionScreen>
   }
 
   Widget _buildTimerDisplay(ThemeData theme, ColorScheme colorScheme) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
       children: [
-        // Step timer
-        ValueListenableBuilder<int>(
-          valueListenable: _engine.stepRemaining,
-          builder: (context, stepRemaining, child) {
-            return _TimerPill(
-              label: 'Step',
-              value: _formatTime(stepRemaining),
-            );
-          },
-        ),
-        
-        // Phase label
+        // Phase countdown and label
         ValueListenableBuilder<Phase>(
           valueListenable: _engine.phase,
           builder: (context, phase, child) {
-            return Text(
-              _engine.phaseLabel,
-              style: theme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
+            return ValueListenableBuilder<int>(
+              valueListenable: _engine.stepRemaining,
+              builder: (context, stepRemaining, child) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  decoration: BoxDecoration(
+                    color: _getPhaseColor(phase).withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: _getPhaseColor(phase).withOpacity(0.3),
+                      width: 2,
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      // Large countdown number
+                      Text(
+                        stepRemaining.toString(),
+                        style: theme.textTheme.displayMedium?.copyWith(
+                          fontWeight: FontWeight.w800,
+                          color: _getPhaseColor(phase),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      // Phase label
+                      Text(
+                        _engine.phaseLabel,
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: _getPhaseColor(phase),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
             );
           },
         ),
         
-        // Total timer
-        ValueListenableBuilder<int>(
-          valueListenable: _engine.totalRemaining,
-          builder: (context, totalRemaining, child) {
-            return _TimerPill(
-              label: 'Total',
-              value: _formatTime(totalRemaining),
-            );
-          },
+        const SizedBox(height: 16),
+        
+        // Total timer and pattern info
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // Total timer
+            ValueListenableBuilder<int>(
+              valueListenable: _engine.totalRemaining,
+              builder: (context, totalRemaining, child) {
+                return _TimerPill(
+                  label: 'Total',
+                  value: _formatTime(totalRemaining),
+                );
+              },
+            ),
+            
+            // Pattern info
+            _TimerPill(
+              label: 'Pattern',
+              value: _getPatternText(_preset.config),
+            ),
+          ],
         ),
       ],
     );
+  }
+  
+  Color _getPhaseColor(Phase phase) {
+    switch (phase) {
+      case Phase.inhale:
+        return Colors.blue.shade400;
+      case Phase.hold1:
+        return Colors.blue.shade600;
+      case Phase.exhale:
+        return Colors.blue.shade300;
+      case Phase.hold2:
+        return Colors.blue.shade200;
+    }
   }
 
   Widget _buildControls(ThemeData theme, ColorScheme colorScheme) {

@@ -112,7 +112,55 @@ class Presets {
     dimUi: true,
   );
 
-  static const all = [quickCalm, hrv, focus, sleep];
+  /// 4-7-8 Breathing - Deep Focus & Stress Relief
+  /// Research-backed pattern for deep focus and stress relief
+  static const fourSevenEight = BreathPreset(
+    id: 'four_seven_eight',
+    name: '4-7-8 Breathing',
+    subtitle: 'Deep focus & stress relief • 3 min',
+    config: BreathEngineConfig(
+      inhale: 4,
+      hold1: 7,
+      exhale: 8,
+      hold2: 0,
+      totalSeconds: 180,
+      exhaleWeighted: true,
+    ),
+  );
+
+  /// Coherent Breathing - Heart Coherence & Performance
+  /// 5-5 breathing for optimal heart rate variability
+  static const coherent = BreathPreset(
+    id: 'coherent',
+    name: 'Coherent Breathing',
+    subtitle: 'Heart coherence & performance • 5 min',
+    config: BreathEngineConfig(
+      inhale: 5,
+      hold1: 0,
+      exhale: 5,
+      hold2: 0,
+      totalSeconds: 300,
+      exhaleWeighted: false,
+    ),
+  );
+
+  /// Extended Box - Deep Relaxation & Focus
+  /// 5-5-5-5 pattern for deeper relaxation
+  static const extendedBox = BreathPreset(
+    id: 'extended_box',
+    name: 'Extended Box',
+    subtitle: 'Deep relaxation & focus • 4 min',
+    config: BreathEngineConfig(
+      inhale: 5,
+      hold1: 5,
+      exhale: 5,
+      hold2: 5,
+      totalSeconds: 240,
+      exhaleWeighted: false,
+    ),
+  );
+
+  static const all = [quickCalm, hrv, focus, sleep, fourSevenEight, coherent, extendedBox];
 
   /// Get preset by ID, fallback to focus if not found
   static BreathPreset byId(String id) {
