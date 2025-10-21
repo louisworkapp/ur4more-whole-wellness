@@ -33,6 +33,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
   // Data storage - Updated structure based on requirements
   int _rpeValue = 5; // Changed to integer as per requirements
   double _painLevel = 0.0; // Simplified to single pain slider
+  List<String> _selectedPainRegions = []; // Selected pain regions
   double _urgeLevel = 0.0; // Single urge/craving slider (0-10)
   List<String> _selectedCopingMechanisms = [];
   String _journalText = '';
@@ -340,9 +341,15 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                       subtitle: _sectionLabels[1],
                       child: PainLevelWidget(
                         painLevel: _painLevel,
+                        selectedRegions: _selectedPainRegions,
                         onChanged: (level) {
                           setState(() {
                             _painLevel = level;
+                          });
+                        },
+                        onRegionsChanged: (regions) {
+                          setState(() {
+                            _selectedPainRegions = regions;
                           });
                         },
                       ),
@@ -563,7 +570,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                             style: GoogleFonts.inter(
                               fontSize: 12,
                               fontWeight: FontWeight.w400,
-                              color: Colors.black54,
+                              color: Colors.black87,
                             ),
                           ),
                         ],
@@ -574,6 +581,20 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
               ),
             ),
             SizedBox(height: AppSpace.x2),
+            
+            // Subtitle
+            Padding(
+              padding: Pad.card,
+              child: Text(
+                subtitle,
+                style: GoogleFonts.inter(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+            
             // The child (CopingMechanismsWidget) already contains CustomScrollView
             Expanded(child: child),
           ],

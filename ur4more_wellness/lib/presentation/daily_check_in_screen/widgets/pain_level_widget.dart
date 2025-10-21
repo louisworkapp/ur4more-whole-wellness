@@ -6,12 +6,16 @@ import '../../../widgets/custom_icon_widget.dart';
 
 class PainLevelWidget extends StatefulWidget {
   final double painLevel; // Single pain level (0-10)
+  final List<String> selectedRegions; // Selected pain regions
   final ValueChanged<double> onChanged;
+  final ValueChanged<List<String>>? onRegionsChanged;
 
   const PainLevelWidget({
     super.key,
     required this.painLevel,
     required this.onChanged,
+    this.selectedRegions = const [],
+    this.onRegionsChanged,
   });
 
   @override
@@ -20,6 +24,32 @@ class PainLevelWidget extends StatefulWidget {
 
 class _PainLevelWidgetState extends State<PainLevelWidget> {
   bool _showDetailedView = true;
+  List<String> _selectedRegions = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedRegions = List.from(widget.selectedRegions);
+  }
+
+  @override
+  void didUpdateWidget(PainLevelWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedRegions != widget.selectedRegions) {
+      _selectedRegions = List.from(widget.selectedRegions);
+    }
+  }
+
+  void _toggleRegion(String region) {
+    setState(() {
+      if (_selectedRegions.contains(region)) {
+        _selectedRegions.remove(region);
+      } else {
+        _selectedRegions.add(region);
+      }
+    });
+    widget.onRegionsChanged?.call(_selectedRegions);
+  }
 
   String _getPainDescription(double value) {
     if (value == 0) return "No pain";
@@ -256,30 +286,44 @@ class _PainLevelWidgetState extends State<PainLevelWidget> {
 
   Widget _buildRegionChip(String region, String iconName) {
     final theme = Theme.of(context);
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: theme.colorScheme.outline.withOpacity( 0.3),
+    final isSelected = _selectedRegions.contains(region);
+    
+    return GestureDetector(
+      onTap: () => _toggleRegion(region),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
+        decoration: BoxDecoration(
+          color: isSelected 
+              ? theme.colorScheme.primaryContainer
+              : theme.colorScheme.surface,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: isSelected 
+                ? theme.colorScheme.primary
+                : theme.colorScheme.outline.withOpacity(0.3),
+          ),
         ),
-      ),
-      child: Row(
-        children: [
-          CustomIconWidget(
-            iconName: iconName,
-            color: theme.colorScheme.onSurface,
-            size: 18,
-          ),
-          SizedBox(width: AppSpace.x2),
-          Text(
-            region,
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.onSurface,
+        child: Row(
+          children: [
+            CustomIconWidget(
+              iconName: iconName,
+              color: isSelected 
+                  ? theme.colorScheme.onPrimaryContainer
+                  : theme.colorScheme.onSurface,
+              size: 18,
             ),
-          ),
-        ],
+            SizedBox(width: AppSpace.x2),
+            Text(
+              region,
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: isSelected 
+                    ? theme.colorScheme.onPrimaryContainer
+                    : theme.colorScheme.onSurface,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
