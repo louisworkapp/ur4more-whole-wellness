@@ -123,8 +123,8 @@ class MindCoachRepository {
   }
 
   /// Get exercises for faith mode
-  static List<Exercise> getExercises(FaithMode mode) {
-    return MindExercisesService.mindExercises(mode);
+  static Future<List<Exercise>> getExercises(FaithMode mode) async {
+    return await MindExercisesService.mindExercises(mode);
   }
 
   /// Get courses for faith mode

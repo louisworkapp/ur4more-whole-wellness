@@ -18,6 +18,8 @@ import '../screens/implementation_intention_screen.dart';
 import '../screens/mindful_observation_screen.dart';
 import '../screens/gratitude_practice_screen.dart';
 import '../../../../routes/app_routes.dart';
+import '../../exercises/exercise_runner_screen.dart';
+import '../../exercises/exercise_registry.dart';
 
 class MindExercisesTab extends StatefulWidget {
   final FaithMode faithMode;
@@ -53,7 +55,9 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
   void _loadExercises() async {
     setState(() => _isLoading = true);
     
-    final exercises = MindCoachRepository.getExercises(widget.faithMode);
+    print('DEBUG: Loading exercises for faith mode: ${widget.faithMode}');
+    final exercises = await MindCoachRepository.getExercises(widget.faithMode);
+    print('DEBUG: Loaded ${exercises.length} exercises: ${exercises.map((e) => e.id).toList()}');
     
     // Add faith exercises if faith mode is activated
     if (widget.faithMode.isActivated) {
@@ -526,6 +530,14 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
 
   void _startExercise(Exercise exercise) {
     print('DEBUG: Starting exercise with ID: ${exercise.id}');
+    
+    // Check if this is one of our new evidence-based exercises
+    final newExerciseIds = ['urge_surfing', 'worry_postpone', 'grounding_54321', 'pmr_short', 'defusion_label', 'tiny_wins'];
+    if (newExerciseIds.contains(exercise.id)) {
+      _startNewExercise(exercise);
+      return;
+    }
+    
     // Special handling for exercises with full screens
     switch (exercise.id) {
       case 'thought_record':
@@ -589,6 +601,38 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
         faithMode: widget.faithMode,
       ),
     );
+  }
+
+  void _startNewExercise(Exercise exercise) async {
+    try {
+      // Load the new exercise from registry
+      final newExercise = await ExerciseRegistry.byId(exercise.id);
+      
+      // Navigate to the new exercise runner
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ExerciseRunnerScreen(exercise: newExercise),
+        ),
+      );
+    } catch (e) {
+      // If loading fails, show error and fall back to dialog
+      print('Error loading new exercise: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error loading exercise. Please try again.'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      
+      // Fall back to dialog
+      showDialog(
+        context: context,
+        builder: (context) => _ExerciseDialog(
+          exercise: exercise,
+          faithMode: widget.faithMode,
+        ),
+      );
+    }
   }
 }
 

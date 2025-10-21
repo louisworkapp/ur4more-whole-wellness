@@ -1,11 +1,13 @@
 import '../models/mind_coach_copy.dart';
 import '../../../services/faith_service.dart';
+import '../exercises/exercise_registry.dart';
+import '../exercises/exercise_model.dart' as new_exercises;
 
 /// Service for managing Mind Coach exercises
 class MindExercisesService {
   /// Get all available exercises for a given faith mode
-  static List<Exercise> mindExercises(FaithMode mode) {
-    return [
+  static Future<List<Exercise>> mindExercises(FaithMode mode) async {
+    final exercises = <Exercise>[
       Exercise(
         id: "thought_record",
         title: "Thought Record",
@@ -61,28 +63,104 @@ class MindExercisesService {
         tags: ["gratitude", "positivity", "wellbeing"],
       ),
     ];
+    
+    // Add new evidence-based exercises
+    exercises.addAll(await _getNewExercises(mode));
+    
+    return exercises;
+  }
+
+  /// Get new evidence-based exercises from registry
+  static Future<List<Exercise>> _getNewExercises(FaithMode mode) async {
+    try {
+      print('DEBUG: Loading new exercises from registry...');
+      final newExercises = await ExerciseRegistry.list();
+      print('DEBUG: Loaded ${newExercises.length} new exercises: ${newExercises.map((e) => e.id).toList()}');
+      final converted = newExercises.map((ne) => _convertNewExercise(ne, mode)).toList();
+      print('DEBUG: Converted ${converted.length} exercises');
+      return converted;
+    } catch (e) {
+      // If loading fails, return empty list
+      print('DEBUG: Error loading new exercises: $e');
+      return [];
+    }
+  }
+
+  /// Convert new exercise model to existing exercise model
+  static Exercise _convertNewExercise(new_exercises.Exercise ne, FaithMode mode) {
+    String? descriptionFaith;
+    if (mode.isActivated) {
+      // Get appropriate overlay based on faith mode
+      final overlay = mode == FaithMode.disciple 
+          ? ne.overlays.disciple 
+          : mode == FaithMode.kingdom 
+              ? ne.overlays.kingdom 
+              : ne.overlays.light;
+      
+      if (overlay.prompt != null || overlay.verseKJV.isNotEmpty) {
+        final parts = <String>[];
+        if (overlay.prompt != null) parts.add(overlay.prompt!);
+        if (overlay.verseKJV.isNotEmpty) {
+          final verse = overlay.verseKJV.first;
+          parts.add('"${verse['text']}" — ${verse['ref']} (KJV)');
+        }
+        descriptionFaith = parts.join(' ');
+      }
+    }
+
+    return Exercise(
+      id: ne.id,
+      title: ne.title,
+      descriptionOff: ne.summary,
+      descriptionFaith: descriptionFaith,
+      icon: _getIconForExercise(ne.id),
+      estimatedMinutes: ne.durationMinutes,
+      tags: ne.tags,
+    );
+  }
+
+  /// Get appropriate icon for exercise ID
+  static String _getIconForExercise(String id) {
+    switch (id) {
+      case 'urge_surfing':
+        return 'psychology';
+      case 'worry_postpone':
+        return 'event_note';
+      case 'grounding_54321':
+        return 'visibility';
+      case 'pmr_short':
+        return 'air';
+      case 'defusion_label':
+        return 'psychology';
+      case 'tiny_wins':
+        return 'sentiment_satisfied';
+      default:
+        return 'psychology';
+    }
   }
 
   /// Get exercises filtered by tags
-  static List<Exercise> getExercisesByTags(FaithMode mode, List<String> tags) {
-    return mindExercises(mode).where((exercise) {
+  static Future<List<Exercise>> getExercisesByTags(FaithMode mode, List<String> tags) async {
+    final exercises = await mindExercises(mode);
+    return exercises.where((exercise) {
       return tags.any((tag) => exercise.tags.contains(tag));
     }).toList();
   }
 
   /// Get quick exercises (under 10 minutes)
-  static List<Exercise> getQuickExercises(FaithMode mode) {
-    return mindExercises(mode).where((exercise) {
+  static Future<List<Exercise>> getQuickExercises(FaithMode mode) async {
+    final exercises = await mindExercises(mode);
+    return exercises.where((exercise) {
       return exercise.estimatedMinutes < 10;
     }).toList();
   }
 
   /// Get exercises for high urge situations
-  static List<Exercise> getUrgeExercises(FaithMode mode) {
+  static Future<List<Exercise>> getUrgeExercises(FaithMode mode) async {
     if (mode.isOff) {
-      return getExercisesByTags(mode, ["breathing", "grounding", "calm"]);
+      return await getExercisesByTags(mode, ["breathing", "grounding", "calm"]);
     } else {
-      return getExercisesByTags(mode, ["breathing", "grounding", "calm", "faith"]);
+      return await getExercisesByTags(mode, ["breathing", "grounding", "calm", "faith"]);
     }
   }
 }

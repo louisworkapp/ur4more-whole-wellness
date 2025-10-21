@@ -1,0 +1,36 @@
+{
+  "id": "grounding_54321",
+  "title": "5–4–3–2–1 Grounding",
+  "summary": "Settle the nervous system with a sensory scan.",
+  "duration_minutes": 3,
+  "tags": ["panic","stress","grounding"],
+  "safety_notes": [
+    "If dizziness or panic escalates, slow down and focus on one sense (touch) with steady nasal breathing."
+  ],
+  "offCopy": {
+    "intro": "We'll anchor attention to the senses to reduce stress.",
+    "steps": [
+      {"label":"See (5)","body":"Name five things you can see."},
+      {"label":"Touch (4)","body":"Notice four things you can feel against your skin."},
+      {"label":"Hear (3)","body":"Identify three sounds, near or far."},
+      {"label":"Smell (2)","body":"Name two scents (or neutral smells)."},
+      {"label":"Taste (1)","body":"Notice one taste, even if faint; sip water if needed."}
+    ],
+    "completion": "You're back in the present. Continue with slow, comfortable nasal breaths."
+  },
+  "activatedOverlays": {
+    "light": {
+      "verseKJV": [{"ref":"Isaiah 41:10","text":"Fear thou not; for I am with thee..."}],
+      "prompt": "Quietly acknowledge God's nearness as you sense the world."
+    },
+    "disciple": {
+      "verseKJV": [{"ref":"Psalm 46:10","text":"Be still, and know that I am God..."}],
+      "identity": "You dwell in His presence; your senses are gifts to ground you."
+    },
+    "kingdom": {
+      "verseKJV": [{"ref":"Psalm 23:4","text":"Yea, though I walk through the valley... thou art with me;"}],
+      "commission": "Receive His peace so you can bring peace to others."
+    }
+  },
+  "xp": 15
+}
