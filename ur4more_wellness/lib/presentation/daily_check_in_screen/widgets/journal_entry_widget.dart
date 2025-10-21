@@ -6,6 +6,8 @@ import '../../../core/app_export.dart';
 import '../../../design/tokens.dart';
 import '../../../services/faith_service.dart';
 import '../../../widgets/universal_speech_text_field.dart';
+import '../../../services/safety_monitor_service.dart';
+import 'safety_alert_widget.dart';
 
 class JournalEntryWidget extends StatefulWidget {
   final String journalText;
@@ -36,6 +38,8 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
   final ImagePicker _imagePicker = ImagePicker();
   int _faithXpEarned = 0;
   bool _faithPromptUsedToday = false;
+  SafetyAnalysisResult? _safetyAnalysis;
+  bool _showSafetyAlert = false;
 
   final List<Map<String, dynamic>> _moods = [
     {'name': 'Grateful', 'icon': 'favorite', 'color': Colors.pink},
@@ -54,6 +58,21 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
     _textController.text = widget.journalText;
     _textController.addListener(() {
       widget.onTextChanged(_textController.text);
+    });
+  }
+
+  void _analyzeSafety(String text) {
+    final analysis = SafetyMonitorService.analyzeText(text);
+    
+    setState(() {
+      _safetyAnalysis = analysis;
+      _showSafetyAlert = analysis.hasConcerns;
+    });
+  }
+
+  void _dismissSafetyAlert() {
+    setState(() {
+      _showSafetyAlert = false;
     });
   }
 
@@ -218,6 +237,16 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
                   ),
                 ],
               ),
+            ),
+            SizedBox(height: AppSpace.x3),
+          ],
+
+          // Safety Alert (if needed)
+          if (_showSafetyAlert && _safetyAnalysis != null) ...[
+            SafetyAlertWidget(
+              analysisResult: _safetyAnalysis!,
+              onDismiss: _dismissSafetyAlert,
+              faithMode: widget.faithMode,
             ),
             SizedBox(height: AppSpace.x3),
           ],
@@ -428,7 +457,10 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
             controller: _textController,
             maxLines: 6,
             maxLength: 500,
-            onChanged: (text) => widget.onTextChanged(text),
+            onChanged: (text) {
+              widget.onTextChanged(text);
+              _analyzeSafety(text);
+            },
             showSpeechButton: true,
             textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration(

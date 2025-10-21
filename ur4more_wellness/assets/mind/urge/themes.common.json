@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "themes": {
+    "substance_use": {
+      "label": "Substance Use",
+      "icon": "local_drink",
+      "passages": [],
+      "actions": {
+        "low":  ["delay_10","remove_cue","water_first"],
+        "mid":  ["quick_calm_2","urge_surf_2","if_then_plan"],
+        "high": ["quick_calm_2","urge_surf_2","help_rail"]
+      },
+      "prompts": {
+        "secular": [
+          "What trigger is present (place, time, person)?",
+          "What helped last time at this intensity?"
+        ],
+        "faith": [
+          "What 'way of escape' can I take right now?",
+          "Pray for strength, then choose one safe step."
+        ]
+      }
+    },
+    "food": {
+      "label": "Food/Cravings",
+      "icon": "restaurant",
+      "passages": [],
+      "actions": {
+        "low":  ["water_first","plate_plan","mindful_3_bite"],
+        "mid":  ["quick_calm_1","protein_swap","delay_10","brush_teeth"],
+        "high": ["quick_calm_2","urge_surf_2","remove_cue","text_support_optional"]
+      },
+      "prompts": {
+        "secular": [
+          "What emotion am I soothing with food?",
+          "If I stop at satisfied, what improves tomorrow?"
+        ],
+        "faith": [
+          "How can I honor God with this choice?",
+          "Pray for temperance, then plate a portion."
+        ]
+      }
+    },
+    "shopping": {
+      "label": "Shopping/Spending",
+      "icon": "shopping_cart",
+      "passages": [],
+      "actions": {
+        "low":  ["delay_10","remove_cue","environment_exit"],
+        "mid":  ["quick_calm_1","if_then_plan","notif_off"],
+        "high": ["quick_calm_2","urge_surf_2","text_support_optional"]
+      },
+      "prompts": {
+        "secular": [
+          "Will this still matter in 7 days?",
+          "What budget or cap aligns with my goals?"
+        ],
+        "faith": [
+          "Could generosity replace this purchase today?",
+          "Pray, then decide tomorrow."
+        ]
+      }
+    },
+    "social_media": {
+      "label": "Social Media",
+      "icon": "share",
+      "passages": [],
+      "actions": {
+        "low":  ["post_and_close","lockout_15","grayscale","walk_2min"],
+        "mid":  ["quick_calm_2","delay_10","move_apps_off_home","notif_off"],
+        "high": ["quick_calm_2","urge_surf_2","remove_cue","text_support_optional"]
+      },
+      "prompts": {
+        "secular": [
+          "What feeling am I seeking by scrolling?",
+          "What offline action gives that feeling better?"
+        ],
+        "faith": [
+          "How can I steward my attention to the Lord?",
+          "Pray, then choose one offline good work."
+        ]
+      }
+    },
+    "gaming": {
+      "label": "Gaming/Entertainment",
+      "icon": "sports_esports",
+      "passages": [],
+      "actions": {
+        "low":  ["stop_at_checkpoint","timer_25","walk_2min"],
+        "mid":  ["quick_calm_2","delay_10","notif_off"],
+        "high": ["quick_calm_2","urge_surf_2","remove_cue","environment_exit"]
+      },
+      "prompts": {
+        "secular": [
+          "What do I want from this session (fun, rest, social)?",
+          "What's a healthy stop time?"
+        ],
+        "faith": [
+          "How do I redeem the time today?",
+          "Offer leisure to God; set one boundary."
+        ]
+      }
+    },
+    "work": {
+      "label": "Work/Productivity",
+      "icon": "work",
+      "passages": [],
+      "actions": {
+        "low":  ["two_min_start","woop_micro","timer_25"],
+        "mid":  ["quick_calm_1","if_then_plan","shutdown_ritual"],
+        "high": ["quick_calm_2","walk_2min","environment_exit"]
+      },
+      "prompts": {
+        "secular": [
+          "What is the tiniest first step?",
+          "What block is really in the way?"
+        ],
+        "faith": [
+          "How can this task be worship?",
+          "Pray, then do the smallest faithful step."
+        ]
+      }
+    },
+    "relationships": {
+      "label": "Relationships",
+      "icon": "people",
+      "passages": [],
+      "actions": {
+        "low":  ["i_statement_draft","soft_answer","walk_break"],
+        "mid":  ["quick_calm_2","delay_10","text_support_optional"],
+        "high": ["quick_calm_2","urge_surf_2","environment_exit"]
+      },
+      "prompts": {
+        "secular": [
+          "What do I actually need to say?",
+          "Is this urgent or can it wait 24 hours?"
+        ],
+        "faith": [
+          "How would a gentle answer sound?",
+          "Pray for a tender heart before you reply."
+        ]
+      }
+    },
+    "other": {
+      "label": "Other",
+      "icon": "more_horiz",
+      "passages": [],
+      "actions": {
+        "low":  ["name_rate_step","delay_10"],
+        "mid":  ["quick_calm_1","if_then_plan"],
+        "high": ["quick_calm_2","urge_surf_2","remove_cue"]
+      },
+      "prompts": {
+        "secular": [
+          "Name it in one sentence. What tiny step helps?",
+          "What trigger can I change right now?"
+        ],
+        "faith": [
+          "Ask God for wisdom about this urge.",
+          "Pray, then take one faithful step."
+        ]
+      }
+    }
+  }
+}

@@ -18,6 +18,7 @@ import './widgets/notification_section_widget.dart';
 import './widgets/privacy_section_widget.dart';
 import './widgets/profile_section_widget.dart';
 import './widgets/theme_section_widget.dart';
+import './widgets/safety_monitoring_section_widget.dart';
 
 class SettingsProfileScreen extends StatefulWidget {
   const SettingsProfileScreen({super.key});
@@ -133,6 +134,9 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
                 onViewPrivacyPolicy: _viewPrivacyPolicy,
                 onViewTerms: _viewTermsOfService,
               ),
+
+              // Safety Monitoring Section
+              const SafetyMonitoringSectionWidget(),
 
               // App Information Section
               AppInfoSectionWidget(

@@ -9,13 +9,17 @@ import 'micro_intervention_card.dart';
 class UrgeIntensityWidget extends StatefulWidget {
   final double urgeLevel; // Single urge level (0-10)
   final FaithMode faithMode;
+  final List<String> selectedUrgeTypes; // Selected urge/craving types
   final ValueChanged<double> onChanged;
+  final ValueChanged<List<String>>? onUrgeTypesChanged;
 
   const UrgeIntensityWidget({
     super.key,
     required this.urgeLevel,
     required this.faithMode,
     required this.onChanged,
+    this.selectedUrgeTypes = const [],
+    this.onUrgeTypesChanged,
   });
 
   @override
@@ -24,6 +28,27 @@ class UrgeIntensityWidget extends StatefulWidget {
 
 class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
   List<String> _selectedItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedItems = List.from(widget.selectedUrgeTypes);
+  }
+
+  @override
+  void didUpdateWidget(UrgeIntensityWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedUrgeTypes != widget.selectedUrgeTypes) {
+      _selectedItems = List.from(widget.selectedUrgeTypes);
+    }
+  }
+
+  void _updateSelectedItems(List<String> newItems) {
+    setState(() {
+      _selectedItems = newItems;
+    });
+    widget.onUrgeTypesChanged?.call(_selectedItems);
+  }
 
   String _getUrgeDescription(double value) {
     if (value == 0) return "No urges or cravings";
@@ -326,13 +351,13 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
     
     return GestureDetector(
       onTap: () {
-        setState(() {
-          if (isSelected) {
-            _selectedItems.remove(item['key']);
-          } else {
-            _selectedItems.add(item['key']);
-          }
-        });
+        final newItems = List<String>.from(_selectedItems);
+        if (isSelected) {
+          newItems.remove(item['key']);
+        } else {
+          newItems.add(item['key']);
+        }
+        _updateSelectedItems(newItems);
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
