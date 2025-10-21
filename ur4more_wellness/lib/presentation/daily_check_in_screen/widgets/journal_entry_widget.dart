@@ -5,6 +5,7 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../../core/app_export.dart';
 import '../../../design/tokens.dart';
 import '../../../services/faith_service.dart';
+import '../../../widgets/universal_speech_text_field.dart';
 
 class JournalEntryWidget extends StatefulWidget {
   final String journalText;
@@ -423,27 +424,30 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
           ),
           SizedBox(height: AppSpace.x1),
 
-          TextField(
+          UniversalSpeechTextField(
             controller: _textController,
             maxLines: 6,
             maxLength: 500,
+            onChanged: (text) => widget.onTextChanged(text),
+            showSpeechButton: true,
+            textCapitalization: TextCapitalization.sentences,
             decoration: InputDecoration(
               hintText:
                   'Share your thoughts, feelings, challenges, victories, or anything on your mind...',
               hintStyle: theme.textTheme.bodyMedium?.copyWith(
                 color:
-                    theme.colorScheme.onSurfaceVariant.withOpacity( 0.7),
+                    theme.colorScheme.onSurfaceVariant.withOpacity(0.7),
               ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(
-                  color: theme.colorScheme.outline.withOpacity( 0.3),
+                  color: theme.colorScheme.outline.withOpacity(0.3),
                 ),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
                 borderSide: BorderSide(
-                  color: theme.colorScheme.outline.withOpacity( 0.3),
+                  color: theme.colorScheme.outline.withOpacity(0.3),
                 ),
               ),
               focusedBorder: OutlineInputBorder(

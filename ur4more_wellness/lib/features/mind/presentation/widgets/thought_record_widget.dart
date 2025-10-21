@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../data/thought_record_content.dart';
 import '../../../../design/tokens.dart';
+import '../../../../widgets/universal_speech_text_field.dart';
 
 class ThoughtRecordWidget extends StatefulWidget {
   final bool isFaithMode;
@@ -423,9 +424,10 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
           ),
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _situationController,
           maxLines: 4,
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'What happened? Where were you? Who was there?',
             border: OutlineInputBorder(),
@@ -446,9 +448,10 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
           ),
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _thoughtController,
           maxLines: 4,
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'What went through your mind? What did you think?',
             border: OutlineInputBorder(),
@@ -469,9 +472,10 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
           ),
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _emotionController,
           maxLines: 2,
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'e.g., Anxious, Embarrassed, Frustrated',
             border: OutlineInputBorder(),
@@ -486,7 +490,9 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
         ),
         SizedBox(height: AppSpace.x2),
         // Simple emotion rating - could be expanded
-        TextField(
+        UniversalSpeechTextField(
+          controller: TextEditingController(),
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'e.g., Anxiety: 8/10, Embarrassment: 6/10',
             border: OutlineInputBorder(),
@@ -507,9 +513,10 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
           ),
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _evidenceForController,
           maxLines: 4,
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'What facts support your automatic thought?',
             border: OutlineInputBorder(),
@@ -530,9 +537,10 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
           ),
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _evidenceAgainstController,
           maxLines: 4,
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'What facts challenge your automatic thought?',
             border: OutlineInputBorder(),
@@ -554,9 +562,10 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
           ),
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _balancedThoughtController,
           maxLines: 4,
+          showSpeechButton: true,
           decoration: const InputDecoration(
             hintText: 'How would you think about this more realistically?',
             border: OutlineInputBorder(),
@@ -598,8 +607,10 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
                   ),
                 ),
                 SizedBox(height: AppSpace.x2),
-                TextField(
+                UniversalSpeechTextField(
+                  controller: TextEditingController(),
                   maxLines: 3,
+                  showSpeechButton: true,
                   decoration: const InputDecoration(
                     hintText: 'What would God say about this? How does your faith inform your thinking?',
                     border: OutlineInputBorder(),
@@ -644,9 +655,10 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
                   ),
                 ),
                 SizedBox(height: AppSpace.x2),
-                TextField(
+                UniversalSpeechTextField(
                   controller: _notesController,
                   maxLines: 3,
+                  showSpeechButton: true,
                   decoration: const InputDecoration(
                     hintText: 'Any additional insights or reflections...',
                     border: OutlineInputBorder(),
@@ -712,9 +724,10 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _rerateEmotionController,
           keyboardType: TextInputType.number,
+          showSpeechButton: true,
           decoration: InputDecoration(
             hintText: 'Rate 1-10',
             border: OutlineInputBorder(
@@ -744,9 +757,10 @@ class _ThoughtRecordWidgetState extends State<ThoughtRecordWidget> {
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         SizedBox(height: AppSpace.x3),
-        TextField(
+        UniversalSpeechTextField(
           controller: _goDeeperController,
           maxLines: 4,
+          showSpeechButton: true,
           decoration: InputDecoration(
             hintText: 'Reflect on your values and what matters most...',
             border: OutlineInputBorder(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import '../../../../design/tokens.dart';
 import '../../../../services/faith_service.dart';
+import '../../../../widgets/universal_speech_text_field.dart';
 
 class MindfulObservationScreen extends StatefulWidget {
   final FaithMode faithMode;
@@ -150,9 +151,10 @@ class _MindfulObservationScreenState extends State<MindfulObservationScreen> {
                         ),
                       ),
                       SizedBox(height: AppSpace.x2),
-                      TextField(
+                      UniversalSpeechTextField(
                         controller: _observationsController,
                         maxLines: 6,
+                        showSpeechButton: true,
                         decoration: const InputDecoration(
                           hintText: 'Describe what you observe: sights, sounds, sensations, thoughts...',
                           border: OutlineInputBorder(),
@@ -196,9 +198,10 @@ class _MindfulObservationScreenState extends State<MindfulObservationScreen> {
                                 ),
                               ),
                               SizedBox(height: AppSpace.x2),
-                              TextField(
+                              UniversalSpeechTextField(
                                 controller: _faithObservationsController,
                                 maxLines: 4,
+                                showSpeechButton: true,
                                 decoration: const InputDecoration(
                                   hintText: 'What do you notice about God\'s presence or creation?',
                                   border: OutlineInputBorder(),
@@ -217,9 +220,10 @@ class _MindfulObservationScreenState extends State<MindfulObservationScreen> {
                         ),
                       ),
                       SizedBox(height: AppSpace.x2),
-                      TextField(
+                      UniversalSpeechTextField(
                         controller: _notesController,
                         maxLines: 3,
+                        showSpeechButton: true,
                         decoration: const InputDecoration(
                           hintText: 'How do you feel after this practice?',
                           border: OutlineInputBorder(),

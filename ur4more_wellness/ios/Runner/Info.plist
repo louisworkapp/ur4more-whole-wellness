@@ -48,5 +48,9 @@
         <key>NSAllowsArbitraryLoads</key>
         <true />
     </dict>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app needs access to microphone for speech-to-text functionality in journaling and reflection exercises.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app needs access to speech recognition for converting your spoken words to text in journaling and reflection exercises.</string>
 </dict>
 </plist>

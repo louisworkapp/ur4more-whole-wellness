@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import '../../../../../core/app_export.dart';
 import '../../../../../design/tokens.dart';
 import '../../../../../services/faith_service.dart';
+import '../../../../../widgets/universal_speech_text_field.dart';
 
 class TruthComponent extends StatefulWidget {
   final FaithMode faithMode;
@@ -37,6 +38,7 @@ class _TruthComponentState extends State<TruthComponent>
   int _currentVerseIndex = 0;
   String _selectedReflection = '';
   String _personalInsight = '';
+  final TextEditingController _insightController = TextEditingController();
 
   // Scripture verses for different faith modes
   final List<Map<String, dynamic>> _verses = [
@@ -89,6 +91,7 @@ class _TruthComponentState extends State<TruthComponent>
   void dispose() {
     _timer?.cancel();
     _fadeController.dispose();
+    _insightController.dispose();
     super.dispose();
   }
 
@@ -314,18 +317,12 @@ class _TruthComponentState extends State<TruthComponent>
                           
                           const SizedBox(height: 16),
                           
-                          // Personal insight
-                          TextField(
+                          // Personal insight with speech-to-text
+                          UniversalSpeechJournalField(
+                            controller: _insightController,
+                            hintText: 'Write your personal insight or prayer...',
                             onChanged: _updateInsight,
-                            maxLines: 3,
-                            decoration: InputDecoration(
-                              hintText: 'Write your personal insight or prayer...',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              filled: true,
-                              fillColor: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
-                            ),
+                            showSpeechButton: true,
                           ),
                         ],
                       ],

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import '../../../../../core/app_export.dart';
 import '../../../../../design/tokens.dart';
 import '../../../../../services/faith_service.dart';
+import '../../../../../widgets/universal_speech_text_field.dart';
 
 class GratitudeComponent extends StatefulWidget {
   final FaithMode faithMode;
@@ -37,6 +38,9 @@ class _GratitudeComponentState extends State<GratitudeComponent>
   List<String> _gratitudeItems = [];
   String _intention = '';
   String _prayer = '';
+  final TextEditingController _gratitudeController = TextEditingController();
+  final TextEditingController _intentionController = TextEditingController();
+  final TextEditingController _prayerController = TextEditingController();
 
   // Gratitude prompts
   final List<String> _gratitudePrompts = [
@@ -67,6 +71,9 @@ class _GratitudeComponentState extends State<GratitudeComponent>
   void dispose() {
     _timer?.cancel();
     _sparkleController.dispose();
+    _gratitudeController.dispose();
+    _intentionController.dispose();
+    _prayerController.dispose();
     super.dispose();
   }
 
@@ -289,24 +296,16 @@ class _GratitudeComponentState extends State<GratitudeComponent>
                           const SizedBox(height: 16),
                         ],
                         
-                        // Add gratitude input
+                        // Add gratitude input with speech-to-text
                         if (_isActive)
-                          TextField(
-                            onSubmitted: _addGratitudeItem,
-                            decoration: InputDecoration(
-                              hintText: 'Add something you\'re grateful for...',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              filled: true,
-                              fillColor: Theme.of(context).colorScheme.surface,
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  // This will be handled by onSubmitted
-                                },
-                                icon: const Icon(Icons.add),
-                              ),
-                            ),
+                          UniversalSpeechTextField(
+                            controller: _gratitudeController,
+                            hintText: 'Add something you\'re grateful for...',
+                            onSubmitted: (text) {
+                              _addGratitudeItem(text);
+                              _gratitudeController.clear();
+                            },
+                            showSpeechButton: true,
                           ),
                       ],
                     ),
@@ -323,17 +322,12 @@ class _GratitudeComponentState extends State<GratitudeComponent>
                       ),
                     ),
                     const SizedBox(height: 12),
-                    TextField(
-                      onChanged: _updateIntention,
+                    UniversalSpeechTextField(
+                      controller: _intentionController,
+                      hintText: 'How will you walk in the light today?',
                       maxLines: 2,
-                      decoration: InputDecoration(
-                        hintText: 'How will you walk in the light today?',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        filled: true,
-                        fillColor: Theme.of(context).colorScheme.surfaceVariant.withOpacity(0.5),
-                      ),
+                      onChanged: _updateIntention,
+                      showSpeechButton: true,
                     ),
                     
                     const SizedBox(height: 24),
@@ -347,19 +341,14 @@ class _GratitudeComponentState extends State<GratitudeComponent>
                         ),
                       ),
                       const SizedBox(height: 12),
-                      TextField(
-                        onChanged: _updatePrayer,
+                      UniversalSpeechTextField(
+                        controller: _prayerController,
+                        hintText: widget.faithMode == FaithMode.light
+                            ? 'A simple prayer or commitment...'
+                            : 'Prayer for strength and guidance...',
                         maxLines: 3,
-                        decoration: InputDecoration(
-                          hintText: widget.faithMode == FaithMode.light
-                              ? 'A simple prayer or commitment...'
-                              : 'Prayer for strength and guidance...',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          filled: true,
-                          fillColor: Theme.of(context).colorScheme.primaryContainer.withOpacity(0.3),
-                        ),
+                        onChanged: _updatePrayer,
+                        showSpeechButton: true,
                       ),
                     ],
                   ],
