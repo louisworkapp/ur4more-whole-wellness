@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../services/faith_service.dart';
-import '../../presentation/screens/walk_in_light_screen.dart';
+import '../presentation/screens/walk_in_light_screen.dart';
 
 class WalkInLightRoutine extends StatelessWidget {
   final bool isFaithActivated;

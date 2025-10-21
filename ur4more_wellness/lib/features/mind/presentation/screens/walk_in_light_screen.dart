@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import '../../../../core/app_export.dart';
 import '../../../../design/tokens.dart';
 import '../../../../services/faith_service.dart';
-import '../../../faith/faith_consent.dart';
+// import '../../faith/faith_consent.dart'; // TODO: Implement faith consent
 import '../widgets/walk_in_light_components/breath_component.dart';
 import '../widgets/walk_in_light_components/truth_component.dart';
 import '../widgets/walk_in_light_components/gratitude_component.dart';
@@ -78,11 +78,12 @@ class _WalkInLightScreenState extends State<WalkInLightScreen>
   }
 
   void _checkFaithConsent() {
-    if (widget.faithMode == FaithMode.light && !FaithConsent.hasConsentLight()) {
-      setState(() {
-        _showFaithConsent = true;
-      });
-    }
+    // TODO: Implement faith consent check
+    // if (widget.faithMode == FaithMode.light && !FaithConsent.hasConsentLight()) {
+    //   setState(() {
+    //     _showFaithConsent = true;
+    //   });
+    // }
   }
 
   @override
@@ -160,6 +161,7 @@ class _WalkInLightScreenState extends State<WalkInLightScreen>
   }
 
   void _onFaithConsentResult(bool granted) {
+    // TODO: Implement faith consent result handling
     setState(() {
       _showFaithConsent = false;
     });
@@ -171,12 +173,13 @@ class _WalkInLightScreenState extends State<WalkInLightScreen>
 
   @override
   Widget build(BuildContext context) {
-    if (_showFaithConsent) {
-      return FaithConsentDialog(
-        context: InviteContext.walkInLight,
-        onResult: _onFaithConsentResult,
-      );
-    }
+    // TODO: Implement faith consent dialog
+    // if (_showFaithConsent) {
+    //   return FaithConsentDialog(
+    //     context: InviteContext.walkInLight,
+    //     onResult: _onFaithConsentResult,
+    //   );
+    // }
 
     if (_isCompleted) {
       return CompletionComponent(
