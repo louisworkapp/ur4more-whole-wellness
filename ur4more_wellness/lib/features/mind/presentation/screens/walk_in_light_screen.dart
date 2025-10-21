@@ -5,6 +5,8 @@ import '../../../../core/app_export.dart';
 import '../../../../design/tokens.dart';
 import '../../../../services/faith_service.dart';
 // import '../../faith/faith_consent.dart'; // TODO: Implement faith consent
+import '../widgets/walk_in_light_components/faith_activation_component.dart';
+import '../widgets/walk_in_light_components/welcome_component.dart';
 import '../widgets/walk_in_light_components/breath_component.dart';
 import '../widgets/walk_in_light_components/truth_component.dart';
 import '../widgets/walk_in_light_components/gratitude_component.dart';
@@ -35,6 +37,7 @@ class _WalkInLightScreenState extends State<WalkInLightScreen>
   int _currentStep = 0;
   bool _isCompleted = false;
   bool _showFaithConsent = false;
+  bool _showWelcome = false; // State to control showing welcome screen
   
   // Component data
   Map<String, dynamic> _breathData = {};
@@ -75,6 +78,9 @@ class _WalkInLightScreenState extends State<WalkInLightScreen>
     );
     
     _checkFaithConsent();
+    
+    // Show welcome screen only when faith mode is activated
+    _showWelcome = widget.faithMode.isActivated;
   }
 
   void _checkFaithConsent() {
@@ -181,6 +187,38 @@ class _WalkInLightScreenState extends State<WalkInLightScreen>
     //   );
     // }
 
+    // Show faith activation screen if faith mode is off
+    if (!widget.faithMode.isActivated) {
+      return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        body: SafeArea(
+          child: FaithActivationComponent(
+            onActivated: () {
+              // Faith mode has been activated, refresh the screen
+              setState(() {});
+            },
+          ),
+        ),
+      );
+    }
+
+    // Show welcome screen first (Walk in the Light always requires faith activation)
+    if (_showWelcome) {
+      return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        body: SafeArea(
+          child: WelcomeComponent(
+            faithMode: widget.faithMode,
+            onContinue: () {
+              setState(() {
+                _showWelcome = false;
+              });
+            },
+          ),
+        ),
+      );
+    }
+
     if (_isCompleted) {
       return CompletionComponent(
         faithMode: widget.faithMode,
@@ -191,6 +229,7 @@ class _WalkInLightScreenState extends State<WalkInLightScreen>
           setState(() {
             _currentStep = 0;
             _isCompleted = false;
+            _showWelcome = widget.faithMode.isActivated; // Show welcome screen only if faith mode is activated
             _breathData = {};
             _truthData = {};
             _gratitudeData = {};
