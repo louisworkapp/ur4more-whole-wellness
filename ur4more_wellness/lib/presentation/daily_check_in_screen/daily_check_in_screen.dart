@@ -8,12 +8,13 @@ import '../../features/home/streaks.dart';
 import '../../core/services/telemetry.dart';
 import '../../services/faith_service.dart';
 import './widgets/completion_summary_widget.dart';
-import './widgets/coping_mechanisms_widget.dart';
+import './widgets/ai_suggestions_widget.dart';
 import './widgets/journal_entry_widget.dart';
 import './widgets/pain_level_widget.dart';
 import './widgets/progress_header_widget.dart';
 import './widgets/rpe_scale_widget.dart';
 import './widgets/urge_intensity_widget.dart';
+import '../../services/safety_monitor_service.dart';
 
 class DailyCheckInScreen extends StatefulWidget {
   const DailyCheckInScreen({super.key});
@@ -35,7 +36,8 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
   double _painLevel = 0.0; // Simplified to single pain slider
   List<String> _selectedPainRegions = []; // Selected pain regions
   double _urgeLevel = 0.0; // Single urge/craving slider (0-10)
-  List<String> _selectedCopingMechanisms = [];
+  List<String> _selectedUrgeTypes = []; // Selected urge/craving types
+  List<String> _selectedAISuggestions = [];
   String _journalText = '';
   String _selectedMood = '';
   List<String> _attachedPhotos = [];
@@ -48,7 +50,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
     'Rate of Perceived Exertion', // Updated titles as per requirements
     'Pain Assessment',
     'Urge & Craving Tracking',
-    'Coping Strategies',
+    'AI-Powered Suggestions',
     'Journal Entry',
   ];
 
@@ -56,7 +58,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
     'How hard did your body work today?', // New labels as per requirements
     'Rate pain today (0–10)',
     'Cravings or urges (0–10)',
-    'What helped today?',
+    'Personalized recommendations based on your check-in',
     'A few lines about today'
   ];
 
@@ -122,7 +124,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
   // Updated points calculation based on new requirements
   int _calculatePointsEarned() {
     int totalPoints = 0;
-    bool copingDone = _selectedCopingMechanisms.isNotEmpty;
+    bool copingDone = _selectedAISuggestions.isNotEmpty;
 
     if (copingDone) {
       // Cap coping points at +25 max per check-in
@@ -136,7 +138,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
   }
 
   bool get _copingDone {
-    return _selectedCopingMechanisms.isNotEmpty;
+    return _selectedAISuggestions.isNotEmpty;
   }
 
   Future<void> _completeCheckIn() async {
@@ -156,7 +158,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
           userId: _userId,
           action: 'coping_completed',
           value: 25,
-          note: _selectedCopingMechanisms.join(', '),
+          note: _selectedAISuggestions.join(', '),
         );
       } else if (_journalText.trim().length >= 120) {
         await PointsService.award(
@@ -363,42 +365,42 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                       child: UrgeIntensityWidget(
                         urgeLevel: _urgeLevel,
                         faithMode: _faithMode,
+                        selectedUrgeTypes: _selectedUrgeTypes,
                         onChanged: (level) {
                           setState(() {
                             _urgeLevel = level;
-
-                            // Pre-prime coping strategies if high urge + faith mode
-                            if (level >= 7 && _faithMode != FaithMode.off) {
-                              if (!_selectedCopingMechanisms
-                                  .contains('scripture')) {
-                                _selectedCopingMechanisms.add('scripture');
-                              }
-                              if (!_selectedCopingMechanisms
-                                  .contains('breathing')) {
-                                _selectedCopingMechanisms.add('breathing');
-                              }
-                            }
                           });
                         },
-                      ),
-                    ),
-
-                    // Step 4 - Coping Strategies (faith-safe naming)
-                    _buildSection(
-                      stepNumber: 4,
-                      title: _sectionTitles[3],
-                      subtitle: _sectionLabels[3],
-                      child: CopingMechanismsWidget(
-                        selectedMechanisms: _selectedCopingMechanisms,
-                        faithMode: _faithMode,
-                        urgeLevel: _urgeLevel,
-                        onChanged: (mechanisms) {
+                        onUrgeTypesChanged: (urgeTypes) {
                           setState(() {
-                            _selectedCopingMechanisms = mechanisms;
+                            _selectedUrgeTypes = urgeTypes;
                           });
                         },
                       ),
                     ),
+
+    // Step 4 - AI-Powered Suggestions
+    _buildSection(
+      stepNumber: 4,
+      title: _sectionTitles[3],
+      subtitle: _sectionLabels[3],
+      child: AISuggestionsWidget(
+        painLevel: _painLevel,
+        painRegions: _selectedPainRegions,
+        urgeLevel: _urgeLevel,
+        urgeTypes: _selectedUrgeTypes,
+        rpeLevel: _rpeValue,
+        faithMode: _faithMode,
+        selectedSuggestions: _selectedAISuggestions,
+        journalText: _journalText,
+        mood: _selectedMood,
+        onSuggestionsChanged: (suggestions) {
+          setState(() {
+            _selectedAISuggestions = suggestions;
+          });
+        },
+      ),
+    ),
 
                     // Step 5 - Journal Entry (with character counter)
                     _buildSection(

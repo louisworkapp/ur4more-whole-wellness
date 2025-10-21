@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "themes": {
+    "pride": {
+      "label": "Pride",
+      "icon": "trending_up",
+      "passages": [
+        {
+          "ref": "Proverbs 16:16–20 (KJV)",
+          "verses": [],
+          "actNow": "Ask counsel; choose humility before acting."
+        }
+      ],
+      "actions": {
+        "low":  ["delay_10","soft_answer"],
+        "mid":  ["quick_calm_1","if_then_plan"],
+        "high": ["quick_calm_2","text_support_optional"]
+      },
+      "prompts": {
+        "secular": ["What outcome matters more than being right?"],
+        "faith": ["How can I humble myself under God's hand?"]
+      }
+    },
+    "envy": {
+      "label": "Envy",
+      "icon": "visibility",
+      "passages": [
+        {
+          "ref": "Proverbs 14:29–31 (KJV)",
+          "verses": [],
+          "actNow": "Write 3 gratitude items; bless instead of compare."
+        }
+      ],
+      "actions": {
+        "low":  ["delay_10","walk_2min"],
+        "mid":  ["quick_calm_1","notif_off"],
+        "high": ["quick_calm_2","urge_surf_2"]
+      },
+      "prompts": {
+        "secular": ["Who am I comparing to? What's my lane?"],
+        "faith": ["Thank God for today's portion by name."]
+      }
+    },
+    "lust": {
+      "label": "Lust",
+      "icon": "favorite",
+      "passages": [
+        {
+          "ref": "Matthew 5:27–30 (KJV)",
+          "verses": [],
+          "actNow": "Flee the trigger; take the way of escape now."
+        }
+      ],
+      "actions": {
+        "low":  ["remove_cue","delay_10"],
+        "mid":  ["quick_calm_2","environment_exit"],
+        "high": ["quick_calm_2","urge_surf_2","text_support_optional"]
+      },
+      "prompts": {
+        "secular": ["What value do I choose over this impulse?"],
+        "faith": ["Pray for purity; choose a clean path now."]
+      }
+    },
+    "greed": {
+      "label": "Greed",
+      "icon": "attach_money",
+      "passages": [
+        {
+          "ref": "Luke 12:13–21 (KJV)",
+          "verses": [],
+          "actNow": "Practice one small generosity pivot before buying."
+        }
+      ],
+      "actions": {
+        "low":  ["delay_10","if_then_plan"],
+        "mid":  ["quick_calm_1","remove_cue"],
+        "high": ["quick_calm_2","text_support_optional"]
+      },
+      "prompts": {
+        "secular": ["Will this add real value next month?"],
+        "faith": ["How can I be rich toward God today?"]
+      }
+    },
+    "anger": {
+      "label": "Anger",
+      "icon": "flash_on",
+      "passages": [
+        {
+          "ref": "Ephesians 4:25–32 (KJV)",
+          "verses": [],
+          "actNow": "Pause; choose a soft answer or a 24-hr delay."
+        }
+      ],
+      "actions": {
+        "low":  ["soft_answer","walk_break"],
+        "mid":  ["quick_calm_2","i_statement_draft"],
+        "high": ["quick_calm_2","urge_surf_2","environment_exit"]
+      },
+      "prompts": {
+        "secular": ["What need am I protecting right now?"],
+        "faith": ["Pray for a tender heart before you reply."]
+      }
+    },
+    "sloth": {
+      "label": "Sloth/Laziness",
+      "icon": "bedtime",
+      "passages": [
+        {
+          "ref": "Proverbs 6:6–11 (KJV)",
+          "verses": [],
+          "actNow": "Do a 2-minute start; become the ant."
+        }
+      ],
+      "actions": {
+        "low":  ["two_min_start","timer_25"],
+        "mid":  ["quick_calm_1","woop_micro"],
+        "high": ["quick_calm_2","environment_exit"]
+      },
+      "prompts": {
+        "secular": ["What's the tiniest faithful step?"],
+        "faith": ["Ask God for diligence; start small now."]
+      }
+    },
+    "gluttony": {
+      "label": "Gluttony",
+      "icon": "restaurant",
+      "passages": [
+        {
+          "ref": "1 Corinthians 9:24–27 (KJV)",
+          "verses": [
+            { "v": 24, "t": "Know ye not that they which run in a race run all, but one receiveth the prize? So run, that ye may obtain." },
+            { "v": 25, "t": "And every man that striveth for the mastery is temperate in all things. Now they do it to obtain a corruptible crown; but we an incorruptible." },
+            { "v": 26, "t": "I therefore so run, not as uncertainly; so fight I, not as one that beateth the air:" },
+            { "v": 27, "t": "But I keep under my body, and bring it into subjection: lest that by any means, when I have preached to others, I myself should be a castaway." }
+          ],
+          "actNow": "Plate plan → pray → eat with temperance; log one small victory."
+        }
+      ],
+      "actions": {
+        "low":  ["water_first","plate_plan","mindful_3_bite","pause_halfway"],
+        "mid":  ["quick_calm_1","protein_swap","delay_10","brush_teeth"],
+        "high": ["quick_calm_2","urge_surf_2","remove_cue","text_support_optional"]
+      },
+      "prompts": {
+        "secular": [
+          "What emotion am I soothing with food?",
+          "How will 'satisfied, not stuffed' help tomorrow?"
+        ],
+        "faith": [
+          "How can I glorify God in my body at this meal?",
+          "Pray for temperance, then choose one faithful portion."
+        ]
+      }
+    },
+    "feeling_lost": {
+      "label": "Feeling Lost",
+      "icon": "explore_off",
+      "passages": [
+        {
+          "ref": "Psalm 23:1–6 (KJV)",
+          "verses": [],
+          "actNow": "Pray Psalm 23; take one guided step today."
+        }
+      ],
+      "actions": {
+        "low":  ["walk_2min","name_rate_step"],
+        "mid":  ["quick_calm_1","woop_micro"],
+        "high": ["quick_calm_2","text_support_optional"]
+      },
+      "prompts": {
+        "secular": ["What would a wise next step look like?"],
+        "faith": ["Ask the Shepherd to lead; write one step."]
+      }
+    }
+  }
+}

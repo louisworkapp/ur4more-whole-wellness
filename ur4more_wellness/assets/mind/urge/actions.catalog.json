@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "actions": {
+    "quick_calm_1": { "title": "Quick Calm (1 min)", "body": "4-4-4-4 breathing for 60 seconds." },
+    "quick_calm_2": { "title": "Quick Calm (2 min)", "body": "Physiological sigh, then 4-6 breathing." },
+    "urge_surf_2": { "title": "Urge Surf (2 min)", "body": "Ride the wave: notice, name, breathe." },
+
+    "delay_10": { "title": "Delay 10", "body": "If you still want it in 10 minutes, reconsider." },
+    "if_then_plan": { "title": "If–Then Plan", "body": "Pre-decide: If trigger → Then small action." },
+
+    "remove_cue": { "title": "Remove the Cue", "body": "Leave the room; hide/lock the trigger." },
+    "environment_exit": { "title": "Change Location", "body": "Step outside; new context, new choice." },
+    "text_support_optional": { "title": "Text Support", "body": "Share the urge; ask for a nudge." },
+    "help_rail": { "title": "Get Help Now", "body": "Call a support person or hotline." },
+
+    "water_first": { "title": "Water First", "body": "Drink a full glass before deciding." },
+    "protein_swap": { "title": "Protein/Fiber Swap", "body": "Pick a steadier option first." },
+    "plate_plan": { "title": "Plate Plan", "body": "Serve a modest portion; put extras away." },
+    "mindful_3_bite": { "title": "Mindful 3-Bite", "body": "Savor 3 bites; pause; decide." },
+    "pause_halfway": { "title": "Halfway Pause", "body": "Set fork down; check satisfied vs stuffed." },
+    "brush_teeth": { "title": "Brush Teeth", "body": "Signal 'meal closed' to your brain." },
+
+    "post_and_close": { "title": "Post & Close", "body": "Share, then exit the app immediately." },
+    "lockout_15": { "title": "15-min Lockout", "body": "Temporarily block the app." },
+    "grayscale": { "title": "Grayscale Screen", "body": "Reduce visual dopamine." },
+    "walk_2min": { "title": "Walk (2 min)", "body": "Move your body; reset attention." },
+    "move_apps_off_home": { "title": "Move Apps", "body": "Remove from home screen; add friction." },
+    "notif_off": { "title": "Notifications Off", "body": "Silence non-essential alerts." },
+
+    "timer_25": { "title": "Timer 25", "body": "Focus for 25 minutes; then break." },
+    "stop_at_checkpoint": { "title": "Stop at Checkpoint", "body": "Save progress; pause there." },
+
+    "two_min_start": { "title": "2-Minute Start", "body": "Do the smallest possible slice." },
+    "woop_micro": { "title": "WOOP Micro", "body": "Wish-Outcome-Obstacle-Plan in 60s." },
+    "shutdown_ritual": { "title": "Shutdown Ritual", "body": "Pick an end time + checklist." },
+
+    "i_statement_draft": { "title": "Draft an I-Statement", "body": "State needs without blame." },
+    "soft_answer": { "title": "Soft Answer", "body": "Choose gentle words; reduce heat." },
+    "walk_break": { "title": "Walk Break", "body": "Cool off before replying." },
+
+    "name_rate_step": { "title": "Name-Rate-Step", "body": "Name urge, rate 0–10, take 1 step." }
+  }
+}
