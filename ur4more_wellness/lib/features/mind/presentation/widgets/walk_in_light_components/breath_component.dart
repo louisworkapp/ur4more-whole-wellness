@@ -8,6 +8,7 @@ import '../../../../../services/faith_service.dart';
 import '../../../../breath/logic/breath_engine.dart';
 import '../../../../breath/logic/presets.dart';
 import '../../../../breath/widgets/animated_circle.dart';
+import 'scripture_rotator.dart';
 
 class BreathComponent extends StatefulWidget {
   final FaithMode faithMode;
@@ -438,6 +439,12 @@ class _BreathComponentState extends State<BreathComponent>
             ),
           
           const SizedBox(height: 24),
+          
+          // Scripture rotator (Walk in the Light always shows scriptures)
+          ScriptureRotator(
+            isActive: _isActive,
+            rotationInterval: const Duration(seconds: 10),
+          ),
           
           // Breathing circle - using the same AnimatedBreathCircle as Breath Coach V2
           SizedBox(
