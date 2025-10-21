@@ -18,6 +18,8 @@ import '../screens/implementation_intention_screen.dart';
 import '../screens/mindful_observation_screen.dart';
 import '../screens/gratitude_practice_screen.dart';
 import '../../../../routes/app_routes.dart';
+import '../../../../core/settings/settings_scope.dart';
+import '../../../../core/settings/settings_model.dart';
 import '../../exercises/exercise_runner_screen.dart';
 import '../../exercises/exercise_registry.dart';
 
@@ -151,15 +153,9 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
                 title: invitation['title'] ?? 'Want to go deeper?',
                 message: invitation['message'] ?? 'Try a faith-enhanced version of this exercise.',
                 verse: invitation['verse'] ?? '',
-                onAccept: () {
+                onAccept: () async {
                   Navigator.of(context).pop();
-                  // TODO: Navigate to faith mode activation
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Faith mode activation coming soon!'),
-                      duration: Duration(seconds: 2),
-                    ),
-                  );
+                  await _activateLightMode(context);
                 },
                 onDecline: () {
                   Navigator.of(context).pop();
@@ -634,6 +630,35 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
       );
     }
   }
+
+  Future<void> _activateLightMode(BuildContext context) async {
+    try {
+      final settingsCtl = SettingsScope.of(context);
+      await settingsCtl.updateFaith(FaithTier.light);
+      
+      if (context.mounted) {
+        // Show success message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Faith Mode: Light activated! Welcome to gentle faith integration.'),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Unable to activate Faith Mode. Please try again.'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    }
+  }
 }
 
 class _ExerciseDialog extends StatefulWidget {
@@ -1003,5 +1028,34 @@ class _ExerciseDialogState extends State<_ExerciseDialog> {
         behavior: SnackBarBehavior.floating,
       ),
     );
+  }
+
+  Future<void> _activateLightMode(BuildContext context) async {
+    try {
+      final settingsCtl = SettingsScope.of(context);
+      await settingsCtl.updateFaith(FaithTier.light);
+      
+      if (context.mounted) {
+        // Show success message
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Faith Mode: Light activated! Welcome to gentle faith integration.'),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            behavior: SnackBarBehavior.floating,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Unable to activate Faith Mode. Please try again.'),
+            backgroundColor: Theme.of(context).colorScheme.error,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    }
   }
 }
