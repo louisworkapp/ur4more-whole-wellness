@@ -23,6 +23,8 @@ class UrgeIntensityWidget extends StatefulWidget {
 }
 
 class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
+  List<String> _selectedItems = [];
+
   String _getUrgeDescription(double value) {
     if (value == 0) return "No urges or cravings";
     if (value <= 2) return "Mild urge - easily manageable";
@@ -182,6 +184,11 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
           ),
           SizedBox(height: AppSpace.x2),
 
+          // Detailed urge/craving types
+          _buildUrgeDetailsSection(),
+
+          SizedBox(height: AppSpace.x2),
+
           // Micro-intervention card (faith-based)
           MicroInterventionCard(
             urgeLevel: widget.urgeLevel,
@@ -224,6 +231,144 @@ class _UrgeIntensityWidgetState extends State<UrgeIntensityWidget> {
             ),
           ],
         ],
+      ),
+    );
+  }
+
+  Widget _buildUrgeDetailsSection() {
+    final theme = Theme.of(context);
+    
+    // Combined list of urge/craving types and biblical themes
+    final List<Map<String, dynamic>> allUrgeTypes = [
+      // Common urge/craving types
+      {'key': 'substance', 'label': 'Substance Use', 'icon': 'local_drink', 'type': 'urge'},
+      {'key': 'food', 'label': 'Food/Cravings', 'icon': 'restaurant', 'type': 'urge'},
+      {'key': 'shopping', 'label': 'Shopping/Spending', 'icon': 'shopping_cart', 'type': 'urge'},
+      {'key': 'social_media', 'label': 'Social Media', 'icon': 'share', 'type': 'urge'},
+      {'key': 'gaming', 'label': 'Gaming/Entertainment', 'icon': 'sports_esports', 'type': 'urge'},
+      {'key': 'work', 'label': 'Work/Productivity', 'icon': 'work', 'type': 'urge'},
+      {'key': 'relationships', 'label': 'Relationships', 'icon': 'people', 'type': 'urge'},
+      
+      // Biblical themes (only show if faith mode is activated)
+      if (widget.faithMode.isActivated) ...[
+        {'key': 'pride', 'label': 'Pride', 'icon': 'trending_up', 'type': 'biblical', 'verse': 'Proverbs 16:18'},
+        {'key': 'envy', 'label': 'Envy', 'icon': 'visibility', 'type': 'biblical', 'verse': 'Proverbs 14:30'},
+        {'key': 'lust', 'label': 'Lust', 'icon': 'favorite', 'type': 'biblical', 'verse': 'Matthew 5:28'},
+        {'key': 'greed', 'label': 'Greed', 'icon': 'attach_money', 'type': 'biblical', 'verse': 'Luke 12:15'},
+        {'key': 'anger', 'label': 'Anger', 'icon': 'flash_on', 'type': 'biblical', 'verse': 'Ephesians 4:26'},
+        {'key': 'sloth', 'label': 'Sloth/Laziness', 'icon': 'bedtime', 'type': 'biblical', 'verse': 'Proverbs 6:6'},
+        {'key': 'gluttony', 'label': 'Gluttony', 'icon': 'restaurant', 'type': 'biblical', 'verse': 'Proverbs 23:2'},
+        {'key': 'lost', 'label': 'Feeling Lost', 'icon': 'explore_off', 'type': 'biblical', 'verse': 'Psalm 23:3'},
+      ],
+      
+      // Other at the bottom
+      {'key': 'other', 'label': 'Other', 'icon': 'more_horiz', 'type': 'urge'},
+    ];
+
+    return Container(
+      padding: EdgeInsets.all(AppSpace.x3),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.5),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: theme.colorScheme.outline.withOpacity(0.2),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Section title
+          Row(
+            children: [
+              CustomIconWidget(
+                iconName: 'psychology',
+                color: theme.colorScheme.primary,
+                size: 20,
+              ),
+              SizedBox(width: AppSpace.x2),
+              Text(
+                'Today\'s Top Urges & Cravings',
+                style: theme.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black87,
+                ),
+              ),
+            ],
+          ),
+          
+          SizedBox(height: AppSpace.x3),
+          
+          // Combined list
+          Text(
+            'What are you struggling with today?',
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
+          ),
+          
+          SizedBox(height: AppSpace.x2),
+          
+          Wrap(
+            spacing: AppSpace.x2,
+            runSpacing: AppSpace.x1,
+            children: allUrgeTypes.map((item) => _buildCombinedChip(item)).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCombinedChip(Map<String, dynamic> item) {
+    final theme = Theme.of(context);
+    final isSelected = _selectedItems.contains(item['key']);
+    final isBiblical = item['type'] == 'biblical';
+    
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          if (isSelected) {
+            _selectedItems.remove(item['key']);
+          } else {
+            _selectedItems.add(item['key']);
+          }
+        });
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
+        decoration: BoxDecoration(
+          color: isSelected 
+              ? (isBiblical ? theme.colorScheme.secondaryContainer : theme.colorScheme.primaryContainer)
+              : theme.colorScheme.surface,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: isSelected 
+                ? (isBiblical ? theme.colorScheme.secondary : theme.colorScheme.primary)
+                : theme.colorScheme.outline.withOpacity(0.3),
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CustomIconWidget(
+              iconName: item['icon'],
+              color: isSelected 
+                  ? (isBiblical ? theme.colorScheme.onSecondaryContainer : theme.colorScheme.onPrimaryContainer)
+                  : theme.colorScheme.onSurface,
+              size: 16,
+            ),
+            SizedBox(width: AppSpace.x1),
+            Text(
+              item['label'],
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: isSelected 
+                    ? (isBiblical ? theme.colorScheme.onSecondaryContainer : theme.colorScheme.onPrimaryContainer)
+                    : theme.colorScheme.onSurface,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
