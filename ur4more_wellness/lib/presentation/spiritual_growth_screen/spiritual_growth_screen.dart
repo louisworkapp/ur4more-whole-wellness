@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/app_export.dart';
 import '../../design/tokens.dart';
+import '../../theme/tokens.dart';
 import '../../widgets/custom_app_bar.dart';
 import '../../features/spirit/widgets/discipleship_header.dart';
 import '../../features/spirit/widgets/offmode_intro_card.dart';
@@ -329,9 +330,9 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
                   Tab(text: "History"),
                   Tab(text: "Milestones"),
                 ],
-                labelColor: AppTheme.primaryLight,
+                labelColor: T.gold, // Spiritual growth: golden
                 unselectedLabelColor: colorScheme.onSurfaceVariant,
-                indicatorColor: AppTheme.primaryLight,
+                indicatorColor: T.gold, // Spiritual growth: golden
                 indicatorSize: TabBarIndicatorSize.tab,
                 labelStyle: theme.textTheme.labelLarge?.copyWith(
                   fontWeight: FontWeight.w600,
@@ -373,8 +374,8 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppTheme.primaryLight,
-            AppTheme.primaryLight.withOpacity( 0.8),
+            T.gold, // Spiritual growth: golden
+            T.gold.withOpacity(0.8), // Spiritual growth: golden
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -449,7 +450,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
   Widget _buildTodayTab(BuildContext context, ColorScheme colorScheme) {
     return RefreshIndicator(
       onRefresh: _refreshContent,
-      color: AppTheme.primaryLight,
+      color: T.gold, // Spiritual growth: golden
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
@@ -462,7 +463,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
                 height: 200,
                 child: Center(
                   child: CircularProgressIndicator(
-                    color: AppTheme.primaryLight,
+                    color: T.gold, // Spiritual growth: golden
                   ),
                 ),
               )
@@ -638,7 +639,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
         content: Text(devotional["isBookmarked"] == true
             ? "Added to favorites"
             : "Removed from favorites"),
-        backgroundColor: AppTheme.primaryLight,
+        backgroundColor: T.gold, // Spiritual growth: golden
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),

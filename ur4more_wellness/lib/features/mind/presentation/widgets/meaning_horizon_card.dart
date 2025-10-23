@@ -141,21 +141,8 @@ class MeaningHorizonCard extends StatelessWidget {
       if (context.mounted) {
         Navigator.of(context).pop();
         
-        // Show success message
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Faith Mode: Light activated! Welcome to gentle faith integration.'),
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            behavior: SnackBarBehavior.floating,
-            duration: const Duration(seconds: 3),
-          ),
-        );
-        
-        // Optional: Show the 7-day Light sampler
-        await Future.delayed(const Duration(milliseconds: 500));
-        if (context.mounted) {
-          _showLightSamplerDialog(context);
-        }
+        // Show the "fear of God" congratulations screen
+        Navigator.of(context).pushNamed('/faith-congratulations');
       }
     } catch (e) {
       if (context.mounted) {

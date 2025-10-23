@@ -238,19 +238,24 @@ class _HomeDashboardState extends State<HomeDashboard> {
           final completionPercentage = activityMap["completionPercentage"] as double? ?? 0.0;
           final isCompleted = activityMap["isCompleted"] as bool? ?? false;
           
+          // Get the appropriate color based on wellness category
+          final activityId = activityMap["id"] as String? ?? '';
+          final categoryColor = _getCategoryColor(activityId);
+          
           return MediaCard(
             title: activityMap["title"] as String? ?? 'Activity',
             subtitle: activityMap["subtitle"] as String? ?? 'Description',
+            accentColor: categoryColor,
             leading: Container(
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: T.ink700,
+                color: categoryColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 _getIconData(activityMap["iconName"] as String? ?? 'help'),
-                color: isCompleted ? T.mint : T.blue,
+                color: categoryColor,
                 size: 24,
               ),
             ),
@@ -261,7 +266,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                 Text(
                   '${(completionPercentage * 100).round()}%',
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: isCompleted ? T.mint : T.blue,
+                    color: categoryColor,
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -277,7 +282,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                     widthFactor: completionPercentage,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: isCompleted ? T.mint : T.blue,
+                        color: categoryColor,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -319,6 +324,22 @@ class _HomeDashboardState extends State<HomeDashboard> {
         return Icons.auto_stories;
       default:
         return Icons.help;
+    }
+  }
+
+  Color _getCategoryColor(String activityId) {
+    switch (activityId) {
+      case 'mind_wellness':
+      case 'mind_coach':
+        return T.mint; // Mind wellness: mint green
+      case 'spiritual_growth':
+      case 'discipleship':
+        return T.gold; // Spiritual growth: golden
+      case 'body_wellness':
+      case 'fitness':
+        return T.blue; // Body wellness: blue (existing)
+      default:
+        return T.blue; // Default: blue
     }
   }
 

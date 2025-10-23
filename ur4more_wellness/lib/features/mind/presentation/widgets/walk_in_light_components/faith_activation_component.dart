@@ -337,13 +337,8 @@ class FaithActivationComponent extends StatelessWidget {
       await settingsCtl.updateFaith(FaithTier.light);
       
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Faith Mode: Light activated! Welcome to Walk in the Light.'),
-            backgroundColor: Colors.green,
-            duration: Duration(seconds: 3),
-          ),
-        );
+        // Show the "fear of God" congratulations screen
+        Navigator.of(context).pushNamed('/faith-congratulations');
       }
     } catch (e) {
       if (context.mounted) {
