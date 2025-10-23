@@ -9,6 +9,7 @@ from flask_limiter.util import get_remote_address
 
 import jwt
 from dotenv import load_dotenv
+import requests
 
 # -------------------------
 # Config
@@ -23,7 +24,7 @@ CACHE_TTL_SEC = int(os.getenv("CACHE_TTL_SEC", "120"))
 
 RATE_LIMIT_PER_MIN = int(os.getenv("RATE_LIMIT_PER_MIN", "60"))
 
-ENABLE_EXTERNAL = os.getenv("ENABLE_EXTERNAL", "0") == "1"
+ENABLE_EXTERNAL = os.getenv("ENABLE_EXTERNAL", "1") == "1"  # Enable by default for wisdom quotes
 ALLOW_FAITH_IN_LIGHT_BY_DEFAULT = os.getenv("ALLOW_FAITH_IN_LIGHT_BY_DEFAULT", "0") == "1"
 
 JWT_KID = os.getenv("JWT_KID", "v1")
@@ -120,6 +121,69 @@ def require_auth(fn):
     return wrapper
 
 # -------------------------
+# External Wisdom Quote Fetching
+# -------------------------
+def fetch_external_wisdom_quotes() -> List[Dict[str, Any]]:
+    """Fetch wisdom quotes from external APIs"""
+    if not ENABLE_EXTERNAL:
+        return []
+    
+    all_quotes = []
+    
+    for provider_name, config in EXTERNAL_WISDOM_PROVIDERS.items():
+        if not config.get("enabled", False):
+            continue
+            
+        try:
+            print(f"🌐 Fetching wisdom quotes from {provider_name}...")
+            response = requests.get(
+                config["url"], 
+                params=config["params"],
+                timeout=10,
+                headers={"User-Agent": "UR4More-Wellness/1.0"}
+            )
+            response.raise_for_status()
+            
+            data = response.json()
+            quotes = data.get("results", data) if isinstance(data, dict) else data
+            
+            for quote in quotes[:10]:  # Limit to 10 per provider
+                try:
+                    transformed = config["transform"](quote)
+                    all_quotes.append(transformed)
+                except Exception as e:
+                    print(f"⚠️ Error transforming quote from {provider_name}: {e}")
+                    continue
+                    
+            print(f"✅ Fetched {len(quotes[:10])} quotes from {provider_name}")
+            
+        except Exception as e:
+            print(f"❌ Error fetching from {provider_name}: {e}")
+            continue
+    
+    print(f"🎯 Total external wisdom quotes fetched: {len(all_quotes)}")
+    return all_quotes
+
+def get_daily_wisdom_quotes() -> List[Dict[str, Any]]:
+    """Get wisdom quotes for today (local + external)"""
+    # Get local wisdom quotes
+    local_wisdom = [q for q in LOCAL_QUOTES if "wisdom" in q.get("tags", [])]
+    
+    # Get external wisdom quotes (cached for the day)
+    cache_key = f"wisdom_external_{datetime.now().strftime('%Y-%m-%d')}"
+    external_quotes = cache_get(cache_key)
+    
+    if external_quotes is None:
+        external_quotes = fetch_external_wisdom_quotes()
+        if external_quotes:
+            cache_set(cache_key, external_quotes, ttl=86400)  # Cache for 24 hours
+    
+    # Combine and return
+    all_wisdom = local_wisdom + (external_quotes or [])
+    print(f"📚 Total wisdom quotes available: {len(all_wisdom)} (local: {len(local_wisdom)}, external: {len(external_quotes or [])})")
+    return all_wisdom
+
+# -------------------------
 # Faith gating
 # -------------------------
 def faith_allowed(mode: str, light_consent: bool, hide_in_mind: bool) -> bool:
@@ -193,6 +257,51 @@ LOCAL_QUOTES = [
     {"id": "wisdom_9", "text": "Whoever walks with the wise becomes wise, but the companion of fools will suffer harm.", "author": "Proverbs 13:20 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "fellowship"]},
     {"id": "wisdom_10", "text": "The wise woman builds her house, but with her own hands the foolish one tears hers down.", "author": "Proverbs 14:1 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "building"]},
 ]
+
+# -------------------------
+# External Wisdom Quote Providers
+# -------------------------
+EXTERNAL_WISDOM_PROVIDERS = {
+    "quotable": {
+        "enabled": True,
+        "url": "https://api.quotable.io/quotes",
+        "params": {"tags": "wisdom", "limit": 10},
+        "transform": lambda q: {
+            "id": f"quotable_{q['_id']}",
+            "text": q["content"],
+            "author": q["author"],
+            "license": "public_domain",
+            "source": "Quotable API",
+            "tags": ["wisdom", "external"]
+        }
+    },
+    "zenquotes": {
+        "enabled": True,
+        "url": "https://zenquotes.io/api/quotes",
+        "params": {},
+        "transform": lambda q: {
+            "id": f"zenquotes_{hash(q['q'])}",
+            "text": q["q"],
+            "author": q["a"],
+            "license": "public_domain", 
+            "source": "ZenQuotes API",
+            "tags": ["wisdom", "external"]
+        }
+    },
+    "quotegarden": {
+        "enabled": True,
+        "url": "https://quotegarden.herokuapp.com/api/v3/quotes",
+        "params": {"limit": 10},
+        "transform": lambda q: {
+            "id": f"quotegarden_{q['_id']}",
+            "text": q["quoteText"],
+            "author": q["quoteAuthor"],
+            "license": "public_domain",
+            "source": "QuoteGarden API", 
+            "tags": ["wisdom", "external"]
+        }
+    }
+}
 
 KJV_DB = {
     "gluttony": [{
@@ -467,14 +576,20 @@ def quotes():
         return app.response_class(response=cached, mimetype="application/json")
 
     items = []
-    # external providers (stubbed off)
-    if ENABLE_EXTERNAL:
-        pass
-    # local quotes
-    for q in LOCAL_QUOTES:
-        fq = filter_quote(dict(q), allow)
-        if fq:
-            items.append(fq)
+    
+    # Special handling for wisdom quotes (local + external)
+    if topic.lower() == "wisdom":
+        wisdom_quotes = get_daily_wisdom_quotes()
+        for q in wisdom_quotes:
+            fq = filter_quote(dict(q), allow)
+            if fq:
+                items.append(fq)
+    else:
+        # Regular quotes (local only for now)
+        for q in LOCAL_QUOTES:
+            fq = filter_quote(dict(q), allow)
+            if fq:
+                items.append(fq)
 
     # dedupe (text+author)
     seen = set()
