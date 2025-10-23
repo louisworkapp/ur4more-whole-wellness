@@ -90,6 +90,11 @@ if JWT_SECRET_V0:
 def require_auth(fn):
     @functools.wraps(fn)
     def wrapper(*args, **kwargs):
+        # DEVELOPMENT MODE: Skip auth for easier testing
+        if ENV == "dev":
+            request.jwt_claims = {"sub": "debug"}
+            return fn(*args, **kwargs)
+        
         auth = request.headers.get("Authorization", "")
         if not auth.lower().startswith("bearer "):
             return jsonify({"detail": "Missing bearer token"}), 401
