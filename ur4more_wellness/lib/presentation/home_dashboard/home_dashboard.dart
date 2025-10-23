@@ -10,6 +10,7 @@ import './widgets/daily_checkin_cta.dart';
 import './widgets/points_progress_ring.dart';
 import './widgets/wellness_navigation_card.dart';
 import '../../widgets/media_card.dart';
+import '../../widgets/daily_inspiration_card.dart';
 import '../../theme/tokens.dart';
 
 class HomeDashboard extends StatefulWidget {
@@ -195,6 +196,11 @@ class _HomeDashboardState extends State<HomeDashboard> {
                     ),
                     userId: userData["userId"] as String,
                   ),
+
+                  const SizedBox(height: AppSpace.x2),
+
+                  // Daily Inspiration Card
+                  const DailyInspirationCard(),
 
                   const SizedBox(height: AppSpace.x2),
 
