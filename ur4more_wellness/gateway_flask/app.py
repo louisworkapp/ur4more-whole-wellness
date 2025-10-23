@@ -252,7 +252,7 @@ def fetch_external_wisdom_quotes() -> List[Dict[str, Any]]:
     return all_quotes
 
 def get_daily_wisdom_quotes() -> List[Dict[str, Any]]:
-    """Get wisdom quotes for today (local + external)"""
+    """Get wisdom quotes for today (local + external + accumulated)"""
     # Get local wisdom quotes
     local_wisdom = [q for q in LOCAL_QUOTES if "wisdom" in q.get("tags", [])]
     
@@ -263,13 +263,18 @@ def get_daily_wisdom_quotes() -> List[Dict[str, Any]]:
     if external_quotes is None:
         external_quotes = fetch_external_wisdom_quotes()
         if external_quotes:
+            # Add new external quotes to accumulated storage
+            add_to_accumulated_quotes(external_quotes)
             cache_set(cache_key, external_quotes, ttl=86400)  # Cache for 24 hours
     
-    # Combine and return
+    # Get accumulated quotes from previous days
+    accumulated_quotes = load_accumulated_quotes()
+    
+    # Combine and return (local + external + accumulated)
     if external_quotes is None:
         external_quotes = []
-    all_wisdom = local_wisdom + external_quotes
-    print(f"Total wisdom quotes available: {len(all_wisdom)} (local: {len(local_wisdom)}, external: {len(external_quotes)})")
+    all_wisdom = local_wisdom + external_quotes + accumulated_quotes
+    print(f"Total wisdom quotes available: {len(all_wisdom)} (local: {len(local_wisdom)}, external: {len(external_quotes)}, accumulated: {len(accumulated_quotes)})")
     return all_wisdom
 
 # -------------------------
@@ -332,26 +337,70 @@ def fetch_external_bible_scripture(reference: str) -> Optional[Dict[str, Any]]:
     return None
 
 def get_daily_bible_scripture(theme: str = "") -> List[Dict[str, Any]]:
-    """Get Bible scripture for today (external + local fallback)"""
+    """Get Bible scripture for today (external + local + accumulated)"""
     # Try external scripture first (cached for the day)
     cache_key = f"bible_external_{datetime.now().strftime('%Y-%m-%d')}_{theme}"
     external_scripture = cache_get(cache_key)
     
     if external_scripture is None:
-        # Try to fetch a random scripture from external APIs
+        # Fetch multiple scriptures from external APIs to build up the library
         import random
-        common_references = [
-            "John 3:16", "Psalm 23:1", "Proverbs 3:5", "Matthew 6:33",
-            "Romans 8:28", "Philippians 4:13", "Jeremiah 29:11", "Isaiah 40:31"
+        # All 66 books of the Bible with key verses
+        all_bible_references = [
+            # Old Testament (39 books)
+            "Genesis 1:1", "Genesis 3:15", "Genesis 12:2", "Genesis 22:17",
+            "Exodus 3:14", "Exodus 20:3", "Exodus 34:6", "Leviticus 19:18",
+            "Numbers 6:24", "Numbers 14:18", "Deuteronomy 6:4", "Deuteronomy 31:6",
+            "Joshua 1:9", "Joshua 24:15", "Judges 6:12", "Ruth 1:16",
+            "1 Samuel 16:7", "2 Samuel 7:16", "1 Kings 8:27", "2 Kings 19:15",
+            "1 Chronicles 16:34", "2 Chronicles 7:14", "Ezra 7:10", "Nehemiah 8:10",
+            "Esther 4:14", "Job 1:21", "Job 42:2", "Psalm 1:1", "Psalm 23:1", "Psalm 46:1", "Psalm 91:1", "Psalm 100:1", "Psalm 119:105", "Psalm 139:14",
+            "Proverbs 1:7", "Proverbs 3:5", "Proverbs 9:10", "Proverbs 16:9", "Proverbs 22:6", "Proverbs 31:10",
+            "Ecclesiastes 3:1", "Ecclesiastes 12:13", "Song of Solomon 2:16", "Song of Solomon 8:7",
+            "Isaiah 7:14", "Isaiah 9:6", "Isaiah 40:31", "Isaiah 53:5", "Isaiah 55:8", "Isaiah 61:1",
+            "Jeremiah 1:5", "Jeremiah 29:11", "Jeremiah 31:3", "Lamentations 3:22",
+            "Ezekiel 36:26", "Ezekiel 37:5", "Daniel 2:20", "Daniel 6:23",
+            "Hosea 6:6", "Joel 2:28", "Amos 5:24", "Obadiah 1:4",
+            "Jonah 2:2", "Micah 6:8", "Nahum 1:7", "Habakkuk 2:4",
+            "Zephaniah 3:17", "Haggai 2:9", "Zechariah 4:6", "Malachi 3:6",
+            
+            # New Testament (27 books)
+            "Matthew 1:23", "Matthew 5:14", "Matthew 6:33", "Matthew 11:28", "Matthew 16:18", "Matthew 28:19",
+            "Mark 1:15", "Mark 10:45", "Mark 16:15", "Luke 1:37", "Luke 2:11", "Luke 6:31", "Luke 19:10",
+            "John 1:1", "John 3:16", "John 8:12", "John 10:10", "John 14:6", "John 15:13", "John 20:31",
+            "Acts 1:8", "Acts 2:38", "Acts 4:12", "Acts 16:31", "Acts 20:24",
+            "Romans 1:16", "Romans 3:23", "Romans 5:8", "Romans 6:23", "Romans 8:28", "Romans 10:9", "Romans 12:1",
+            "1 Corinthians 13:4", "1 Corinthians 15:55", "2 Corinthians 5:17", "2 Corinthians 9:8",
+            "Galatians 2:20", "Galatians 5:22", "Galatians 6:9", "Ephesians 2:8", "Ephesians 4:32", "Ephesians 6:10",
+            "Philippians 1:21", "Philippians 4:13", "Philippians 4:19", "Colossians 3:23", "Colossians 4:6",
+            "1 Thessalonians 5:16", "1 Thessalonians 5:18", "2 Thessalonians 3:3", "1 Timothy 1:15", "1 Timothy 4:12",
+            "2 Timothy 1:7", "2 Timothy 3:16", "Titus 2:11", "Titus 3:5", "Philemon 1:6",
+            "Hebrews 4:12", "Hebrews 11:1", "Hebrews 12:2", "Hebrews 13:8", "James 1:2", "James 1:17", "James 2:26",
+            "1 Peter 2:9", "1 Peter 3:15", "1 Peter 5:7", "2 Peter 1:3", "2 Peter 3:9",
+            "1 John 1:9", "1 John 3:16", "1 John 4:8", "1 John 4:19", "2 John 1:6", "3 John 1:2",
+            "Jude 1:24", "Revelation 1:8", "Revelation 3:20", "Revelation 21:4", "Revelation 22:13"
         ]
-        reference = random.choice(common_references)
         
-        external_scripture = fetch_external_bible_scripture(reference)
-        if external_scripture:
-            external_scripture = [external_scripture]  # Convert to list
+        # Fetch 3-5 random scriptures to build up the library
+        num_to_fetch = random.randint(3, 5)
+        fetched_scriptures = []
+        
+        for _ in range(num_to_fetch):
+            reference = random.choice(all_bible_references)
+            scripture = fetch_external_bible_scripture(reference)
+            if scripture:
+                fetched_scriptures.append(scripture)
+        
+        if fetched_scriptures:
+            external_scripture = fetched_scriptures
+            # Add new external scriptures to accumulated storage
+            add_to_accumulated_scripture(external_scripture)
             cache_set(cache_key, external_scripture, ttl=86400)  # Cache for 24 hours
         else:
             external_scripture = []
+    
+    # Get accumulated scripture from previous days
+    accumulated_scripture = load_accumulated_scripture()
     
     # Get local scripture as fallback
     local_scripture = []
@@ -362,10 +411,133 @@ def get_daily_bible_scripture(theme: str = "") -> List[Dict[str, Any]]:
         for theme_scriptures in KJV_DB.values():
             local_scripture.extend(theme_scriptures)
     
-    # Combine and return (external first, then local)
-    all_scripture = external_scripture + local_scripture
-    print(f"Total scripture available: {len(all_scripture)} (external: {len(external_scripture)}, local: {len(local_scripture)})")
+    # Combine and return (external + accumulated + local)
+    all_scripture = external_scripture + accumulated_scripture + local_scripture
+    print(f"Total scripture available: {len(all_scripture)} (external: {len(external_scripture)}, accumulated: {len(accumulated_scripture)}, local: {len(local_scripture)})")
     return all_scripture
+
+# -------------------------
+# Daily Storage System
+# -------------------------
+STORAGE_DIR = "daily_storage"
+QUOTES_STORAGE_FILE = os.path.join(STORAGE_DIR, "accumulated_quotes.json")
+SCRIPTURE_STORAGE_FILE = os.path.join(STORAGE_DIR, "accumulated_scripture.json")
+
+def ensure_storage_dir():
+    """Ensure storage directory exists"""
+    if not os.path.exists(STORAGE_DIR):
+        os.makedirs(STORAGE_DIR)
+        print(f"Created storage directory: {STORAGE_DIR}")
+
+def load_accumulated_quotes() -> List[Dict[str, Any]]:
+    """Load accumulated quotes from storage"""
+    ensure_storage_dir()
+    if os.path.exists(QUOTES_STORAGE_FILE):
+        try:
+            with open(QUOTES_STORAGE_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Error loading accumulated quotes: {e}")
+    return []
+
+def save_accumulated_quotes(quotes: List[Dict[str, Any]]):
+    """Save accumulated quotes to storage"""
+    ensure_storage_dir()
+    try:
+        with open(QUOTES_STORAGE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(quotes, f, indent=2, ensure_ascii=False)
+        print(f"Saved {len(quotes)} accumulated quotes to storage")
+    except Exception as e:
+        print(f"Error saving accumulated quotes: {e}")
+
+def load_accumulated_scripture() -> List[Dict[str, Any]]:
+    """Load accumulated scripture from storage"""
+    ensure_storage_dir()
+    if os.path.exists(SCRIPTURE_STORAGE_FILE):
+        try:
+            with open(SCRIPTURE_STORAGE_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"Error loading accumulated scripture: {e}")
+    return []
+
+def save_accumulated_scripture(scripture: List[Dict[str, Any]]):
+    """Save accumulated scripture to storage"""
+    ensure_storage_dir()
+    try:
+        with open(SCRIPTURE_STORAGE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(scripture, f, indent=2, ensure_ascii=False)
+        print(f"Saved {len(scripture)} accumulated scripture to storage")
+    except Exception as e:
+        print(f"Error saving accumulated scripture: {e}")
+
+def add_to_accumulated_quotes(new_quotes: List[Dict[str, Any]]):
+    """Add new quotes to accumulated storage, avoiding duplicates"""
+    accumulated = load_accumulated_quotes()
+    
+    # Create a set of existing quote signatures for deduplication
+    existing_signatures = set()
+    for quote in accumulated:
+        # Create signature from text + author
+        text = quote.get('text', '').strip().lower()
+        author = quote.get('author', '').strip().lower()
+        signature = f"{text}|{author}"
+        existing_signatures.add(signature)
+    
+    # Add new quotes that aren't duplicates
+    added_count = 0
+    for quote in new_quotes:
+        text = quote.get('text', '').strip().lower()
+        author = quote.get('author', '').strip().lower()
+        signature = f"{text}|{author}"
+        
+        if signature not in existing_signatures:
+            # Add metadata about when it was added
+            quote['added_date'] = datetime.now().isoformat()
+            quote['source_type'] = 'external_accumulated'
+            accumulated.append(quote)
+            existing_signatures.add(signature)
+            added_count += 1
+    
+    if added_count > 0:
+        save_accumulated_quotes(accumulated)
+        print(f"Added {added_count} new quotes to accumulated storage")
+    
+    return accumulated
+
+def add_to_accumulated_scripture(new_scripture: List[Dict[str, Any]]):
+    """Add new scripture to accumulated storage, avoiding duplicates"""
+    accumulated = load_accumulated_scripture()
+    
+    # Create a set of existing scripture signatures for deduplication
+    existing_signatures = set()
+    for scripture in accumulated:
+        # Create signature from reference + text
+        ref = scripture.get('ref', '').strip().lower()
+        text = scripture.get('verses', [{}])[0].get('t', '').strip().lower() if scripture.get('verses') else ''
+        signature = f"{ref}|{text}"
+        existing_signatures.add(signature)
+    
+    # Add new scripture that isn't duplicates
+    added_count = 0
+    for scripture in new_scripture:
+        ref = scripture.get('ref', '').strip().lower()
+        text = scripture.get('verses', [{}])[0].get('t', '').strip().lower() if scripture.get('verses') else ''
+        signature = f"{ref}|{text}"
+        
+        if signature not in existing_signatures:
+            # Add metadata about when it was added
+            scripture['added_date'] = datetime.now().isoformat()
+            scripture['source_type'] = 'external_accumulated'
+            accumulated.append(scripture)
+            existing_signatures.add(signature)
+            added_count += 1
+    
+    if added_count > 0:
+        save_accumulated_scripture(accumulated)
+        print(f"Added {added_count} new scripture to accumulated storage")
+    
+    return accumulated
 
 # -------------------------
 # Faith gating
@@ -682,12 +854,35 @@ def health():
 @app.route("/content/manifest")
 @require_auth
 def manifest():
+    # Get accumulated storage counts
+    accumulated_quotes = load_accumulated_quotes()
+    accumulated_scripture = load_accumulated_scripture()
+    
     themes = {k: {"passageCount": len(v)} for k, v in KJV_DB.items()}
-    total = sum(len(v) for v in KJV_DB.values())
+    local_total = sum(len(v) for v in KJV_DB.values())
+    total_scripture = local_total + len(accumulated_scripture)
+    
     payload = {
         "schemaVersion": 1,
-        "quotes": {"localCount": len(LOCAL_QUOTES), "externalEnabled": ENABLE_EXTERNAL},
-        "scripture": {"themeCount": len(KJV_DB), "totalPassages": total, "themes": themes},
+        "quotes": {
+            "localCount": len(LOCAL_QUOTES), 
+            "accumulatedCount": len(accumulated_quotes),
+            "totalCount": len(LOCAL_QUOTES) + len(accumulated_quotes),
+            "externalEnabled": ENABLE_EXTERNAL
+        },
+        "scripture": {
+            "localCount": local_total,
+            "accumulatedCount": len(accumulated_scripture),
+            "totalCount": total_scripture,
+            "themeCount": len(KJV_DB), 
+            "themes": themes,
+            "externalEnabled": ENABLE_EXTERNAL
+        },
+        "storage": {
+            "quotesFile": QUOTES_STORAGE_FILE,
+            "scriptureFile": SCRIPTURE_STORAGE_FILE,
+            "storageDir": STORAGE_DIR
+        },
         "updatedAt": datetime.now(timezone.utc).isoformat()
     }
     return jsonify(payload)
