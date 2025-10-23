@@ -161,9 +161,10 @@ class _AISuggestionsWidgetState extends State<AISuggestionsWidget> {
           color: colorScheme.outline.withOpacity(0.2),
         ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           // Safety Alert (if needed)
           if (_showSafetyAlert && _safetyAnalysis != null) ...[
             SafetyAlertWidget(
@@ -330,6 +331,7 @@ class _AISuggestionsWidgetState extends State<AISuggestionsWidget> {
             ),
           ],
         ],
+        ),
       ),
     );
   }
