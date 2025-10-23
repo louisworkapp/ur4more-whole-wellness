@@ -180,6 +180,18 @@ LOCAL_QUOTES = [
     {"id": "secular_8", "text": "The way to get started is to quit talking and begin doing.", "author": "Walt Disney", "license": "public_domain", "source": "Gateway", "tags": ["secular","action"]},
     {"id": "secular_9", "text": "Life is what happens to you while you're busy making other plans.", "author": "John Lennon", "license": "public_domain", "source": "Gateway", "tags": ["secular","life"]},
     {"id": "secular_10", "text": "The only impossible journey is the one you never begin.", "author": "Tony Robbins", "license": "public_domain", "source": "Gateway", "tags": ["secular","journey"]},
+
+    # Wisdom quotes (for daily wisdom feature)
+    {"id": "wisdom_1", "text": "The fear of the Lord is the beginning of wisdom, and knowledge of the Holy One is understanding.", "author": "Proverbs 9:10 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "faith"]},
+    {"id": "wisdom_2", "text": "Trust in the Lord with all thine heart; and lean not unto thine own understanding.", "author": "Proverbs 3:5 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "trust"]},
+    {"id": "wisdom_3", "text": "For the Lord giveth wisdom: out of his mouth cometh knowledge and understanding.", "author": "Proverbs 2:6 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "knowledge"]},
+    {"id": "wisdom_4", "text": "The wise in heart are called discerning, and gracious words promote instruction.", "author": "Proverbs 16:21 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "discernment"]},
+    {"id": "wisdom_5", "text": "How much better to get wisdom than gold, to get insight rather than silver!", "author": "Proverbs 16:16 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "value"]},
+    {"id": "wisdom_6", "text": "The beginning of wisdom is this: Get wisdom. Though it cost all you have, get understanding.", "author": "Proverbs 4:7 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "understanding"]},
+    {"id": "wisdom_7", "text": "A wise man will hear, and will increase learning; and a man of understanding shall attain unto wise counsels.", "author": "Proverbs 1:5 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "learning"]},
+    {"id": "wisdom_8", "text": "The wise store up knowledge, but the mouth of a fool invites ruin.", "author": "Proverbs 10:14 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "knowledge"]},
+    {"id": "wisdom_9", "text": "Whoever walks with the wise becomes wise, but the companion of fools will suffer harm.", "author": "Proverbs 13:20 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "fellowship"]},
+    {"id": "wisdom_10", "text": "The wise woman builds her house, but with her own hands the foolish one tears hers down.", "author": "Proverbs 14:1 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "building"]},
 ]
 
 KJV_DB = {
