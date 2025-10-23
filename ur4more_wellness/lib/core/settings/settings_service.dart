@@ -45,6 +45,18 @@ class SettingsService {
     await p.setBool(_kHideFaith, s.hideFaithOverlaysInMind);
   }
 
+  Future<void> clearCache() async {
+    final p = await SharedPreferences.getInstance();
+    await p.remove(_kFaithTier);
+    await p.remove(_kNotif);
+    await p.remove(_kEqBody);
+    await p.remove(_kEqBand);
+    await p.remove(_kEqPull);
+    await p.remove(_kTz);
+    await p.remove(_kTheme);
+    await p.remove(_kHideFaith);
+  }
+
   AppThemeMode _parseThemeMode(String? raw) {
     switch (raw) {
       case 'light': return AppThemeMode.light;

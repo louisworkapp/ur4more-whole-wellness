@@ -12,6 +12,7 @@ import '../../features/spirit/widgets/alignment_preview_card.dart';
 import '../../features/spirit/widgets/faith_mode_banner.dart';
 import '../../core/settings/settings_scope.dart';
 import '../../core/settings/settings_model.dart';
+import '../../services/devotional_service.dart';
 import './widgets/devotional_card_widget.dart';
 import './widgets/devotional_history_widget.dart';
 import './widgets/faith_mode_banner_widget.dart';
@@ -36,37 +37,9 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
   int _spiritualPoints = 1250;
   int _devotionStreak = 7;
 
-  // Mock data for devotionals
-  final List<Map<String, dynamic>> _todayDevotionals = [
-    {
-      "id": 1,
-      "title": "Walking in Faith",
-      "date": "October 13, 2024",
-      "scripture": "Hebrews 11:1",
-      "verse":
-          "Now faith is confidence in what we hope for and assurance about what we do not see.",
-      "reflection":
-          "Faith is not about having all the answers, but about trusting God's plan even when we cannot see the full picture. Today, let us walk boldly in faith, knowing that God is guiding our steps and preparing good things for those who love Him.",
-      "readTime": 5,
-      "isCompleted": false,
-      "isBookmarked": false,
-      "points": 25,
-    },
-    {
-      "id": 2,
-      "title": "God's Unfailing Love",
-      "date": "October 12, 2024",
-      "scripture": "Psalm 136:1",
-      "verse":
-          "Give thanks to the Lord, for he is good. His love endures forever.",
-      "reflection":
-          "In every season of life, God's love remains constant. His mercy is new every morning, and His faithfulness extends to all generations. Take time today to reflect on the many ways God has shown His love in your life.",
-      "readTime": 4,
-      "isCompleted": true,
-      "isBookmarked": true,
-      "points": 25,
-    },
-  ];
+  // Dynamic devotionals from gateway
+  List<Map<String, dynamic>> _todayDevotionals = [];
+  bool _isLoadingDevotionals = true;
 
   final List<Map<String, dynamic>> _devotionalHistory = [
     {
@@ -155,6 +128,16 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
     _loadCollapsedStates();
+    // Don't load devotionals in initState - wait for didChangeDependencies
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Load devotionals after dependencies are available
+    if (_todayDevotionals.isEmpty) {
+      _loadDailyDevotionals();
+    }
   }
 
   Future<void> _loadCollapsedStates() async {
@@ -163,6 +146,39 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
       _soulCollapsed = prefs.getBool('spirit.soulCollapsed') ?? true;
       _alignCollapsed = prefs.getBool('spirit.alignCollapsed') ?? true;
     });
+  }
+
+  Future<void> _loadDailyDevotionals() async {
+    try {
+      final settingsCtl = SettingsScope.of(context);
+      final settings = settingsCtl.value;
+      
+      // Only load devotionals if faith mode is enabled
+      if (settings.faithTier != FaithTier.off) {
+        final devotional = await DevotionalService.getDailyDevotional(
+          faithTier: settings.faithTier,
+          theme: 'gluttony', // You can make this dynamic based on user preferences
+        );
+        
+        if (mounted && devotional != null) {
+          setState(() {
+            _todayDevotionals = [devotional];
+            _isLoadingDevotionals = false;
+          });
+        }
+      } else {
+        setState(() {
+          _isLoadingDevotionals = false;
+        });
+      }
+    } catch (e) {
+      print('Error loading daily devotionals: $e');
+      if (mounted) {
+        setState(() {
+          _isLoadingDevotionals = false;
+        });
+      }
+    }
   }
 
   void _toggleSoulCollapsed() async {
@@ -441,14 +457,52 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
             SizedBox(height: AppSpace.x2),
 
             // Today's devotionals
-            ..._todayDevotionals.map((devotional) => DevotionalCardWidget(
-                  devotional: devotional,
-                  isBookmarked: devotional["isBookmarked"] == true,
-                  onTap: () => _openDevotional(devotional),
-                  onShare: () => _shareDevotional(devotional),
-                  onBookmark: () => _toggleBookmark(devotional),
-                  onAddToPrayer: () => _addToPrayerList(devotional),
-                )),
+            if (_isLoadingDevotionals)
+              Container(
+                height: 200,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    color: AppTheme.primaryLight,
+                  ),
+                ),
+              )
+            else if (_todayDevotionals.isEmpty)
+              Container(
+                padding: const EdgeInsets.all(AppSpace.x4),
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.auto_stories_outlined,
+                      size: 48,
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                    const SizedBox(height: AppSpace.x3),
+                    Text(
+                      'No devotionals available',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpace.x2),
+                    Text(
+                      'Enable Faith Mode in settings to access daily devotionals',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              )
+            else
+              ..._todayDevotionals.map((devotional) => DevotionalCardWidget(
+                    devotional: devotional,
+                    isBookmarked: devotional["isBookmarked"] == true,
+                    onTap: () => _openDevotional(devotional),
+                    onShare: () => _shareDevotional(devotional),
+                    onBookmark: () => _toggleBookmark(devotional),
+                    onAddToPrayer: () => _addToPrayerList(devotional),
+                  )),
 
             SizedBox(height: AppSpace.x2),
 
@@ -541,23 +595,22 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
   }
 
   Future<void> _refreshContent() async {
-    await Future.delayed(const Duration(seconds: 1));
-    setState(() {
-      // Refresh content
-    });
+    // Reload daily devotionals
+    await _loadDailyDevotionals();
   }
 
-  void _openDevotional(Map<String, dynamic> devotional) {
+  void _openDevotional(Map<String, dynamic> devotional) async {
     // Mark as completed and award points
-    setState(() {
-      if (devotional["isCompleted"] != true) {
+    if (devotional["isCompleted"] != true) {
+      await DevotionalService.markDevotionalCompleted(devotional["id"]);
+      setState(() {
         devotional["isCompleted"] = true;
         _spiritualPoints += (devotional["points"] as int? ?? 25);
-
-        // Show celebration animation
-        _showCompletionCelebration();
-      }
-    });
+      });
+      
+      // Show celebration animation
+      _showCompletionCelebration();
+    }
   }
 
   void _shareDevotional(Map<String, dynamic> devotional) {
@@ -574,7 +627,8 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
     );
   }
 
-  void _toggleBookmark(Map<String, dynamic> devotional) {
+  void _toggleBookmark(Map<String, dynamic> devotional) async {
+    await DevotionalService.toggleBookmark(devotional["id"]);
     setState(() {
       devotional["isBookmarked"] = !(devotional["isBookmarked"] == true);
     });
