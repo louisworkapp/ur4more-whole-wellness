@@ -117,12 +117,8 @@ class _MindCoachTabState extends State<MindCoachTab> {
                 await settings.updateFaith(FaithTier.light);
                 
                 if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Faith Mode: Light activated!'),
-                      behavior: SnackBarBehavior.floating,
-                    ),
-                  );
+                  // Show the "fear of God" congratulations screen
+                  Navigator.of(context).pushNamed('/faith-congratulations');
                 }
                 return true;
               },

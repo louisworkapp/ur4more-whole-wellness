@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../core/app_export.dart';
 import '../../../services/faith_service.dart';
 import '../../../design/tokens.dart';
+import '../../../theme/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
 import '../../../widgets/settings/setting_card.dart';
 import '../../../widgets/settings/choice_tile.dart';
@@ -40,7 +41,7 @@ class FaithModeSectionWidget extends StatelessWidget {
       subtitle: 'Control spiritual content visibility across the app',
       icon: CustomIconWidget(
         iconName: 'auto_awesome',
-        color: colorScheme.primary,
+        color: T.gold, // Faith mode: golden icon
         size: 24,
       ),
       children: [
@@ -51,7 +52,7 @@ class FaithModeSectionWidget extends StatelessWidget {
           subtitle: 'Secular mode - no spiritual content',
           icon: Icon(
             Icons.visibility_off,
-            color: colorScheme.onSurfaceVariant,
+            color: T.ink500, // Secular mode: neutral color
             size: 24,
           ),
           onChanged: _handleFaithModeChange,
@@ -64,7 +65,7 @@ class FaithModeSectionWidget extends StatelessWidget {
           subtitle: 'Minimal spiritual content with gentle encouragement',
           icon: Icon(
             Icons.wb_sunny_outlined,
-            color: colorScheme.onSurfaceVariant,
+            color: T.gold, // Faith mode: golden color
             size: 24,
           ),
           onChanged: _handleFaithModeChange,
@@ -77,7 +78,7 @@ class FaithModeSectionWidget extends StatelessWidget {
           subtitle: 'Active faith integration with daily devotions',
           icon: Icon(
             Icons.auto_awesome,
-            color: colorScheme.onSurfaceVariant,
+            color: T.gold, // Faith mode: golden color
             size: 24,
           ),
           onChanged: _handleFaithModeChange,
@@ -90,7 +91,7 @@ class FaithModeSectionWidget extends StatelessWidget {
           subtitle: 'Complete spiritual journey with advanced features',
           icon: Icon(
             Icons.king_bed,
-            color: colorScheme.onSurfaceVariant,
+            color: T.gold, // Faith mode: golden color
             size: 24,
           ),
           onChanged: _handleFaithModeChange,

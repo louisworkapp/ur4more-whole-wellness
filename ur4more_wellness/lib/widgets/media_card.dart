@@ -11,6 +11,7 @@ class MediaCard extends StatefulWidget {
     this.trailing,
     this.onTap,
     this.padding,
+    this.accentColor,
   });
   
   final String title;
@@ -19,6 +20,7 @@ class MediaCard extends StatefulWidget {
   final Widget? trailing;
   final VoidCallback? onTap;
   final EdgeInsetsGeometry? padding;
+  final Color? accentColor;
 
   @override
   State<MediaCard> createState() => _MediaCardState();
@@ -87,12 +89,12 @@ class _MediaCardState extends State<MediaCard> with SingleTickerProviderStateMix
                 borderRadius: BorderRadius.circular(Sp.r16),
                 border: Border.all(
                   color: _isPressed 
-                      ? T.blue.withOpacity(.5)
+                      ? (widget.accentColor ?? T.blue).withOpacity(.5)
                       : T.ink600.withOpacity(.35),
                 ),
                 boxShadow: _isPressed ? [
                   BoxShadow(
-                    color: T.blue.withOpacity(.1),
+                    color: (widget.accentColor ?? T.blue).withOpacity(.1),
                     blurRadius: 8,
                     spreadRadius: 1,
                   ),

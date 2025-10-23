@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../design/tokens.dart';
+import '../theme/tokens.dart';
 import '../core/settings/settings_scope.dart';
 import '../core/settings/settings_model.dart';
 import '../services/gateway_service.dart';
@@ -309,18 +310,18 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> with Ticker
                   end: Alignment.bottomRight,
                   colors: [
                     _isFaithQuote 
-                        ? const Color(0xFFC9A227).withOpacity(0.1)
-                        : const Color(0xFF0FA97A).withOpacity(0.1),
+                        ? T.gold.withOpacity(0.1)  // Faith: golden gradient
+                        : T.ink500.withOpacity(0.1), // Secular: neutral gradient
                     _isFaithQuote 
-                        ? const Color(0xFFC9A227).withOpacity(0.05)
-                        : const Color(0xFF0FA97A).withOpacity(0.05),
+                        ? T.gold.withOpacity(0.05)  // Faith: golden gradient
+                        : T.ink500.withOpacity(0.05), // Secular: neutral gradient
                   ],
                 ),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: _isFaithQuote 
-                      ? const Color(0xFFC9A227).withOpacity(0.2)
-                      : const Color(0xFF0FA97A).withOpacity(0.2),
+                      ? T.gold.withOpacity(0.3)  // Faith: golden border
+                      : T.ink500.withOpacity(0.2), // Secular: neutral border
                   width: 1,
                 ),
               ),
@@ -335,15 +336,15 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> with Ticker
                         height: 40,
                         decoration: BoxDecoration(
                           color: _isFaithQuote 
-                              ? const Color(0xFFC9A227).withOpacity(0.1)
-                              : const Color(0xFF0FA97A).withOpacity(0.1),
+                              ? T.gold.withOpacity(0.15)  // Faith: golden background
+                              : T.ink500.withOpacity(0.15), // Secular: neutral background
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(
                           _isFaithQuote ? Icons.auto_awesome : Icons.lightbulb,
                           color: _isFaithQuote 
-                              ? const Color(0xFFC9A227)
-                              : const Color(0xFF0FA97A),
+                              ? T.gold  // Faith: golden icon
+                              : T.ink500, // Secular: neutral icon
                           size: 20,
                         ),
                       ),

@@ -198,15 +198,8 @@ class SwitchToFaithModeModal extends StatelessWidget {
       if (context.mounted) {
         Navigator.of(context).pop(true);
         
-        // Show success message
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Faith Mode: Light activated! Welcome to gentle faith integration.'),
-            backgroundColor: Theme.of(context).colorScheme.primary,
-            behavior: SnackBarBehavior.floating,
-            duration: const Duration(seconds: 3),
-          ),
-        );
+        // Show the "fear of God" congratulations screen
+        Navigator.of(context).pushNamed('/faith-congratulations');
       }
     } catch (e) {
       if (context.mounted) {

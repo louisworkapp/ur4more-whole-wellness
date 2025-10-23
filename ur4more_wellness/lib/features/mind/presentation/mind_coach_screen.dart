@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../repositories/mind_coach_repository.dart';
 import '../../../services/faith_service.dart';
 import '../../../../design/tokens.dart';
+import '../../../../theme/tokens.dart';
 import '../../../../core/settings/settings_scope.dart';
 import '../../../../core/settings/settings_model.dart';
 import 'widgets/mind_coach_tab.dart';
@@ -100,7 +101,7 @@ class _MindCoachScreenState extends State<MindCoachScreen>
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  colorScheme.primary.withOpacity(0.05),
+                  T.mint.withOpacity(0.05), // Mind wellness: mint green gradient
                   colorScheme.surface,
                 ],
                 begin: Alignment.topCenter,
