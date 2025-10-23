@@ -166,6 +166,48 @@ EXTERNAL_WISDOM_PROVIDERS = {
 }
 
 # -------------------------
+# External Bible Scripture Providers
+# -------------------------
+EXTERNAL_BIBLE_PROVIDERS = {
+    "bible_api": {
+        "enabled": True,
+        "url": "https://bible-api.com",
+        "params": {},
+        "transform": lambda ref, text: {
+            "ref": ref,
+            "verses": [{"v": 1, "t": text}],
+            "actNow": "Reflect on this scripture today.",
+            "license": "public_domain",
+            "source": "Bible API"
+        }
+    },
+    "bible_gateway_votd": {
+        "enabled": True,
+        "url": "https://www.biblegateway.com/votd/get",
+        "params": {"format": "json", "version": "KJV"},
+        "transform": lambda ref, text: {
+            "ref": ref,
+            "verses": [{"v": 1, "t": text}],
+            "actNow": "Apply this truth to your life today.",
+            "license": "public_domain", 
+            "source": "Bible Gateway VOTD"
+        }
+    },
+    "bible_org_labs": {
+        "enabled": True,
+        "url": "https://labs.bible.org/api",
+        "params": {"formatting": "plain", "type": "json"},
+        "transform": lambda ref, text: {
+            "ref": ref,
+            "verses": [{"v": 1, "t": text}],
+            "actNow": "Meditate on this passage.",
+            "license": "public_domain",
+            "source": "Bible.org Labs"
+        }
+    }
+}
+
+# -------------------------
 # External Wisdom Quote Fetching
 # -------------------------
 def fetch_external_wisdom_quotes() -> List[Dict[str, Any]]:
@@ -229,6 +271,101 @@ def get_daily_wisdom_quotes() -> List[Dict[str, Any]]:
     all_wisdom = local_wisdom + external_quotes
     print(f"Total wisdom quotes available: {len(all_wisdom)} (local: {len(local_wisdom)}, external: {len(external_quotes)})")
     return all_wisdom
+
+# -------------------------
+# External Bible Scripture Fetching
+# -------------------------
+def fetch_external_bible_scripture(reference: str) -> Optional[Dict[str, Any]]:
+    """Fetch scripture from external Bible APIs"""
+    if not ENABLE_EXTERNAL:
+        return None
+    
+    for provider_name, config in EXTERNAL_BIBLE_PROVIDERS.items():
+        if not config.get("enabled", False):
+            continue
+            
+        try:
+            print(f"Fetching scripture from {provider_name} for {reference}...")
+            
+            # Prepare URL and parameters
+            url = config["url"]
+            params = config["params"].copy()
+            
+            # Add reference to params based on provider
+            if provider_name == "bible_api":
+                url = f"{url}/{reference.replace(' ', '%20')}"
+            elif provider_name == "bible_gateway_votd":
+                # VOTD doesn't need reference, it's daily
+                pass
+            elif provider_name == "bible_org_labs":
+                url = f"{url}?passage={reference.replace(' ', '%20')}"
+            
+            response = requests.get(
+                url,
+                params=params,
+                timeout=10,
+                headers={"User-Agent": "UR4More-Wellness/1.0"}
+            )
+            response.raise_for_status()
+            
+            data = response.json()
+            
+            # Extract text based on provider response format
+            text = ""
+            if provider_name == "bible_api":
+                text = data.get("text", "")
+            elif provider_name == "bible_gateway_votd":
+                text = data.get("votd", {}).get("content", "")
+                reference = data.get("votd", {}).get("display_ref", reference)
+            elif provider_name == "bible_org_labs":
+                text = data[0].get("text", "") if data else ""
+            
+            if text:
+                transformed = config["transform"](reference, text)
+                print(f"Fetched scripture from {provider_name}")
+                return transformed
+                
+        except Exception as e:
+            print(f"Error fetching from {provider_name}: {e}")
+            continue
+    
+    return None
+
+def get_daily_bible_scripture(theme: str = "") -> List[Dict[str, Any]]:
+    """Get Bible scripture for today (external + local fallback)"""
+    # Try external scripture first (cached for the day)
+    cache_key = f"bible_external_{datetime.now().strftime('%Y-%m-%d')}_{theme}"
+    external_scripture = cache_get(cache_key)
+    
+    if external_scripture is None:
+        # Try to fetch a random scripture from external APIs
+        import random
+        common_references = [
+            "John 3:16", "Psalm 23:1", "Proverbs 3:5", "Matthew 6:33",
+            "Romans 8:28", "Philippians 4:13", "Jeremiah 29:11", "Isaiah 40:31"
+        ]
+        reference = random.choice(common_references)
+        
+        external_scripture = fetch_external_bible_scripture(reference)
+        if external_scripture:
+            external_scripture = [external_scripture]  # Convert to list
+            cache_set(cache_key, external_scripture, ttl=86400)  # Cache for 24 hours
+        else:
+            external_scripture = []
+    
+    # Get local scripture as fallback
+    local_scripture = []
+    if theme and theme in KJV_DB:
+        local_scripture = KJV_DB[theme]
+    else:
+        # Get all local scripture
+        for theme_scriptures in KJV_DB.values():
+            local_scripture.extend(theme_scriptures)
+    
+    # Combine and return (external first, then local)
+    all_scripture = external_scripture + local_scripture
+    print(f"Total scripture available: {len(all_scripture)} (external: {len(external_scripture)}, local: {len(local_scripture)})")
+    return all_scripture
 
 # -------------------------
 # Faith gating
@@ -632,10 +769,14 @@ def scripture():
     if cached:
         return app.response_class(response=cached, mimetype="application/json")
 
-    seq = KJV_DB.get(theme, [])
-    if not seq:
+    # Get scripture (local + external)
+    all_scripture = get_daily_bible_scripture(theme)
+    
+    if not all_scripture:
         return jsonify({"detail": "No scripture available for theme."}), 404
-    p = filter_scripture(dict(seq[0]))
+    
+    # Filter and return the first scripture
+    p = filter_scripture(dict(all_scripture[0]))
     if not p:
         return jsonify({"detail": "Scripture failed filter policy."}), 422
 
