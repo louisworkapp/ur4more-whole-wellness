@@ -121,6 +121,51 @@ def require_auth(fn):
     return wrapper
 
 # -------------------------
+# External Wisdom Quote Providers
+# -------------------------
+EXTERNAL_WISDOM_PROVIDERS = {
+    "quotable": {
+        "enabled": True,
+        "url": "https://api.quotable.io/quotes",
+        "params": {"tags": "wisdom", "limit": 10},
+        "transform": lambda q: {
+            "id": f"quotable_{q['_id']}",
+            "text": q["content"],
+            "author": q["author"],
+            "license": "public_domain",
+            "source": "Quotable API",
+            "tags": ["wisdom", "external"]
+        }
+    },
+    "zenquotes": {
+        "enabled": True,
+        "url": "https://zenquotes.io/api/quotes",
+        "params": {},
+        "transform": lambda q: {
+            "id": f"zenquotes_{hash(q['q'])}",
+            "text": q["q"],
+            "author": q["a"],
+            "license": "public_domain", 
+            "source": "ZenQuotes API",
+            "tags": ["wisdom", "external"]
+        }
+    },
+    "quotegarden": {
+        "enabled": True,
+        "url": "https://quotegarden.herokuapp.com/api/v3/quotes",
+        "params": {"limit": 10},
+        "transform": lambda q: {
+            "id": f"quotegarden_{q['_id']}",
+            "text": q["quoteText"],
+            "author": q["quoteAuthor"],
+            "license": "public_domain",
+            "source": "QuoteGarden API", 
+            "tags": ["wisdom", "external"]
+        }
+    }
+}
+
+# -------------------------
 # External Wisdom Quote Fetching
 # -------------------------
 def fetch_external_wisdom_quotes() -> List[Dict[str, Any]]:
@@ -135,7 +180,7 @@ def fetch_external_wisdom_quotes() -> List[Dict[str, Any]]:
             continue
             
         try:
-            print(f"🌐 Fetching wisdom quotes from {provider_name}...")
+            print(f"Fetching wisdom quotes from {provider_name}...")
             response = requests.get(
                 config["url"], 
                 params=config["params"],
@@ -152,16 +197,16 @@ def fetch_external_wisdom_quotes() -> List[Dict[str, Any]]:
                     transformed = config["transform"](quote)
                     all_quotes.append(transformed)
                 except Exception as e:
-                    print(f"⚠️ Error transforming quote from {provider_name}: {e}")
+                    print(f"Error transforming quote from {provider_name}: {e}")
                     continue
                     
-            print(f"✅ Fetched {len(quotes[:10])} quotes from {provider_name}")
+            print(f"Fetched {len(quotes[:10])} quotes from {provider_name}")
             
         except Exception as e:
-            print(f"❌ Error fetching from {provider_name}: {e}")
+            print(f"Error fetching from {provider_name}: {e}")
             continue
     
-    print(f"🎯 Total external wisdom quotes fetched: {len(all_quotes)}")
+    print(f"Total external wisdom quotes fetched: {len(all_quotes)}")
     return all_quotes
 
 def get_daily_wisdom_quotes() -> List[Dict[str, Any]]:
@@ -179,8 +224,10 @@ def get_daily_wisdom_quotes() -> List[Dict[str, Any]]:
             cache_set(cache_key, external_quotes, ttl=86400)  # Cache for 24 hours
     
     # Combine and return
-    all_wisdom = local_wisdom + (external_quotes or [])
-    print(f"📚 Total wisdom quotes available: {len(all_wisdom)} (local: {len(local_wisdom)}, external: {len(external_quotes or [])})")
+    if external_quotes is None:
+        external_quotes = []
+    all_wisdom = local_wisdom + external_quotes
+    print(f"Total wisdom quotes available: {len(all_wisdom)} (local: {len(local_wisdom)}, external: {len(external_quotes)})")
     return all_wisdom
 
 # -------------------------
@@ -257,51 +304,6 @@ LOCAL_QUOTES = [
     {"id": "wisdom_9", "text": "Whoever walks with the wise becomes wise, but the companion of fools will suffer harm.", "author": "Proverbs 13:20 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "fellowship"]},
     {"id": "wisdom_10", "text": "The wise woman builds her house, but with her own hands the foolish one tears hers down.", "author": "Proverbs 14:1 (KJV)", "license": "public_domain", "source": "Gateway", "tags": ["wisdom", "building"]},
 ]
-
-# -------------------------
-# External Wisdom Quote Providers
-# -------------------------
-EXTERNAL_WISDOM_PROVIDERS = {
-    "quotable": {
-        "enabled": True,
-        "url": "https://api.quotable.io/quotes",
-        "params": {"tags": "wisdom", "limit": 10},
-        "transform": lambda q: {
-            "id": f"quotable_{q['_id']}",
-            "text": q["content"],
-            "author": q["author"],
-            "license": "public_domain",
-            "source": "Quotable API",
-            "tags": ["wisdom", "external"]
-        }
-    },
-    "zenquotes": {
-        "enabled": True,
-        "url": "https://zenquotes.io/api/quotes",
-        "params": {},
-        "transform": lambda q: {
-            "id": f"zenquotes_{hash(q['q'])}",
-            "text": q["q"],
-            "author": q["a"],
-            "license": "public_domain", 
-            "source": "ZenQuotes API",
-            "tags": ["wisdom", "external"]
-        }
-    },
-    "quotegarden": {
-        "enabled": True,
-        "url": "https://quotegarden.herokuapp.com/api/v3/quotes",
-        "params": {"limit": 10},
-        "transform": lambda q: {
-            "id": f"quotegarden_{q['_id']}",
-            "text": q["quoteText"],
-            "author": q["quoteAuthor"],
-            "license": "public_domain",
-            "source": "QuoteGarden API", 
-            "tags": ["wisdom", "external"]
-        }
-    }
-}
 
 KJV_DB = {
     "gluttony": [{
