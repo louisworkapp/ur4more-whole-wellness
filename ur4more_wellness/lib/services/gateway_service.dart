@@ -1,0 +1,320 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import '../core/settings/settings_model.dart';
+
+class GatewayService {
+  static const String _baseUrl = 'http://localhost:8080';
+  static const String _tokenKey = 'gateway_jwt_token';
+  
+  // Cache keys for daily content
+  static const String _dailyQuoteKey = 'daily_quote_cache';
+  static const String _dailyScriptureKey = 'daily_scripture_cache';
+  static const String _lastFetchDateKey = 'last_fetch_date';
+
+  // Generate a simple JWT token for development
+  static String _generateDevToken() {
+    final now = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    final payload = {
+      'sub': 'flutter_app',
+      'iss': 'ur4more-gateway',
+      'aud': 'ur4more-apps',
+      'iat': now,
+      'exp': now + 3600, // 1 hour
+    };
+    
+    // Simple base64 encoding for dev (in production, use proper JWT library)
+    final header = base64Url.encode(utf8.encode(json.encode({'alg': 'HS256', 'typ': 'JWT', 'kid': 'v1'})));
+    final payloadEncoded = base64Url.encode(utf8.encode(json.encode(payload)));
+    final signature = base64Url.encode(utf8.encode('dev-secret-change-me'));
+    
+    return '$header.$payloadEncoded.$signature';
+  }
+
+  static Future<Map<String, String>> _getHeaders() async {
+    final token = await _getStoredToken() ?? _generateDevToken();
+    await _storeToken(token);
+    
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+  }
+
+  static Future<String?> _getStoredToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(_tokenKey);
+  }
+
+  static Future<void> _storeToken(String token) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_tokenKey, token);
+  }
+
+  static Future<bool> _isNewDay() async {
+    final prefs = await SharedPreferences.getInstance();
+    final lastFetch = prefs.getString(_lastFetchDateKey);
+    final today = DateTime.now().toIso8601String().split('T')[0];
+    
+    if (lastFetch != today) {
+      await prefs.setString(_lastFetchDateKey, today);
+      return true;
+    }
+    return false;
+  }
+
+  // Fetch daily quotes from gateway
+  static Future<List<Map<String, dynamic>>> fetchDailyQuotes({
+    required FaithTier faithTier,
+    String topic = '',
+    int limit = 15, // Increased from 5 to 15 for more rotation options
+  }) async {
+    try {
+      print('🔄 GatewayService: Fetching daily quotes for faithTier: $faithTier, topic: $topic');
+      final headers = await _getHeaders();
+      final isNewDay = await _isNewDay();
+      
+      print('🔄 GatewayService: isNewDay: $isNewDay');
+      
+      // Check cache first (unless it's a new day)
+      if (!isNewDay) {
+        final cached = await _getCachedQuotes();
+        if (cached.isNotEmpty) {
+          print('📦 GatewayService: Using cached quotes (${cached.length} items)');
+          return cached;
+        }
+      }
+
+      final faithMode = _convertFaithTierToMode(faithTier);
+      final body = {
+        'faithMode': faithMode,
+        'lightConsentGiven': faithTier != FaithTier.off,
+        'hideFaithOverlaysInMind': false,
+        'topic': topic,
+        'limit': limit,
+      };
+
+      print('🌐 GatewayService: Making HTTP request to $_baseUrl/content/quotes');
+      final response = await http.post(
+        Uri.parse('$_baseUrl/content/quotes'),
+        headers: headers,
+        body: json.encode(body),
+      );
+
+      print('🌐 GatewayService: Response status: ${response.statusCode}');
+      
+      if (response.statusCode == 200) {
+        final List<dynamic> quotes = json.decode(response.body);
+        final formattedQuotes = quotes.map((q) => {
+          'text': q['text'] ?? '',
+          'author': q['author'] ?? '',
+          'source': q['source'] ?? 'Gateway',
+          'tags': (q['tags'] as List<dynamic>?)?.map((tag) => tag.toString()).toList() ?? [],
+          'license': q['license'] ?? 'public_domain',
+        }).toList();
+        
+        print('✅ GatewayService: Successfully fetched ${formattedQuotes.length} quotes from gateway');
+        
+        // Cache the results
+        await _cacheQuotes(formattedQuotes);
+        return formattedQuotes;
+      } else {
+        print('❌ Gateway quotes error: ${response.statusCode} - ${response.body}');
+        return _getFallbackQuotes(faithTier);
+      }
+    } catch (e) {
+      print('Gateway quotes exception: $e');
+      return _getFallbackQuotes(faithTier);
+    }
+  }
+
+  // Fetch daily scripture from gateway
+  static Future<Map<String, dynamic>?> fetchDailyScripture({
+    required FaithTier faithTier,
+    String theme = 'gluttony',
+  }) async {
+    try {
+      final headers = await _getHeaders();
+      final isNewDay = await _isNewDay();
+      
+      // Check cache first (unless it's a new day)
+      if (!isNewDay) {
+        final cached = await _getCachedScripture();
+        if (cached != null) return cached;
+      }
+
+      final faithMode = _convertFaithTierToMode(faithTier);
+      final body = {
+        'faithMode': faithMode,
+        'lightConsentGiven': faithTier != FaithTier.off,
+        'hideFaithOverlaysInMind': false,
+        'theme': theme,
+        'limit': 1,
+      };
+
+      final response = await http.post(
+        Uri.parse('$_baseUrl/content/scripture'),
+        headers: headers,
+        body: json.encode(body),
+      );
+
+      if (response.statusCode == 200) {
+        final scripture = json.decode(response.body);
+        final formattedScripture = {
+          'ref': scripture['ref'] ?? '',
+          'verses': List<Map<String, dynamic>>.from(scripture['verses'] ?? []),
+          'actNow': scripture['actNow'] ?? '',
+          'source': scripture['source'] ?? 'kjv.local',
+        };
+        
+        // Cache the result
+        await _cacheScripture(formattedScripture);
+        return formattedScripture;
+      } else {
+        print('Gateway scripture error: ${response.statusCode} - ${response.body}');
+        return _getFallbackScripture();
+      }
+    } catch (e) {
+      print('Gateway scripture exception: $e');
+      return _getFallbackScripture();
+    }
+  }
+
+  // Get manifest from gateway
+  static Future<Map<String, dynamic>?> fetchManifest() async {
+    try {
+      final headers = await _getHeaders();
+      final response = await http.get(
+        Uri.parse('$_baseUrl/content/manifest'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        print('Gateway manifest error: ${response.statusCode} - ${response.body}');
+        return null;
+      }
+    } catch (e) {
+      print('Gateway manifest exception: $e');
+      return null;
+    }
+  }
+
+  // Health check
+  static Future<bool> checkHealth() async {
+    try {
+      final response = await http.get(Uri.parse('$_baseUrl/health'));
+      return response.statusCode == 200;
+    } catch (e) {
+      print('Gateway health check failed: $e');
+      return false;
+    }
+  }
+
+  // Cache management
+  static Future<void> _cacheQuotes(List<Map<String, dynamic>> quotes) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_dailyQuoteKey, json.encode(quotes));
+  }
+
+  static Future<void> clearQuoteCache() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_dailyQuoteKey);
+    await prefs.remove(_lastFetchDateKey);
+    print('🗑️ GatewayService: Cleared quote cache');
+  }
+
+  static Future<List<Map<String, dynamic>>> _getCachedQuotes() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cached = prefs.getString(_dailyQuoteKey);
+    if (cached != null) {
+      try {
+        final List<dynamic> quotes = json.decode(cached);
+        return quotes.cast<Map<String, dynamic>>();
+      } catch (e) {
+        print('Error parsing cached quotes: $e');
+      }
+    }
+    return [];
+  }
+
+  static Future<void> _cacheScripture(Map<String, dynamic> scripture) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_dailyScriptureKey, json.encode(scripture));
+  }
+
+  static Future<Map<String, dynamic>?> _getCachedScripture() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cached = prefs.getString(_dailyScriptureKey);
+    if (cached != null) {
+      try {
+        return Map<String, dynamic>.from(json.decode(cached));
+      } catch (e) {
+        print('Error parsing cached scripture: $e');
+      }
+    }
+    return null;
+  }
+
+  // Helper methods
+  static String _convertFaithTierToMode(FaithTier tier) {
+    switch (tier) {
+      case FaithTier.off:
+        return 'off';
+      case FaithTier.light:
+        return 'light';
+      case FaithTier.disciple:
+        return 'disciple';
+      case FaithTier.kingdom:
+        return 'kingdom';
+    }
+  }
+
+  // Fallback content when gateway is unavailable
+  static List<Map<String, dynamic>> _getFallbackQuotes(FaithTier faithTier) {
+    if (faithTier == FaithTier.off) {
+      return [
+        {
+          'text': 'The only way to do great work is to love what you do.',
+          'author': 'Steve Jobs',
+          'source': 'Stanford Commencement Speech',
+          'tags': ['motivation', 'passion'],
+        },
+        {
+          'text': 'Success is not final, failure is not fatal: it is the courage to continue that counts.',
+          'author': 'Winston Churchill',
+          'source': 'Historical Quote',
+          'tags': ['perseverance', 'courage'],
+        },
+      ];
+    } else {
+      return [
+        {
+          'text': 'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, to give you hope and a future.',
+          'author': 'Jeremiah 29:11',
+          'source': 'Holy Bible',
+          'tags': ['hope', 'purpose'],
+        },
+        {
+          'text': 'I can do all things through Christ who strengthens me.',
+          'author': 'Philippians 4:13',
+          'source': 'Holy Bible',
+          'tags': ['strength', 'faith'],
+        },
+      ];
+    }
+  }
+
+  static Map<String, dynamic>? _getFallbackScripture() {
+    return {
+      'ref': '1 Corinthians 9:24–27 (KJV)',
+      'verses': [
+        {'v': 24, 't': 'Know ye not that they which run in a race run all, but one receiveth the prize? So run, that ye may obtain.'},
+        {'v': 25, 't': 'And every man that striveth for the mastery is temperate in all things. Now they do it to obtain a corruptible crown; but we an incorruptible.'},
+      ],
+      'actNow': 'Plate plan → pray → eat with temperance; log one small victory.',
+      'source': 'kjv.local',
+    };
+  }
+}

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../design/tokens.dart';
 import '../core/settings/settings_scope.dart';
 import '../core/settings/settings_model.dart';
+import '../services/gateway_service.dart';
 
 class DailyInspirationCard extends StatefulWidget {
   const DailyInspirationCard({super.key});
@@ -14,8 +15,14 @@ class DailyInspirationCard extends StatefulWidget {
 class _DailyInspirationCardState extends State<DailyInspirationCard> with TickerProviderStateMixin {
   int _currentQuoteIndex = 0;
   bool _isExpanded = false;
+  bool _isLoading = true;
   late AnimationController _expandController;
   late Animation<double> _expandAnimation;
+  
+  // Dynamic quotes from gateway
+  List<Map<String, dynamic>> _quotes = [];
+  Map<String, dynamic>? _currentQuote;
+  FaithTier? _lastFaithTier; // Track faith mode changes
 
   // Simple quotes array - 7 secular and 7 faith-based
   final List<Map<String, dynamic>> _secularQuotes = [
@@ -119,7 +126,27 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> with Ticker
       parent: _expandController,
       curve: Curves.easeInOut,
     );
-    _setDailyQuote();
+    // Don't load quotes in initState - wait for didChangeDependencies
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    
+    // Check if faith mode has changed
+    final settingsCtl = SettingsScope.of(context);
+    final currentFaithTier = settingsCtl.value.faithTier;
+    
+    if (_lastFaithTier != null && _lastFaithTier != currentFaithTier) {
+      print('🔄 DailyInspirationCard: Faith mode changed from $_lastFaithTier to $currentFaithTier');
+      // Clear cache and reload quotes when faith mode changes
+      _clearCacheAndReload();
+    } else if (_quotes.isEmpty) {
+      // Load quotes after dependencies are available (first time)
+      _loadDailyQuotes();
+    }
+    
+    _lastFaithTier = currentFaithTier;
   }
 
   @override
@@ -128,23 +155,59 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> with Ticker
     super.dispose();
   }
 
-  void _setDailyQuote() {
-    // Use date-based seeding for consistent daily quotes
-    final now = DateTime.now();
-    final dayOfYear = now.difference(DateTime(now.year, 1, 1)).inDays;
-    _currentQuoteIndex = dayOfYear % 14; // 14 total quotes (7 secular + 7 faith)
+  Future<void> _clearCacheAndReload() async {
+    // Clear the quote cache
+    await GatewayService.clearQuoteCache();
+    
+    // Reset state
+    setState(() {
+      _quotes = [];
+      _currentQuoteIndex = 0;
+      _isLoading = true;
+    });
+    
+    // Reload quotes with new faith mode
+    await _loadDailyQuotes();
   }
 
-  Map<String, dynamic> get _currentQuote {
-    final settingsCtl = SettingsScope.of(context);
-    final settings = settingsCtl.value;
-    
-    // Determine which quote to show based on faith mode
-    if (settings.faithTier == FaithTier.off) {
-      // Show secular quotes only
+  Future<void> _loadDailyQuotes() async {
+    try {
+      final settingsCtl = SettingsScope.of(context);
+      final settings = settingsCtl.value;
+      
+      print('🎯 DailyInspirationCard: Current faithTier: ${settings.faithTier}');
+      print('🎯 DailyInspirationCard: _isFaithQuote: ${settings.faithTier != FaithTier.off}');
+      
+      // Fetch fresh quotes from gateway
+      final quotes = await GatewayService.fetchDailyQuotes(
+        faithTier: settings.faithTier,
+        topic: 'daily_inspiration',
+        limit: 15, // Increased for more rotation options
+      );
+      
+      if (mounted) {
+        setState(() {
+          _quotes = quotes;
+          _isLoading = false;
+          _currentQuoteIndex = 0;
+          _currentQuote = quotes.isNotEmpty ? quotes[0] : _getFallbackQuote(settings.faithTier);
+        });
+      }
+    } catch (e) {
+      print('Error loading daily quotes: $e');
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+          _currentQuote = _getFallbackQuote(SettingsScope.of(context).value.faithTier);
+        });
+      }
+    }
+  }
+
+  Map<String, dynamic> _getFallbackQuote(FaithTier faithTier) {
+    if (faithTier == FaithTier.off) {
       return _secularQuotes[_currentQuoteIndex % _secularQuotes.length];
     } else {
-      // Show faith quotes for any faith mode
       return _faithQuotes[_currentQuoteIndex % _faithQuotes.length];
     }
   }
@@ -169,18 +232,67 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> with Ticker
     HapticFeedback.lightImpact();
   }
 
-  void _refreshQuote() {
+  void _refreshQuote() async {
     HapticFeedback.mediumImpact();
-    setState(() {
-      _currentQuoteIndex = (_currentQuoteIndex + 1) % 14;
-    });
+    
+    if (_quotes.isNotEmpty) {
+      setState(() {
+        _currentQuoteIndex = (_currentQuoteIndex + 1) % _quotes.length;
+        _currentQuote = _quotes[_currentQuoteIndex];
+      });
+      
+      // If we're near the end of available quotes, fetch more
+      if (_currentQuoteIndex >= _quotes.length - 3) {
+        await _fetchMoreQuotes();
+      }
+    } else {
+      // Fallback to static quotes
+      final settingsCtl = SettingsScope.of(context);
+      final settings = settingsCtl.value;
+      setState(() {
+        _currentQuoteIndex = (_currentQuoteIndex + 1) % 14;
+        _currentQuote = _getFallbackQuote(settings.faithTier);
+      });
+    }
+  }
+
+  Future<void> _fetchMoreQuotes() async {
+    try {
+      final settingsCtl = SettingsScope.of(context);
+      final settings = settingsCtl.value;
+      
+      // Fetch additional quotes with different topics for variety
+      final topics = ['motivation', 'wisdom', 'growth', 'peace', 'strength'];
+      final randomTopic = topics[_currentQuoteIndex % topics.length];
+      
+      final moreQuotes = await GatewayService.fetchDailyQuotes(
+        faithTier: settings.faithTier,
+        topic: randomTopic,
+        limit: 10, // Fetch 10 more quotes
+      );
+      
+      if (mounted && moreQuotes.isNotEmpty) {
+        setState(() {
+          // Add new quotes to existing ones, avoiding duplicates
+          final existingTexts = _quotes.map((q) => q['text'].toLowerCase()).toSet();
+          final newQuotes = moreQuotes.where((q) => 
+            !existingTexts.contains(q['text'].toLowerCase())
+          ).toList();
+          
+          _quotes.addAll(newQuotes);
+          print('🔄 Added ${newQuotes.length} new quotes. Total: ${_quotes.length}');
+        });
+      }
+    } catch (e) {
+      print('Error fetching more quotes: $e');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final quote = _currentQuote;
+    final quote = _currentQuote ?? _getFallbackQuote(SettingsScope.of(context).value.faithTier);
 
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: AppSpace.x4),
@@ -242,10 +354,13 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> with Ticker
                           children: [
                             Row(
                               children: [
-                                Text(
-                                  'Daily Inspiration',
-                                  style: theme.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
+                                Flexible(
+                                  child: Text(
+                                    'Daily Inspiration',
+                                    style: theme.textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
                                 const SizedBox(width: AppSpace.x2),
@@ -273,26 +388,43 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> with Ticker
                               ],
                             ),
                             const SizedBox(height: 4),
-                            Text(
-                              'Tap to ${_isExpanded ? 'collapse' : 'expand'}',
-                              style: theme.textTheme.bodySmall?.copyWith(
-                                color: colorScheme.onSurfaceVariant,
-                              ),
-                            ),
+                                    Text(
+                                      'Tap to ${_isExpanded ? 'collapse' : 'expand'} • ${_quotes.length} quotes available',
+                                      style: theme.textTheme.bodySmall?.copyWith(
+                                        color: colorScheme.onSurfaceVariant,
+                                      ),
+                                    ),
                           ],
                         ),
                       ),
-                      IconButton(
-                        onPressed: _refreshQuote,
-                        icon: Icon(
-                          Icons.refresh,
-                          color: _isFaithQuote 
-                              ? const Color(0xFFC9A227)
-                              : const Color(0xFF0FA97A),
-                          size: 20,
-                        ),
-                        tooltip: 'New inspiration',
-                      ),
+                              Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  IconButton(
+                                    onPressed: _refreshQuote,
+                                    icon: Icon(
+                                      Icons.refresh,
+                                      color: _isFaithQuote 
+                                          ? const Color(0xFFC9A227)
+                                          : const Color(0xFF0FA97A),
+                                      size: 20,
+                                    ),
+                                    tooltip: 'New inspiration',
+                                  ),
+                                  if (_quotes.length < 10) // Show load more button if we have few quotes
+                                    IconButton(
+                                      onPressed: _fetchMoreQuotes,
+                                      icon: Icon(
+                                        Icons.add_circle_outline,
+                                        color: _isFaithQuote 
+                                            ? const Color(0xFFC9A227)
+                                            : const Color(0xFF0FA97A),
+                                        size: 20,
+                                      ),
+                                      tooltip: 'Load more quotes',
+                                    ),
+                                ],
+                              ),
                       Icon(
                         _isExpanded ? Icons.expand_less : Icons.expand_more,
                         color: colorScheme.onSurfaceVariant,
@@ -303,15 +435,30 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> with Ticker
                   const SizedBox(height: AppSpace.x3),
                   
                   // Inspiration text
-                  Text(
-                    quote['text'],
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      height: 1.4,
-                      fontStyle: FontStyle.italic,
+                  if (_isLoading)
+                    Container(
+                      height: 60,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            _isFaithQuote 
+                                ? const Color(0xFFC9A227)
+                                : const Color(0xFF0FA97A),
+                          ),
+                        ),
+                      ),
+                    )
+                  else
+                    Text(
+                      quote['text'],
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        height: 1.4,
+                        fontStyle: FontStyle.italic,
+                      ),
+                      maxLines: _isExpanded ? null : 3,
+                      overflow: _isExpanded ? null : TextOverflow.ellipsis,
                     ),
-                    maxLines: _isExpanded ? null : 3,
-                    overflow: _isExpanded ? null : TextOverflow.ellipsis,
-                  ),
                   
                   // Author (always visible)
                   const SizedBox(height: AppSpace.x2),
@@ -353,7 +500,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> with Ticker
                     Wrap(
                       spacing: 8,
                       runSpacing: 4,
-                      children: (quote['tags'] as List<String>).map((tag) {
+                      children: (quote['tags'] as List<dynamic>).map((tag) {
                         return Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 8,
@@ -366,7 +513,7 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> with Ticker
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
-                            '#$tag',
+                            '#${tag.toString()}',
                             style: theme.textTheme.labelSmall?.copyWith(
                               color: _isFaithQuote 
                                   ? const Color(0xFFC9A227)
