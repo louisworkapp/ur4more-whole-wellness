@@ -10,12 +10,25 @@ import '../../../widgets/settings/choice_tile.dart';
 class FaithModeSectionWidget extends StatelessWidget {
   final FaithMode faithMode;
   final ValueChanged<FaithMode?> onFaithModeChanged;
+  final VoidCallback? onFaithModeEnabled;
 
   const FaithModeSectionWidget({
     super.key,
     required this.faithMode,
     required this.onFaithModeChanged,
+    this.onFaithModeEnabled,
   });
+
+  void _handleFaithModeChange(FaithMode? newMode) {
+    // Check if faith mode is being enabled (from off to any faith mode)
+    if (faithMode == FaithMode.off && newMode != null && newMode != FaithMode.off) {
+      // Call the callback to show congratulations
+      onFaithModeEnabled?.call();
+    }
+    
+    // Always call the original callback
+    onFaithModeChanged(newMode);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +54,7 @@ class FaithModeSectionWidget extends StatelessWidget {
             color: colorScheme.onSurfaceVariant,
             size: 24,
           ),
-          onChanged: onFaithModeChanged,
+          onChanged: _handleFaithModeChange,
         ),
         const SizedBox(height: AppSpace.x3),
         ChoiceTile<FaithMode>(
@@ -54,7 +67,7 @@ class FaithModeSectionWidget extends StatelessWidget {
             color: colorScheme.onSurfaceVariant,
             size: 24,
           ),
-          onChanged: onFaithModeChanged,
+          onChanged: _handleFaithModeChange,
         ),
         const SizedBox(height: AppSpace.x3),
         ChoiceTile<FaithMode>(
@@ -67,7 +80,7 @@ class FaithModeSectionWidget extends StatelessWidget {
             color: colorScheme.onSurfaceVariant,
             size: 24,
           ),
-          onChanged: onFaithModeChanged,
+          onChanged: _handleFaithModeChange,
         ),
         const SizedBox(height: AppSpace.x3),
         ChoiceTile<FaithMode>(
@@ -80,7 +93,7 @@ class FaithModeSectionWidget extends StatelessWidget {
             color: colorScheme.onSurfaceVariant,
             size: 24,
           ),
-          onChanged: onFaithModeChanged,
+          onChanged: _handleFaithModeChange,
         ),
       ],
     );
