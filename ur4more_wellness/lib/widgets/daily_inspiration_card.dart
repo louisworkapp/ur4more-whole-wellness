@@ -378,6 +378,80 @@ class _DailyInspirationCardState extends State<DailyInspirationCard> with Ticker
                       }).toList(),
                     ),
                   ],
+                  
+                  // Faith invitation for secular mode users
+                  if (!_isFaithQuote) ...[
+                    const SizedBox(height: AppSpace.x3),
+                    GestureDetector(
+                      onTap: () {
+                        HapticFeedback.lightImpact();
+                        // Navigate to settings faith section
+                        Navigator.of(context).pushNamed('/settings', arguments: {'section': 'faith'});
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(AppSpace.x3),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              const Color(0xFFC9A227).withOpacity(0.1),
+                              const Color(0xFFC9A227).withOpacity(0.05),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: const Color(0xFFC9A227).withOpacity(0.2),
+                            width: 1,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFC9A227).withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Icons.auto_stories_rounded,
+                                color: Color(0xFFC9A227),
+                                size: 20,
+                              ),
+                            ),
+                            const SizedBox(width: AppSpace.x3),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Deeper Truths in Faith',
+                                    style: theme.textTheme.titleSmall?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: const Color(0xFFC9A227),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'Explore spiritual wisdom and biblical insights',
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: colorScheme.onSurfaceVariant,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: const Color(0xFFC9A227),
+                              size: 16,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),

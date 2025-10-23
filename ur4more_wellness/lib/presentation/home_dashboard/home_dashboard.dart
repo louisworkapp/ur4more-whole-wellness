@@ -12,6 +12,8 @@ import './widgets/wellness_navigation_card.dart';
 import '../../widgets/media_card.dart';
 import '../../widgets/daily_inspiration_card.dart';
 import '../../theme/tokens.dart';
+import '../../core/settings/settings_scope.dart';
+import '../../core/settings/settings_model.dart';
 
 class HomeDashboard extends StatefulWidget {
   const HomeDashboard({super.key});
@@ -464,4 +466,5 @@ class _HomeDashboardState extends State<HomeDashboard> {
       ),
     );
   }
+
 }

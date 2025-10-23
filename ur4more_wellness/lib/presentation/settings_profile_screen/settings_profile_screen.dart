@@ -28,6 +28,10 @@ class SettingsProfileScreen extends StatefulWidget {
 }
 
 class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
+  // Scroll controller for section focus
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _faithSectionKey = GlobalKey();
+  
   // Profile settings
   String _fullName = 'Sarah Johnson';
 
@@ -51,6 +55,39 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
   final String _appVersion = '1.2.3';
 
   @override
+  void initState() {
+    super.initState();
+    // Check if we should focus on faith section
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+      if (args?['section'] == 'faith') {
+        _scrollToFaithSection();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToFaithSection() {
+    if (_faithSectionKey.currentContext != null) {
+      Scrollable.ensureVisible(
+        _faithSectionKey.currentContext!,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
+
+  void _showFaithCongratulations() {
+    // Navigate to faith congratulations screen
+    Navigator.of(context).pushNamed('/faith-congratulations');
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
@@ -68,6 +105,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
+          controller: _scrollController,
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -94,9 +132,13 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
               ),
 
               // Faith Mode Control Section
-              FaithModeSectionWidget(
-                faithMode: _convertFaithTierToFaithMode(settings.faithTier),
-                onFaithModeChanged: _updateFaithMode,
+              Container(
+                key: _faithSectionKey,
+                child: FaithModeSectionWidget(
+                  faithMode: _convertFaithTierToFaithMode(settings.faithTier),
+                  onFaithModeChanged: _updateFaithMode,
+                  onFaithModeEnabled: _showFaithCongratulations,
+                ),
               ),
 
               // Notification Settings Section
