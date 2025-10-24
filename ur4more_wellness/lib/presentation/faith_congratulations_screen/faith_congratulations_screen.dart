@@ -89,7 +89,7 @@ class _FaithCongratulationsScreenState extends State<FaithCongratulationsScreen>
 
   void _onContinue() {
     HapticFeedback.mediumImpact();
-    Navigator.of(context).pop();
+    Navigator.of(context).pushReplacementNamed('/discipleship-welcome');
   }
 
   @override

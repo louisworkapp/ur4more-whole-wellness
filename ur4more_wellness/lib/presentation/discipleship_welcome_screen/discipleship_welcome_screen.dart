@@ -4,14 +4,14 @@ import '../../theme/tokens.dart';
 import '../../widgets/custom_icon_widget.dart';
 import '../../widgets/discipleship_background.dart';
 
-class DiscipleshipCoursesScreen extends StatefulWidget {
-  const DiscipleshipCoursesScreen({super.key});
+class DiscipleshipWelcomeScreen extends StatefulWidget {
+  const DiscipleshipWelcomeScreen({super.key});
 
   @override
-  State<DiscipleshipCoursesScreen> createState() => _DiscipleshipCoursesScreenState();
+  State<DiscipleshipWelcomeScreen> createState() => _DiscipleshipWelcomeScreenState();
 }
 
-class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
+class _DiscipleshipWelcomeScreenState extends State<DiscipleshipWelcomeScreen>
     with TickerProviderStateMixin {
   late AnimationController _fadeController;
   late AnimationController _scaleController;
@@ -146,7 +146,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
                           child: Column(
                             children: [
                               Text(
-                                'Discipleship Courses',
+                                'Follow Me',
                                 style: theme.textTheme.headlineMedium?.copyWith(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -165,7 +165,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
                               const SizedBox(height: 12),
                               
                               Text(
-                                'Choose your path of spiritual growth and learning.',
+                                'Begin your journey of learning Jesus, living His word, and leading others.',
                                 style: theme.textTheme.titleMedium?.copyWith(
                                   color: T.gold,
                                   fontWeight: FontWeight.w600,
@@ -349,7 +349,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
                                   child: InkWell(
                                     borderRadius: BorderRadius.circular(20),
                                     onTap: () {
-                                      Navigator.of(context).pushNamed('/courses/detail');
+                                      Navigator.of(context).pushReplacementNamed('/courses/detail');
                                     },
                                     child: Center(
                                       child: Row(
@@ -362,7 +362,7 @@ class _DiscipleshipCoursesScreenState extends State<DiscipleshipCoursesScreen>
                                           ),
                                           const SizedBox(width: 12),
                                           Text(
-                                            'Start Course',
+                                            'Follow Me',
                                             style: theme.textTheme.titleLarge?.copyWith(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,
