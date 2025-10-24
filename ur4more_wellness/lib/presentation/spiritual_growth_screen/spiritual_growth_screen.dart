@@ -14,11 +14,25 @@ import '../../features/spirit/widgets/faith_mode_banner.dart';
 import '../../core/settings/settings_scope.dart';
 import '../../core/settings/settings_model.dart';
 import '../../services/devotional_service.dart';
+import '../../widgets/daily_wisdom_card.dart';
+import '../../widgets/badge_chip.dart';
 import './widgets/devotional_card_widget.dart';
 import './widgets/devotional_history_widget.dart';
 import './widgets/faith_mode_banner_widget.dart';
 import './widgets/prayer_request_widget.dart';
 import './widgets/spiritual_milestone_widget.dart';
+
+// Design System Colors
+const Color _bgColor = Color(0xFF0C1220);
+const Color _surfaceColor = Color(0xFF121A2B);
+const Color _surface2Color = Color(0xFF172238);
+const Color _textColor = Color(0xFFEAF1FF);
+const Color _textSubColor = Color(0xFFA8B7D6);
+const Color _brandBlue = Color(0xFF3C79FF);
+const Color _brandBlue200 = Color(0xFF7AA9FF);
+const Color _brandGold = Color(0xFFFFC24D);
+const Color _brandGold700 = Color(0xFFD59E27);
+const Color _outlineColor = Color(0xFF243356);
 
 class SpiritualGrowthScreen extends StatefulWidget {
   const SpiritualGrowthScreen({super.key});
@@ -313,15 +327,20 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
             // Discipleship header
             const DiscipleshipHeader(),
 
+            // Daily Wisdom Card
+            const DailyWisdomCard(),
+            SizedBox(height: AppSpace.x3),
+
             // Streak and points header
             _buildStreakHeader(context, colorScheme),
 
             // Tab bar
             Container(
-              margin: EdgeInsets.symmetric(horizontal: AppSpace.x4),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                color: colorScheme.surfaceContainerHighest,
+                color: _surfaceColor,
                 borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: _outlineColor, width: 1),
               ),
               child: TabBar(
                 controller: _tabController,
@@ -330,9 +349,9 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
                   Tab(text: "History"),
                   Tab(text: "Milestones"),
                 ],
-                labelColor: T.gold, // Spiritual growth: golden
-                unselectedLabelColor: colorScheme.onSurfaceVariant,
-                indicatorColor: T.gold, // Spiritual growth: golden
+                labelColor: _brandBlue, // Navigation: blue
+                unselectedLabelColor: _textSubColor,
+                indicatorColor: _brandBlue, // Navigation: blue
                 indicatorSize: TabBarIndicatorSize.tab,
                 labelStyle: theme.textTheme.labelLarge?.copyWith(
                   fontWeight: FontWeight.w600,
@@ -369,34 +388,39 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
     final theme = Theme.of(context);
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x1),
-      padding: Pad.card,
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            T.gold, // Spiritual growth: golden
-            T.gold.withOpacity(0.8), // Spiritual growth: golden
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: _surfaceColor,
         borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: _outlineColor, width: 1),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x14000000), 
+            blurRadius: 12, 
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
         children: [
           Container(
-            padding: EdgeInsets.all(AppSpace.x3),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity( 0.2),
+              color: _brandGold.withOpacity(0.15),
               borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: _brandGold.withOpacity(0.3),
+                width: 1,
+              ),
             ),
             child: CustomIconWidget(
               iconName: 'local_fire_department',
-              color: Colors.white,
+              color: _brandGold,
               size: 24,
             ),
           ),
-          SizedBox(width: AppSpace.x4),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -404,43 +428,23 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
                 Text(
                   "$_devotionStreak Day Streak",
                   style: theme.textTheme.titleLarge?.copyWith(
-                    color: Colors.white,
+                    color: _textColor,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                SizedBox(height: AppSpace.x1),
+                const SizedBox(height: 4),
                 Text(
                   "Keep up your daily devotion habit!",
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: Colors.white.withOpacity( 0.9),
+                    color: _textSubColor,
                   ),
                 ),
               ],
             ),
           ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
-            decoration: BoxDecoration(
-              color: AppTheme.secondaryLight,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Column(
-              children: [
-                Text(
-                  "$_spiritualPoints",
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                Text(
-                  "Points",
-                  style: theme.textTheme.labelSmall?.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
+          BadgeChip(
+            label: "$_spiritualPoints Points",
+            color: _brandGold,
           ),
         ],
       ),
@@ -450,7 +454,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
   Widget _buildTodayTab(BuildContext context, ColorScheme colorScheme) {
     return RefreshIndicator(
       onRefresh: _refreshContent,
-      color: T.gold, // Spiritual growth: golden
+      color: _brandBlue, // Navigation: blue
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
@@ -463,7 +467,7 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
                 height: 200,
                 child: Center(
                   child: CircularProgressIndicator(
-                    color: T.gold, // Spiritual growth: golden
+                    color: _brandBlue, // Navigation: blue
                   ),
                 ),
               )
