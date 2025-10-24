@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import '../../../design/tokens.dart';
 import '../../../widgets/custom_app_bar.dart';
+import '../../../widgets/badge_chip.dart';
 import '../data/course_repository.dart';
 import '../models/course_models.dart';
 import '../../../services/scripture_service.dart';
 import '../widgets/unlock_scripture_card.dart';
 import '../../spirit/services/faith_mode_navigator.dart';
+
+// Design System Colors
+const Color _bgColor = Color(0xFF0C1220);
+const Color _surfaceColor = Color(0xFF121A2B);
+const Color _surface2Color = Color(0xFF172238);
+const Color _textColor = Color(0xFFEAF1FF);
+const Color _textSubColor = Color(0xFFA8B7D6);
+const Color _brandBlue = Color(0xFF3C79FF);
+const Color _brandBlue200 = Color(0xFF7AA9FF);
+const Color _brandGold = Color(0xFFFFC24D);
+const Color _brandGold700 = Color(0xFFD59E27);
+const Color _outlineColor = Color(0xFF243356);
 
 class WeekLessonScreen extends StatefulWidget {
   const WeekLessonScreen({super.key});
@@ -226,15 +239,16 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
       width: double.infinity,
       padding: EdgeInsets.all(AppSpace.x5),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            colorScheme.primaryContainer,
-            colorScheme.primaryContainer.withOpacity(0.8),
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(AppRadius.lg),
+        color: _surfaceColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: _outlineColor, width: 1),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x14000000), 
+            blurRadius: 12, 
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -280,7 +294,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
                       _week!.title,
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w600,
-                        color: colorScheme.onPrimaryContainer,
+                        color: _textColor,
                       ),
                     ),
                   ],
@@ -292,7 +306,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
           Text(
             _week!.theme,
             style: theme.textTheme.bodyLarge?.copyWith(
-              color: colorScheme.onPrimaryContainer.withOpacity(0.9),
+              color: _textSubColor,
               height: 1.4,
             ),
           ),

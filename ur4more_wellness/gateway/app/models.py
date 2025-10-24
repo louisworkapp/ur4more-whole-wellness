@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field
 from typing import List, Literal, Optional, Dict
 
 FaithMode = Literal["off","light","disciple","kingdom"]
@@ -18,14 +18,12 @@ class QuoteItem(BaseModel):
     source: Literal["local","external","rag"] = "local"
     tags: List[str] = []
     attributionUrl: Optional[str] = None
-    @validator("text")
-    def _trim(cls, v): return v.strip()
 
 class ScriptureRequest(BaseModel):
     faithMode: FaithMode
     lightConsentGiven: bool = False
     hideFaithOverlaysInMind: bool = False
-    theme: str
+    theme: str = ""
     limit: int = 1
 
 class Verse(BaseModel):
