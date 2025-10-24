@@ -1,22 +1,13 @@
 import 'package:flutter/material.dart';
-import '../../../design/tokens.dart';
+import 'dart:math';
+import '../../../theme/tokens.dart';
+import '../../../widgets/custom_icon_widget.dart';
+import '../../../widgets/discipleship_background.dart';
 import '../../../widgets/custom_app_bar.dart';
 import '../../../widgets/badge_chip.dart';
 import '../data/course_repository.dart';
 import '../models/course_models.dart';
 import '../../../routes/app_routes.dart';
-
-// Design System Colors
-const Color _bgColor = Color(0xFF0C1220);
-const Color _surfaceColor = Color(0xFF121A2B);
-const Color _surface2Color = Color(0xFF172238);
-const Color _textColor = Color(0xFFEAF1FF);
-const Color _textSubColor = Color(0xFFA8B7D6);
-const Color _brandBlue = Color(0xFF3C79FF);
-const Color _brandBlue200 = Color(0xFF7AA9FF);
-const Color _brandGold = Color(0xFFFFC24D);
-const Color _brandGold700 = Color(0xFFD59E27);
-const Color _outlineColor = Color(0xFF243356);
 
 class CourseDetailScreen extends StatefulWidget {
   const CourseDetailScreen({super.key});
@@ -25,17 +16,81 @@ class CourseDetailScreen extends StatefulWidget {
   State<CourseDetailScreen> createState() => _CourseDetailScreenState();
 }
 
-class _CourseDetailScreenState extends State<CourseDetailScreen> {
+class _CourseDetailScreenState extends State<CourseDetailScreen>
+    with TickerProviderStateMixin {
   final CourseRepository _repository = CourseRepository();
   Course? _course;
   CourseProgress? _progress;
   FaithTier _currentTier = FaithTier.off;
   bool _isLoading = true;
 
+  late AnimationController _fadeController;
+  late AnimationController _scaleController;
+  late AnimationController _sparkleController;
+  
+  late Animation<double> _fadeAnimation;
+  late Animation<double> _scaleAnimation;
+  late Animation<double> _sparkleAnimation;
+
   @override
   void initState() {
     super.initState();
+    
+    _fadeController = AnimationController(
+      duration: const Duration(milliseconds: 1500),
+      vsync: this,
+    );
+    
+    _scaleController = AnimationController(
+      duration: const Duration(milliseconds: 1200),
+      vsync: this,
+    );
+    
+    _sparkleController = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
+
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _fadeController,
+      curve: Curves.easeInOut,
+    ));
+
+    _scaleAnimation = Tween<double>(
+      begin: 0.5,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _scaleController,
+      curve: Curves.elasticOut,
+    ));
+
+    _sparkleAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _sparkleController,
+      curve: Curves.linear,
+    ));
+
+    // Start animations
+    _fadeController.forward();
+    Future.delayed(const Duration(milliseconds: 300), () {
+      _scaleController.forward();
+    });
+    _sparkleController.repeat();
+
     _loadData();
+  }
+
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    _scaleController.dispose();
+    _sparkleController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadData() async {
@@ -61,50 +116,99 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
+    
     return Scaffold(
-      appBar: CustomAppBar(
-        title: _course?.title ?? 'Course Details',
-        showBackButton: true,
+      body: Stack(
+        children: [
+          // Custom background gradient
+          const DiscipleshipBackground(),
+          
+          // Content overlay
+          SafeArea(
+            child: Column(
+              children: [
+                // Custom app bar
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        icon: const Icon(Icons.arrow_back, color: Colors.white),
+                      ),
+                      Expanded(
+                        child: Text(
+                          _course?.title ?? 'Course Details',
+                          style: theme.textTheme.titleLarge?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          // Profile action
+                        },
+                        icon: const Icon(Icons.person, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+                
+                // Main content
+                Expanded(
+                  child: _isLoading
+                      ? const Center(child: CircularProgressIndicator(color: T.gold))
+                      : _course == null
+                          ? _buildErrorState(theme)
+                          : _buildContent(theme),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : _course == null
-              ? _buildErrorState(theme, colorScheme)
-              : _buildContent(theme, colorScheme),
     );
   }
 
-  Widget _buildErrorState(ThemeData theme, ColorScheme colorScheme) {
+  Widget _buildErrorState(ThemeData theme) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(AppSpace.x6),
+        padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.error_outline,
               size: 64,
-              color: colorScheme.error,
+              color: Colors.white,
             ),
-            const SizedBox(height: AppSpace.x4),
+            const SizedBox(height: 16),
             Text(
               'Unable to load course',
-              style: theme.textTheme.titleLarge,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: AppSpace.x2),
-            Text(
-              'Please try again later.',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurfaceVariant,
+              style: theme.textTheme.titleLarge?.copyWith(
+                color: Colors.white,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: AppSpace.x6),
+            const SizedBox(height: 8),
+            Text(
+              'Please try again later.',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: Colors.white.withOpacity(0.7),
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
             ElevatedButton(
               onPressed: _loadData,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: T.gold,
+                foregroundColor: Colors.white,
+              ),
               child: const Text('Retry'),
             ),
           ],
@@ -113,431 +217,436 @@ class _CourseDetailScreenState extends State<CourseDetailScreen> {
     );
   }
 
-  Widget _buildContent(ThemeData theme, ColorScheme colorScheme) {
-    return Column(
-      children: [
-        Expanded(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.all(AppSpace.x4),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 430),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildCourseHeader(theme, colorScheme),
-                  const SizedBox(height: AppSpace.x6),
-                  _buildWeeksList(theme, colorScheme),
-                ],
+  Widget _buildContent(ThemeData theme) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          // Top section with fish logo in center
+          Container(
+            height: 200,
+            child: Center(
+              child: FadeTransition(
+                opacity: _fadeAnimation,
+                child: ScaleTransition(
+                  scale: _scaleAnimation,
+                  child: Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      color: T.gold.withOpacity(0.1),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: T.gold.withOpacity(0.3),
+                        width: 2,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: T.gold.withOpacity(0.2),
+                          blurRadius: 15,
+                          spreadRadius: 3,
+                        ),
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Image.asset(
+                        'assets/images/fish_logo.png',
+                        color: T.gold,
+                        colorBlendMode: BlendMode.modulate,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-        _buildBottomAction(theme, colorScheme),
-      ],
-    );
-  }
-
-  Widget _buildCourseHeader(ThemeData theme, ColorScheme colorScheme) {
-    if (_course == null) return const SizedBox.shrink();
-
-    final progressPercentage = _progress?.progressPercentage ?? 0.0;
-    final completedWeeks = _progress?.weekCompletion.values
-            .where((completed) => completed)
-            .length ??
-        0;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppSpace.x5),
-          decoration: BoxDecoration(
-            color: _surfaceColor,
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: _outlineColor, width: 1),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x14000000), 
-                blurRadius: 12, 
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      color: _brandBlue200.withOpacity(0.15),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: _brandBlue200.withOpacity(0.3),
-                        width: 1,
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.auto_stories_rounded,
-                      color: _brandBlue200,
-                      size: 24,
-                    ),
-                  ),
-                  const SizedBox(width: AppSpace.x3),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          _course!.title,
-                          style: theme.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: _textColor,
-                          ),
-                        ),
-                        const SizedBox(height: AppSpace.x1),
-                        Text(
-                          _course!.description,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: _textSubColor,
-                            height: 1.3,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: AppSpace.x4),
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Progress',
-                          style: theme.textTheme.labelMedium?.copyWith(
-                            color: _textSubColor,
-                          ),
-                        ),
-                        const SizedBox(height: AppSpace.x1),
-                        LinearProgressIndicator(
-                          value: progressPercentage,
-                          backgroundColor: colorScheme.onPrimaryContainer.withOpacity(0.2),
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            colorScheme.onPrimaryContainer,
-                          ),
-                          minHeight: 6,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: AppSpace.x4),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpace.x3,
-                      vertical: AppSpace.x2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: _brandGold.withOpacity(0.15),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: _brandGold.withOpacity(0.3),
-                        width: 1,
-                      ),
-                    ),
-                    child: Text(
-                      '${(progressPercentage * 100).round()}%',
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: _brandGold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: AppSpace.x2),
-              Text(
-                '$completedWeeks of 12 weeks completed',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: _textSubColor,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildWeeksList(ThemeData theme, ColorScheme colorScheme) {
-    if (_course == null || _progress == null) return const SizedBox.shrink();
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Course Content',
-          style: theme.textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w600,
-            color: _textColor,
-          ),
-        ),
-        const SizedBox(height: AppSpace.x4),
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: _course!.weeks.length,
-          separatorBuilder: (context, index) => const SizedBox(height: AppSpace.x3),
-          itemBuilder: (context, index) {
-            final week = _course!.weeks[index];
-            return _buildWeekCard(theme, colorScheme, week);
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget _buildWeekCard(ThemeData theme, ColorScheme colorScheme, Week week) {
-    final isCompleted = _progress!.isWeekComplete(week.week);
-    final isUnlocked = _repository.isWeekUnlocked(week.week, _currentTier, _progress!);
-    final isCurrentWeek = week.week == _progress!.nextIncompleteWeek;
-    final hasStartedCourse = _progress!.weekCompletion.values.any((completed) => completed);
-
-    return Card(
-      elevation: isCurrentWeek ? 4 : 1,
-      color: hasStartedCourse && isUnlocked 
-          ? const Color(0xFFFFD700).withOpacity(0.1) // Gold background
-          : null,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        side: isCurrentWeek
-            ? BorderSide(color: hasStartedCourse ? const Color(0xFFFFD700) : colorScheme.primary, width: 2)
-            : hasStartedCourse && isUnlocked
-                ? BorderSide(color: const Color(0xFFFFD700).withOpacity(0.3), width: 1)
-                : BorderSide.none,
-      ),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        onTap: isUnlocked ? () => _navigateToWeek(week) : null,
-        child: Padding(
-          padding: EdgeInsets.all(AppSpace.x4),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: isCompleted
-                          ? (hasStartedCourse ? const Color(0xFFFFD700) : colorScheme.primary)
-                          : isUnlocked
-                              ? (hasStartedCourse ? const Color(0xFFFFD700).withOpacity(0.8) : colorScheme.primaryContainer)
-                              : colorScheme.surfaceVariant,
-                      borderRadius: BorderRadius.circular(AppRadius.md),
-                    ),
-                    child: isCompleted
-                        ? Icon(
-                            Icons.check,
-                            color: colorScheme.onPrimary,
-                            size: 20,
-                          )
-                        : isUnlocked
-                            ? Text(
-                                '${week.week}',
-                                style: theme.textTheme.titleMedium?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: hasStartedCourse ? Colors.white : colorScheme.onPrimaryContainer,
-                                ),
-                                textAlign: TextAlign.center,
-                              )
-                            : Icon(
-                                Icons.lock,
-                                color: colorScheme.onSurfaceVariant,
-                                size: 20,
-                              ),
-                  ),
-                  const SizedBox(width: AppSpace.x3),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              'Week ${week.week}',
-                              style: theme.textTheme.labelMedium?.copyWith(
-                                color: colorScheme.primary,
-                                fontWeight: FontWeight.w600,
-                              ),
+          
+          // Content section with proper spacing
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Column(
+              children: [
+                // Course header message
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: Column(
+                    children: [
+                      Text(
+                        _course?.title ?? 'Discipleship Course',
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28,
+                          shadows: [
+                            Shadow(
+                              color: Colors.black.withOpacity(0.5),
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
                             ),
-                            if (isCurrentWeek) ...[
-                              const SizedBox(width: AppSpace.x2),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: AppSpace.x2,
-                                  vertical: AppSpace.x1,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: colorScheme.primary,
-                                  borderRadius: BorderRadius.circular(AppRadius.sm),
-                                ),
-                                child: Text(
-                                  'Current',
-                                  style: theme.textTheme.labelSmall?.copyWith(
-                                    color: colorScheme.onPrimary,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ],
                           ],
                         ),
-                        const SizedBox(height: AppSpace.x1),
-                        Text(
-                          week.title,
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: isUnlocked
-                                ? colorScheme.onSurface
-                                : colorScheme.onSurfaceVariant,
+                        textAlign: TextAlign.center,
+                      ),
+                      
+                      const SizedBox(height: 12),
+                      
+                      Text(
+                        _course?.description ?? 'A comprehensive journey through the foundations of Christian faith.',
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          color: T.gold,
+                          fontWeight: FontWeight.w600,
+                          shadows: [
+                            Shadow(
+                              color: Colors.black.withOpacity(0.5),
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      
+                      const SizedBox(height: 16),
+                      
+                      // Progress card with enhanced styling
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: T.gold.withOpacity(0.5),
+                            width: 2,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              blurRadius: 10,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                const CustomIconWidget(
+                                  iconName: 'trending_up',
+                                  color: T.gold,
+                                  size: 20,
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    'Progress',
+                                    style: theme.textTheme.titleMedium?.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                BadgeChip(
+                                  label: '${((_progress?.progressPercentage ?? 0.0) * 100).round()}%',
+                                  color: T.gold,
+                                ),
+                              ],
+                            ),
+                            
+                            const SizedBox(height: 12),
+                            
+                            LinearProgressIndicator(
+                              value: _progress?.progressPercentage ?? 0.0,
+                              backgroundColor: Colors.white.withOpacity(0.2),
+                              valueColor: const AlwaysStoppedAnimation<Color>(T.gold),
+                              minHeight: 8,
+                            ),
+                            
+                            const SizedBox(height: 8),
+                            
+                            Text(
+                              '${(_progress?.weekCompletion.values.where((completed) => completed).length ?? 0)} of 12 weeks completed',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: Colors.white.withOpacity(0.8),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      
+                      const SizedBox(height: 20),
+                      
+                      // Course content section
+                      Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: T.gold.withOpacity(0.4),
+                            width: 2,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 8,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                const CustomIconWidget(
+                                  iconName: 'library_books',
+                                  color: T.gold,
+                                  size: 20,
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    'Course Content',
+                                    style: theme.textTheme.titleMedium?.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            
+                            const SizedBox(height: 16),
+                            
+                            // Course weeks list - show all weeks
+                            ...(_course?.weeks.map((week) => _buildWeekCard(theme, week)) ?? []),
+                          ],
+                        ),
+                      ),
+                      
+                      const SizedBox(height: 24),
+                      
+                      // Continue button with enhanced styling
+                      Container(
+                        width: double.infinity,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: T.gold,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: T.gold.withOpacity(0.4),
+                              blurRadius: 15,
+                              offset: const Offset(0, 6),
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              blurRadius: 8,
+                              offset: const Offset(0, 3),
+                            ),
+                          ],
+                        ),
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(20),
+                            onTap: () {
+                              final nextWeek = _progress?.nextIncompleteWeek ?? 1;
+                              if (_course != null && _course!.weeks.isNotEmpty) {
+                                _navigateToWeek(_course!.weeks[nextWeek - 1]);
+                              }
+                            },
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const CustomIconWidget(
+                                    iconName: 'play_arrow',
+                                    color: Colors.white,
+                                    size: 24,
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Text(
+                                    (_progress?.weekCompletion.values.every((completed) => completed) ?? false)
+                                        ? 'Review Course'
+                                        : 'Continue',
+                                    style: theme.textTheme.titleLarge?.copyWith(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
-                        const SizedBox(height: AppSpace.x1),
-                        Text(
-                          week.theme,
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: isUnlocked
-                                ? colorScheme.onSurfaceVariant
-                                : colorScheme.onSurfaceVariant.withOpacity(0.6),
-                            height: 1.3,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  if (!isUnlocked)
-                    Icon(
-                      Icons.lock_outline,
-                      color: colorScheme.onSurfaceVariant.withOpacity(0.5),
-                      size: 20,
-                    ),
-                ],
-              ),
-              const SizedBox(height: AppSpace.x3),
-              Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpace.x2,
-                      vertical: AppSpace.x1,
-                    ),
-                    decoration: BoxDecoration(
-                      color: colorScheme.secondaryContainer,
-                      borderRadius: BorderRadius.circular(AppRadius.sm),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.schedule,
-                          size: 14,
-                          color: colorScheme.onSecondaryContainer,
-                        ),
-                        const SizedBox(width: AppSpace.x1),
-                        Text(
-                          '${week.estLessonMinutes} min',
-                          style: theme.textTheme.labelSmall?.copyWith(
-                            color: colorScheme.onSecondaryContainer,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: AppSpace.x2),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpace.x2,
-                      vertical: AppSpace.x1,
-                    ),
-                    decoration: BoxDecoration(
-                      color: colorScheme.tertiaryContainer,
-                      borderRadius: BorderRadius.circular(AppRadius.sm),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.fitness_center,
-                          size: 14,
-                          color: colorScheme.onTertiaryContainer,
-                        ),
-                        const SizedBox(width: AppSpace.x1),
-                        Text(
-                          '${week.estWeekPracticeMinutes} min/week',
-                          style: theme.textTheme.labelSmall?.copyWith(
-                            color: colorScheme.onTertiaryContainer,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
-        ),
+          
+          // Waves footer at bottom of scroll
+          Container(
+            height: 120,
+            width: double.infinity,
+            child: Center(
+              child: Image.asset(
+                'assets/images/waves_logo.png',
+                width: 300,
+                height: 80,
+                color: T.gold.withOpacity(0.3),
+                colorBlendMode: BlendMode.modulate,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildBottomAction(ThemeData theme, ColorScheme colorScheme) {
-    final nextWeek = _progress?.nextIncompleteWeek ?? 1;
-    final isCompleted = _progress?.weekCompletion.values.every((completed) => completed) ?? false;
+  Widget _buildWeekCard(ThemeData theme, Week week) {
+    final isCompleted = _progress?.isWeekComplete(week.week) ?? false;
+    final isUnlocked = _repository.isWeekUnlocked(week.week, _currentTier, _progress!);
+    final isCurrentWeek = week.week == (_progress?.nextIncompleteWeek ?? 1);
 
-    return Container(
-      padding: const EdgeInsets.all(AppSpace.x4),
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        border: Border(
-          top: BorderSide(
-            color: colorScheme.outline.withOpacity(0.2),
+    return GestureDetector(
+      onTap: isUnlocked ? () => _navigateToWeek(week) : null,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.05),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isCurrentWeek 
+                ? T.gold.withOpacity(0.5)
+                : isUnlocked 
+                    ? T.gold.withOpacity(0.2)
+                    : Colors.white.withOpacity(0.1),
+            width: 1,
           ),
         ),
-      ),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 430),
         child: Row(
-          children: [
-            Expanded(
-              child: ElevatedButton.icon(
-                onPressed: isCompleted
-                    ? () => _navigateToWeek(_course!.weeks[nextWeek - 1])
-                    : () => _navigateToWeek(_course!.weeks[nextWeek - 1]),
-                icon: Icon(
-                  isCompleted ? Icons.refresh : Icons.play_arrow,
+        children: [
+          // Week number/status icon
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: isCompleted
+                  ? T.gold.withOpacity(0.2)
+                  : isUnlocked
+                      ? T.gold.withOpacity(0.15)
+                      : Colors.white.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: isCompleted
+                ? const Icon(Icons.check, color: T.gold, size: 20)
+                : isUnlocked
+                    ? Center(
+                        child: Text(
+                          '${week.week}',
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            color: T.gold,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      )
+                    : const Icon(Icons.lock, color: Colors.white54, size: 20),
+          ),
+          
+          const SizedBox(width: 12),
+          
+          // Week content
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      'Week ${week.week}',
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        color: T.gold,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    if (isCurrentWeek) ...[
+                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: T.gold.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          'Current',
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: T.gold,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ],
                 ),
-                label: Text(
-                  isCompleted ? 'Review Course' : 'Continue',
+                const SizedBox(height: 4),
+                Text(
+                  week.title,
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(0, 56),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppRadius.md),
+                const SizedBox(height: 2),
+                Text(
+                  week.theme,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: Colors.white.withOpacity(0.7),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          // Duration badges
+          Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: T.gold.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  '${week.estLessonMinutes} min',
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: T.gold,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
+              const SizedBox(height: 4),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  color: T.gold.withOpacity(0.15),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  '${week.estWeekPracticeMinutes} min/week',
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    color: T.gold,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
       ),
     );
   }
