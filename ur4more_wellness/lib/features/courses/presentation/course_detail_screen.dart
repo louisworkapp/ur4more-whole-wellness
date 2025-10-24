@@ -86,6 +86,13 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Refresh progress when screen becomes visible again
+    _refreshProgress();
+  }
+
+  @override
   void dispose() {
     _fadeController.dispose();
     _scaleController.dispose();
@@ -111,6 +118,34 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
         _isLoading = false;
       });
     }
+  }
+
+  /// Refresh progress data and check for auto-advancement
+  Future<void> _refreshProgress() async {
+    if (_course == null) return;
+    
+    try {
+      final progress = await _repository.getCourseProgress(_course!.id);
+      setState(() {
+        _progress = progress;
+      });
+      
+      // Check if we need to auto-advance to next week
+      final nextWeek = progress.nextIncompleteWeek;
+      if (nextWeek > 1) {
+        // Auto-scroll to the current week
+        _scrollToCurrentWeek(nextWeek);
+      }
+    } catch (e) {
+      print('Error refreshing progress: $e');
+    }
+  }
+
+  /// Scroll to the current week in the list
+  void _scrollToCurrentWeek(int weekNumber) {
+    // This would scroll to the specific week card
+    // For now, we'll just update the UI to highlight the current week
+    print('Auto-advancing to week $weekNumber');
   }
 
   @override
@@ -164,7 +199,11 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
                       ? const Center(child: CircularProgressIndicator(color: T.gold))
                       : _course == null
                           ? _buildErrorState(theme)
-                          : _buildContent(theme),
+                          : RefreshIndicator(
+                              onRefresh: _refreshProgress,
+                              color: T.gold,
+                              child: _buildContent(theme),
+                            ),
                 ),
               ],
             ),
@@ -566,27 +605,46 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
               children: [
                 Row(
                   children: [
-                    Text(
-                      'Week ${week.week}',
-                      style: theme.textTheme.titleSmall?.copyWith(
-                        color: T.gold,
-                        fontWeight: FontWeight.w600,
+                    Flexible(
+                      child: Text(
+                        'Week ${week.week}',
+                        style: theme.textTheme.titleSmall?.copyWith(
+                          color: T.gold,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     if (isCurrentWeek) ...[
                       const SizedBox(width: 8),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                         decoration: BoxDecoration(
                           color: T.gold.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          'Current',
-                          style: theme.textTheme.labelSmall?.copyWith(
-                            color: T.gold,
-                            fontWeight: FontWeight.w600,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: T.gold.withOpacity(0.5),
+                            width: 1,
                           ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.play_arrow,
+                              color: T.gold,
+                              size: 12,
+                            ),
+                            const SizedBox(width: 3),
+                            Text(
+                              'Current',
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                color: T.gold,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 10,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -613,6 +671,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
           
           // Duration badges
           Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
@@ -651,9 +710,9 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
     );
   }
 
-  void _navigateToWeek(Week week) {
+  void _navigateToWeek(Week week) async {
     if (_course != null) {
-      Navigator.pushNamed(
+      final result = await Navigator.pushNamed(
         context,
         AppRoutes.weekLesson,
         arguments: {
@@ -661,6 +720,12 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
           'week': week.week,
         },
       );
+      
+      // Refresh progress when returning from week lesson
+      // This will automatically advance to next week if current week was completed
+      if (result == true || result == null) {
+        await _refreshProgress();
+      }
     }
   }
 }

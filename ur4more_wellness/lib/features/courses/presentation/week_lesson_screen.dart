@@ -129,16 +129,23 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: _week != null ? 'Week ${_week!.week}' : 'Lesson',
-        showBackButton: true,
+    return WillPopScope(
+      onWillPop: () async {
+        // Return false to indicate no completion
+        Navigator.of(context).pop(false);
+        return false;
+      },
+      child: Scaffold(
+        appBar: CustomAppBar(
+          title: _week != null ? 'Week ${_week!.week}' : 'Lesson',
+          showBackButton: true,
+        ),
+        body: _isLoading
+            ? const Center(child: CircularProgressIndicator())
+            : _week == null
+                ? _buildErrorState(theme, colorScheme)
+                : _buildContent(theme, colorScheme),
       ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : _week == null
-              ? _buildErrorState(theme, colorScheme)
-              : _buildContent(theme, colorScheme),
     );
   }
 
@@ -1083,8 +1090,8 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pop(); // Go back to course detail
+              Navigator.of(context).pop(); // Close dialog
+              Navigator.of(context).pop(true); // Go back to course detail with completion status
             },
             child: const Text('Continue'),
           ),
