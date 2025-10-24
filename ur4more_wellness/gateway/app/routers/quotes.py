@@ -13,7 +13,6 @@ from app.services.auth import require_auth
 router = APIRouter(prefix="/content", tags=["content"])
 
 @router.post("/quotes", response_model=List[QuoteItem])
-@limiter.limit("30/minute")
 async def quotes_endpoint(req: Request, body: QuoteRequest, _claims = Depends(require_auth)):
     allow = faith_allowed(body.faithMode, body.lightConsentGiven, body.hideFaithOverlaysInMind)
     key = make_cache_key("/quotes", body.model_dump())

@@ -3,7 +3,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../courses/models/course_models.dart';
 import '../../../routes/app_routes.dart';
 import '../../../design/tokens.dart';
-import '../../../theme/app_colors.dart';
+import '../../../theme/tokens.dart';
+import '../../../widgets/custom_icon_widget.dart';
+
+// Design System Colors
+const Color _bgColor = Color(0xFF0C1220);
+const Color _surfaceColor = Color(0xFF121A2B);
+const Color _surface2Color = Color(0xFF172238);
+const Color _textColor = Color(0xFFEAF1FF);
+const Color _textSubColor = Color(0xFFA8B7D6);
+const Color _brandBlue = Color(0xFF3C79FF);
+const Color _brandBlue200 = Color(0xFF7AA9FF);
+const Color _brandGold = Color(0xFFFFC24D);
+const Color _brandGold700 = Color(0xFFD59E27);
+const Color _outlineColor = Color(0xFF243356);
 
 class DiscipleshipHeader extends StatefulWidget {
   final FaithTier? tier;
@@ -75,145 +88,157 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
         horizontal: AppSpace.x4,
         vertical: AppSpace.x3,
       ),
-      child: Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.lg),
-        ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(AppRadius.lg),
-          onTap: _navigateToDiscipleship,
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: _hasStarted ? [
-                  AppColors.gold,
-                  AppColors.gold.withOpacity(0.8),
-                ] : [
-                  colorScheme.primaryContainer,
-                  colorScheme.primaryContainer.withOpacity(0.8),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(AppRadius.lg),
+      child: GestureDetector(
+        onTap: _navigateToDiscipleship,
+        child: Container(
+          decoration: BoxDecoration(
+            color: _surfaceColor,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: _outlineColor,
+              width: 1,
             ),
-            padding: const EdgeInsets.all(AppSpace.x5),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x14000000), 
+                blurRadius: 12, 
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.all(AppSpace.x4),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
                     Container(
-                      width: 56,
-                      height: 56,
+                      padding: EdgeInsets.all(AppSpace.x2),
                       decoration: BoxDecoration(
-                        color: _hasStarted ? AppColors.gold : colorScheme.primary,
-                        borderRadius: BorderRadius.circular(AppRadius.lg),
+                        color: _brandBlue200.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: _brandBlue200.withOpacity(0.3),
+                          width: 1,
+                        ),
                       ),
-                      child: Icon(
-                        Icons.auto_stories_rounded,
-                        color: _hasStarted ? Colors.white : colorScheme.onPrimary,
-                        size: 28,
+                      child: CustomIconWidget(
+                        iconName: 'auto_stories',
+                        color: _brandBlue200,
+                        size: 20,
                       ),
                     ),
-                    const SizedBox(width: AppSpace.x4),
+                    SizedBox(width: AppSpace.x3),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             _hasStarted ? 'Discipleship Progress' : 'Start your Discipleship',
-                            style: theme.textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: _hasStarted ? Colors.white : colorScheme.onPrimaryContainer,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: _textColor,
                             ),
                           ),
-                          const SizedBox(height: AppSpace.x1),
                           Text(
                             _getSubtitleText(),
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: _hasStarted ? Colors.white.withOpacity(0.9) : colorScheme.onPrimaryContainer.withOpacity(0.9),
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: _textSubColor,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    if (_hasStarted) ...[
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpace.x3,
-                          vertical: AppSpace.x2,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(AppRadius.md),
-                        ),
-                        child: Text(
-                          '${(_progress * 100).round()}%',
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-                if (_hasStarted) ...[
-                  const SizedBox(height: AppSpace.x4),
-                  _buildProgressSection(theme, colorScheme),
-                ],
-                const SizedBox(height: AppSpace.x4),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton.icon(
-                        onPressed: _navigateToDiscipleship,
-                        icon: Icon(
-                          _hasStarted ? Icons.play_arrow : Icons.launch,
-                          size: 20,
-                        ),
-                        label: Text(
-                          _hasStarted ? 'Continue' : 'Start Course',
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(0, 48),
-                          backgroundColor: _hasStarted ? AppColors.gold : colorScheme.primary,
-                          foregroundColor: _hasStarted ? Colors.white : colorScheme.onPrimary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(AppRadius.md),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: AppSpace.x3),
+                    // Progress badge
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: AppSpace.x3,
-                        vertical: AppSpace.x2,
-                      ),
+                      padding: EdgeInsets.symmetric(horizontal: AppSpace.x2, vertical: AppSpace.x1),
                       decoration: BoxDecoration(
-                        color: _hasStarted ? Colors.white.withOpacity(0.2) : colorScheme.onPrimaryContainer.withOpacity(0.2),
-                        borderRadius: BorderRadius.circular(AppRadius.md),
+                        color: _brandBlue200.withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(
-                            Icons.schedule,
-                            size: 16,
-                            color: _hasStarted ? Colors.white : colorScheme.onPrimaryContainer,
+                          CustomIconWidget(
+                            iconName: _hasStarted ? 'trending_up' : 'play_arrow',
+                            color: _brandBlue200,
+                            size: 12,
                           ),
-                          const SizedBox(width: AppSpace.x1),
+                          SizedBox(width: AppSpace.x1),
+                          Text(
+                            _hasStarted ? '${(_progress * 100).round()}%' : 'Start',
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              color: _brandBlue200,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                if (_hasStarted) ...[
+                  SizedBox(height: AppSpace.x3),
+                  _buildProgressSection(theme, colorScheme),
+                ],
+                SizedBox(height: AppSpace.x3),
+                Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: _navigateToDiscipleship,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: AppSpace.x2),
+                          decoration: BoxDecoration(
+                            color: _brandBlue.withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: _brandBlue.withOpacity(0.3),
+                              width: 1,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CustomIconWidget(
+                                iconName: _hasStarted ? 'play_arrow' : 'launch',
+                                color: _brandBlue200,
+                                size: 16,
+                              ),
+                              SizedBox(width: AppSpace.x1),
+                              Text(
+                                _hasStarted ? 'Continue Course' : 'Start Course',
+                                style: theme.textTheme.labelMedium?.copyWith(
+                                  color: _brandBlue200,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: AppSpace.x2),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: AppSpace.x2, vertical: AppSpace.x1),
+                      decoration: BoxDecoration(
+                        color: T.gold.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CustomIconWidget(
+                            iconName: 'schedule',
+                            color: _brandBlue200,
+                            size: 12,
+                          ),
+                          SizedBox(width: AppSpace.x1),
                           Text(
                             '12 weeks',
-                            style: theme.textTheme.labelMedium?.copyWith(
-                              color: _hasStarted ? Colors.white : colorScheme.onPrimaryContainer,
-                              fontWeight: FontWeight.w600,
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              color: _brandBlue200,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ],
@@ -225,7 +250,6 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
             ),
           ),
         ),
-      ),
     );
   }
 
@@ -241,23 +265,23 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
             Text(
               'Progress',
               style: theme.textTheme.labelMedium?.copyWith(
-                color: Colors.white.withOpacity(0.8),
+                color: colorScheme.onSurfaceVariant,
               ),
             ),
             Text(
               'Week $_week of 12',
               style: theme.textTheme.labelMedium?.copyWith(
-                color: Colors.white.withOpacity(0.8),
+                color: T.gold,
                 fontWeight: FontWeight.w600,
               ),
             ),
           ],
         ),
-        const SizedBox(height: AppSpace.x2),
+        SizedBox(height: AppSpace.x2),
         LinearProgressIndicator(
           value: _progress,
-          backgroundColor: Colors.white.withOpacity(0.2),
-          valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+          backgroundColor: T.gold.withOpacity(0.2),
+          valueColor: AlwaysStoppedAnimation<Color>(T.gold),
           minHeight: 6,
         ),
       ],

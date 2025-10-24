@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 import '../../../design/tokens.dart';
 import '../models/course_models.dart';
 
+// Design System Colors
+const Color _bgColor = Color(0xFF0C1220);
+const Color _surfaceColor = Color(0xFF121A2B);
+const Color _surface2Color = Color(0xFF172238);
+const Color _textColor = Color(0xFFEAF1FF);
+const Color _textSubColor = Color(0xFFA8B7D6);
+const Color _brandBlue = Color(0xFF3C79FF);
+const Color _brandBlue200 = Color(0xFF7AA9FF);
+const Color _brandGold = Color(0xFFFFC24D);
+const Color _brandGold700 = Color(0xFFD59E27);
+const Color _outlineColor = Color(0xFF243356);
+
 class UnlockScriptureCard extends StatelessWidget {
   final Unlock unlock;
   final bool unlocked;
@@ -19,10 +31,18 @@ class UnlockScriptureCard extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
+    return Container(
+      decoration: BoxDecoration(
+        color: _surfaceColor,
         borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: _outlineColor, width: 1),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x14000000), 
+            blurRadius: 12, 
+            offset: Offset(0, 4),
+          ),
+        ],
       ),
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -34,7 +54,7 @@ class UnlockScriptureCard extends StatelessWidget {
               children: [
                 Icon(
                   Icons.menu_book,
-                  color: colorScheme.primary,
+                  color: _brandBlue200,
                   size: 24,
                 ),
                 const SizedBox(width: AppSpace.x2),
@@ -43,7 +63,7 @@ class UnlockScriptureCard extends StatelessWidget {
                     unlock.title,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: colorScheme.onSurface,
+                      color: _textColor,
                     ),
                   ),
                 ),
@@ -124,7 +144,7 @@ class UnlockScriptureCard extends StatelessWidget {
                     Text(
                       unlock.insight,
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onSurface,
+                        color: _textColor,
                         height: 1.4,
                         fontStyle: FontStyle.italic,
                       ),
@@ -174,7 +194,7 @@ class UnlockScriptureCard extends StatelessWidget {
                         child: Text(
                           truth,
                           style: theme.textTheme.bodyMedium?.copyWith(
-                            color: colorScheme.onSurface,
+                            color: _textColor,
                             height: 1.4,
                           ),
                         ),
