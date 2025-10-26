@@ -196,16 +196,16 @@ class _AISuggestionsWidgetState extends State<AISuggestionsWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'AI-Powered Suggestions',
+                      'UR4MORE Powered Suggestions',
                       style: theme.textTheme.headlineSmall?.copyWith(
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: Colors.white,
                       ),
                     ),
                     Text(
                       'Personalized recommendations based on your check-in',
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color: Colors.black87,
+                        color: Colors.white70,
                       ),
                     ),
                   ],

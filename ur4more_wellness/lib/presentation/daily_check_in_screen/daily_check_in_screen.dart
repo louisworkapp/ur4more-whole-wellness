@@ -50,7 +50,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
     'Rate of Perceived Exertion', // Updated titles as per requirements
     'Pain Assessment',
     'Urge & Craving Tracking',
-    'AI-Powered Suggestions',
+    'UR4MORE Powered Suggestions',
     'Journal Entry',
   ];
 
@@ -379,7 +379,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
                       ),
                     ),
 
-    // Step 4 - AI-Powered Suggestions
+    // Step 4 - UR4MORE Powered Suggestions
     _buildSection(
       stepNumber: 4,
       title: _sectionTitles[3],
