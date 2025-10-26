@@ -8,7 +8,7 @@ class DevotionalService {
   static const String _devotionalHistoryKey = 'devotional_history';
   static const String _lastDevotionalDateKey = 'last_devotional_date';
 
-  // Generate daily devotional from gateway scripture
+  // Generate daily devotional from gateway scripture with 365-day rotation
   static Future<Map<String, dynamic>?> getDailyDevotional({
     required FaithTier faithTier,
     String theme = 'gluttony',
@@ -147,13 +147,115 @@ class DevotionalService {
   }
 
   static String _generateTitle(String reference) {
-    // Extract book name and create a meaningful title
-    final parts = reference.split(' ');
-    if (parts.isNotEmpty) {
-      final book = parts[0];
-      return 'Daily Wisdom from $book';
+    // Just return "Daily Wisdom" since the scripture reference is shown below
+    return 'Daily Wisdom';
+  }
+
+  // Get daily wisdom quote with 365-day rotation
+  static Future<Map<String, dynamic>?> getDailyWisdom({
+    required FaithTier faithTier,
+  }) async {
+    try {
+      print('🔄 DevotionalService: Getting daily wisdom for faithTier: $faithTier');
+      
+      // Fetch wisdom quotes from gateway
+      final quotes = await GatewayService.fetchDailyQuotes(
+        faithTier: faithTier,
+        topic: 'wisdom',
+        limit: 15,
+      );
+      
+      if (quotes.isNotEmpty) {
+        // Use 365-day rotation to select quote
+        final quoteIndex = _getDailyQuoteIndex(quotes.length);
+        final selectedQuote = quotes[quoteIndex];
+        
+        // Create wisdom devotional from quote
+        final wisdom = {
+          'title': 'Daily Wisdom',
+          'subtitle': '365 days of spiritual insight',
+          'quote': selectedQuote['text'] ?? 'Wisdom comes from experience.',
+          'author': selectedQuote['author'] ?? 'Unknown',
+          'date': _formatDate(DateTime.now()),
+          'isCompleted': false,
+          'readTime': '3',
+          'isBookmarked': false,
+          'type': 'wisdom',
+          'dayOfYear': _getDayOfYear(),
+        };
+        
+        print('✅ DevotionalService: Loaded wisdom quote for day ${_getDayOfYear()}');
+        return wisdom;
+      } else {
+        return _getFallbackWisdom();
+      }
+    } catch (e) {
+      print('❌ DevotionalService: Error loading daily wisdom: $e');
+      return _getFallbackWisdom();
     }
-    return 'Daily Devotional';
+  }
+
+  /// Get the daily quote index for 365-day rotation
+  /// This ensures each day gets a different quote from the available pool
+  static int _getDailyQuoteIndex(int totalQuotes) {
+    if (totalQuotes == 0) return 0;
+    
+    // Get the current date and calculate days since epoch
+    final now = DateTime.now();
+    final daysSinceEpoch = now.difference(DateTime(1970, 1, 1)).inDays;
+    
+    // Use modulo to cycle through quotes based on the day
+    return daysSinceEpoch % totalQuotes;
+  }
+
+  /// Get the day of the year (1-365)
+  static int _getDayOfYear() {
+    final now = DateTime.now();
+    final startOfYear = DateTime(now.year, 1, 1);
+    return now.difference(startOfYear).inDays + 1;
+  }
+
+  /// Format date for display
+  static String _formatDate(DateTime date) {
+    final months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    return '${months[date.month - 1]} ${date.day}';
+  }
+
+  /// Fallback wisdom when gateway fails
+  static Map<String, dynamic> _getFallbackWisdom() {
+    final fallbackQuotes = [
+      {
+        'quote': 'The fear of the Lord is the beginning of wisdom.',
+        'author': 'Proverbs 9:10',
+      },
+      {
+        'quote': 'Trust in the Lord with all your heart and lean not on your own understanding.',
+        'author': 'Proverbs 3:5',
+      },
+      {
+        'quote': 'For I know the plans I have for you, declares the Lord.',
+        'author': 'Jeremiah 29:11',
+      },
+    ];
+    
+    final quoteIndex = _getDailyQuoteIndex(fallbackQuotes.length);
+    final selectedQuote = fallbackQuotes[quoteIndex];
+    
+    return {
+      'title': 'Daily Wisdom',
+      'subtitle': '365 days of spiritual insight',
+      'quote': selectedQuote['quote'],
+      'author': selectedQuote['author'],
+      'date': _formatDate(DateTime.now()),
+      'isCompleted': false,
+      'readTime': '3',
+      'isBookmarked': false,
+      'type': 'wisdom',
+      'dayOfYear': _getDayOfYear(),
+    };
   }
 
   static String _generateReflection(String reference, String verseText, String actNow) {
