@@ -1,540 +1,33 @@
 [
   {
-    "id": "zenquotes_4092190609336717027",
-    "text": "Children are our greatest natural resource.",
-    "author": "Herbert Hoover",
+    "id": "zenquotes_-6983565973817001922",
+    "text": "To seek greatness is the only righteous vengeance.",
+    "author": "Criss Jami",
     "license": "public_domain",
     "source": "ZenQuotes API",
     "tags": [
       "wisdom",
       "external"
     ],
-    "added_date": "2025-10-23T15:41:08.518154",
+    "added_date": "2025-10-25T18:16:10.047312",
     "source_type": "external_accumulated"
   },
   {
-    "id": "zenquotes_7343717433252666178",
-    "text": "You cannot teach a crab to walk straight.",
-    "author": "Aristophanes",
+    "id": "zenquotes_8700047069608700173",
+    "text": "Misfortune shows those who are not really friends.",
+    "author": "Aristotle",
     "license": "public_domain",
     "source": "ZenQuotes API",
     "tags": [
       "wisdom",
       "external"
     ],
-    "added_date": "2025-10-23T15:41:08.518165",
+    "added_date": "2025-10-25T18:16:10.047322",
     "source_type": "external_accumulated"
   },
   {
-    "id": "zenquotes_892188590503876373",
-    "text": "The greatest deception men suffer is from their own opinions.",
-    "author": "Leonardo da Vinci",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:41:08.518168",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_6325483257110193244",
-    "text": "Who you are is always right.",
-    "author": "Ming-Dao Deng",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:41:08.518170",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-4329561145389624653",
-    "text": "Everything has beauty but not everyone sees it.",
-    "author": "Confucius",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:41:08.518172",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_3186971016169658846",
-    "text": "The grass is greener where you water it.",
-    "author": "Neil Barringham",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:41:08.518174",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-5772864973785680294",
-    "text": "Smile, breathe and go slowly.",
-    "author": "Thich Nhat Hanh",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:41:08.518176",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-4687198395773676881",
-    "text": "It doesn't matter if the glass is half empty or half full. Be grateful you have a glass - you're the only person that can decide what's in it.",
-    "author": "Gurbaksh Chahal",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:41:08.518177",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_3187305593246086389",
-    "text": "From the errors of others, a wise man corrects his own.",
-    "author": "Publilius Syrus",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:41:08.518179",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_1585869202846479933",
-    "text": "Be approximately right rather than exactly wrong.",
-    "author": "John Tukey",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:41:08.518180",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-8702069459039966639",
-    "text": "The only place success comes before work is in the dictionary.",
-    "author": "Vince Lombardi",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:45:21.672923",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-6920942116806047772",
-    "text": "I have lived with several Zen masters -- all of them cats.",
-    "author": "Eckhart Tolle",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:45:21.672932",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_7612885976580763868",
-    "text": "Words can only have a positive effect on others if and when they are ready to listen.",
-    "author": "Christopher Reeve",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:45:21.672934",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-4128095128215643258",
-    "text": "Even if you stumble and fall down, it doesn't mean you've chosen the wrong path.",
-    "author": "Zen Proverb",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:45:21.672936",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-6833705856221810417",
-    "text": "Your mind will make you rich or poor, depending on the use you put to it.",
-    "author": "Brian Tracy",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:45:21.672937",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-3410293400732038364",
-    "text": "A good system shortens the road to the goal. ",
-    "author": "Orison Swett Marden",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:45:21.672938",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-3027037700149033820",
-    "text": "The soul without imagination is what an observatory would be without a telescope.",
-    "author": "Henry Ward Beecher",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:45:21.672940",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-3190120728536718284",
-    "text": "Imagination is everything. It is the preview of life's coming attractions.",
-    "author": "Albert Einstein",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:45:21.672941",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-6694587849911493404",
-    "text": "Everyone you meet is fighting a battle you know nothing about. Be kind. Always.",
-    "author": "Robin Williams",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:45:21.672943",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_7458980972986742507",
-    "text": "Too many of us are not living our dreams because we are living our fears.",
-    "author": "Les Brown",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T15:45:21.672955",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_7092129510447294085",
-    "text": "Knowledge is learning something everyday. Wisdom is letting go of something everyday.",
-    "author": "Unknown",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.239576",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-8150183431741657755",
-    "text": "Constantly think about how you could be doing things better.",
-    "author": "Elon Musk",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.239586",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-3861936382783986993",
-    "text": "The best way to predict your future is to create it.",
-    "author": "Abraham Lincoln",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.239589",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_1522353723994768086",
-    "text": "There are no constraints on the human mind, no walls around the human spirit, no barriers to our progress except those we ourselves erect.",
-    "author": "Ronald Reagan",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.239591",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_8150559108794921563",
-    "text": "Youth is happy because it has the ability to see beauty. Anyone who keeps the ability to see beauty never grows old. ",
-    "author": "Franz Kafka",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.239593",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_5297142398079453180",
-    "text": "Observe things as they are and don't pay attention to other people.",
-    "author": "Huang Po",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.239594",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-2074746940295165314",
-    "text": "Every saint has a past, and every sinner has a future.",
-    "author": "Oscar Wilde",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.239596",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-2333019664770140832",
-    "text": "The big thing is to make a winning effort. I'm not obsessed with wins.",
-    "author": "Morgan Wootten",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.239597",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-3192952659041400028",
-    "text": "Bad things are not the worst things that an happen to us. NOTHING is the worst thing that can happen to us.",
-    "author": "Richard Bach",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.239599",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_7312855180347992433",
-    "text": "You are today where your thoughts have brought you.",
-    "author": "James Allen",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.239600",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_3791537462807035312",
-    "text": "It's wise to tell the truth. It's even wiser to tell it kindly.",
-    "author": "Maxime Lagace",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.247616",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-151851527147725792",
-    "text": "Best be yourself, imperial, plain, and true.",
-    "author": "Robert Browning",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.247625",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-1637694514531165137",
-    "text": "A good master leads you to the true master within. Only that master, who is your own higher self, can adequately answer all questions.",
-    "author": "Ming-Dao Deng",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.247627",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-8764441995991730752",
-    "text": "If you want to be sad, no one in the world can make you happy. But if you make up your mind to be happy, no one and nothing on earth can take that happiness from you.",
-    "author": "Paramahansa Yogananda",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.247630",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-2642553876956574619",
-    "text": "He who is not contented with what he has, would not be contented with what he would like to have.",
-    "author": "Socrates",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.247633",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_5704416302739223776",
-    "text": "No man will make a great leader who wants to do it all himself or to get all the credit for doing it.",
-    "author": "Andrew Carnegie",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.247634",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-6717997666441309830",
-    "text": "Life is much like going to the gym. The most painful part is deciding to go. Once you get past that, it's easy.",
-    "author": "Robert Kiyosaki",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.247636",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-5153721978387547691",
-    "text": "Dreams have only one owner at a time. That's why dreamers are lonely.",
-    "author": "William Faulkner",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.247637",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_2347942704532963659",
-    "text": "A man should do his job so well that the living, the dead, and the unborn could do it no better.",
-    "author": "Martin Luther King, Jr.",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.247638",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-7618111516082130134",
-    "text": "They say love is the best investment; the more you give, the more you get in return.",
-    "author": "Audrey Hepburn",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:00:27.247640",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_955290917710229691",
-    "text": "Success is never final; failure is never fatal.",
-    "author": "Conrad Hilton",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.597767",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-5127815251766478234",
-    "text": "Dreams provide nourishment for the soul, just as a meal does for the body.",
+    "id": "zenquotes_-5101348704628242606",
+    "text": "When you repeat a mistake, it is not a mistake anymore: it is a decision.",
     "author": "Paulo Coelho",
     "license": "public_domain",
     "source": "ZenQuotes API",
@@ -542,493 +35,38 @@
       "wisdom",
       "external"
     ],
-    "added_date": "2025-10-23T16:43:37.597784",
+    "added_date": "2025-10-25T18:16:10.047324",
     "source_type": "external_accumulated"
   },
   {
-    "id": "zenquotes_-8275898766544448516",
-    "text": "If I have seen further than others, it is by standing upon the shoulders of giants.",
-    "author": "Isaac Newton",
+    "id": "zenquotes_7297387835471156364",
+    "text": "Great things are not accomplished by those who yield to trends and fads and popular opinion.",
+    "author": "Jack Kerouac",
     "license": "public_domain",
     "source": "ZenQuotes API",
     "tags": [
       "wisdom",
       "external"
     ],
-    "added_date": "2025-10-23T16:43:37.597787",
+    "added_date": "2025-10-25T18:16:10.047326",
     "source_type": "external_accumulated"
   },
   {
-    "id": "zenquotes_6943443985528395426",
-    "text": "There is nothing more frightful than ignorance in action.",
-    "author": "Johann Wolfgang von Goethe",
+    "id": "zenquotes_5097354171733910044",
+    "text": "Action is the foundational key to all success.",
+    "author": "Pablo Picasso",
     "license": "public_domain",
     "source": "ZenQuotes API",
     "tags": [
       "wisdom",
       "external"
     ],
-    "added_date": "2025-10-23T16:43:37.597790",
+    "added_date": "2025-10-25T18:16:10.047328",
     "source_type": "external_accumulated"
   },
   {
-    "id": "zenquotes_5378847000545247278",
-    "text": "Gratitude is the fairest blossom which springs from the soul.",
-    "author": "Henry Ward Beecher",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.597792",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-8810113535464415528",
-    "text": "No problem can be solved from the same level of consciousness that created it.",
-    "author": "Albert Einstein",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.597795",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_3984484421511014482",
-    "text": "Your mind is infinite, it's your doubts that are limiting.",
-    "author": "Robert Kiyosaki",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.597796",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_7548256578271859147",
-    "text": "I will not walk backward in life.",
-    "author": "J.R.R. Tolkien",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.597798",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_5014519733519001029",
-    "text": "Ponder and deliberate before you make a move.",
-    "author": "Sun Tzu",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.597800",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_1241524022226057104",
-    "text": "Our happiness depends on the habit of mind we cultivate.",
-    "author": "Norman Vincent Peale",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.597803",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-5695965665571717980",
-    "text": "Everything starts with a dream. A particle of our imagination that teases us of what the future could be like, as long as we fight for it.",
-    "author": "Gurbaksh Chahal",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.604957",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_224161700818866566",
-    "text": "Conscience is a man's compass. ",
-    "author": "Vincent van Gogh",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.604969",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-1544988774679932543",
-    "text": "Don't settle, and don't struggle.",
-    "author": "Naval Ravikant",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.604972",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_3472630712117450433",
-    "text": "Love is the energy of life.",
-    "author": "Robert Browning",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.604989",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_2215769087408061867",
-    "text": "Judge a man by his questions rather than his answers.",
-    "author": "Voltaire",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.604992",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_2141429564649345434",
-    "text": "It is not because things are difficult that we do not dare; it is because we do not dare that things are difficult.  ",
-    "author": "Seneca",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.604994",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_3228173164144385187",
-    "text": "To travel is to be alive, but to get somewhere is to be dead.",
-    "author": "Alan Watts",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.604998",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-772541048933143888",
-    "text": "Well done is better than well said.",
-    "author": "Benjamin Franklin",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.605000",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_5887781328390819705",
-    "text": "What you seek is seeking you.",
-    "author": "Rumi",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.605003",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_5019504668075007840",
-    "text": "Trust your instincts: my first reaction is almost invariably the right one.  ",
-    "author": "Estee Lauder",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:43:37.605006",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_4811661190823617869",
-    "text": "Magic is believing in yourself, if you can do that, you can make anything happen.",
-    "author": "Johann Wolfgang von Goethe",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.479476",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-6842400715707693343",
-    "text": "One day, in retrospect, the years of struggle will strike you as the most beautiful.",
-    "author": "Sigmund Freud",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.479484",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_3647909570339050365",
-    "text": "If you don't have time to do it right, when will you have time to do it over?",
-    "author": "John Wooden",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.479487",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_3657833760370200142",
-    "text": "The ones who are crazy enough to think they can change the world, are the ones that do.",
-    "author": "Steve Jobs",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.479488",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-3897559757076378081",
-    "text": "The more something threatens your identity, the more you will avoid it.",
-    "author": "Mark Manson",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.479490",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-6589479712717863682",
-    "text": "I know not all that may be coming, but be it what it will, I'll go to it laughing.",
-    "author": "Herman Melville",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.479491",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_2943451098354366069",
-    "text": "Pain doesn't last. And when it's gone, we have something to show for it. Growth.",
-    "author": "Kamal Ravikant",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.479493",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-134349036658127913",
-    "text": "I have no methods; all I do is accept people as they are.",
-    "author": "Joan Rivers",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.479494",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-7724960072774381111",
-    "text": "You change the world by being yourself.",
-    "author": "Yoko Ono",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.479495",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_6387373000278790090",
-    "text": "Courage is knowing what not to fear.",
-    "author": "Plato",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.479496",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_4294664693726739358",
-    "text": "Remember to look up at the stars and not down at your feet.",
-    "author": "Stephen Hawking",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.488817",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-5544611585826499271",
-    "text": "Do you want to know who you are? Don't ask. Act! Action will delineate and define you.",
-    "author": "Thomas Jefferson",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.488826",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-1883092900856174154",
-    "text": "All wealth is the product of labor.",
-    "author": "John Locke",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.488828",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_4007593972733491770",
-    "text": "Where the willingness is great, the difficulties cannot be great.",
-    "author": "Niccolo Machiavelli",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.488829",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_7624885014549456585",
-    "text": "Our greatest fears lie in anticipation.",
-    "author": "Honore de Balzac",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.488830",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_8412006422230032237",
-    "text": "It is literally true that you can succeed best and quickest by helping others succeed.",
-    "author": "Napoleon Hill",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.488832",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_1841825667144130116",
-    "text": "Trust, like the soul, never returns once it is gone.",
-    "author": "Publilius Syrus",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.488833",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-7441723114619588428",
-    "text": "Your world is a living expression of how you are using and have used your mind.",
-    "author": "Earl Nightingale",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.488836",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_7394032925888852628",
-    "text": "Anyone who wants to achieve a dream must stay strong, focused and steady.",
-    "author": "Estee Lauder",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-23T16:52:24.488837",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-5443671031621719170",
-    "text": "Vision is the art of seeing things invisible.",
+    "id": "zenquotes_1456713451679004100",
+    "text": "There is no absolute success in the world, only constant progress.",
     "author": "Jonathan Swift",
     "license": "public_domain",
     "source": "ZenQuotes API",
@@ -1036,135 +74,59 @@
       "wisdom",
       "external"
     ],
-    "added_date": "2025-10-23T16:52:24.488839",
+    "added_date": "2025-10-25T18:16:10.047329",
     "source_type": "external_accumulated"
   },
   {
-    "id": "zenquotes_5014663869740820033",
-    "text": "You don't know who is important to you until you actually lose them.",
-    "author": "Mahatma Gandhi",
+    "id": "zenquotes_-8326483754622737833",
+    "text": "The greatest enemy of knowledge is not ignorance, it's the illusion of knowledge.",
+    "author": "Stephen Hawking",
     "license": "public_domain",
     "source": "ZenQuotes API",
     "tags": [
       "wisdom",
       "external"
     ],
-    "added_date": "2025-10-24T09:39:01.987530",
+    "added_date": "2025-10-25T18:16:10.047331",
     "source_type": "external_accumulated"
   },
   {
-    "id": "zenquotes_-5327658671355062740",
-    "text": "Making your mark on the world is hard. If it were easy, everybody would do it.",
-    "author": "Barack Obama",
+    "id": "zenquotes_637399683263478663",
+    "text": "Do something to move yourself toward your major goal every day.",
+    "author": "Brian Tracy",
     "license": "public_domain",
     "source": "ZenQuotes API",
     "tags": [
       "wisdom",
       "external"
     ],
-    "added_date": "2025-10-24T09:39:01.987542",
+    "added_date": "2025-10-25T18:16:10.047332",
     "source_type": "external_accumulated"
   },
   {
-    "id": "zenquotes_-5422319891075320308",
-    "text": "Before you embark on a journey of revenge, dig two graves. ",
-    "author": "Confucius",
+    "id": "zenquotes_-1709130351386883041",
+    "text": "Remembering that you are going to die is the best way I know to avoid the trap of thinking you have something to lose.",
+    "author": "Steve Jobs",
     "license": "public_domain",
     "source": "ZenQuotes API",
     "tags": [
       "wisdom",
       "external"
     ],
-    "added_date": "2025-10-24T09:39:01.987546",
+    "added_date": "2025-10-25T18:16:10.047334",
     "source_type": "external_accumulated"
   },
   {
-    "id": "zenquotes_182537434279507567",
-    "text": "The most important thing in life is to stop saying 'I wish' and start saying 'I will'. Consider nothing impossible, then treat possibilities as probabilities.",
-    "author": "Charles Dickens",
+    "id": "zenquotes_2534279118621629955",
+    "text": "Never waste a minute of your precious life thinking about people you don't like.",
+    "author": "Celestine Chua",
     "license": "public_domain",
     "source": "ZenQuotes API",
     "tags": [
       "wisdom",
       "external"
     ],
-    "added_date": "2025-10-24T09:39:01.987549",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_4571596073883697991",
-    "text": "It is better to fail in originality than to succeed in imitation.",
-    "author": "Herman Melville",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-24T09:39:01.987551",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_6205270828709541206",
-    "text": "The greatest miracle is to be alive.",
-    "author": "Thich Nhat Hanh",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-24T09:39:01.987554",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_-6902925384091767843",
-    "text": "It's just a bad day, not a bad life.",
-    "author": "Mary Engelbreit",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-24T09:39:01.987557",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_8329045711473272152",
-    "text": "If you want to turn a vision into reality, you have to give 100% and never stop believing in your dream.",
-    "author": "Arnold Schwarzenegger",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-24T09:39:01.987559",
-    "source_type": "external_accumulated"
-  },
-  {
-    "id": "zenquotes_72404517627528088",
-    "text": "Happiness can be found, even in the darkest of times, if one only remembers to turn on the light.",
-    "author": "Albus Dumbledore",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-24T09:39:01.987561",
-    "source_type": "external_accumulated"
-  }
-] "text": "There are no mistakes in life, only lessons.",
-    "author": "Robin Sharma",
-    "license": "public_domain",
-    "source": "ZenQuotes API",
-    "tags": [
-      "wisdom",
-      "external"
-    ],
-    "added_date": "2025-10-24T09:39:01.987629",
+    "added_date": "2025-10-25T18:16:10.047335",
     "source_type": "external_accumulated"
   }
 ]

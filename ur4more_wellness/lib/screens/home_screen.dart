@@ -60,14 +60,12 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Daily Check-in feature coming soon!')),
-                      );
+                      Navigator.pushNamed(context, AppRoutes.alarmClock);
                     },
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(horizontal: AppSpace.x6, vertical: AppSpace.x4),
                     ),
-                    child: const Text('Daily Check-in'),
+                    child: const Text('Alarm Clock'),
                   ),
                   ElevatedButton(
                     onPressed: () {
