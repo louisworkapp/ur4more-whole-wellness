@@ -128,5 +128,135 @@
     ],
     "added_date": "2025-10-25T18:16:10.047335",
     "source_type": "external_accumulated"
+  },
+  {
+    "id": "zenquotes_-7216805641597787974",
+    "text": "Behind every beautiful thing, there's some kind of pain.",
+    "author": "Bob Dylan",
+    "license": "public_domain",
+    "source": "ZenQuotes API",
+    "tags": [
+      "wisdom",
+      "external"
+    ],
+    "added_date": "2025-10-26T09:16:20.019561",
+    "source_type": "external_accumulated"
+  },
+  {
+    "id": "zenquotes_382892914020490685",
+    "text": "Don't blame others. it won't make you a better person.",
+    "author": "Lolly Daskal",
+    "license": "public_domain",
+    "source": "ZenQuotes API",
+    "tags": [
+      "wisdom",
+      "external"
+    ],
+    "added_date": "2025-10-26T09:16:20.019718",
+    "source_type": "external_accumulated"
+  },
+  {
+    "id": "zenquotes_-824986521673659390",
+    "text": "It doesn't matter if the glass is half empty or half full. Be grateful you have a glass - you're the only person that can decide what's in it.",
+    "author": "Gurbaksh Chahal",
+    "license": "public_domain",
+    "source": "ZenQuotes API",
+    "tags": [
+      "wisdom",
+      "external"
+    ],
+    "added_date": "2025-10-26T09:16:20.019722",
+    "source_type": "external_accumulated"
+  },
+  {
+    "id": "zenquotes_-2264803738258412248",
+    "text": "I enjoy life when things are happening. I don't care if it's good things or bad things. That means you're alive.",
+    "author": "Joan Rivers",
+    "license": "public_domain",
+    "source": "ZenQuotes API",
+    "tags": [
+      "wisdom",
+      "external"
+    ],
+    "added_date": "2025-10-26T09:16:20.019724",
+    "source_type": "external_accumulated"
+  },
+  {
+    "id": "zenquotes_-5121017725815264319",
+    "text": "We must create our own world or we will die from inaction.",
+    "author": "Robert Greene",
+    "license": "public_domain",
+    "source": "ZenQuotes API",
+    "tags": [
+      "wisdom",
+      "external"
+    ],
+    "added_date": "2025-10-26T09:16:20.019727",
+    "source_type": "external_accumulated"
+  },
+  {
+    "id": "zenquotes_-6454700150810123842",
+    "text": "All things come into being by conflict of opposites.",
+    "author": "Heraclitus",
+    "license": "public_domain",
+    "source": "ZenQuotes API",
+    "tags": [
+      "wisdom",
+      "external"
+    ],
+    "added_date": "2025-10-26T09:16:20.019730",
+    "source_type": "external_accumulated"
+  },
+  {
+    "id": "zenquotes_8078341593324117710",
+    "text": "Living a life that has a greater purpose and living up to it is the ultimate degree that we should strive for.",
+    "author": "Gurbaksh Chahal",
+    "license": "public_domain",
+    "source": "ZenQuotes API",
+    "tags": [
+      "wisdom",
+      "external"
+    ],
+    "added_date": "2025-10-26T09:16:20.019733",
+    "source_type": "external_accumulated"
+  },
+  {
+    "id": "zenquotes_2969550598514894428",
+    "text": "There are no ordinary moments.",
+    "author": "Dan Millman",
+    "license": "public_domain",
+    "source": "ZenQuotes API",
+    "tags": [
+      "wisdom",
+      "external"
+    ],
+    "added_date": "2025-10-26T09:16:20.019735",
+    "source_type": "external_accumulated"
+  },
+  {
+    "id": "zenquotes_31255598004266222",
+    "text": "Each problem has a positive side.",
+    "author": "Og Mandino",
+    "license": "public_domain",
+    "source": "ZenQuotes API",
+    "tags": [
+      "wisdom",
+      "external"
+    ],
+    "added_date": "2025-10-26T09:16:20.019738",
+    "source_type": "external_accumulated"
+  },
+  {
+    "id": "zenquotes_-5540240088572818548",
+    "text": "If you do not tell the truth about yourself you cannot tell it about other people.",
+    "author": "Virginia Woolf",
+    "license": "public_domain",
+    "source": "ZenQuotes API",
+    "tags": [
+      "wisdom",
+      "external"
+    ],
+    "added_date": "2025-10-26T09:16:20.019741",
+    "source_type": "external_accumulated"
   }
 ]

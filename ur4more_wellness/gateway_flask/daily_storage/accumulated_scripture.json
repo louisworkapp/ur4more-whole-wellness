@@ -880,5 +880,75 @@
     "source": "Bible API",
     "added_date": "2025-10-25T18:16:09.517379",
     "source_type": "external_accumulated"
+  },
+  {
+    "ref": "Isaiah 9:6",
+    "verses": [
+      {
+        "v": 1,
+        "t": "For to us a child is born. To us a son is given; and the government will be on his shoulders. His name will be called Wonderful, Counselor, Mighty God, Everlasting Father, Prince of Peace.\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-26T09:16:26.732350",
+    "source_type": "external_accumulated"
+  },
+  {
+    "ref": "John 15:13",
+    "verses": [
+      {
+        "v": 1,
+        "t": "\nGreater love has no one than this, that someone lay down his life for his friends.\n\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-26T09:16:26.732368",
+    "source_type": "external_accumulated"
+  },
+  {
+    "ref": "John 10:10",
+    "verses": [
+      {
+        "v": 1,
+        "t": "\nThe thief only comes to steal, kill, and destroy. I came that they may have life, and may have it abundantly.\n\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-26T09:16:30.711112",
+    "source_type": "external_accumulated"
+  },
+  {
+    "ref": "Psalm 91:1",
+    "verses": [
+      {
+        "v": 1,
+        "t": "He who dwells in the secret place of the Most High\nwill rest in the shadow of the Almighty.\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-26T09:16:30.711124",
+    "source_type": "external_accumulated"
+  },
+  {
+    "ref": "Proverbs 16:9",
+    "verses": [
+      {
+        "v": 1,
+        "t": "A man’s heart plans his course,\nbut Yahweh directs his steps.\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-26T09:16:30.711128",
+    "source_type": "external_accumulated"
   }
 ]
