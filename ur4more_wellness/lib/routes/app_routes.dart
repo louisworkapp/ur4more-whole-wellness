@@ -13,6 +13,14 @@ import '../features/breath/presentation/breath_presets_screen.dart';
 import '../presentation/safety_monitoring_screen.dart';
 import '../presentation/faith_congratulations_screen/faith_congratulations_screen.dart';
 import '../presentation/discipleship_welcome_screen/discipleship_welcome_screen.dart';
+import '../presentation/alarm_clock_screen/alarm_clock_screen.dart';
+import '../presentation/morning_checkin_screen/morning_checkin_screen.dart';
+import '../features/planner/presentation/morning_checkin_screen.dart';
+import '../features/planner/presentation/planner_screen.dart';
+import '../features/planner/presentation/daily_calendar_screen.dart';
+import '../features/planner/presentation/suggestions_screen.dart';
+import '../features/planner/presentation/calendar_screen.dart';
+import '../features/planner/presentation/commit_screen.dart';
 
 class AppRoutes {
   static const String splash = '/splash';
@@ -29,6 +37,14 @@ class AppRoutes {
   static const String safetyMonitoring = '/safety-monitoring';
   static const String faithCongratulations = '/faith-congratulations';
   static const String discipleshipWelcome = '/discipleship-welcome';
+  static const String alarmClock = '/alarm-clock';
+  static const String morningCheckin = '/morning-checkin';
+  static const String plannerMorningCheckin = '/planner/morning-checkin';
+  static const String planner = '/planner';
+  static const String dailyCalendar = '/daily-calendar';
+  static const String plannerSuggestions = '/planner/suggestions';
+  static const String plannerCalendar = '/planner/calendar';
+  static const String plannerCommit = '/planner/commit';
   
   // Special course IDs
   static const String ur4moreCoreId = 'ur4more_core_12w';
@@ -49,5 +65,45 @@ class AppRoutes {
     safetyMonitoring: (context) => const SafetyMonitoringScreen(),
     faithCongratulations: (context) => const FaithCongratulationsScreen(),
     discipleshipWelcome: (context) => const DiscipleshipWelcomeScreen(),
+    alarmClock: (context) => const AlarmClockScreen(),
+    morningCheckin: (context) => const MorningCheckinScreen(),
+    plannerMorningCheckin: (context) => const MorningCheckInScreen(),
+    planner: (context) => const PlannerScreen(),
+    dailyCalendar: (context) => DailyCalendarScreen(selectedDate: DateTime.now()),
+    plannerSuggestions: (context) {
+      final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+      return SuggestionsScreen(
+        suggestions: args?['suggestions'] ?? [],
+        focusMind: args?['focusMind'] ?? false,
+        focusBody: args?['focusBody'] ?? false,
+        focusSpirit: args?['focusSpirit'] ?? false,
+        faithActivated: args?['faithActivated'] ?? false,
+        showFaithOverlay: args?['showFaithOverlay'] ?? false,
+        morningAlarmTime: args?['morningAlarmTime'] ?? const TimeOfDay(hour: 7, minute: 0),
+        pmCheckinTime: args?['pmCheckinTime'] ?? const TimeOfDay(hour: 20, minute: 0),
+        morningAlarmEnabled: args?['morningAlarmEnabled'] ?? true,
+        pmCheckinAlarmEnabled: args?['pmCheckinAlarmEnabled'] ?? true,
+      );
+    },
+    plannerCalendar: (context) {
+      final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+      return CalendarScreen(
+        suggestions: args?['suggestions'] ?? [],
+        morningAlarmTime: args?['morningAlarmTime'] ?? const TimeOfDay(hour: 7, minute: 0),
+        pmCheckinTime: args?['pmCheckinTime'] ?? const TimeOfDay(hour: 20, minute: 0),
+        morningAlarmEnabled: args?['morningAlarmEnabled'] ?? true,
+        pmCheckinAlarmEnabled: args?['pmCheckinAlarmEnabled'] ?? true,
+      );
+    },
+    plannerCommit: (context) {
+      final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+      return CommitScreen(
+        plan: args?['plan'] ?? [],
+        morningAlarmTime: args?['morningAlarmTime'] ?? const TimeOfDay(hour: 7, minute: 0),
+        pmCheckinTime: args?['pmCheckinTime'] ?? const TimeOfDay(hour: 20, minute: 0),
+        morningAlarmEnabled: args?['morningAlarmEnabled'] ?? true,
+        pmCheckinAlarmEnabled: args?['pmCheckinAlarmEnabled'] ?? true,
+      );
+    },
   };
 }

@@ -838,5 +838,47 @@
     "source": "Bible API",
     "added_date": "2025-10-24T09:39:06.305904",
     "source_type": "external_accumulated"
+  },
+  {
+    "ref": "Deuteronomy 31:6",
+    "verses": [
+      {
+        "v": 1,
+        "t": "Be strong and courageous. Don’t be afraid or scared of them; for Yahweh your God himself is who goes with you. He will not fail you nor forsake you.”\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-25T18:16:09.340429",
+    "source_type": "external_accumulated"
+  },
+  {
+    "ref": "Deuteronomy 6:4",
+    "verses": [
+      {
+        "v": 1,
+        "t": "Hear, Israel: Yahweh is our God. Yahweh is one.\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-25T18:16:09.517369",
+    "source_type": "external_accumulated"
+  },
+  {
+    "ref": "Isaiah 61:1",
+    "verses": [
+      {
+        "v": 1,
+        "t": "The Lord Yahweh’s Spirit is on me;\nbecause Yahweh has anointed me to preach good news to the humble.\nHe has sent me to bind up the broken hearted,\nto proclaim liberty to the captives,\nand release to those who are bound;\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-25T18:16:09.517379",
+    "source_type": "external_accumulated"
   }
 ]
