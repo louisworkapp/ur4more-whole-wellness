@@ -14,6 +14,11 @@ import './widgets/reward_card_widget.dart';
 import './widgets/reward_detail_modal_widget.dart';
 import './widgets/search_bar_widget.dart';
 
+// NOTE: This screen currently shows "Coming Soon" but preserves all the original
+// rewards marketplace functionality (products, filtering, search, etc.) for future use.
+// To restore the full marketplace, simply replace the "Coming Soon" section with
+// the commented-out code below that includes search, filters, and rewards grid.
+
 class RewardsMarketplaceScreen extends StatefulWidget {
   const RewardsMarketplaceScreen({super.key});
 
@@ -563,6 +568,101 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
                 onTap: _showPointsHistory,
               ),
 
+              // Coming Soon Section
+              Expanded(
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Coming Soon Icon
+                      Container(
+                        width: 120,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          color: colorScheme.primary.withOpacity(0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.card_giftcard,
+                          size: 60,
+                          color: colorScheme.primary,
+                        ),
+                      ),
+                      
+                      SizedBox(height: AppSpace.x4),
+                      
+                      // Coming Soon Title
+                      Text(
+                        'Coming Soon',
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.onSurface,
+                        ),
+                      ),
+                      
+                      SizedBox(height: AppSpace.x2),
+                      
+                      // Coming Soon Description
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: AppSpace.x4),
+                        child: Text(
+                          'We\'re working hard to bring you an amazing rewards marketplace. Stay tuned for exciting products and experiences you can redeem with your points!',
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: colorScheme.onSurface.withOpacity(0.7),
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+                      
+                      SizedBox(height: AppSpace.x4),
+                      
+                      // Keep Earning Points Message
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: AppSpace.x4),
+                        padding: EdgeInsets.all(AppSpace.x3),
+                        decoration: BoxDecoration(
+                          color: colorScheme.primary.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: colorScheme.primary.withOpacity(0.3),
+                            width: 1,
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.trending_up,
+                              color: colorScheme.primary,
+                              size: 24,
+                            ),
+                            SizedBox(width: AppSpace.x2),
+                            Expanded(
+                              child: Text(
+                                'Keep earning points through daily check-ins, workouts, and spiritual growth activities!',
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: colorScheme.primary,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ORIGINAL REWARDS MARKETPLACE FUNCTIONALITY (COMMENTED OUT FOR LATER USE)
+  // To restore the full marketplace, replace the "Coming Soon" section above with this code:
+  /*
               // Search bar
               SearchBarWidget(
                 controller: _searchController,
@@ -623,7 +723,7 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
-                                childAspectRatio: 0.65, // Reduced from 0.75 to give more height
+                                childAspectRatio: 0.65,
                                 crossAxisSpacing: AppSpace.x2,
                                 mainAxisSpacing: AppSpace.x1,
                               ),
@@ -639,10 +739,5 @@ class _RewardsMarketplaceScreenState extends State<RewardsMarketplaceScreen> {
                           },
                         ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+  */
 }
