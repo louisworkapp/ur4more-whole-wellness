@@ -99,6 +99,8 @@ class DevotionalCardWidget extends StatelessWidget {
 
   Widget _buildContent(BuildContext context, ColorScheme colorScheme) {
     final theme = Theme.of(context);
+    final isWisdom = devotional["type"] == "wisdom";
+    
     return Padding(
       padding: Pad.card,
       child: Column(
@@ -111,6 +113,16 @@ class DevotionalCardWidget extends StatelessWidget {
               color: colorScheme.onSurface,
             ),
           ),
+          if (isWisdom && devotional["subtitle"] != null) ...[
+            SizedBox(height: AppSpace.x1),
+            Text(
+              devotional["subtitle"] as String,
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: AppTheme.secondaryLight,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ],
           SizedBox(height: AppSpace.x1),
           Container(
             padding: EdgeInsets.symmetric(horizontal: AppSpace.x3, vertical: AppSpace.x1),
@@ -119,7 +131,9 @@ class DevotionalCardWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
-              devotional["scripture"] as String? ?? "Philippians 4:13",
+              isWisdom 
+                ? (devotional["author"] as String? ?? "Unknown")
+                : (devotional["scripture"] as String? ?? "Philippians 4:13"),
               style: theme.textTheme.labelLarge?.copyWith(
                 color: AppTheme.primaryLight,
                 fontWeight: FontWeight.w600,
@@ -128,25 +142,28 @@ class DevotionalCardWidget extends StatelessWidget {
           ),
           SizedBox(height: AppSpace.x2),
           Text(
-            devotional["verse"] as String? ??
-                "I can do all things through Christ who strengthens me.",
+            isWisdom
+              ? (devotional["quote"] as String? ?? "Wisdom comes from experience.")
+              : (devotional["verse"] as String? ?? "I can do all things through Christ who strengthens me."),
             style: theme.textTheme.bodyLarge?.copyWith(
               fontStyle: FontStyle.italic,
               color: colorScheme.onSurface,
               height: 1.5,
             ),
           ),
-          SizedBox(height: AppSpace.x2),
-          Text(
-            devotional["reflection"] as String? ??
-                "Today's reflection on spiritual growth...",
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
-              height: 1.4,
+          if (!isWisdom) ...[
+            SizedBox(height: AppSpace.x2),
+            Text(
+              devotional["reflection"] as String? ??
+                  "Today's reflection on spiritual growth...",
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+                height: 1.4,
+              ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-          ),
+          ],
         ],
       ),
     );

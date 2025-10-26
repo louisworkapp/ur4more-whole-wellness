@@ -14,7 +14,6 @@ import '../../features/spirit/widgets/faith_mode_banner.dart';
 import '../../core/settings/settings_scope.dart';
 import '../../core/settings/settings_model.dart';
 import '../../services/devotional_service.dart';
-import '../../widgets/daily_wisdom_card.dart';
 import '../../widgets/badge_chip.dart';
 import './widgets/devotional_card_widget.dart';
 import './widgets/devotional_history_widget.dart';
@@ -327,9 +326,6 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
             // Discipleship header
             const DiscipleshipHeader(),
 
-            // Daily Wisdom Card
-            const DailyWisdomCard(),
-            SizedBox(height: AppSpace.x3),
 
             // Streak and points header
             _buildStreakHeader(context, colorScheme),
@@ -459,6 +455,44 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
         physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
+            SizedBox(height: AppSpace.x2),
+
+            // Daily Wisdom with 365-day rotation
+            FutureBuilder<Map<String, dynamic>?>(
+              future: _getDailyWisdom(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData && snapshot.data != null) {
+                  return DevotionalCardWidget(
+                    devotional: snapshot.data!,
+                    isBookmarked: snapshot.data!["isBookmarked"] == true,
+                    onTap: () => _openDevotional(snapshot.data!),
+                    onShare: () => _shareDevotional(snapshot.data!),
+                    onBookmark: () => _toggleBookmark(snapshot.data!),
+                    onAddToPrayer: () => _addToPrayerList(snapshot.data!),
+                  );
+                } else if (snapshot.hasError) {
+                  return Container(
+                    padding: const EdgeInsets.all(AppSpace.x4),
+                    child: Text(
+                      'Unable to load daily wisdom',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  );
+                } else {
+                  return Container(
+                    height: 200,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: _brandBlue, // Navigation: blue
+                      ),
+                    ),
+                  );
+                }
+              },
+            ),
+
             SizedBox(height: AppSpace.x2),
 
             // Today's devotionals
@@ -707,6 +741,11 @@ class _SpiritualGrowthScreenState extends State<SpiritualGrowthScreen>
         ),
       ),
     );
+  }
+
+  Future<Map<String, dynamic>?> _getDailyWisdom() async {
+    final settings = SettingsScope.of(context).value;
+    return await DevotionalService.getDailyWisdom(faithTier: settings.faithTier);
   }
 }
 
