@@ -314,7 +314,8 @@ class CourseProgress {
   double get progressPercentage {
     if (weekCompletion.isEmpty) return 0.0;
     final completedWeeks = weekCompletion.values.where((completed) => completed).length;
-    return completedWeeks / weekCompletion.length;
+    // Use 12 as the total number of weeks in the course, not the length of weekCompletion map
+    return completedWeeks / 12;
   }
 
   double get progress => progressPercentage;
