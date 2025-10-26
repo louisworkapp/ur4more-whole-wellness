@@ -63,7 +63,49 @@ class _DailyCheckinCtaState extends State<DailyCheckinCta> {
           Text('Daily Check-in', style: t.titleLarge ?? AppText.title),
           const SizedBox(height: AppSpace.x3),
           Text('Track your daily progress and earn points',
-              style: t.bodyMedium?.copyWith(color: Colors.black54) ?? AppText.body.merge(AppText.mutED)),
+              style: t.bodyMedium?.copyWith(color: Colors.white70) ?? AppText.body.merge(AppText.mutED)),
+          const SizedBox(height: AppSpace.x2),
+          
+          // Alarm Clock & Morning Check-in button
+          Container(
+            width: double.infinity,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.amber.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: Colors.amber.withOpacity(0.5),
+                width: 1,
+              ),
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(12),
+                onTap: () => Navigator.of(context).pushNamed('/planner/morning-checkin'),
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.alarm,
+                        color: Colors.amber,
+                        size: 18,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Planner and Alarms',
+                        style: t.bodyMedium?.copyWith(
+                          color: Colors.amber,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
           const SizedBox(height: AppSpace.x4),
 
           // Streak pill with specified styling - only show if streak >= 7
