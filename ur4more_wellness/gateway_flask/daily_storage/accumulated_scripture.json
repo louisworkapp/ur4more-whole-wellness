@@ -950,5 +950,75 @@
     "source": "Bible API",
     "added_date": "2025-10-26T09:16:30.711128",
     "source_type": "external_accumulated"
+  },
+  {
+    "ref": "Galatians 2:20",
+    "verses": [
+      {
+        "v": 1,
+        "t": "I have been crucified with Christ, and it is no longer I that live, but Christ lives in me. That life which I now live in the flesh, I live by faith in the Son of God, who loved me, and gave himself up for me.\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-27T10:00:36.080846",
+    "source_type": "external_accumulated"
+  },
+  {
+    "ref": "John 20:31",
+    "verses": [
+      {
+        "v": 1,
+        "t": "but these are written, that you may believe that Jesus is the Christ, the Son of God, and that believing you may have life in his name.\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-27T10:00:36.080864",
+    "source_type": "external_accumulated"
+  },
+  {
+    "ref": "Zephaniah 3:17",
+    "verses": [
+      {
+        "v": 1,
+        "t": "Yahweh, your God, is among you, a mighty one who will save. He will rejoice over you with joy. He will calm you in his love. He will rejoice over you with singing.\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-27T10:00:37.953684",
+    "source_type": "external_accumulated"
+  },
+  {
+    "ref": "1 Samuel 16:7",
+    "verses": [
+      {
+        "v": 1,
+        "t": "But Yahweh said to Samuel, “Don’t look on his face, or on the height of his stature, because I have rejected him; for I don’t see as man sees. For man looks at the outward appearance, but Yahweh looks at the heart.”\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-27T10:00:37.953694",
+    "source_type": "external_accumulated"
+  },
+  {
+    "ref": "Esther 4:14",
+    "verses": [
+      {
+        "v": 1,
+        "t": "For if you remain silent now, then relief and deliverance will come to the Jews from another place, but you and your father’s house will perish. Who knows if you haven’t come to the kingdom for such a time as this?”\n"
+      }
+    ],
+    "actNow": "Reflect on this scripture today.",
+    "license": "public_domain",
+    "source": "Bible API",
+    "added_date": "2025-10-27T10:00:37.953698",
+    "source_type": "external_accumulated"
   }
 ]
