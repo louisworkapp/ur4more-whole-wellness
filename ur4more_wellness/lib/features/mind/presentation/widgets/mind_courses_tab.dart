@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../models/mind_coach_copy.dart';
 import '../../repositories/mind_coach_repository.dart';
 import '../../../../services/faith_service.dart';
+import '../../../../core/settings/settings_model.dart';
 import '../../../../design/tokens.dart';
 import '../../../../widgets/custom_icon_widget.dart';
 import '../../services/conversion_funnel_service.dart';

@@ -8,6 +8,7 @@ import '../../../widgets/badge_chip.dart';
 import '../data/course_repository.dart';
 import '../models/course_models.dart';
 import '../../../routes/app_routes.dart';
+import '../../../core/settings/settings_model.dart';
 
 class CourseDetailScreen extends StatefulWidget {
   const CourseDetailScreen({super.key});

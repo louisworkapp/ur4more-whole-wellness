@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../services/faith_service.dart';
+import '../../../core/settings/settings_model.dart';
 
 /// Ask once per session whether Light users want faith overlays (quotes/verses).
 /// Returns `true` if faith overlays are allowed for this session.

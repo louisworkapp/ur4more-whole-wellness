@@ -159,7 +159,7 @@ class ConversionFunnelService {
   static Future<void> _showGeneralInvite(BuildContext context) async {
     final result = await showDialog<bool>(
       context: context,
-      builder: (context) => const SwitchToFaithTierModal(),
+      builder: (context) => const SwitchToFaithModeModal(),
     );
 
     if (result == true) {

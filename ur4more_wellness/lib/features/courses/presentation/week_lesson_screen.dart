@@ -7,6 +7,7 @@ import '../models/course_models.dart';
 import '../../../services/scripture_service.dart';
 import '../widgets/unlock_scripture_card.dart';
 import '../../spirit/services/faith_mode_navigator.dart';
+import '../../../core/settings/settings_model.dart';
 
 // Design System Colors
 const Color _bgColor = Color(0xFF0C1220);
@@ -76,7 +77,7 @@ class _WeekLessonScreenState extends State<WeekLessonScreen> {
       );
       final isCompleted = await _repository.isWeekComplete(weekNumber);
       final isUnlocked = await _repository.isWeekUnlock(weekNumber);
-      final currentTier = await FaithModeNavigator.getCurrentFaithTier();
+      final currentTier = FaithModeNavigator.getCurrentFaithTier(context);
       final isGated = _repository.isWeekGatedForTier(weekNumber, currentTier, course);
 
       setState(() {

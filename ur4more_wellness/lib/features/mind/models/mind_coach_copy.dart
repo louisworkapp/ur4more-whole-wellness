@@ -1,4 +1,5 @@
 import '../../../services/faith_service.dart';
+import '../../../core/settings/settings_model.dart';
 
 /// Content templates for Mind Coach based on faith mode
 class MindCoachCopy {

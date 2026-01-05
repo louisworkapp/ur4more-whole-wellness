@@ -3,6 +3,7 @@ import '../../../design/tokens.dart';
 import '../../../common/widgets/collapsible_info_card.dart';
 import '../services/faith_mode_navigator.dart';
 import '../../courses/models/course_models.dart';
+import '../../../core/settings/settings_model.dart';
 
 class FaithModeBanner extends StatelessWidget {
   const FaithModeBanner({super.key});
@@ -13,7 +14,7 @@ class FaithModeBanner extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return FutureBuilder<FaithTier>(
-      future: FaithModeNavigator.getCurrentFaithTier(),
+      future: Future.value(FaithModeNavigator.getCurrentFaithTier(context)),
       builder: (context, snapshot) {
         final faithTier = snapshot.data ?? FaithTier.off;
         

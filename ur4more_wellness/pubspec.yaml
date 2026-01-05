@@ -65,7 +65,7 @@ flutter:
     - assets/mind/exercises/
     - assets/core/
     - assets/quotes/manifest.json
-    - assets\quotes\shards\quotes_000.json
+    - assets/quotes/shards/quotes_000.json
     - assets/inspiration/
 
 flutter_native_splash:

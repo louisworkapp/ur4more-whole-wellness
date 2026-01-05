@@ -146,7 +146,7 @@ class _ThoughtRecordScreenState extends State<ThoughtRecordScreen> {
         child: _isLoading
             ? const Center(child: CircularProgressIndicator())
             : ThoughtRecordWidget(
-                isFaithTier: widget.faithMode.isActivated,
+                isFaithMode: widget.faithMode.isActivated,
                 exerciseData: _exerciseData,
           onComplete: () {
             // Show completion message
