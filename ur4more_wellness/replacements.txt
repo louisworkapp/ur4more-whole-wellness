@@ -1,1 +1,9 @@
-REDACTED_JWT_TOKEN==>REDACTED_JWT_TOKEN
+# This file is used with git-filter-repo to replace secrets in git history
+# Format: OLD_VALUE==>NEW_VALUE
+# Example (replace YOUR_ACTUAL_TOKEN_HERE with the actual token from git history):
+# YOUR_ACTUAL_TOKEN_HERE==>REDACTED_JWT_TOKEN
+#
+# Usage: git filter-repo --replace-text replacements.txt
+# After cleanup, delete this file: rm replacements.txt (or del replacements.txt on Windows)
+#
+# See HISTORY_CLEANUP_GUIDE.md and docs/SECURITY.md for detailed instructions
