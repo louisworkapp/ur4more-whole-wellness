@@ -5,7 +5,7 @@ import '../../../../services/faith_service.dart';
 import '../../../../widgets/universal_speech_text_field.dart';
 
 class MindfulObservationScreen extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
 
   const MindfulObservationScreen({
     Key? key,

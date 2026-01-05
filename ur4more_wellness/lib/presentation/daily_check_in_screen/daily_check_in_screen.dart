@@ -44,7 +44,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
 
   // Mock user data and faith mode
   final String _userId = "user_12345";
-  FaithMode _faithMode = FaithMode.light; // Mock faith mode
+  FaithTier _faithMode = FaithTier.light; // Mock faith mode
 
   final List<String> _sectionTitles = [
     'Rate of Perceived Exertion', // Updated titles as per requirements
@@ -176,7 +176,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
       Telemetry.checkInCompleted(
         _userId, 
         pointsEarned, 
-        FaithService.getFaithModeLabel(_faithMode)
+        FaithService.getFaithModeLabel(faithModeToTier(_faithMode))
       );
 
       setState(() {
@@ -227,7 +227,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
     if (_painLevel > 0) {
       suggestionTitle = "Start Mobility Reset (5 min)";
       suggestionAction = "mobility_reset";
-    } else if (_urgeLevel >= 7 && _faithMode != FaithMode.off) {
+    } else if (_urgeLevel >= 7 && _faithMode != FaithTier.off) {
       suggestionTitle = "Open Peace Verse (30 sec)";
       suggestionAction = "peace_verse";
     }

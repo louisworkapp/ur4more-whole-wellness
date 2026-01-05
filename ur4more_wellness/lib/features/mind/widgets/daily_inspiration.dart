@@ -7,7 +7,7 @@ import '../../../core/settings/settings_model.dart';
 import '../../../theme/tokens.dart';
 
 class DailyInspiration extends StatefulWidget {
-  final FaithMode mode;
+  final FaithTier mode;
   final bool hideFaithOverlaysInMind;
   
   const DailyInspiration({

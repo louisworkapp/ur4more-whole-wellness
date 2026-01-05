@@ -9,8 +9,8 @@ import '../../../widgets/settings/setting_card.dart';
 import '../../../widgets/settings/choice_tile.dart';
 
 class FaithModeSectionWidget extends StatelessWidget {
-  final FaithMode faithMode;
-  final ValueChanged<FaithMode?> onFaithModeChanged;
+  final FaithTier faithMode;
+  final ValueChanged<FaithTier?> onFaithModeChanged;
   final VoidCallback? onFaithModeEnabled;
 
   const FaithModeSectionWidget({
@@ -20,9 +20,9 @@ class FaithModeSectionWidget extends StatelessWidget {
     this.onFaithModeEnabled,
   });
 
-  void _handleFaithModeChange(FaithMode? newMode) {
+  void _handleFaithModeChange(FaithTier? newMode) {
     // Check if faith mode is being enabled (from off to any faith mode)
-    if (faithMode == FaithMode.off && newMode != null && newMode != FaithMode.off) {
+    if (faithMode == FaithTier.off && newMode != null && newMode != FaithTier.off) {
       // Call the callback to show congratulations
       onFaithModeEnabled?.call();
     }
@@ -45,8 +45,8 @@ class FaithModeSectionWidget extends StatelessWidget {
         size: 24,
       ),
       children: [
-        ChoiceTile<FaithMode>(
-          value: FaithMode.off,
+        ChoiceTile<FaithTier>(
+          value: FaithTier.off,
           groupValue: faithMode,
           title: 'Off',
           subtitle: 'Secular mode - no spiritual content',
@@ -58,8 +58,8 @@ class FaithModeSectionWidget extends StatelessWidget {
           onChanged: _handleFaithModeChange,
         ),
         const SizedBox(height: AppSpace.x3),
-        ChoiceTile<FaithMode>(
-          value: FaithMode.light,
+        ChoiceTile<FaithTier>(
+          value: FaithTier.light,
           groupValue: faithMode,
           title: 'Light',
           subtitle: 'Minimal spiritual content with gentle encouragement',
@@ -71,8 +71,8 @@ class FaithModeSectionWidget extends StatelessWidget {
           onChanged: _handleFaithModeChange,
         ),
         const SizedBox(height: AppSpace.x3),
-        ChoiceTile<FaithMode>(
-          value: FaithMode.disciple,
+        ChoiceTile<FaithTier>(
+          value: FaithTier.disciple,
           groupValue: faithMode,
           title: 'Disciple',
           subtitle: 'Active faith integration with daily devotions',
@@ -84,8 +84,8 @@ class FaithModeSectionWidget extends StatelessWidget {
           onChanged: _handleFaithModeChange,
         ),
         const SizedBox(height: AppSpace.x3),
-        ChoiceTile<FaithMode>(
-          value: FaithMode.kingdom,
+        ChoiceTile<FaithTier>(
+          value: FaithTier.kingdom,
           groupValue: faithMode,
           title: 'Kingdom Builder',
           subtitle: 'Complete spiritual journey with advanced features',

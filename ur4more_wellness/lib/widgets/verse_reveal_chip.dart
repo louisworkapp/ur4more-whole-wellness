@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import '../core/services/settings_service.dart';
 import '../services/faith_service.dart';
 
 class VerseRevealChip extends StatefulWidget {
-  final FaithMode mode;
+  final FaithTier mode;
   final String ref;
   final String text; // ≤ 2 sentences (KJV)
   final bool askConsentLight; // true = ask once per session in Light
@@ -24,7 +25,7 @@ class _VerseRevealChipState extends State<VerseRevealChip> {
   bool _consentedThisSession = false;
 
   Future<void> _reveal() async {
-    if (widget.mode == FaithMode.light && widget.askConsentLight && !_consentedThisSession) {
+    if (widget.mode == FaithTier.light && widget.askConsentLight && !_consentedThisSession) {
       final ok = await showDialog<bool>(
         context: context,
         builder: (_) => AlertDialog(

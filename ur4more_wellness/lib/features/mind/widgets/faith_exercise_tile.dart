@@ -4,7 +4,7 @@ import '../../../../widgets/verse_reveal_chip.dart';
 import '../../../../data/mind_faith_exercises_repository.dart';
 
 class FaithExerciseTile extends StatelessWidget {
-  final FaithMode mode;
+  final FaithTier mode;
   final FaithExercise ex;
   final bool overlaysHidden; // settings.hide_faith_overlays_in_mind
   final VoidCallback onStart;

@@ -5,14 +5,14 @@ import '../../../services/faith_service.dart';
 /// Returns `true` if faith overlays are allowed for this session.
 Future<bool> askLightConsentIfNeeded({
   required BuildContext context,
-  required FaithMode faithMode,
+  required FaithTier faithMode,
   required bool hideFaithOverlaysInMind,
 }) async {
   // Off or user hides overlays globally → never allow overlays.
-  if (faithMode == FaithMode.off || hideFaithOverlaysInMind) return false;
+  if (faithMode == FaithTier.off || hideFaithOverlaysInMind) return false;
 
   // Disciple/Kingdom → overlays allowed by default (user can still hide via global toggle).
-  if (faithMode == FaithMode.disciple || faithMode == FaithMode.kingdom) return true;
+  if (faithMode == FaithTier.disciple || faithMode == FaithTier.kingdom) return true;
 
   // Light → ask once per session.
   return await showDialog<bool>(

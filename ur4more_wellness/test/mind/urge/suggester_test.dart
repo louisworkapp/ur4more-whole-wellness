@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ur4more_wellness/core/services/settings_service.dart';
 import 'package:ur4more_wellness/features/mind/urge/repositories/urge_themes_repository.dart';
 import 'package:ur4more_wellness/features/mind/urge/models/urge_theme_model.dart';
 import 'package:ur4more_wellness/services/ai_suggestion_service.dart';
@@ -66,7 +67,7 @@ void main() {
         urgeLevel: 6.0,
         urgeTypes: ['substance_use', 'food'],
         rpeLevel: 5,
-        faithMode: FaithMode.light,
+        faithMode: FaithTier.light,
         timestamp: DateTime.now(),
       );
 
@@ -93,7 +94,7 @@ void main() {
         urgeLevel: 9.0, // Very high intensity
         urgeTypes: ['substance_use'],
         rpeLevel: 3,
-        faithMode: FaithMode.off,
+        faithMode: FaithTier.off,
         timestamp: DateTime.now(),
       );
 
@@ -113,7 +114,7 @@ void main() {
         urgeLevel: 5.0,
         urgeTypes: ['gluttony'], // Biblical theme
         rpeLevel: 3,
-        faithMode: FaithMode.light,
+        faithMode: FaithTier.light,
         timestamp: DateTime.now(),
       );
 
@@ -123,7 +124,7 @@ void main() {
       
       // Should include faith-based suggestions
       final faithSuggestions = suggestions.where((s) => 
-          s.requiresFaithMode || s.category == 'spiritual').toList();
+          s.requiresFaithTier || s.category == 'spiritual').toList();
       expect(faithSuggestions, isNotEmpty);
     });
 
@@ -136,7 +137,7 @@ void main() {
         urgeLevel: 5.0,
         urgeTypes: ['substance_use'],
         rpeLevel: 3,
-        faithMode: FaithMode.off,
+        faithMode: FaithTier.off,
         timestamp: DateTime.now(),
       );
 
@@ -152,7 +153,7 @@ void main() {
         urgeLevel: 0.0,
         urgeTypes: [], // Empty urge types
         rpeLevel: 3,
-        faithMode: FaithMode.off,
+        faithMode: FaithTier.off,
         timestamp: DateTime.now(),
       );
 

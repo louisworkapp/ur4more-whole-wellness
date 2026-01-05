@@ -10,7 +10,7 @@ class CoachFaithExercises extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settings = SettingsScope.of(context).value;
-    final mode = _getFaithModeFromTier(settings.faithTier);
+    final mode = _getFaithTierFromTier(settings.faithTier);
     
     if (!mode.isActivated) return const SizedBox.shrink();
 
@@ -62,19 +62,19 @@ class CoachFaithExercises extends StatelessWidget {
     );
   }
 
-  FaithMode _getFaithModeFromTier(dynamic faithTier) {
-    // Convert FaithTier to FaithMode
+  FaithTier _getFaithTierFromTier(dynamic faithTier) {
+    // Convert FaithTier to FaithTier
     switch (faithTier.toString()) {
       case 'FaithTier.off':
-        return FaithMode.off;
+        return FaithTier.off;
       case 'FaithTier.light':
-        return FaithMode.light;
+        return FaithTier.light;
       case 'FaithTier.disciple':
-        return FaithMode.disciple;
-      case 'FaithTier.kingdomBuilder':
-        return FaithMode.kingdom;
+        return FaithTier.disciple;
+      case 'FaithTier.kingdom':
+        return FaithTier.kingdom;
       default:
-        return FaithMode.off;
+        return FaithTier.off;
     }
   }
 }

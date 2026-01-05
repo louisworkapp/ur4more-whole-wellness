@@ -9,7 +9,7 @@ import '../../../../core/settings/settings_scope.dart';
 import '../../../../core/settings/settings_model.dart';
 
 class ThoughtRecordScreen extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
 
   const ThoughtRecordScreen({
     Key? key,
@@ -146,7 +146,7 @@ class _ThoughtRecordScreenState extends State<ThoughtRecordScreen> {
         child: _isLoading
             ? const Center(child: CircularProgressIndicator())
             : ThoughtRecordWidget(
-                isFaithMode: widget.faithMode.isActivated,
+                isFaithTier: widget.faithMode.isActivated,
                 exerciseData: _exerciseData,
           onComplete: () {
             // Show completion message

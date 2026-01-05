@@ -13,7 +13,7 @@ class JournalEntryWidget extends StatefulWidget {
   final String journalText;
   final String selectedMood;
   final List<String> attachedPhotos;
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final ValueChanged<String> onTextChanged;
   final ValueChanged<String> onMoodChanged;
   final ValueChanged<List<String>> onPhotosChanged;
@@ -164,7 +164,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
   }
 
   void _selectFaithPrompt(String prompt) async {
-    if (_faithPromptUsedToday || widget.faithMode == FaithMode.off) return;
+    if (_faithPromptUsedToday || widget.faithMode == FaithTier.off) return;
 
     setState(() {
       _faithPromptUsedToday = true;
@@ -324,7 +324,7 @@ class _JournalEntryWidgetState extends State<JournalEntryWidget> {
           SizedBox(height: AppSpace.x3),
 
           // Faith Prompt Chips (for non-Off modes)
-          if (widget.faithMode != FaithMode.off) ...[
+          if (widget.faithMode != FaithTier.off) ...[
             Text(
               'Faith Prompts (Optional)',
               style: theme.textTheme.bodyMedium?.copyWith(

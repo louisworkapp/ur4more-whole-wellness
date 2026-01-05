@@ -93,8 +93,8 @@ class _BreathSessionScreenState extends State<BreathSessionScreen>
   Future<void> _askLightConsentIfNeeded() async {
     if (_faithTier != FaithTier.light || _lightConsentGiven) return;
     
-    // Convert FaithTier to FaithMode
-    final faithMode = _convertFaithTierToFaithMode(_faithTier);
+    // Convert FaithTier to FaithTier
+    final faithMode = _convertFaithTierToFaithTier(_faithTier);
     
     _lightConsentGiven = await askLightConsentIfNeeded(
       context: context,
@@ -105,16 +105,16 @@ class _BreathSessionScreenState extends State<BreathSessionScreen>
     _trackAnalytics('light_consent_set', {'allowed': _lightConsentGiven});
   }
 
-  FaithMode _convertFaithTierToFaithMode(FaithTier tier) {
+  FaithTier _convertFaithTierToFaithTier(FaithTier tier) {
     switch (tier) {
       case FaithTier.off:
-        return FaithMode.off;
+        return FaithTier.off;
       case FaithTier.light:
-        return FaithMode.light;
+        return FaithTier.light;
       case FaithTier.disciple:
-        return FaithMode.disciple;
+        return FaithTier.disciple;
       case FaithTier.kingdom:
-        return FaithMode.kingdom;
+        return FaithTier.kingdom;
     }
   }
 

@@ -32,17 +32,17 @@ class _MindCoachScreenState extends State<MindCoachScreen>
     super.dispose();
   }
 
-  FaithMode _getFaithModeFromTier(FaithTier faithTier) {
-    // Convert FaithTier to FaithMode
+  FaithTier _getFaithTierFromTier(FaithTier faithTier) {
+    // Convert FaithTier to FaithTier
     switch (faithTier) {
       case FaithTier.off:
-        return FaithMode.off;
+        return FaithTier.off;
       case FaithTier.light:
-        return FaithMode.light;
+        return FaithTier.light;
       case FaithTier.disciple:
-        return FaithMode.disciple;
+        return FaithTier.disciple;
       case FaithTier.kingdom:
-        return FaithMode.kingdom;
+        return FaithTier.kingdom;
     }
   }
 
@@ -53,7 +53,7 @@ class _MindCoachScreenState extends State<MindCoachScreen>
     
     // Get current settings from SettingsScope (reactive to changes)
     final settings = SettingsScope.of(context).value;
-    final faithMode = _getFaithModeFromTier(settings.faithTier);
+    final faithMode = _getFaithTierFromTier(settings.faithTier);
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
@@ -126,7 +126,7 @@ class _MindCoachScreenState extends State<MindCoachScreen>
     );
   }
 
-  Widget _buildModePill(ThemeData theme, ColorScheme colorScheme, FaithMode faithMode) {
+  Widget _buildModePill(ThemeData theme, ColorScheme colorScheme, FaithTier faithMode) {
     final modeText = MindCoachRepository.getModeDisplayText(faithMode);
     final pillColor = MindCoachRepository.getModePillColor(faithMode);
 

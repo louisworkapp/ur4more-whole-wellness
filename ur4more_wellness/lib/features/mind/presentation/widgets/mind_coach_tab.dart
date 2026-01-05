@@ -11,7 +11,7 @@ import '../../../../core/settings/settings_scope.dart';
 import '../../../../core/settings/settings_model.dart';
 
 class MindCoachTab extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
 
   const MindCoachTab({
     super.key,
@@ -490,7 +490,7 @@ class _MindCoachTabState extends State<MindCoachTab> {
 }
 
 class _ReframeDialog extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final MindCoachCopy coachCopy;
 
   const _ReframeDialog({
@@ -932,7 +932,7 @@ class _ReframeDialogState extends State<_ReframeDialog> {
 }
 
 class _SmallStepDialog extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final MindCoachCopy coachCopy;
 
   const _SmallStepDialog({

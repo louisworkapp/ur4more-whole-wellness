@@ -34,7 +34,7 @@ class CourseRepository {
       case FaithTier.light:
         return allWeeks.where((week) => week.requiredTier == FaithTier.light).toList();
       case FaithTier.disciple:
-      case FaithTier.kingdomBuilder:
+      case FaithTier.kingdom:
         return allWeeks;
     }
   }

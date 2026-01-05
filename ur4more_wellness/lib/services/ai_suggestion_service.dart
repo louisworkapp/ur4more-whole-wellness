@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../core/app_export.dart';
 import '../services/faith_service.dart';
 import 'pain_relief_guide.dart';
 import '../features/mind/urge/repositories/urge_themes_repository.dart';
@@ -14,7 +15,7 @@ class AISuggestion {
   final int priority; // 1-5, higher is more important
   final String reasoning; // Why this suggestion was made
   final List<String> tags;
-  final bool requiresFaithMode;
+  final bool requiresFaithTier;
   final String? faithVerse;
   final String? faithPrompt;
 
@@ -27,7 +28,7 @@ class AISuggestion {
     required this.priority,
     required this.reasoning,
     required this.tags,
-    this.requiresFaithMode = false,
+    this.requiresFaithTier = false,
     this.faithVerse,
     this.faithPrompt,
   });
@@ -42,7 +43,7 @@ class AISuggestion {
       priority: json['priority'] as int,
       reasoning: json['reasoning'] as String,
       tags: List<String>.from(json['tags'] as List),
-      requiresFaithMode: json['requiresFaithMode'] as bool? ?? false,
+      requiresFaithTier: json['requiresFaithTier'] as bool? ?? false,
       faithVerse: json['faithVerse'] as String?,
       faithPrompt: json['faithPrompt'] as String?,
     );
@@ -58,7 +59,7 @@ class AISuggestion {
       'priority': priority,
       'reasoning': reasoning,
       'tags': tags,
-      'requiresFaithMode': requiresFaithMode,
+      'requiresFaithTier': requiresFaithTier,
       'faithVerse': faithVerse,
       'faithPrompt': faithPrompt,
     };
@@ -72,7 +73,7 @@ class CheckInData {
   final double urgeLevel;
   final List<String> urgeTypes;
   final int rpeLevel;
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final DateTime timestamp;
   final String? mood;
 
@@ -131,7 +132,7 @@ class AISuggestionService {
       priority: 5,
       reasoning: 'Spiritual comfort can provide strength during physical pain.',
       tags: ['pain', 'prayer', 'healing'],
-      requiresFaithMode: true,
+      requiresFaithTier: true,
       faithVerse: 'James 5:16',
       faithPrompt: 'Pray for healing and ask God to give you strength.',
     ),
@@ -156,7 +157,7 @@ class AISuggestionService {
       priority: 4,
       reasoning: 'Scripture provides spiritual strength during temptation.',
       tags: ['urge', 'scripture', 'strength'],
-      requiresFaithMode: true,
+      requiresFaithTier: true,
       faithVerse: '1 Corinthians 10:13',
       faithPrompt: 'God provides a way out of every temptation.',
     ),
@@ -223,7 +224,7 @@ class AISuggestionService {
       priority: 4,
       reasoning: 'Addressing pride through prayer and humility.',
       tags: ['pride', 'humility', 'prayer'],
-      requiresFaithMode: true,
+      requiresFaithTier: true,
       faithVerse: 'Proverbs 16:18',
       faithPrompt: 'Ask God to help you walk in humility.',
     ),
@@ -236,7 +237,7 @@ class AISuggestionService {
       priority: 4,
       reasoning: 'Service helps combat envy and selfishness.',
       tags: ['envy', 'service', 'others'],
-      requiresFaithMode: true,
+      requiresFaithTier: true,
       faithVerse: 'Philippians 2:3-4',
       faithPrompt: 'Consider others better than yourself.',
     ),
@@ -249,7 +250,7 @@ class AISuggestionService {
       priority: 3,
       reasoning: 'Contentment helps overcome envy and greed.',
       tags: ['envy', 'greed', 'contentment'],
-      requiresFaithMode: true,
+      requiresFaithTier: true,
       faithVerse: 'Philippians 4:11-12',
       faithPrompt: 'Learn to be content in all circumstances.',
     ),
@@ -336,7 +337,7 @@ class AISuggestionService {
             priority: _calculatePriority(data.urgeLevel, action.title),
             reasoning: _generateUnifiedReasoning(urgeType, data.urgeLevel, action.title),
             tags: [urgeType, 'unified_schema'],
-            requiresFaithMode: themesData.biblicalThemes.containsKey(urgeType),
+            requiresFaithTier: themesData.biblicalThemes.containsKey(urgeType),
             faithVerse: null, // Will be populated from passages if needed
             faithPrompt: null, // Will be populated from prompts if needed
           ));
@@ -359,7 +360,7 @@ class AISuggestionService {
                 priority: _calculatePriority(data.urgeLevel, 'scripture'),
                 reasoning: 'Biblical wisdom for ${theme.label} based on ${passage.ref}',
                 tags: [urgeType, 'scripture', 'faith'],
-                requiresFaithMode: true,
+                requiresFaithTier: true,
                 faithVerse: passage.verses.first.t, // Use first verse
                 faithPrompt: prompts.isNotEmpty ? prompts.first : null,
               ));
@@ -430,7 +431,7 @@ class AISuggestionService {
           priority: enhancedPriority.clamp(1, 5), // Keep within 1-5 range
           reasoning: _generatePainReasoning(region, data.painLevel, prs),
           tags: prs.tags,
-          requiresFaithMode: prs.category == 'spiritual',
+          requiresFaithTier: prs.category == 'spiritual',
           faithVerse: prs.faithVerse,
           faithPrompt: prs.category == 'spiritual' ? 'Seek God\'s healing and comfort through this practice.' : null,
         ));
@@ -496,7 +497,7 @@ class AISuggestionService {
         priority: bs.priority,
         reasoning: 'Spiritual comfort and healing through faith-based practices.',
         tags: bs.tags,
-        requiresFaithMode: true,
+        requiresFaithTier: true,
         faithVerse: bs.faithVerse,
         faithPrompt: 'Trust in God\'s healing power and find peace in His presence.',
       ));
@@ -515,7 +516,7 @@ class AISuggestionService {
       int score = 0;
 
       // Skip faith-based suggestions if faith mode is off
-      if (suggestion.requiresFaithMode && !data.faithMode.isActivated) {
+      if (suggestion.requiresFaithTier && !data.faithMode.isActivated) {
         continue;
       }
 
@@ -564,7 +565,7 @@ class AISuggestionService {
       }
 
       // Faith mode bonus
-      if (data.faithMode.isActivated && suggestion.requiresFaithMode) {
+      if (data.faithMode.isActivated && suggestion.requiresFaithTier) {
         score += 2;
       }
 
@@ -602,7 +603,7 @@ class AISuggestionService {
       for (final suggestion in _allSuggestions) {
         if (selectedSuggestions.length >= 2) break;
         if (!selectedSuggestions.contains(suggestion) && 
-            !suggestion.requiresFaithMode && 
+            !suggestion.requiresFaithTier && 
             suggestion.tags.contains('wellness')) {
           selectedSuggestions.add(suggestion);
         }

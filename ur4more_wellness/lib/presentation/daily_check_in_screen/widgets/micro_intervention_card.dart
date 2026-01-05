@@ -7,7 +7,7 @@ import '../../../widgets/custom_icon_widget.dart';
 
 class MicroInterventionCard extends StatefulWidget {
   final double urgeLevel;
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final VoidCallback? onCompleted;
 
   const MicroInterventionCard({
@@ -29,8 +29,8 @@ class _MicroInterventionCardState extends State<MicroInterventionCard> {
   void initState() {
     super.initState();
     // Auto-expand for Disciple and Kingdom modes
-    _isExpanded = widget.faithMode == FaithMode.disciple || 
-                  widget.faithMode == FaithMode.kingdom;
+    _isExpanded = widget.faithMode == FaithTier.disciple || 
+                  widget.faithMode == FaithTier.kingdom;
   }
 
   void _toggleExpanded() {
@@ -71,7 +71,7 @@ class _MicroInterventionCardState extends State<MicroInterventionCard> {
     final colorScheme = theme.colorScheme;
     
     // Don't show for Off mode
-    if (widget.faithMode == FaithMode.off) {
+    if (widget.faithMode == FaithTier.off) {
       return const SizedBox.shrink();
     }
 

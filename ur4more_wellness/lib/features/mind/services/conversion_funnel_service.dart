@@ -20,7 +20,7 @@ class ConversionFunnelService {
   static const Duration inviteCooldown = Duration(hours: 24);
 
   /// Check if user should be invited to faith mode based on current signals
-  static bool shouldShowInvite(FaithMode currentMode) {
+  static bool shouldShowInvite(FaithTier currentMode) {
     if (!currentMode.isOff) return false;
     
     // Don't show invites too frequently
@@ -159,7 +159,7 @@ class ConversionFunnelService {
   static Future<void> _showGeneralInvite(BuildContext context) async {
     final result = await showDialog<bool>(
       context: context,
-      builder: (context) => const SwitchToFaithModeModal(),
+      builder: (context) => const SwitchToFaithTierModal(),
     );
 
     if (result == true) {
@@ -175,17 +175,17 @@ class ConversionFunnelService {
     _lastInviteShown = DateTime.now();
   }
 
-  /// Convert FaithTier to FaithMode
-  static FaithMode _faithTierToMode(FaithTier tier) {
+  /// Convert FaithTier to FaithTier
+  static FaithTier _faithTierToMode(FaithTier tier) {
     switch (tier) {
       case FaithTier.off:
-        return FaithMode.off;
+        return FaithTier.off;
       case FaithTier.light:
-        return FaithMode.light;
+        return FaithTier.light;
       case FaithTier.disciple:
-        return FaithMode.disciple;
+        return FaithTier.disciple;
       case FaithTier.kingdom:
-        return FaithMode.kingdom;
+        return FaithTier.kingdom;
     }
   }
 

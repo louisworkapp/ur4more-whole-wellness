@@ -11,7 +11,7 @@ class SafetyAlertWidget extends StatelessWidget {
   final SafetyAnalysisResult analysisResult;
   final VoidCallback? onDismiss;
   final String? countryCode;
-  final FaithMode? faithMode;
+  final FaithTier? faithMode;
 
   const SafetyAlertWidget({
     super.key,
@@ -380,7 +380,7 @@ class SafetyAlertWidget extends StatelessWidget {
             width: double.infinity,
             child: OutlinedButton.icon(
               onPressed: () {
-                _showFaithModeInvitation(context);
+                _showFaithTierInvitation(context);
               },
               icon: Icon(
                 Icons.explore,
@@ -474,7 +474,7 @@ class SafetyAlertWidget extends StatelessWidget {
     );
   }
 
-  void _showFaithModeInvitation(BuildContext context) {
+  void _showFaithTierInvitation(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(

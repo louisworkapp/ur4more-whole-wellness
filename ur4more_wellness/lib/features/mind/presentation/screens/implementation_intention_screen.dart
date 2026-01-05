@@ -4,7 +4,7 @@ import '../../../../services/faith_service.dart';
 import '../../../../widgets/universal_speech_text_field.dart';
 
 class ImplementationIntentionScreen extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
 
   const ImplementationIntentionScreen({
     Key? key,

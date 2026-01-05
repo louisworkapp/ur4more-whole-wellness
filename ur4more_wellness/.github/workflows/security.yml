@@ -1,0 +1,80 @@
+name: Security Scan
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  public-safety-check:
+    name: Public Launch Safety Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for better detection
+
+      - name: Install Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        with:
+          install-only: true
+
+      - name: Install Trufflehog
+        run: |
+          # Get latest version from GitHub API
+          TRUFFLEHOG_VERSION=$(curl -s https://api.github.com/repos/trufflesecurity/trufflehog/releases/latest | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+          wget -q https://github.com/trufflesecurity/trufflehog/releases/download/v${TRUFFLEHOG_VERSION}/trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz
+          tar -xzf trufflehog_${TRUFFLEHOG_VERSION}_linux_amd64.tar.gz
+          sudo mv trufflehog /usr/local/bin/
+          trufflehog --version
+
+      - name: Run Public Safety Check (Strict Mode)
+        shell: pwsh
+        run: |
+          pwsh ./tools/public_safety_check.ps1 -Strict
+
+  gitleaks:
+    name: Gitleaks Secret Detection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for better detection
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          config-path: ./gitleaks.toml
+          extra-args: '--verbose --no-banner'
+          fail: true  # Fail the build on secret detection
+
+  trufflehog:
+    name: TruffleHog Secret Detection
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for better detection
+
+      - name: Run TruffleHog
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --only-verified
+        env:
+          TRUFFLEHOG_IGNORE_PATH: ./.trufflehogignore
+
+      - name: Check for secrets
+        run: |
+          # TruffleHog exits with non-zero if secrets are found
+          # This step ensures the workflow fails on secret detection
+          echo "TruffleHog scan completed. If secrets were found, the workflow will fail."
+

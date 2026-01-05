@@ -4,7 +4,7 @@ import '../../services/faith_service.dart';
 import '../../widgets/verse_reveal_chip.dart';
 
 class SpiritOverview extends StatelessWidget {
-  final FaithMode mode;
+  final FaithTier mode;
 
   const SpiritOverview({super.key, required this.mode});
 

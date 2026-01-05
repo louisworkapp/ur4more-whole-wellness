@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../design/mind_tokens.dart';
 import '../domain/block_models.dart';
-import '../domain/faith_mode.dart';
+import '../../../core/settings/settings_model.dart' show FaithTier;
 
 class BlockEditorSheet extends StatefulWidget {
   final PlanBlock initial;

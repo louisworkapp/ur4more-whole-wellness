@@ -114,7 +114,7 @@ class FaithModeBanner extends StatelessWidget {
         return 'Minimal spiritual content with gentle encouragement';
       case FaithTier.disciple:
         return 'Active faith integration with daily devotions';
-      case FaithTier.kingdomBuilder:
+      case FaithTier.kingdom:
         return 'Complete experience with service and leadership focus';
     }
   }

@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../design/tokens.dart';
 import '../../../routes/app_routes.dart';
 import '../../courses/models/course_models.dart';
-import '../../../core/services/settings_service.dart';
+import '../../../core/settings/settings_model.dart';
+import '../../../core/settings/settings_scope.dart';
 
 class FaithModeNavigator {
-  static const String _faithTierKey = 'faith_tier';
-
   /// Opens the faith mode selector - either navigates to Settings or shows inline dialog
   static Future<void> openFaithModeSelector(BuildContext context) async {
     // Try to navigate to Settings first
@@ -30,57 +28,22 @@ class FaithModeNavigator {
     );
   }
 
-  /// Gets the current faith tier from settings service
-  static Future<FaithTier> getCurrentFaithTier() async {
-    final settings = await SettingsService.loadSettings();
-    return _convertFaithModeToTier(settings.faithMode);
+  /// Gets the current faith tier from settings
+  static FaithTier getCurrentFaithTier(BuildContext context) {
+    final settingsCtl = SettingsScope.of(context);
+    return settingsCtl.value.faithTier;
   }
 
-  /// Sets the faith tier using settings service
-  static Future<void> setFaithTier(FaithTier tier) async {
-    final faithMode = _convertTierToFaithMode(tier);
-    await SettingsService.updateFaithMode(faithMode);
-  }
-
-  /// Convert FaithMode to FaithTier
-  static FaithTier _convertFaithModeToTier(FaithMode faithMode) {
-    switch (faithMode) {
-      case FaithMode.off:
-        return FaithTier.off;
-      case FaithMode.light:
-        return FaithTier.light;
-      case FaithMode.disciple:
-        return FaithTier.disciple;
-      case FaithMode.kingdom:
-        return FaithTier.kingdomBuilder;
-    }
-  }
-
-  /// Convert FaithTier to FaithMode
-  static FaithMode _convertTierToFaithMode(FaithTier tier) {
-    switch (tier) {
-      case FaithTier.off:
-        return FaithMode.off;
-      case FaithTier.light:
-        return FaithMode.light;
-      case FaithTier.disciple:
-        return FaithMode.disciple;
-      case FaithTier.kingdomBuilder:
-        return FaithMode.kingdom;
-    }
+  /// Sets the faith tier using settings controller
+  static Future<void> setFaithTier(BuildContext context, FaithTier tier) async {
+    final settingsCtl = SettingsScope.of(context);
+    await settingsCtl.updateFaith(tier);
   }
 
   /// Sets the faith tier and notifies listeners
   static Future<void> setFaithTierAndNotify(FaithTier tier, BuildContext context) async {
-    await setFaithTier(tier);
-    // Trigger a rebuild of the current screen to reflect the change
-    if (context.mounted) {
-      // Find the nearest StatefulWidget and trigger a rebuild
-      final state = context.findAncestorStateOfType<State>();
-      if (state != null && state.mounted) {
-        state.setState(() {});
-      }
-    }
+    await setFaithTier(context, tier);
+    // SettingsController already notifies listeners, so no need to manually trigger rebuild
   }
 }
 
@@ -101,8 +64,8 @@ class _FaithModeSelectorDialogState extends State<FaithModeSelectorDialog> {
     _loadCurrentTier();
   }
 
-  Future<void> _loadCurrentTier() async {
-    final currentTier = await FaithModeNavigator.getCurrentFaithTier();
+  void _loadCurrentTier() {
+    final currentTier = FaithModeNavigator.getCurrentFaithTier(context);
     setState(() {
       _selectedTier = currentTier;
     });
@@ -273,7 +236,7 @@ class _FaithModeSelectorDialogState extends State<FaithModeSelectorDialog> {
         return 'Basic faith content. Scripture and simple prayers.';
       case FaithTier.disciple:
         return 'Full faith experience. Devotions, courses, and guidance.';
-      case FaithTier.kingdomBuilder:
+      case FaithTier.kingdom:
         return 'Complete experience with service and leadership focus.';
     }
   }
@@ -288,7 +251,7 @@ extension FaithTierDisplay on FaithTier {
         return 'Light';
       case FaithTier.disciple:
         return 'Disciple';
-      case FaithTier.kingdomBuilder:
+      case FaithTier.kingdom:
         return 'Kingdom Builder';
     }
   }

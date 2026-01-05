@@ -47,10 +47,10 @@ class _MorningCheckInScreenState extends State<MorningCheckInScreen> {
   }
 
   Future<void> _loadFaithSettings() async {
-    final faithMode = await FaithService.getFaithMode();
+    final faithMode = await FaithService.getFaithTier();
     setState(() {
-      faithActivated = faithMode != FaithMode.off;
-      showFaithOverlay = faithMode == FaithMode.disciple || faithMode == FaithMode.kingdom;
+      faithActivated = faithMode != FaithTier.off;
+      showFaithOverlay = faithMode == FaithTier.disciple || faithMode == FaithTier.kingdom;
       
       // Auto-select Spirit if faith mode is already enabled
       if (faithActivated) {
@@ -59,9 +59,9 @@ class _MorningCheckInScreenState extends State<MorningCheckInScreen> {
     });
   }
 
-  Future<void> _toggleFaithMode(bool enabled) async {
-    final newMode = enabled ? FaithMode.light : FaithMode.off;
-    await FaithService.setFaithMode(newMode);
+  Future<void> _toggleFaithTier(bool enabled) async {
+    final newMode = enabled ? FaithTier.light : FaithTier.off;
+    await FaithService.setFaithTier(newMode);
     
     setState(() {
       faithActivated = enabled;
@@ -412,7 +412,7 @@ class _MorningCheckInScreenState extends State<MorningCheckInScreen> {
             title: const Text('Faith Mode', style: TextStyle(fontWeight: FontWeight.w600)),
             subtitle: Text(faithActivated ? 'Spiritual content enabled' : 'Secular mode only'),
             value: faithActivated,
-            onChanged: _toggleFaithMode,
+            onChanged: _toggleFaithTier,
             secondary: Icon(
               faithActivated ? Icons.auto_awesome : Icons.visibility_off,
               color: faithActivated ? MindColors.lime : MindColors.textSub,
@@ -551,7 +551,7 @@ class _MorningCheckInScreenState extends State<MorningCheckInScreen> {
           title: const Text('Faith Mode', style: TextStyle(fontWeight: FontWeight.w600)),
           subtitle: Text(faithActivated ? 'Spiritual content enabled' : 'Secular mode only'),
           value: faithActivated,
-          onChanged: _toggleFaithMode,
+          onChanged: _toggleFaithTier,
           secondary: Icon(
             faithActivated ? Icons.auto_awesome : Icons.visibility_off,
             color: faithActivated ? MindColors.lime : MindColors.textSub,

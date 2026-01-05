@@ -25,7 +25,7 @@ class GoDeeperCardData {
     required this.snoozeOnDismiss,
   });
 
-  static Future<GoDeeperCardData> load(FaithMode mode) async {
+  static Future<GoDeeperCardData> load(FaithTier mode) async {
     final raw = json.decode(await rootBundle.loadString('assets/mind/go_deeper_card.json')) as Map<String, dynamic>;
     final m = raw[mode.isOff ? 'off' : 'activated'] as Map<String, dynamic>;
     final rl = (raw['off']?['rateLimit'] ?? {}) as Map<String, dynamic>;
@@ -44,7 +44,7 @@ class GoDeeperCardData {
 }
 
 class GoDeeperCard extends StatelessWidget {
-  final FaithMode mode;
+  final FaithTier mode;
   final Future<bool> Function(Duration cooldown) onExplore;   // returns true if action taken
   final Future<void> Function(Duration snooze) onDismiss;     // snooze invites
   final VoidCallback? onOpenSettings;                         // for activated state

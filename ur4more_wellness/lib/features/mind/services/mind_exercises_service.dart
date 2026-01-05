@@ -6,7 +6,7 @@ import '../exercises/exercise_model.dart' as new_exercises;
 /// Service for managing Mind Coach exercises
 class MindExercisesService {
   /// Get all available exercises for a given faith mode
-  static Future<List<Exercise>> mindExercises(FaithMode mode) async {
+  static Future<List<Exercise>> mindExercises(FaithTier mode) async {
     final exercises = <Exercise>[
       Exercise(
         id: "thought_record",
@@ -71,7 +71,7 @@ class MindExercisesService {
   }
 
   /// Get new evidence-based exercises from registry
-  static Future<List<Exercise>> _getNewExercises(FaithMode mode) async {
+  static Future<List<Exercise>> _getNewExercises(FaithTier mode) async {
     try {
       print('DEBUG: Loading new exercises from registry...');
       final newExercises = await ExerciseRegistry.list();
@@ -87,13 +87,13 @@ class MindExercisesService {
   }
 
   /// Convert new exercise model to existing exercise model
-  static Exercise _convertNewExercise(new_exercises.Exercise ne, FaithMode mode) {
+  static Exercise _convertNewExercise(new_exercises.Exercise ne, FaithTier mode) {
     String? descriptionFaith;
     if (mode.isActivated) {
       // Get appropriate overlay based on faith mode
-      final overlay = mode == FaithMode.disciple 
+      final overlay = mode == FaithTier.disciple 
           ? ne.overlays.disciple 
-          : mode == FaithMode.kingdom 
+          : mode == FaithTier.kingdom 
               ? ne.overlays.kingdom 
               : ne.overlays.light;
       
@@ -140,7 +140,7 @@ class MindExercisesService {
   }
 
   /// Get exercises filtered by tags
-  static Future<List<Exercise>> getExercisesByTags(FaithMode mode, List<String> tags) async {
+  static Future<List<Exercise>> getExercisesByTags(FaithTier mode, List<String> tags) async {
     final exercises = await mindExercises(mode);
     return exercises.where((exercise) {
       return tags.any((tag) => exercise.tags.contains(tag));
@@ -148,7 +148,7 @@ class MindExercisesService {
   }
 
   /// Get quick exercises (under 10 minutes)
-  static Future<List<Exercise>> getQuickExercises(FaithMode mode) async {
+  static Future<List<Exercise>> getQuickExercises(FaithTier mode) async {
     final exercises = await mindExercises(mode);
     return exercises.where((exercise) {
       return exercise.estimatedMinutes < 10;
@@ -156,7 +156,7 @@ class MindExercisesService {
   }
 
   /// Get exercises for high urge situations
-  static Future<List<Exercise>> getUrgeExercises(FaithMode mode) async {
+  static Future<List<Exercise>> getUrgeExercises(FaithTier mode) async {
     if (mode.isOff) {
       return await getExercisesByTags(mode, ["breathing", "grounding", "calm"]);
     } else {
@@ -168,7 +168,7 @@ class MindExercisesService {
 /// Service for managing Mind Coach courses
 class MindCoursesService {
   /// Get available courses for a given faith mode
-  static List<CourseTile> getCourses(FaithMode mode) {
+  static List<CourseTile> getCourses(FaithTier mode) {
     final courses = <CourseTile>[
       CourseTile(
         id: "cog_foundations_8w",
@@ -197,7 +197,7 @@ class MindCoursesService {
   }
 
   /// Get course by ID
-  static CourseTile? getCourseById(String id, FaithMode mode) {
+  static CourseTile? getCourseById(String id, FaithTier mode) {
     return getCourses(mode).where((course) => course.id == id).firstOrNull;
   }
 }

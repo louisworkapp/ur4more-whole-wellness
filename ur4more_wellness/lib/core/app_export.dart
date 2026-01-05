@@ -7,3 +7,4 @@ export '../theme/app_theme.dart';
 export '../theme/app_theme_compat.dart';
 export 'services/auth_service.dart';
 export 'services/telemetry.dart';
+export 'settings/settings_model.dart' show FaithTier, FaithFlags, parseFaithTier, faithTierToString;

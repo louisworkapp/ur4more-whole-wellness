@@ -63,21 +63,21 @@ class TruthService {
     }
   }
 
-  String summarize(String concept, FaithMode mode) {
+  String summarize(String concept, FaithTier mode) {
     final anchor = _get(concept);
     if (anchor == null) return concept;
     
     return mode.isOff ? anchor.summaryOff : anchor.summaryOn;
   }
 
-  List<Map<String, String>> scripture(String concept, FaithMode mode) {
+  List<Map<String, String>> scripture(String concept, FaithTier mode) {
     if (!mode.isActivated) return const [];
     
     final anchor = _get(concept);
     return anchor?.scriptureKJV ?? [];
   }
 
-  String getReframeSuccessMessage(String concept, FaithMode mode) {
+  String getReframeSuccessMessage(String concept, FaithTier mode) {
     if (mode.isOff) {
       return 'Aligned to truth.';
     } else {
@@ -89,7 +89,7 @@ class TruthService {
     }
   }
 
-  String getHabitFooter(FaithMode mode) {
+  String getHabitFooter(FaithTier mode) {
     if (mode.isOff) {
       return 'Choose what leads to life.';
     } else {
@@ -97,7 +97,7 @@ class TruthService {
     }
   }
 
-  String getLightStreakText(FaithMode mode) {
+  String getLightStreakText(FaithTier mode) {
     return summarize('Responsibility', mode);
   }
 }

@@ -4,7 +4,7 @@ import '../../../services/faith_service.dart';
 /// Integration service for TruthService in Mind Coach
 class TruthIntegrationService {
   final TruthService _truthService;
-  final FaithMode _faithMode;
+  final FaithTier _faithMode;
 
   TruthIntegrationService(this._truthService, this._faithMode);
 
@@ -26,7 +26,7 @@ class TruthIntegrationService {
   /// Check if verse should be shown (consent-aware)
   bool shouldShowVerse() {
     if (_faithMode.isOff) return false;
-    if (_faithMode == FaithMode.light) {
+    if (_faithMode == FaithTier.light) {
       // In Light mode, ask consent each session
       return true; // UI will handle consent dialog
     }

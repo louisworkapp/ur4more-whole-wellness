@@ -115,7 +115,7 @@ class MeditativeFigurePainter extends CustomPainter {
 }
 
 class WelcomeComponent extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final VoidCallback onContinue;
 
   const WelcomeComponent({

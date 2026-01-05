@@ -1,38 +1,4 @@
-
-enum FaithTier {
-  off,
-  light,
-  disciple,
-  kingdomBuilder;
-
-  String get displayName {
-    switch (this) {
-      case FaithTier.off:
-        return 'Off';
-      case FaithTier.light:
-        return 'Light';
-      case FaithTier.disciple:
-        return 'Disciple';
-      case FaithTier.kingdomBuilder:
-        return 'Kingdom Builder';
-    }
-  }
-
-  static FaithTier fromString(String value) {
-    switch (value.toLowerCase()) {
-      case 'off':
-        return FaithTier.off;
-      case 'light':
-        return FaithTier.light;
-      case 'disciple':
-        return FaithTier.disciple;
-      case 'kingdom builder':
-        return FaithTier.kingdomBuilder;
-      default:
-        return FaithTier.off;
-    }
-  }
-}
+import '../../../core/settings/settings_model.dart' show FaithTier, parseFaithTier;
 
 class CourseGate {
   final int? offTierHardGateWeek;
@@ -230,7 +196,11 @@ class Week {
     };
   }
 
-  FaithTier get requiredTier => FaithTier.fromString(tierMin);
+  FaithTier get requiredTier {
+    // Handle legacy "Kingdom Builder" string
+    final tierStr = tierMin.toLowerCase().replaceAll('kingdom builder', 'kingdom');
+    return parseFaithTier(tierStr);
+  }
 }
 
 class Practice {

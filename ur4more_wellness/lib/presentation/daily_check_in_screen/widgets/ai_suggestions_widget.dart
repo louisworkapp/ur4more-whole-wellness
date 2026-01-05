@@ -15,7 +15,7 @@ class AISuggestionsWidget extends StatefulWidget {
   final double urgeLevel;
   final List<String> urgeTypes;
   final int rpeLevel;
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final List<String> selectedSuggestions;
   final String? journalText;
   final String? mood;
@@ -340,7 +340,7 @@ class _AISuggestionsWidgetState extends State<AISuggestionsWidget> {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     final isSelected = widget.selectedSuggestions.contains(suggestion.id);
-    final isFaithBased = suggestion.requiresFaithMode;
+    final isFaithBased = suggestion.requiresFaithTier;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),

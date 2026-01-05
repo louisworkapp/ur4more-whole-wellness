@@ -295,7 +295,7 @@ class _DiscipleshipHeaderState extends State<DiscipleshipHeader> {
           return 'Begin your journey with foundational lessons';
         case FaithTier.disciple:
           return 'A practical 12-week journey to follow Jesus deeply';
-        case FaithTier.kingdomBuilder:
+        case FaithTier.kingdom:
           return 'Lead others as you grow in discipleship and service';
         default:
           return 'Start your discipleship journey';

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:ur4more_wellness/core/services/settings_service.dart';
 import 'package:ur4more_wellness/features/mind/urge/repositories/urge_themes_repository.dart';
 import 'package:ur4more_wellness/features/mind/urge/models/urge_theme_model.dart';
 import 'package:ur4more_wellness/services/faith_service.dart';
@@ -48,7 +49,7 @@ void main() {
     });
 
     test('should handle all faith modes correctly', () {
-      final faithModes = [FaithMode.off, FaithMode.light, FaithMode.disciple, FaithMode.kingdom];
+      final faithModes = [FaithTier.off, FaithTier.light, FaithTier.disciple, FaithTier.kingdom];
       
       for (final mode in faithModes) {
         final isActivated = mode.isActivated;
