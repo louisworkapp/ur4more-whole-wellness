@@ -5,7 +5,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../core/settings/settings_model.dart';
 
 class GatewayService {
-  static const String _baseUrl = 'http://localhost:8080';
+  // Base URL from --dart-define=UR4MORE_API_BASE_URL=...
+  // Defaults to http://127.0.0.1:8080 if not provided
+  static String get _baseUrl => String.fromEnvironment(
+    'UR4MORE_API_BASE_URL',
+    defaultValue: 'http://127.0.0.1:8080',
+  );
+  
   static const String _tokenKey = 'gateway_jwt_token';
   
   // Cache keys for daily content
@@ -94,14 +100,25 @@ class GatewayService {
         'limit': limit,
       };
 
-      print('🌐 GatewayService: Making HTTP request to $_baseUrl/content/quotes');
+      if (kDebugMode) {
+        print('🌐 GatewayService: Resolved base URL: $_baseUrl');
+        print('🌐 GatewayService: Making HTTP request to $_baseUrl/content/quotes');
+      }
+      
       final response = await http.post(
         Uri.parse('$_baseUrl/content/quotes'),
         headers: headers,
         body: json.encode(body),
+      ).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw Exception('Connection timeout: Gateway did not respond within 10 seconds. Check if gateway is running on $_baseUrl');
+        },
       );
 
-      print('🌐 GatewayService: Response status: ${response.statusCode}');
+      if (kDebugMode) {
+        print('📡 GatewayService: Response status: ${response.statusCode}');
+      }
       
       if (response.statusCode == 200) {
         final List<dynamic> quotes = json.decode(response.body);
@@ -113,17 +130,25 @@ class GatewayService {
           'license': q['license'] ?? 'public_domain',
         }).toList();
         
-        print('✅ GatewayService: Successfully fetched ${formattedQuotes.length} quotes from gateway');
+        if (kDebugMode) {
+          print('✅ GatewayService: Successfully fetched ${formattedQuotes.length} quotes from gateway');
+        }
         
         // Cache the results
         await _cacheQuotes(formattedQuotes);
         return formattedQuotes;
       } else {
-        print('❌ Gateway quotes error: ${response.statusCode} - ${response.body}');
+        if (kDebugMode) {
+          print('❌ Gateway quotes error: ${response.statusCode} - ${response.body}');
+        }
         return _getFallbackQuotes(faithTier);
       }
     } catch (e) {
-      print('Gateway quotes exception: $e');
+      if (kDebugMode) {
+        print('❌ Gateway quotes exception: $e');
+        print('💡 Tip: Ensure gateway is running on $_baseUrl');
+        print('💡 Tip: Use --dart-define=UR4MORE_API_BASE_URL=http://127.0.0.1:8080 if port differs');
+      }
       return _getFallbackQuotes(faithTier);
     }
   }
@@ -156,6 +181,11 @@ class GatewayService {
         Uri.parse('$_baseUrl/content/scripture'),
         headers: headers,
         body: json.encode(body),
+      ).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw Exception('Connection timeout: Gateway did not respond within 10 seconds. Check if gateway is running on $_baseUrl');
+        },
       );
 
       if (response.statusCode == 200) {
@@ -171,11 +201,16 @@ class GatewayService {
         await _cacheScripture(formattedScripture);
         return formattedScripture;
       } else {
-        print('Gateway scripture error: ${response.statusCode} - ${response.body}');
+        if (kDebugMode) {
+          print('❌ Gateway scripture error: ${response.statusCode} - ${response.body}');
+        }
         return _getFallbackScripture();
       }
     } catch (e) {
-      print('Gateway scripture exception: $e');
+      if (kDebugMode) {
+        print('❌ Gateway scripture exception: $e');
+        print('💡 Tip: Ensure gateway is running on $_baseUrl');
+      }
       return _getFallbackScripture();
     }
   }
@@ -187,16 +222,26 @@ class GatewayService {
       final response = await http.get(
         Uri.parse('$_baseUrl/content/manifest'),
         headers: headers,
+      ).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw Exception('Connection timeout: Gateway did not respond within 10 seconds. Check if gateway is running on $_baseUrl');
+        },
       );
 
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {
-        print('Gateway manifest error: ${response.statusCode} - ${response.body}');
+        if (kDebugMode) {
+          print('❌ Gateway manifest error: ${response.statusCode} - ${response.body}');
+        }
         return null;
       }
     } catch (e) {
-      print('Gateway manifest exception: $e');
+      if (kDebugMode) {
+        print('❌ Gateway manifest exception: $e');
+        print('💡 Tip: Ensure gateway is running on $_baseUrl');
+      }
       return null;
     }
   }
@@ -204,10 +249,21 @@ class GatewayService {
   // Health check
   static Future<bool> checkHealth() async {
     try {
-      final response = await http.get(Uri.parse('$_baseUrl/health'));
+      final response = await http.get(
+        Uri.parse('$_baseUrl/health'),
+      ).timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          throw Exception('Health check timeout: Gateway did not respond. Check if gateway is running on $_baseUrl');
+        },
+      );
       return response.statusCode == 200;
     } catch (e) {
-      print('Gateway health check failed: $e');
+      if (kDebugMode) {
+        print('❌ Gateway health check failed: $e');
+        print('💡 Tip: Ensure gateway is running on $_baseUrl');
+        print('💡 Tip: Use --dart-define=UR4MORE_API_BASE_URL=http://127.0.0.1:8080 if port differs');
+      }
       return false;
     }
   }

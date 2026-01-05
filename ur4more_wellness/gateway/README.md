@@ -16,16 +16,16 @@ now=int(time.time()); payload={"sub":"debug","iss":iss,"aud":aud,"iat":now,"exp"
 print(jwt.encode(payload, sec, algorithm="HS256", headers={"kid":kid}))
 PY
 
-Smoke tests
+Smoke tests (recommended: use 127.0.0.1, localhost also works)
 TOK=<paste>
-curl -s http://localhost:8080/health -H "Authorization: Bearer $TOK" | jq .
-curl -s http://localhost:8080/content/manifest -H "Authorization: Bearer $TOK" | jq .
-curl -s http://localhost:8080/content/quotes -H "Authorization: Bearer $TOK" -H 'Content-Type: application/json' \
+curl -s http://127.0.0.1:8080/health -H "Authorization: Bearer $TOK" | jq .
+curl -s http://127.0.0.1:8080/content/manifest -H "Authorization: Bearer $TOK" | jq .
+curl -s http://127.0.0.1:8080/content/quotes -H "Authorization: Bearer $TOK" -H 'Content-Type: application/json' \
   -d '{"faithMode":"off","topic":"temperance","limit":3}' | jq .
-curl -s -o - -w "\n%{http_code}\n" http://localhost:8080/content/scripture \
+curl -s -o - -w "\n%{http_code}\n" http://127.0.0.1:8080/content/scripture \
   -H "Authorization: Bearer $TOK" -H 'Content-Type: application/json' \
   -d '{"faithMode":"off","lightConsentGiven":false,"hideFaithOverlaysInMind":false,"theme":"gluttony","limit":1}'
-curl -s http://localhost:8080/content/scripture -H "Authorization: Bearer $TOK" -H 'Content-Type: application/json' \
+curl -s http://127.0.0.1:8080/content/scripture -H "Authorization: Bearer $TOK" -H 'Content-Type: application/json' \
   -d '{"faithMode":"light","lightConsentGiven":true,"hideFaithOverlaysInMind":false,"theme":"gluttony","limit":1}' | jq .
 
 Tests
