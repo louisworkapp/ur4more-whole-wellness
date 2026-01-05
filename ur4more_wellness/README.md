@@ -95,6 +95,19 @@ Dry run:
 dart run tools/exercise_upgrade.dart --core assets/mind/exercises_core.json --faith assets/mind/exercises_faith.json --dry-run
 ```
 
+## Exercise Upgrader
+
+Generate L2/L3 variants from L1 exercises:
+
+```bash
+dart run tools/exercise_upgrade.dart --core assets/mind/exercises_core.json --faith assets/mind/exercises_faith.json --write
+```
+
+Dry run:
+```bash
+dart run tools/exercise_upgrade.dart --core assets/mind/exercises_core.json --faith assets/mind/exercises_faith.json --dry-run
+```
+
 ## 🧩 Adding Routes
 
 To add new routes to the application, update the `lib/routes/app_routes.dart` file:
