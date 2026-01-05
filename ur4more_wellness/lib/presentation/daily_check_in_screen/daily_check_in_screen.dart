@@ -7,6 +7,7 @@ import '../../core/services/points_service.dart';
 import '../../features/home/streaks.dart';
 import '../../core/services/telemetry.dart';
 import '../../services/faith_service.dart';
+import '../../core/settings/settings_model.dart';
 import './widgets/completion_summary_widget.dart';
 import './widgets/ai_suggestions_widget.dart';
 import './widgets/journal_entry_widget.dart';
@@ -176,7 +177,7 @@ class _DailyCheckInScreenState extends State<DailyCheckInScreen> {
       Telemetry.checkInCompleted(
         _userId, 
         pointsEarned, 
-        FaithService.getFaithModeLabel(faithModeToTier(_faithMode))
+        FaithService.getFaithModeLabel(_faithMode)
       );
 
       setState(() {

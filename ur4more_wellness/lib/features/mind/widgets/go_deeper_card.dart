@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../../services/faith_service.dart';
+import '../../../core/settings/settings_model.dart';
 
 class GoDeeperCardData {
   final String title;

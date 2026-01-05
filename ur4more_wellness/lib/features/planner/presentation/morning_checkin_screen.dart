@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../../../design/mind_tokens.dart';
 import '../../../services/notification_service.dart';
 import '../../../services/faith_service.dart';
+import '../../../core/settings/settings_model.dart';
 import '../domain/plan_models.dart';
 import '../data/plan_repository.dart';
 import '../data/suggestion_service.dart';
@@ -47,7 +48,7 @@ class _MorningCheckInScreenState extends State<MorningCheckInScreen> {
   }
 
   Future<void> _loadFaithSettings() async {
-    final faithMode = await FaithService.getFaithTier();
+    final faithMode = await FaithService.getFaithMode();
     setState(() {
       faithActivated = faithMode != FaithTier.off;
       showFaithOverlay = faithMode == FaithTier.disciple || faithMode == FaithTier.kingdom;
@@ -61,7 +62,7 @@ class _MorningCheckInScreenState extends State<MorningCheckInScreen> {
 
   Future<void> _toggleFaithTier(bool enabled) async {
     final newMode = enabled ? FaithTier.light : FaithTier.off;
-    await FaithService.setFaithTier(newMode);
+    await FaithService.setFaithMode(newMode);
     
     setState(() {
       faithActivated = enabled;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/values_clarification_widget.dart';
 import '../../../../design/tokens.dart';
 import '../../../../services/faith_service.dart';
+import '../../../../core/settings/settings_model.dart';
 
 class ValuesClarificationScreen extends StatelessWidget {
   final FaithTier faithMode;
@@ -61,7 +62,7 @@ class ValuesClarificationScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: ValuesClarificationWidget(
-          isFaithTier: faithMode.isActivated,
+          isFaithMode: faithMode.isActivated,
           onComplete: () {
             // Show completion message
             ScaffoldMessenger.of(context).showSnackBar(

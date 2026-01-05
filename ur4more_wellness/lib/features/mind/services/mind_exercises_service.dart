@@ -1,5 +1,6 @@
 import '../models/mind_coach_copy.dart';
 import '../../../services/faith_service.dart';
+import '../../../core/settings/settings_model.dart';
 import '../exercises/exercise_registry.dart';
 import '../exercises/exercise_model.dart' as new_exercises;
 

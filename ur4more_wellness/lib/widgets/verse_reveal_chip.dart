@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../core/services/settings_service.dart';
 import '../services/faith_service.dart';
+import '../core/settings/settings_model.dart';
 
 class VerseRevealChip extends StatefulWidget {
   final FaithTier mode;

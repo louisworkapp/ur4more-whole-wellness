@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import '../models/mind_coach_copy.dart';
 import '../services/mind_exercises_service.dart';
 import '../../../services/faith_service.dart';
+import '../../../core/settings/settings_model.dart';
 
 /// Repository for managing Mind Coach content and data
 class MindCoachRepository {

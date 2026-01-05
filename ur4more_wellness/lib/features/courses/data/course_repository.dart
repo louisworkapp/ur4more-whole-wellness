@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/course_models.dart';
+import '../../../core/settings/settings_model.dart';
 
 class CourseRepository {
   static const String _progressKeyPrefix = 'course:ur4more_core_12w:week:';

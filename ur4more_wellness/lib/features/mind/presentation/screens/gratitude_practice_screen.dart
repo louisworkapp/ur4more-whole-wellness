@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../design/tokens.dart';
 import '../../../../services/faith_service.dart';
+import '../../../../core/settings/settings_model.dart';
 import '../../../../widgets/universal_speech_text_field.dart';
 
 class GratitudePracticeScreen extends StatefulWidget {

@@ -5,6 +5,7 @@ import '../../../routes/app_routes.dart';
 import '../../../design/tokens.dart';
 import '../../../theme/tokens.dart';
 import '../../../widgets/custom_icon_widget.dart';
+import '../../../core/settings/settings_model.dart';
 
 // Design System Colors
 const Color _bgColor = Color(0xFF0C1220);
