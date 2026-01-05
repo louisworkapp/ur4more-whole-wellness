@@ -8,7 +8,7 @@ import 'micro_intervention_card.dart';
 
 class UrgeIntensityWidget extends StatefulWidget {
   final double urgeLevel; // Single urge level (0-10)
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final List<String> selectedUrgeTypes; // Selected urge/craving types
   final ValueChanged<double> onChanged;
   final ValueChanged<List<String>>? onUrgeTypesChanged;

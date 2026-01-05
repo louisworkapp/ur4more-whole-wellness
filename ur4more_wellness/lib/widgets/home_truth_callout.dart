@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../core/services/settings_service.dart';
 import '../data/creed_repository.dart';
 import '../services/faith_service.dart';
 import 'verse_reveal_chip.dart';
 
 class HomeTruthCallout extends StatelessWidget {
-  final FaithMode mode;
+  final FaithTier mode;
 
   const HomeTruthCallout({super.key, required this.mode});
 

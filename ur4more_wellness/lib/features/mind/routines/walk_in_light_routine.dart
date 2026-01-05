@@ -19,8 +19,8 @@ class WalkInLightRoutine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Convert boolean to FaithMode
-    final faithMode = isFaithActivated ? FaithMode.light : FaithMode.off;
+    // Convert boolean to FaithTier
+    final faithMode = isFaithActivated ? FaithTier.light : FaithTier.off;
     
     return WalkInLightScreen(
       faithMode: faithMode,

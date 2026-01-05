@@ -8,7 +8,7 @@ import '../../../../../services/faith_service.dart';
 import '../../../../../widgets/universal_speech_text_field.dart';
 
 class TruthComponent extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final int duration;
   final Function(Map<String, dynamic>) onData;
   final VoidCallback onComplete;

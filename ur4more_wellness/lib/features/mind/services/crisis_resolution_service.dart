@@ -57,17 +57,17 @@ class CrisisResolutionService {
     }
   }
 
-  /// Convert FaithTier to FaithMode
-  static FaithMode _faithTierToMode(FaithTier tier) {
+  /// Convert FaithTier to FaithTier
+  static FaithTier _faithTierToMode(FaithTier tier) {
     switch (tier) {
       case FaithTier.off:
-        return FaithMode.off;
+        return FaithTier.off;
       case FaithTier.light:
-        return FaithMode.light;
+        return FaithTier.light;
       case FaithTier.disciple:
-        return FaithMode.disciple;
+        return FaithTier.disciple;
       case FaithTier.kingdom:
-        return FaithMode.kingdom;
+        return FaithTier.kingdom;
     }
   }
 }

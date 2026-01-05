@@ -135,7 +135,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
               Container(
                 key: _faithSectionKey,
                 child: FaithModeSectionWidget(
-                  faithMode: _convertFaithTierToFaithMode(settings.faithTier),
+                  faithMode: settings.faithTier,
                   onFaithModeChanged: _updateFaithMode,
                   onFaithModeEnabled: _showFaithCongratulations,
                 ),
@@ -196,20 +196,6 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
     );
   }
 
-  // Helper method to convert FaithTier to FaithMode
-  FaithMode _convertFaithTierToFaithMode(FaithTier tier) {
-    switch (tier) {
-      case FaithTier.off:
-        return FaithMode.off;
-      case FaithTier.light:
-        return FaithMode.light;
-      case FaithTier.disciple:
-        return FaithMode.disciple;
-      case FaithTier.kingdom:
-        return FaithMode.kingdom;
-    }
-  }
-
   // Profile update methods
   void _updateFullName(String name) {
     setState(() {
@@ -248,41 +234,24 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
   }
 
   // Faith mode update method
-  void _updateFaithMode(FaithMode? mode) async {
-    if (mode == null) return;
-    
-    // Convert FaithMode to FaithTier
-    FaithTier tier;
-    switch (mode) {
-      case FaithMode.off:
-        tier = FaithTier.off;
-        break;
-      case FaithMode.light:
-        tier = FaithTier.light;
-        break;
-      case FaithMode.disciple:
-        tier = FaithTier.disciple;
-        break;
-      case FaithMode.kingdom:
-        tier = FaithTier.kingdom;
-        break;
-    }
+  void _updateFaithMode(FaithTier? tier) async {
+    if (tier == null) return;
     
     final settingsCtl = SettingsScope.of(context);
     await settingsCtl.updateFaith(tier);
 
     String modeText = '';
-    switch (mode) {
-      case FaithMode.off:
+    switch (tier) {
+      case FaithTier.off:
         modeText = 'Secular mode activated';
         break;
-      case FaithMode.light:
+      case FaithTier.light:
         modeText = 'Light faith mode activated';
         break;
-      case FaithMode.disciple:
+      case FaithTier.disciple:
         modeText = 'Disciple faith mode activated';
         break;
-      case FaithMode.kingdom:
+      case FaithTier.kingdom:
         modeText = 'Kingdom Builder faith mode activated';
         break;
     }

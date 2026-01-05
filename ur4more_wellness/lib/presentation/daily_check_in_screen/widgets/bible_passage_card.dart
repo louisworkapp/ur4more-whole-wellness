@@ -8,7 +8,7 @@ import '../../../services/faith_service.dart';
 
 class BiblePassageCard extends StatefulWidget {
   final BiblePassage passage;
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final bool hideFaithOverlaysInMind;
 
   const BiblePassageCard({

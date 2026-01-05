@@ -33,7 +33,7 @@ class CopingItem {
 
 class CopingMechanismsWidget extends StatefulWidget {
   final List<String> selectedMechanisms;
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final double urgeLevel;
   final Function(List<String>) onChanged;
 
@@ -149,7 +149,7 @@ class _CopingMechanismsWidgetState extends State<CopingMechanismsWidget> {
         widget.selectedMechanisms.add(key);
         
         // Award faith XP for first-time scripture/prayer use today
-        if (widget.faithMode != FaithMode.off) {
+        if (widget.faithMode != FaithTier.off) {
           if (key == 'read_scripture' && !_scriptureUsedToday) {
             _scriptureUsedToday = true;
             _awardFaithXp(3);

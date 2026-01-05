@@ -4,7 +4,7 @@ import '../../../../design/tokens.dart';
 import '../../../../services/faith_service.dart';
 
 class ValuesClarificationScreen extends StatelessWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
 
   const ValuesClarificationScreen({
     Key? key,
@@ -61,7 +61,7 @@ class ValuesClarificationScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: ValuesClarificationWidget(
-          isFaithMode: faithMode.isActivated,
+          isFaithTier: faithMode.isActivated,
           onComplete: () {
             // Show completion message
             ScaffoldMessenger.of(context).showSnackBar(

@@ -11,7 +11,7 @@ import '../../../../breath/widgets/animated_circle.dart';
 import 'scripture_rotator.dart';
 
 class BreathComponent extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final int duration;
   final Function(Map<String, dynamic>) onData;
   final VoidCallback onComplete;
@@ -503,7 +503,7 @@ class _BreathComponentState extends State<BreathComponent>
           const SizedBox(height: 24),
           
           // Faith overlay for Light mode
-          if (widget.faithMode == FaithMode.light && _isActive)
+          if (widget.faithMode == FaithTier.light && _isActive)
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -535,7 +535,7 @@ class _BreathComponentState extends State<BreathComponent>
             ),
           
           // Faith overlay for Disciple/Kingdom modes
-          if ((widget.faithMode == FaithMode.disciple || widget.faithMode == FaithMode.kingdom) && _isActive)
+          if ((widget.faithMode == FaithTier.disciple || widget.faithMode == FaithTier.kingdom) && _isActive)
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(

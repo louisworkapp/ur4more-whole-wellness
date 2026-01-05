@@ -153,25 +153,25 @@ class _BoxBreathingScreenState extends State<BoxBreathingScreen> with SingleTick
     final faithActivated = faithTier != FaithTier.off;
     final hideFaith = false; // TODO: Add this setting to AppSettings
 
-    // Convert FaithTier to FaithMode for the consent helper
-    FaithMode faithMode;
+    // Convert FaithTier to FaithTier for the consent helper
+    FaithTier faithMode;
     switch (faithTier) {
       case FaithTier.off:
-        faithMode = FaithMode.off;
+        faithMode = FaithTier.off;
         break;
       case FaithTier.light:
-        faithMode = FaithMode.light;
+        faithMode = FaithTier.light;
         break;
       case FaithTier.disciple:
-        faithMode = FaithMode.disciple;
+        faithMode = FaithTier.disciple;
         break;
       case FaithTier.kingdom:
-        faithMode = FaithMode.kingdom;
+        faithMode = FaithTier.kingdom;
         break;
     }
 
     // If Light and we haven't asked yet, prompt once per session:
-    final isLight = faithMode == FaithMode.light;
+    final isLight = faithMode == FaithTier.light;
     if (faithActivated && isLight && !_lightConsentGiven && !hideFaith) {
       _lightConsentGiven = await askLightConsentIfNeeded(
         context: context,
@@ -184,9 +184,9 @@ class _BoxBreathingScreenState extends State<BoxBreathingScreen> with SingleTick
 
     // Determine whether faith quotes are allowed right now:
     final canShowFaith = faithActivated && !hideFaith && (
-      faithMode == FaithMode.disciple ||
-      faithMode == FaithMode.kingdom ||
-      (faithMode == FaithMode.light && _lightConsentGiven)
+      faithMode == FaithTier.disciple ||
+      faithMode == FaithTier.kingdom ||
+      (faithMode == FaithTier.light && _lightConsentGiven)
     );
 
     final selected = await showQuotePicker(

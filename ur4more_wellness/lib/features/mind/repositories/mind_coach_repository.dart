@@ -57,7 +57,7 @@ class MindCoachRepository {
   }
 
   /// Get coach copy for specific faith mode
-  static Future<MindCoachCopy> getCoachCopy(FaithMode mode) async {
+  static Future<MindCoachCopy> getCoachCopy(FaithTier mode) async {
     final prompts = await loadCoachPrompts();
     final coachData = prompts['coach'] as Map<String, dynamic>;
     final modeKey = mode.isOff ? 'off' : 'activated';
@@ -72,7 +72,7 @@ class MindCoachRepository {
   }
 
   /// Get quotes for specific faith mode
-  static Future<List<String>> getQuotes(FaithMode mode) async {
+  static Future<List<String>> getQuotes(FaithTier mode) async {
     final prompts = await loadCoachPrompts();
     final coachData = prompts['coach'] as Map<String, dynamic>;
     final modeKey = mode.isOff ? 'off' : 'activated';
@@ -83,7 +83,7 @@ class MindCoachRepository {
   }
 
   /// Get scripture verses for faith modes
-  static Future<List<Map<String, String>>> getScriptureVerses(FaithMode mode) async {
+  static Future<List<Map<String, String>>> getScriptureVerses(FaithTier mode) async {
     if (mode.isOff) return [];
     
     final prompts = await loadCoachPrompts();
@@ -103,7 +103,7 @@ class MindCoachRepository {
   }
 
   /// Get random quote for faith mode
-  static Future<String> getRandomQuote(FaithMode mode) async {
+  static Future<String> getRandomQuote(FaithTier mode) async {
     final quotes = await getQuotes(mode);
     if (quotes.isEmpty) return "Take one step at a time.";
     
@@ -112,7 +112,7 @@ class MindCoachRepository {
   }
 
   /// Get random scripture verse for faith modes
-  static Future<Map<String, String>?> getRandomScripture(FaithMode mode) async {
+  static Future<Map<String, String>?> getRandomScripture(FaithTier mode) async {
     if (mode.isOff) return null;
     
     final verses = await getScriptureVerses(mode);
@@ -123,37 +123,37 @@ class MindCoachRepository {
   }
 
   /// Get exercises for faith mode
-  static Future<List<Exercise>> getExercises(FaithMode mode) async {
+  static Future<List<Exercise>> getExercises(FaithTier mode) async {
     return await MindExercisesService.mindExercises(mode);
   }
 
   /// Get courses for faith mode
-  static List<CourseTile> getCourses(FaithMode mode) {
+  static List<CourseTile> getCourses(FaithTier mode) {
     return MindCoursesService.getCourses(mode);
   }
 
   /// Get mode display text
-  static String getModeDisplayText(FaithMode mode) {
+  static String getModeDisplayText(FaithTier mode) {
     switch (mode) {
-      case FaithMode.off:
+      case FaithTier.off:
         return "Mode: Secular-first";
-      case FaithMode.light:
-      case FaithMode.disciple:
-      case FaithMode.kingdom:
+      case FaithTier.light:
+      case FaithTier.disciple:
+      case FaithTier.kingdom:
         return "Mode: Faith-activated";
     }
   }
 
   /// Get mode pill color
-  static int getModePillColor(FaithMode mode) {
+  static int getModePillColor(FaithTier mode) {
     switch (mode) {
-      case FaithMode.off:
+      case FaithTier.off:
         return 0xFF6B7280; // Gray
-      case FaithMode.light:
+      case FaithTier.light:
         return 0xFFF59E0B; // Amber
-      case FaithMode.disciple:
+      case FaithTier.disciple:
         return 0xFF3B82F6; // Blue
-      case FaithMode.kingdom:
+      case FaithTier.kingdom:
         return 0xFF8B5CF6; // Purple
     }
   }

@@ -1,10 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-// Import the new faith service
-import '../services/faith_service.dart';
-
-// Re-export FaithMode from faith service for backward compatibility
-export '../services/faith_service.dart' show FaithMode;
+// Import FaithTier from canonical location
+import 'settings/settings_model.dart' show FaithTier, parseFaithTier, faithTierToString;
 
 // Brand Safety & Faith Rules
 bool isFaithSafe(String s) {
@@ -13,19 +10,29 @@ bool isFaithSafe(String s) {
   return !banned.any(t.contains);
 }
 
-FaithMode parseFaith(String? v) => switch (v) {
-  'Light' => FaithMode.light,
-  'Full' => FaithMode.disciple, // Migrate old 'Full' to 'Disciple'
-  'Disciple' => FaithMode.disciple,
-  'Kingdom' => FaithMode.kingdom,
-  _ => FaithMode.off,
-};
+/// Parse faith tier from string (supports legacy capitalized strings)
+FaithTier parseFaith(String? v) {
+  if (v == null) return FaithTier.off;
+  final lower = v.toLowerCase().trim();
+  switch (lower) {
+    case 'light':
+      return FaithTier.light;
+    case 'full': // Migrate old 'Full' to 'Disciple'
+    case 'disciple':
+      return FaithTier.disciple;
+    case 'kingdom':
+      return FaithTier.kingdom;
+    default:
+      return FaithTier.off;
+  }
+}
 
-String faithModeToString(FaithMode mode) => switch (mode) {
-  FaithMode.light => 'Light',
-  FaithMode.disciple => 'Disciple',
-  FaithMode.kingdom => 'Kingdom',
-  FaithMode.off => 'Off',
+/// Convert FaithTier to display string (capitalized)
+String faithModeToString(FaithTier mode) => switch (mode) {
+  FaithTier.light => 'Light',
+  FaithTier.disciple => 'Disciple',
+  FaithTier.kingdom => 'Kingdom',
+  FaithTier.off => 'Off',
 };
 
 // Brand validation utilities

@@ -18,7 +18,7 @@ class _SafetyMonitoringScreenState extends State<SafetyMonitoringScreen> {
   final TextEditingController _testTextController = TextEditingController();
   SafetyAnalysisResult? _currentAnalysis;
   bool _showAlert = false;
-  FaithMode _testFaithMode = FaithMode.light;
+  FaithTier _testFaithTier = FaithTier.light;
   
   // Test data for different scenarios
   final List<Map<String, dynamic>> _testScenarios = [
@@ -128,13 +128,13 @@ class _SafetyMonitoringScreenState extends State<SafetyMonitoringScreen> {
             SafetyAlertWidget(
               analysisResult: _currentAnalysis!,
               onDismiss: _dismissAlert,
-              faithMode: _testFaithMode,
+              faithMode: _testFaithTier,
             ),
               const SizedBox(height: 16),
             ],
             
             // Faith Mode Selector
-            _buildFaithModeSelectorCard(theme),
+            _buildFaithTierSelectorCard(theme),
             
             const SizedBox(height: 16),
             
@@ -217,7 +217,7 @@ class _SafetyMonitoringScreenState extends State<SafetyMonitoringScreen> {
     );
   }
 
-  Widget _buildFaithModeSelectorCard(ThemeData theme) {
+  Widget _buildFaithTierSelectorCard(ThemeData theme) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -239,14 +239,14 @@ class _SafetyMonitoringScreenState extends State<SafetyMonitoringScreen> {
             Wrap(
               spacing: 8,
               runSpacing: 8,
-              children: FaithMode.values.map((mode) => 
+              children: FaithTier.values.map((mode) => 
                 FilterChip(
                   label: Text(mode.name.toUpperCase()),
-                  selected: _testFaithMode == mode,
+                  selected: _testFaithTier == mode,
                   onSelected: (selected) {
                     if (selected) {
                       setState(() {
-                        _testFaithMode = mode;
+                        _testFaithTier = mode;
                       });
                     }
                   },
@@ -257,7 +257,7 @@ class _SafetyMonitoringScreenState extends State<SafetyMonitoringScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Current: ${_testFaithMode.name.toUpperCase()} ${_testFaithMode.isActivated ? "(Faith Active)" : "(Faith Off)"}',
+              'Current: ${_testFaithTier.name.toUpperCase()} ${_testFaithTier.isActivated ? "(Faith Active)" : "(Faith Off)"}',
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.primary,
                 fontWeight: FontWeight.w500,

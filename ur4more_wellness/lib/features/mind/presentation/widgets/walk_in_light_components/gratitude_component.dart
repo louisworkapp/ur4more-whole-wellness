@@ -8,7 +8,7 @@ import '../../../../../services/faith_service.dart';
 import '../../../../../widgets/universal_speech_text_field.dart';
 
 class GratitudeComponent extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final int duration;
   final Function(Map<String, dynamic>) onData;
   final VoidCallback onComplete;
@@ -333,7 +333,7 @@ class _GratitudeComponentState extends State<GratitudeComponent>
                     const SizedBox(height: 24),
                     
                     // Prayer section for faith modes
-                    if (widget.faithMode != FaithMode.off) ...[
+                    if (widget.faithMode != FaithTier.off) ...[
                       Text(
                         'Prayer or commitment',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -343,7 +343,7 @@ class _GratitudeComponentState extends State<GratitudeComponent>
                       const SizedBox(height: 12),
                       UniversalSpeechTextField(
                         controller: _prayerController,
-                        hintText: widget.faithMode == FaithMode.light
+                        hintText: widget.faithMode == FaithTier.light
                             ? 'A simple prayer or commitment...'
                             : 'Prayer for strength and guidance...',
                         maxLines: 3,

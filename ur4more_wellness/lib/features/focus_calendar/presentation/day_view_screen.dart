@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../design/mind_tokens.dart';
-import '../../shared/faith_mode.dart';
+import '../../../core/settings/settings_model.dart' show FaithTier;
 import '../../shared/inspiration_service.dart';
 import '../../shared/nudge_service.dart';
 import '../domain/block_models.dart';

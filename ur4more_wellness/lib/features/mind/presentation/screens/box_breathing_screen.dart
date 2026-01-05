@@ -15,7 +15,7 @@ import '../../faith/faith_consent.dart';
 enum BreathStep { inhale, hold1, exhale, hold2 }
 
 class BoxBreathingScreen extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final String exerciseId;
 
   const BoxBreathingScreen({
@@ -231,7 +231,7 @@ class _BoxBreathingScreenState extends State<BoxBreathingScreen> with SingleTick
     if (faithActivated && isLight && !_lightConsentGiven && !hideFaith) {
       _lightConsentGiven = await askLightConsentIfNeeded(
         context: context,
-        faithMode: _faithModeFromTier(settings.faithTier),
+        faithMode: settings.faithTier,
         hideFaithOverlaysInMind: hideFaith,
       );
       _track('light_consent_set', {'allowed': _lightConsentGiven});
@@ -240,14 +240,6 @@ class _BoxBreathingScreenState extends State<BoxBreathingScreen> with SingleTick
   }
 
 
-  FaithMode _faithModeFromTier(FaithTier tier) {
-    switch (tier) {
-      case FaithTier.off: return FaithMode.off;
-      case FaithTier.light: return FaithMode.light;
-      case FaithTier.disciple: return FaithMode.disciple;
-      case FaithTier.kingdom: return FaithMode.kingdom;
-    }
-  }
 
   String _stepLabel() {
     switch (_step) {

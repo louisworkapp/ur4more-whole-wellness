@@ -1,12 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart';
-
-enum FaithMode {
-  off,
-  light,
-  disciple,
-  kingdom,
-}
+import '../settings/settings_model.dart' show FaithTier, parseFaithTier, faithTierToString;
 
 enum AppThemeMode {
   light,
@@ -16,7 +10,7 @@ enum AppThemeMode {
 
 class AppSettings {
   // Faith mode setting
-  FaithMode faithMode;
+  FaithTier faithMode;
   
   // Equipment settings
   bool hasBodyweight;
@@ -43,7 +37,7 @@ class AppSettings {
   String timezone;
   
   AppSettings({
-    this.faithMode = FaithMode.off,
+    this.faithMode = FaithTier.off,
     this.hasBodyweight = true,
     this.hasResistanceBands = false,
     this.hasPullupBar = false,
@@ -61,7 +55,7 @@ class AppSettings {
   });
 
   AppSettings copyWith({
-    FaithMode? faithMode,
+    FaithTier? faithMode,
     bool? hasBodyweight,
     bool? hasResistanceBands,
     bool? hasPullupBar,
@@ -118,7 +112,7 @@ class SettingsService {
   /// Get default settings for first-time app launch
   static AppSettings getDefaultSettings() {
     return AppSettings(
-      faithMode: FaithMode.off,
+      faithMode: FaithTier.off,
       hasBodyweight: true,
       hasResistanceBands: false,
       hasPullupBar: false,
@@ -219,7 +213,7 @@ class SettingsService {
     try {
       final prefs = await SharedPreferences.getInstance();
       
-      await prefs.setString(_faithModeKey, settings.faithMode.name);
+      await prefs.setString(_faithModeKey, faithTierToString(settings.faithMode));
       await prefs.setBool(_hasBodyweightKey, settings.hasBodyweight);
       await prefs.setBool(_hasResistanceBandsKey, settings.hasResistanceBands);
       await prefs.setBool(_hasPullupBarKey, settings.hasPullupBar);
@@ -242,11 +236,11 @@ class SettingsService {
   }
 
   /// Update specific setting
-  static Future<void> updateFaithMode(FaithMode faithMode) async {
+  static Future<void> updateFaithMode(FaithTier faithMode) async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_faithModeKey, faithMode.name);
-      debugPrint('Faith mode updated to: ${faithMode.name}');
+      await prefs.setString(_faithModeKey, faithTierToString(faithMode));
+      debugPrint('Faith mode updated to: ${faithTierToString(faithMode)}');
     } catch (e) {
       debugPrint('Error updating faith mode: $e');
     }
@@ -287,12 +281,8 @@ class SettingsService {
   }
 
   /// Helper methods for parsing enums
-  static FaithMode _parseFaithMode(String? value) {
-    if (value == null) return FaithMode.off;
-    return FaithMode.values.firstWhere(
-      (mode) => mode.name == value,
-      orElse: () => FaithMode.off,
-    );
+  static FaithTier _parseFaithMode(String? value) {
+    return parseFaithTier(value);
   }
 
   static AppThemeMode _parseThemeMode(String? value) {

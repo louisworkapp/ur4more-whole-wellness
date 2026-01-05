@@ -8,7 +8,7 @@ import '../../services/conversion_funnel_service.dart';
 import 'meaning_horizon_card.dart';
 
 class MindCoursesTab extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
 
   const MindCoursesTab({
     super.key,
@@ -351,7 +351,7 @@ class _MindCoursesTabState extends State<MindCoursesTab> {
 
 class _CourseDetailDialog extends StatelessWidget {
   final CourseTile course;
-  final FaithMode faithMode;
+  final FaithTier faithMode;
 
   const _CourseDetailDialog({
     required this.course,

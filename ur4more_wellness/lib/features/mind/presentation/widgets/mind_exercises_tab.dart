@@ -24,7 +24,7 @@ import '../../exercises/exercise_runner_screen.dart';
 import '../../exercises/exercise_registry.dart';
 
 class MindExercisesTab extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
 
   const MindExercisesTab({
     super.key,
@@ -663,7 +663,7 @@ class _MindExercisesTabState extends State<MindExercisesTab> {
 
 class _ExerciseDialog extends StatefulWidget {
   final Exercise exercise;
-  final FaithMode faithMode;
+  final FaithTier faithMode;
 
   const _ExerciseDialog({
     required this.exercise,

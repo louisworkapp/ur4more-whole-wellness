@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../design/mind_tokens.dart';
-import '../domain/faith_mode.dart';
+import '../../../core/settings/settings_model.dart' show FaithTier;
 
 class WeeklyReviewScreen extends StatefulWidget {
   final FaithTier faithTier;

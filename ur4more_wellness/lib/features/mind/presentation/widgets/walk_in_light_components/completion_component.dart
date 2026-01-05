@@ -6,7 +6,7 @@ import '../../../../../design/tokens.dart';
 import '../../../../../services/faith_service.dart';
 
 class CompletionComponent extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final Map<String, dynamic> breathData;
   final Map<String, dynamic> truthData;
   final Map<String, dynamic> gratitudeData;
@@ -214,7 +214,7 @@ class _CompletionComponentState extends State<CompletionComponent>
                       const SizedBox(height: 40),
                       
                       // Faith-specific encouragement
-                      if (widget.faithMode != FaithMode.off)
+                      if (widget.faithMode != FaithTier.off)
                         AnimatedBuilder(
                           animation: _fadeAnimation,
                           builder: (context, child) {
@@ -239,7 +239,7 @@ class _CompletionComponentState extends State<CompletionComponent>
                                     ),
                                     const SizedBox(height: 12),
                                     Text(
-                                      widget.faithMode == FaithMode.light
+                                      widget.faithMode == FaithTier.light
                                           ? 'You\'re walking in the light!'
                                           : 'May God bless your day ahead',
                                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -250,7 +250,7 @@ class _CompletionComponentState extends State<CompletionComponent>
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
-                                      widget.faithMode == FaithMode.light
+                                      widget.faithMode == FaithTier.light
                                           ? 'Continue to seek His presence throughout your day.'
                                           : 'Remember: "The Lord is my light and my salvation" - Psalm 27:1',
                                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(

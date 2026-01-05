@@ -15,7 +15,7 @@ class MindCoachCopy {
   });
 
   /// Get copy for specific faith mode
-  static MindCoachCopy copyFor(FaithMode mode) {
+  static MindCoachCopy copyFor(FaithTier mode) {
     if (mode.isOff) {
       return const MindCoachCopy(
         greeting: "I'm your Mind Coach. We'll use evidence-based tools to steady your thoughts.",
@@ -55,7 +55,7 @@ class Exercise {
   });
 
   /// Get description based on faith mode
-  String getDescription(FaithMode mode) {
+  String getDescription(FaithTier mode) {
     if (mode.isActivated && descriptionFaith != null) {
       return '$descriptionOff $descriptionFaith';
     }
@@ -82,7 +82,7 @@ class CourseTile {
   });
 
   /// Check if course is available for given faith mode
-  bool isAvailableFor(FaithMode mode) {
+  bool isAvailableFor(FaithTier mode) {
     if (gates.isEmpty) return true;
     
     final faithGates = gates['faith_mode'];
@@ -92,15 +92,15 @@ class CourseTile {
     return faithGates.contains(modeString);
   }
 
-  String _faithModeToString(FaithMode mode) {
+  String _faithModeToString(FaithTier mode) {
     switch (mode) {
-      case FaithMode.off:
+      case FaithTier.off:
         return 'Off';
-      case FaithMode.light:
+      case FaithTier.light:
         return 'Light';
-      case FaithMode.disciple:
+      case FaithTier.disciple:
         return 'Disciple';
-      case FaithMode.kingdom:
+      case FaithTier.kingdom:
         return 'KingdomBuilder';
     }
   }

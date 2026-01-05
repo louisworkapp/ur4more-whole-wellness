@@ -9,7 +9,7 @@ class CompletionSummaryWidget extends StatelessWidget {
   final int totalPointsEarned;
   final String? suggestionTitle;
   final String? suggestionAction;
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final double painLevel;
   final double urgeLevel;
   final VoidCallback onContinue;
@@ -110,7 +110,7 @@ class CompletionSummaryWidget extends StatelessWidget {
           ],
 
           // Faith XP and Streak (for non-Off modes)
-          if (faithMode != FaithMode.off) ...[
+          if (faithMode != FaithTier.off) ...[
             FutureBuilder<FaithProgress>(
               future: FaithService.getFaithProgress(),
               builder: (context, snapshot) {
@@ -196,10 +196,10 @@ class CompletionSummaryWidget extends StatelessWidget {
           ],
 
           // Peace Verse card (for Light with high pain/urge, or Disciple/Kingdom)
-          if (faithMode != FaithMode.off && 
-              ((faithMode == FaithMode.light && (painLevel > 0 || urgeLevel >= 7)) ||
-               faithMode == FaithMode.disciple || 
-               faithMode == FaithMode.kingdom)) ...[
+          if (faithMode != FaithTier.off && 
+              ((faithMode == FaithTier.light && (painLevel > 0 || urgeLevel >= 7)) ||
+               faithMode == FaithTier.disciple || 
+               faithMode == FaithTier.kingdom)) ...[
             _buildPeaceVerseCard(theme),
             SizedBox(height: AppSpace.x3),
           ],
@@ -278,7 +278,7 @@ class CompletionSummaryWidget extends StatelessWidget {
   }
 
   Widget _buildPeaceVerseCard(ThemeData theme) {
-    final isExpanded = faithMode == FaithMode.disciple || faithMode == FaithMode.kingdom;
+    final isExpanded = faithMode == FaithTier.disciple || faithMode == FaithTier.kingdom;
     
     return Container(
       width: double.infinity,

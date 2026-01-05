@@ -13,7 +13,7 @@ import '../widgets/walk_in_light_components/gratitude_component.dart';
 import '../widgets/walk_in_light_components/completion_component.dart';
 
 class WalkInLightScreen extends StatefulWidget {
-  final FaithMode faithMode;
+  final FaithTier faithMode;
   final Function(String event, Map<String, dynamic> props)? onAnalytics;
   final Function(int xp)? onAwardXp;
 
@@ -85,7 +85,7 @@ class _WalkInLightScreenState extends State<WalkInLightScreen>
 
   void _checkFaithConsent() {
     // TODO: Implement faith consent check
-    // if (widget.faithMode == FaithMode.light && !FaithConsent.hasConsentLight()) {
+    // if (widget.faithMode == FaithTier.light && !FaithConsent.hasConsentLight()) {
     //   setState(() {
     //     _showFaithConsent = true;
     //   });

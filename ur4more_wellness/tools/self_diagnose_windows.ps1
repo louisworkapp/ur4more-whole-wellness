@@ -1,3 +1,9 @@
+param(
+    [Parameter()]
+    [Alias("Host")]
+    [string]$Hostname = "api.openai.com"
+)
+
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $OutputEncoding = [System.Text.Encoding]::UTF8
 
@@ -185,6 +191,91 @@ if ($apiBaseUrl) {
     }
 } else {
     Write-Status "WARN" "  Could not detect UR4MORE_API_BASE_URL in gateway_service.dart"
+}
+
+Write-Host ""
+Write-Status "INFO" "Host connectivity check..."
+Write-Status "INFO" "Testing connectivity to: $Hostname"
+Write-Host ""
+
+# DNS resolution test
+Write-Status "INFO" "DNS Resolution:"
+try {
+    $dnsResult = nslookup $Hostname 2>&1
+    if ($LASTEXITCODE -eq 0 -or $dnsResult -match "Name:") {
+        Write-Status "OK" "DNS resolution successful"
+    } else {
+        Write-Status "FAIL" "DNS resolution failed"
+    }
+} catch {
+    Write-Status "FAIL" "DNS resolution error: $($_.Exception.Message)"
+}
+
+Write-Host ""
+
+# Port 443 connectivity test
+Write-Status "INFO" "Port 443 Connectivity Test:"
+try {
+    $portTest = Test-NetConnection -ComputerName $Hostname -Port 443 -WarningAction SilentlyContinue -ErrorAction SilentlyContinue
+    if ($portTest.TcpTestSucceeded) {
+        Write-Status "OK" "Port 443 is reachable"
+    } else {
+        Write-Status "FAIL" "Port 443 is not reachable"
+    }
+} catch {
+    Write-Status "FAIL" "Port 443 test error: $($_.Exception.Message)"
+}
+
+Write-Host ""
+
+# IPv4 HTTPS test
+$ipv4Success = $false
+Write-Status "INFO" "IPv4 HTTPS Test:"
+try {
+    $ipv4Result = & curl.exe -4 -I "https://$Hostname/" 2>&1
+    if ($LASTEXITCODE -eq 0 -or $ipv4Result -match "HTTP/") {
+        Write-Status "OK" "IPv4 HTTPS connection successful"
+        $ipv4Success = $true
+    } else {
+        Write-Status "FAIL" "IPv4 HTTPS connection failed"
+    }
+} catch {
+    Write-Status "FAIL" "IPv4 HTTPS test error: $($_.Exception.Message)"
+}
+
+Write-Host ""
+
+# IPv6 HTTPS test
+$ipv6Success = $false
+Write-Status "INFO" "IPv6 HTTPS Test:"
+try {
+    $ipv6Result = & curl.exe -6 -I "https://$Hostname/" 2>&1
+    if ($LASTEXITCODE -eq 0 -or $ipv6Result -match "HTTP/") {
+        Write-Status "OK" "IPv6 HTTPS connection successful"
+        $ipv6Success = $true
+    } else {
+        Write-Status "FAIL" "IPv6 HTTPS connection failed"
+    }
+} catch {
+    Write-Status "FAIL" "IPv6 HTTPS test error: $($_.Exception.Message)"
+}
+
+Write-Host ""
+
+# Conclusion logic
+Write-Status "INFO" "Host Connectivity Conclusion:"
+if ($ipv4Success -and -not $ipv6Success) {
+    Write-Status "WARN" "IPv4 works but IPv6 DNS resolution fails"
+    Write-Status "INFO" "  This can cause Cursor/Node.js connection issues"
+    Write-Status "INFO" "  Recommendation: Set NODE_OPTIONS='--dns-result-order=ipv4first'"
+    Write-Status "INFO" "  See docs/CURSOR_CONNECTION_FIX.md for details"
+} elseif ($ipv4Success -and $ipv6Success) {
+    Write-Status "OK" "Host connectivity OK (both IPv4 and IPv6 work)"
+} elseif (-not $ipv4Success -and -not $ipv6Success) {
+    Write-Status "FAIL" "Cannot reach host via IPv4 or IPv6"
+    Write-Status "INFO" "  Check firewall, antivirus, proxy, or DNS settings"
+} else {
+    Write-Status "INFO" "Connectivity status unclear - check individual test results above"
 }
 
 Write-Host ""

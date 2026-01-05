@@ -28,14 +28,14 @@ class _ExerciseRunnerScreenState extends State<ExerciseRunnerScreen> {
   Future<void> _maybeAskLight() async {
     // For now, we'll use a simple approach since we don't have access to AppSettings
     // In a real implementation, you'd get this from context.read<AppSettings>()
-    final faithMode = FaithMode.off; // This should come from settings
+    final faithMode = FaithTier.off; // This should come from settings
     final hideFaith = false; // This should come from settings
 
-    if (faithMode == FaithMode.light && !_asked && !hideFaith) {
+    if (faithMode == FaithTier.light && !_asked && !hideFaith) {
       _asked = true;
       _lightConsentGiven = await askLightConsentIfNeeded(
         context: context,
-        faithMode: FaithMode.light,
+        faithMode: FaithTier.light,
         hideFaithOverlaysInMind: hideFaith,
       );
       if (mounted) setState(() {});
@@ -49,15 +49,15 @@ class _ExerciseRunnerScreenState extends State<ExerciseRunnerScreen> {
     final e = widget.exercise;
 
     // For now, we'll use simple defaults - in real implementation, get from settings
-    final faithMode = FaithMode.off; // This should come from context.read<AppSettings>()
+    final faithMode = FaithTier.off; // This should come from context.read<AppSettings>()
     final hideFaith = false; // This should come from context.read<AppSettings>()
 
-    final faithOn = faithMode != FaithMode.off;
-    final canShowFaith = faithOn && !hideFaith && (faithMode == FaithMode.light ? _lightConsentGiven : true);
+    final faithOn = faithMode != FaithTier.off;
+    final canShowFaith = faithOn && !hideFaith && (faithMode == FaithTier.light ? _lightConsentGiven : true);
 
-    final overlay = faithMode == FaithMode.disciple
+    final overlay = faithMode == FaithTier.disciple
         ? e.overlays.disciple
-        : faithMode == FaithMode.kingdom
+        : faithMode == FaithTier.kingdom
             ? e.overlays.kingdom
             : e.overlays.light;
 
