@@ -118,9 +118,9 @@ If a secret was committed to git history, it must be removed. The JWT token was 
 Create a replacement file:
 ```bash
 # Create replacement file (replace OLD_TOKEN with the actual leaked token)
-echo "OLD_TOKEN==>" > /tmp/replacements.txt
+echo "OLD_TOKEN==>REDACTED_JWT_TOKEN" > /tmp/replacements.txt
 # Or use the known token from the commit:
-# echo "eyJhbGciOiJIUzI1NiIsImtpZCI6InYxIiwidHlwIjoiSldUIn0.eyJzdWIiOiJkZWJ1ZyIsImlzcyI6InVyNG1vcmUtZ2F0ZXdheSIsImF1ZCI6InVyNG1vcmUtYXBwcyIsImlhdCI6MTczNTA0NDgwMCwiZXhwIjoxNzM1NjQ5NjAwfQ.8BnMneRLnfOvTaZwbGwyEwOhbgLwdOH6nNTBz977n8Q==>" > /tmp/replacements.txt
+# echo "eyJhbGciOiJIUzI1NiIsImtpZCI6InYxIiwidHlwIjoiSldUIn0.eyJzdWIiOiJkZWJ1ZyIsImlzcyI6InVyNG1vcmUtZ2F0ZXdheSIsImF1ZCI6InVyNG1vcmUtYXBwcyIsImlhdCI6MTczNTA0NDgwMCwiZXhwIjoxNzM1NjQ5NjAwfQ.8BnMneRLnfOvTaZwbGwyEwOhbgLwdOH6nNTBz977n8Q==>REDACTED_JWT_TOKEN" > /tmp/replacements.txt
 
 # Run filter-repo
 git filter-repo --replace-text /tmp/replacements.txt

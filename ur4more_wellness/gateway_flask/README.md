@@ -20,23 +20,23 @@ Smoke tests
 TOK=<paste token>
 
 # health
-curl -s http://localhost:8080/health -H "Authorization: Bearer $TOK" | jq .
+curl -s http://127.0.0.1:8080/health -H "Authorization: Bearer $TOK" | jq .
 
 # manifest
-curl -s http://localhost:8080/content/manifest -H "Authorization: Bearer $TOK" | jq .
+curl -s http://127.0.0.1:8080/content/manifest -H "Authorization: Bearer $TOK" | jq .
 
 # quotes (OFF → secular only)
-curl -s http://localhost:8080/content/quotes \
+curl -s http://127.0.0.1:8080/content/quotes \
   -H "Authorization: Bearer $TOK" -H 'Content-Type: application/json' \
   -d '{"faithMode":"off","lightConsentGiven":false,"hideFaithOverlaysInMind":false,"topic":"temperance","limit":3}' | jq .
 
 # scripture (OFF → 403)
-curl -s -o - -w "\n%{http_code}\n" http://localhost:8080/content/scripture \
+curl -s -o - -w "\n%{http_code}\n" http://127.0.0.1:8080/content/scripture \
   -H "Authorization: Bearer $TOK" -H 'Content-Type: application/json' \
   -d '{"faithMode":"off","lightConsentGiven":false,"hideFaithOverlaysInMind":false,"theme":"gluttony","limit":1}'
 
 # scripture (Light+consent → 200)
-curl -s http://localhost:8080/content/scripture \
+curl -s http://127.0.0.1:8080/content/scripture \
   -H "Authorization: Bearer $TOK" -H 'Content-Type: application/json' \
   -d '{"faithMode":"light","lightConsentGiven":true,"hideFaithOverlaysInMind":false,"theme":"gluttony","limit":1}' | jq .
 
