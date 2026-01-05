@@ -1,0 +1,14 @@
+# Trufflehog ignore patterns
+# Excludes Xcode project metadata files that contain high-entropy UUIDs
+# These are false positives and do not contain real secrets
+
+# Xcode project files (contain UUIDs, not secrets)
+**/*.pbxproj
+**/*.xcscheme
+
+# Build artifacts
+build/
+**/build/
+*.xcworkspace
+*.xcuserdata
+
