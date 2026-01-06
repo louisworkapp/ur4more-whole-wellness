@@ -36,10 +36,83 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>ur4more_wellness</title>
+  <title>UR4MORE Wellness - Holistic Health & Wellness App</title>
   <link rel="manifest" href="manifest.json">
+  
+  <!-- JSON-LD Structured Data for SEO/Crawlers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "UR4MORE Wellness",
+    "description": "A holistic wellness application delivering evidence-based physical, mental, and spiritual health tools with optional faith integration.",
+    "url": "https://louisworkapp.github.io/ur4more-whole-wellness/",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Mind Coach - Evidence-based mental health exercises",
+      "Body Fitness - Physical wellness tracking",
+      "Spiritual Growth - Faith-integrated content",
+      "Daily Check-ins - Wellness monitoring",
+      "Planner - Daily planning and organization"
+    ]
+  }
+  </script>
 </head>
 <body>
+  <!-- Visible content before JavaScript loads - helps crawlers -->
+  <noscript>
+    <div style="font-family: system-ui, -apple-system, sans-serif; padding: 2rem; max-width: 600px; margin: 2rem auto; text-align: center;">
+      <h1>UR4MORE Wellness</h1>
+      <p>A holistic wellness application delivering evidence-based physical, mental, and spiritual health tools.</p>
+      <p><strong>JavaScript is required to use this application.</strong></p>
+      <p>Please enable JavaScript in your browser settings and refresh the page.</p>
+      <hr style="margin: 2rem 0;">
+      <p style="font-size: 0.9em; color: #666;">
+        Features: Mind Coach • Body Fitness • Spiritual Growth • Daily Check-ins • Planner
+      </p>
+    </div>
+  </noscript>
+  
+  <!-- Loading message visible before Flutter app initializes -->
+  <div id="loading" style="font-family: system-ui, -apple-system, sans-serif; padding: 2rem; max-width: 600px; margin: 2rem auto; text-align: center; min-height: 100vh; display: flex; flex-direction: column; justify-content: center;">
+    <h1 style="margin-bottom: 1rem;">UR4MORE Wellness</h1>
+    <p style="margin-bottom: 2rem;">Loading application...</p>
+    <div style="margin: 2rem 0;">
+      <p style="font-size: 0.9em; color: #666; margin-bottom: 1rem;">A holistic wellness application with:</p>
+      <ul style="list-style: none; padding: 0; font-size: 0.9em; color: #666;">
+        <li>✓ Mind Coach - Mental health exercises</li>
+        <li>✓ Body Fitness - Physical wellness tracking</li>
+        <li>✓ Spiritual Growth - Faith-integrated content</li>
+        <li>✓ Daily Check-ins - Wellness monitoring</li>
+        <li>✓ Planner - Daily planning tools</li>
+      </ul>
+    </div>
+  </div>
+  
+  <script>
+    // Hide loading message once Flutter app loads
+    window.addEventListener('flutter-first-frame', function() {
+      const loading = document.getElementById('loading');
+      if (loading) {
+        loading.style.display = 'none';
+      }
+    });
+    
+    // Fallback: hide loading after reasonable timeout
+    setTimeout(function() {
+      const loading = document.getElementById('loading');
+      if (loading && loading.style.display !== 'none') {
+        loading.style.display = 'none';
+      }
+    }, 10000);
+  </script>
+  
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
