@@ -8,12 +8,9 @@ import '../../widgets/level_badge.dart';
 import './widgets/branded_header.dart';
 import './widgets/daily_checkin_cta.dart';
 import './widgets/points_progress_ring.dart';
-import './widgets/wellness_navigation_card.dart';
 import '../../widgets/media_card.dart';
 import '../../widgets/daily_inspiration_card.dart';
 import '../../theme/tokens.dart';
-import '../../core/settings/settings_scope.dart';
-import '../../core/settings/settings_model.dart';
 
 class HomeDashboard extends StatefulWidget {
   const HomeDashboard({super.key});
@@ -99,7 +96,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
       "completionPercentage": 0.25,
       "isCompleted": false,
       "route": "/courses",
-      "routeIndex": -1, // Special route for courses
+      "routeIndex": -1,
     },
   ];
 
@@ -112,105 +109,113 @@ class _HomeDashboardState extends State<HomeDashboard> {
   }
 
   Future<void> _loadUserData() async {
-    // Simulate loading user data
     await Future.delayed(const Duration(milliseconds: 500));
     if (mounted) {
-      setState(() {
-        // Data already loaded in mock format
-      });
+      setState(() {});
     }
   }
 
   Future<void> _refreshData() async {
     if (_isRefreshing) return;
 
-    setState(() {
-      _isRefreshing = true;
-    });
-
-    // Provide haptic feedback
+    setState(() => _isRefreshing = true);
     HapticFeedback.lightImpact();
 
-    // Simulate data refresh
     await Future.delayed(const Duration(seconds: 1));
 
-    if (mounted) {
-      setState(() {
-        _isRefreshing = false;
-        // Update points slightly to show refresh worked
-        userData["totalPoints"] = (userData["totalPoints"] as int) + 5;
-      });
-    }
+    if (!mounted) return;
+    setState(() {
+      _isRefreshing = false;
+      userData["totalPoints"] = (userData["totalPoints"] as int) + 5;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final cs = theme.colorScheme;
+    final points = userData["totalPoints"] as int;
 
     return Scaffold(
-      backgroundColor: colorScheme.surface,
+      backgroundColor: cs.background, // calmer page background
       body: RefreshIndicator(
         onRefresh: _refreshData,
-        color: colorScheme.primary,
+        color: cs.primary,
         child: CustomScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
-            // Header
+            // Header with subtle points bump animation
             SliverToBoxAdapter(
-              child: BrandedHeader(
-                totalPoints: userData["totalPoints"] as int,
-                onProfileTap:
-                    () => Navigator.pushNamed(context, AppRoutes.settings),
-                onNotificationTap: _handleNotificationTap,
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 220),
+                switchInCurve: Curves.easeOut,
+                transitionBuilder: (child, anim) {
+                  return ScaleTransition(
+                    scale: Tween<double>(begin: 0.98, end: 1.0).animate(anim),
+                    child: FadeTransition(opacity: anim, child: child),
+                  );
+                },
+                child: BrandedHeader(
+                  key: ValueKey(points),
+                  totalPoints: points,
+                  onProfileTap: () => Navigator.pushNamed(context, AppRoutes.settings),
+                  onNotificationTap: _handleNotificationTap,
+                ),
               ),
             ),
 
             // Main content
-            SliverToBoxAdapter(
-              child: Column(
-                children: [
-                  const SizedBox(height: AppSpace.x2),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpace.x4),
+              sliver: SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    const SizedBox(height: AppSpace.x2),
 
-                  // Points progress ring
-                  PointsProgressRing(
-                    totalPoints: userData["totalPoints"] as int,
-                    bodyProgress: userData["bodyProgress"] as double,
-                    mindProgress: userData["mindProgress"] as double,
-                    spiritualProgress: userData["spiritualProgress"] as double,
-                    showSpiritualProgress: _shouldShowSpiritualContent(),
-                  ),
-
-                  const SizedBox(height: AppSpace.x2),
-
-                  // Level badge under the points ring
-                  LevelBadge(points: userData["totalPoints"] as int),
-
-                  const SizedBox(height: AppSpace.x3),
-
-                  // Daily check-in CTA with user ID for streak calculation
-                  DailyCheckinCta(
-                    isCompleted: userData["todayCompleted"] as bool,
-                    onTap:
-                        () => Navigator.pushNamed(context, AppRoutes.checkin),
-                    lastCheckinDate: DateTime.parse(
-                      userData["lastCheckinDate"] as String,
+                    // Points ring with a gentle scale-in
+                    TweenAnimationBuilder<double>(
+                      tween: Tween(begin: 0.985, end: 1.0),
+                      duration: const Duration(milliseconds: 350),
+                      curve: Curves.easeOutCubic,
+                      builder: (context, scale, child) {
+                        return Transform.scale(scale: scale, child: child);
+                      },
+                      child: PointsProgressRing(
+                        totalPoints: points,
+                        bodyProgress: userData["bodyProgress"] as double,
+                        mindProgress: userData["mindProgress"] as double,
+                        spiritualProgress: userData["spiritualProgress"] as double,
+                        showSpiritualProgress: _shouldShowSpiritualContent(),
+                      ),
                     ),
-                    userId: userData["userId"] as String,
-                  ),
 
-                  const SizedBox(height: AppSpace.x2),
+                    const SizedBox(height: AppSpace.x2),
 
-                  // Daily Inspiration Card
-                  const DailyInspirationCard(),
+                    LevelBadge(points: points),
 
-                  const SizedBox(height: AppSpace.x2),
+                    const SizedBox(height: AppSpace.x3),
 
-                  // Wellness navigation cards
-                  ..._buildWellnessCards(context),
+                    // Daily Check-in: primary + optional secondary tonal
+                    DailyCheckinCta(
+                      isCompleted: userData["todayCompleted"] as bool,
+                      onTap: () => Navigator.pushNamed(context, AppRoutes.checkin),
+                      lastCheckinDate: DateTime.parse(userData["lastCheckinDate"] as String),
+                      userId: userData["userId"] as String,
+                      onPlannerTap: () => Navigator.pushNamed(context, AppRoutes.alarmClock),
+                    ),
 
-                  const SizedBox(height: AppSpace.x10), // Bottom padding for navigation
-                ],
+                    const SizedBox(height: AppSpace.x2),
+
+                    const DailyInspirationCard(),
+
+                    const SizedBox(height: AppSpace.x2),
+
+                    ..._buildWellnessCards(context),
+
+                    // breathing room for nav / scroll
+                    const SizedBox(height: 96),
+                  ],
+                ),
               ),
             ),
           ],
