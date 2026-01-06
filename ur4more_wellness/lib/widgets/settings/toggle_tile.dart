@@ -35,7 +35,7 @@ class ToggleTile extends StatelessWidget {
         child: InkWell(
           onTap: enabled ? () => onChanged?.call(!value) : null,
           borderRadius: BorderRadius.circular(12),
-        child: Container(
+          child: Container(
           constraints: const BoxConstraints(minHeight: 56),
           padding: const EdgeInsets.all(AppSpace.x4),
           decoration: BoxDecoration(
