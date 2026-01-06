@@ -33,28 +33,39 @@ jobs:
       - name: List workflow files
         run: |
           echo "Workflows in .github/workflows:"
-          ls -la .github/workflows || echo "Directory not found"
+          if [ -d ".github/workflows" ]; then
+            ls -la .github/workflows || echo "Failed to list directory"
+          else
+            echo "Directory not found"
+          fi
           echo ""
           echo "Workflows in ur4more_wellness/.github/workflows (if any):"
-          ls -la ur4more_wellness/.github/workflows 2>/dev/null || echo "Directory not found"
+          if [ -d "ur4more_wellness/.github/workflows" ]; then
+            ls -la ur4more_wellness/.github/workflows || echo "Failed to list directory"
+          else
+            echo "Directory not found"
+          fi
 
       - name: Print deploy workflow details
         run: |
           echo "Searching for deploy workflow files..."
           echo ""
           
-          if [ -d ".github/workflows" ]; then
-            echo "Found .github/workflows directory"
-            for file in .github/workflows/*.yml .github/workflows/*.yaml; do
-              if [ -f "$file" ]; then
-                echo ""
-                echo "===== $file ====="
-                grep -nE "deploy-pages|upload-pages-artifact|configure-pages|environment:|github-pages|branches:|if:" "$file" || echo "No matches found"
-              fi
-            done
-          else
+          if [ ! -d ".github/workflows" ]; then
             echo ".github/workflows directory not found"
+            exit 0
           fi
+          
+          echo "Found .github/workflows directory"
+          shopt -s nullglob
+          for file in .github/workflows/*.yml .github/workflows/*.yaml; do
+            if [ -f "$file" ]; then
+              echo ""
+              echo "===== $file ====="
+              grep -nE "deploy-pages|upload-pages-artifact|configure-pages|environment:|github-pages|branches:|if:" "$file" || echo "No matches found"
+            fi
+          done
+          shopt -u nullglob
 
       - name: Check if deploy workflow allows workflow_dispatch on non-main
         run: |
