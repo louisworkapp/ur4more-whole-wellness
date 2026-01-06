@@ -1,0 +1,64 @@
+name: Pages Diagnostics (No Deploy)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show event + ref context
+        run: |
+          echo "event_name=${{ github.event_name }}"
+          echo "ref=${{ github.ref }}"
+          echo "ref_name=${{ github.ref_name }}"
+          echo "sha=${{ github.sha }}"
+          echo "repository=${{ github.repository }}"
+          echo "repo_name=${{ github.event.repository.name }}"
+          echo "actor=${{ github.actor }}"
+          echo ""
+          echo "Would deploy if ref == main?"
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "YES (main)"
+          else
+            echo "NO (not main)"
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: List workflow files
+        run: |
+          echo "Workflows in .github/workflows:"
+          ls -la .github/workflows || true
+          echo ""
+          echo "Workflows in ur4more_wellness/.github/workflows (if any):"
+          ls -la ur4more_wellness/.github/workflows || true
+
+      - name: Print deploy workflow (first match)
+        run: |
+          set -e
+          echo "Searching for deploy workflow files..."
+          echo ""
+
+          FILES=$(ls .github/workflows/*.yml .github/workflows/*.yaml 2>/dev/null || true)
+          echo "$FILES" | sed 's/^/ - /'
+
+          echo ""
+          echo "---- Grep for deploy-pages / github-pages / branches / if: ----"
+          for f in $FILES; do
+            echo ""
+            echo "===== $f ====="
+            grep -nE "deploy-pages|upload-pages-artifact|configure-pages|environment:|github-pages|branches:|if:" "$f" || true
+          done
+
+      - name: Check if deploy workflow still allows workflow_dispatch on non-main
+        run: |
+          echo ""
+          echo "If you see something like:"
+          echo "  if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'"
+          echo "then manual runs on fix-workflow-on-main will still attempt deploy and will be rejected."
+
