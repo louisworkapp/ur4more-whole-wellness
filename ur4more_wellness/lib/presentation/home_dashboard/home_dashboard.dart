@@ -7,10 +7,10 @@ import '../../routes/app_routes.dart';
 import '../../widgets/level_badge.dart';
 import './widgets/branded_header.dart';
 import './widgets/daily_checkin_cta.dart';
-import './widgets/points_progress_ring.dart';
 import '../../widgets/media_card.dart';
 import '../../widgets/daily_inspiration_card.dart';
 import '../../theme/tokens.dart';
+import '../../widgets/whole_wellness_hero.dart';
 
 class HomeDashboard extends StatefulWidget {
   const HomeDashboard({super.key});
@@ -172,26 +172,16 @@ class _HomeDashboardState extends State<HomeDashboard> {
                   children: [
                     const SizedBox(height: AppSpace.x2),
 
-                    // Points ring with a gentle scale-in
-                    TweenAnimationBuilder<double>(
-                      tween: Tween(begin: 0.985, end: 1.0),
-                      duration: const Duration(milliseconds: 350),
-                      curve: Curves.easeOutCubic,
-                      builder: (context, scale, child) {
-                        return Transform.scale(scale: scale, child: child);
-                      },
-                      child: PointsProgressRing(
-                        totalPoints: points,
-                        bodyProgress: userData["bodyProgress"] as double,
-                        mindProgress: userData["mindProgress"] as double,
-                        spiritualProgress: userData["spiritualProgress"] as double,
-                        showSpiritualProgress: _shouldShowSpiritualContent(),
+                    WholeWellnessHero(
+                      totalPoints: points,
+                      bodyProgress: userData["bodyProgress"] as double,
+                      mindProgress: userData["mindProgress"] as double,
+                      spiritProgress: userData["spiritualProgress"] as double,
+                      onBuilderTap: () => Navigator.pushNamed(
+                        context,
+                        AppRoutes.discipleshipCourses,
                       ),
                     ),
-
-                    const SizedBox(height: AppSpace.x2),
-
-                    LevelBadge(points: points),
 
                     const SizedBox(height: AppSpace.x3),
 
