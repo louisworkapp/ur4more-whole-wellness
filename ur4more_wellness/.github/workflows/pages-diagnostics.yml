@@ -40,20 +40,26 @@ jobs:
 
       - name: Print deploy workflow (first match)
         run: |
-          set -e
           echo "Searching for deploy workflow files..."
           echo ""
 
-          FILES=$(ls .github/workflows/*.yml .github/workflows/*.yaml 2>/dev/null || true)
-          echo "$FILES" | sed 's/^/ - /'
-
-          echo ""
-          echo "---- Grep for deploy-pages / github-pages / branches / if: ----"
-          for f in $FILES; do
-            echo ""
-            echo "===== $f ====="
-            grep -nE "deploy-pages|upload-pages-artifact|configure-pages|environment:|github-pages|branches:|if:" "$f" || true
-          done
+          if [ -d ".github/workflows" ]; then
+            FILES=$(ls .github/workflows/*.yml .github/workflows/*.yaml 2>/dev/null || echo "")
+            if [ -n "$FILES" ]; then
+              echo "$FILES" | sed 's/^/ - /'
+              echo ""
+              echo "---- Grep for deploy-pages / github-pages / branches / if: ----"
+              for f in $FILES; do
+                echo ""
+                echo "===== $f ====="
+                grep -nE "deploy-pages|upload-pages-artifact|configure-pages|environment:|github-pages|branches:|if:" "$f" || true
+              done
+            else
+              echo "No workflow files found in .github/workflows"
+            fi
+          else
+            echo ".github/workflows directory not found"
+          fi
 
       - name: Check if deploy workflow still allows workflow_dispatch on non-main
         run: |
