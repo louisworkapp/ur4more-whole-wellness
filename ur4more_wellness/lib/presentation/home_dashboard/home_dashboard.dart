@@ -10,7 +10,7 @@ import './widgets/daily_checkin_cta.dart';
 import '../../widgets/media_card.dart';
 import '../../widgets/daily_inspiration_card.dart';
 import '../../theme/tokens.dart';
-import '../../widgets/whole_wellness_hero.dart';
+import '../../widgets/whole_wellness_hero/whole_wellness_hero.dart';
 
 class HomeDashboard extends StatefulWidget {
   const HomeDashboard({super.key});
