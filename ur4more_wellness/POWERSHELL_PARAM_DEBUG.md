@@ -37,7 +37,7 @@ Use `test_param_parsing.ps1` to debug parameter parsing:
 
 ### Method 2: Named Parameter (Recommended)
 ```powershell
-.\run_flutter.ps1 -JwtToken "REDACTED_JWT_TOKEN"
+.\run_flutter.ps1 -JwtToken "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 - Explicitly sets `JwtToken` parameter
 - Most reliable method
@@ -45,14 +45,14 @@ Use `test_param_parsing.ps1` to debug parameter parsing:
 
 ### Method 3: Named Parameter with Equals
 ```powershell
-.\run_flutter.ps1 -JwtToken="REDACTED_JWT_TOKEN"
+.\run_flutter.ps1 -JwtToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 - Alternative syntax for named parameters
 - Equally reliable as Method 2
 
 ### Method 4: Positional Parameter
 ```powershell
-.\run_flutter.ps1 "REDACTED_JWT_TOKEN"
+.\run_flutter.ps1 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 - Uses position (first parameter = JwtToken)
 - Works because `Position=0` is set in param block
@@ -79,7 +79,7 @@ Use `test_param_parsing.ps1` to debug parameter parsing:
 
 **Solution**: Always quote the token:
 ```powershell
-.\run_flutter.ps1 -JwtToken "REDACTED_JWT_TOKEN"
+.\run_flutter.ps1 -JwtToken "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 ```
 
 ### Issue 2: Token Contains Spaces

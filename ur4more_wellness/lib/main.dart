@@ -12,6 +12,7 @@ import 'core/settings/settings_model.dart';
 import 'theme/dark_theme.dart';
 import 'theme/light_theme.dart';
 import 'theme/app_theme.dart';
+import 'services/gateway_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,6 +20,12 @@ void main() async {
   // Create and hydrate settings controller
   final controller = SettingsController(SettingsService());
   await controller.hydrate();
+
+  // Perform startup health probe (non-blocking)
+  GatewayService.performStartupHealthProbe().catchError((e) {
+    // Fail gracefully - app will use demo mode
+    debugPrint('Startup health probe failed: $e');
+  });
 
   bool _hasShownError = false;
 
@@ -65,7 +72,9 @@ class MyApp extends StatelessWidget {
               theme: buildLightTheme(),
               darkTheme: darkFrameTheme(context),
               themeMode: themeMode,
-        // 🚨 CRITICAL: NEVER REMOVE OR MODIFY
+              // Use hash routing for GitHub Pages compatibility
+              useInheritedMediaQuery: true,
+              // 🚨 CRITICAL: NEVER REMOVE OR MODIFY
         builder: (context, child) {
           // Normalize desktop/web layout with centered content and max width
           final media = MediaQuery.of(context);
