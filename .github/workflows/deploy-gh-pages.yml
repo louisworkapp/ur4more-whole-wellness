@@ -37,7 +37,7 @@ jobs:
 
       - name: Build web
         working-directory: ur4more_wellness
-        run: flutter build web --release --base-href "/ur4more-whole-wellness/" --dart-define=UR4MORE_API_BASE_URL=
+        run: flutter build web --release --base-href "/${{ github.event.repository.name }}/" --dart-define=UR4MORE_API_BASE_URL=
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -50,4 +50,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
