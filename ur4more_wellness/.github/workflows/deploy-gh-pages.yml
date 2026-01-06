@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -16,26 +15,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  check-branch:
-    runs-on: ubuntu-latest
-    outputs:
-      is-main: ${{ steps.check.outputs.is-main }}
-    steps:
-      - name: Check if on main branch
-        id: check
-        run: |
-          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "is-main=true" >> $GITHUB_OUTPUT
-            echo "✅ On main branch - deployment allowed"
-          else
-            echo "is-main=false" >> $GITHUB_OUTPUT
-            echo "❌ Not on main branch (${{ github.ref }}) - deployment blocked"
-          fi
-
   deploy:
     runs-on: ubuntu-latest
-    needs: check-branch
-    if: needs.check-branch.outputs.is-main == 'true'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -95,55 +76,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-  build-only:
-    runs-on: ubuntu-latest
-    needs: check-branch
-    if: needs.check-branch.outputs.is-main == 'false'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.35.6'
-          channel: 'stable'
-
-      - name: Determine Flutter project directory
-        id: project_dir
-        run: |
-          if [ -f "./ur4more_wellness/pubspec.yaml" ]; then
-            echo "dir=ur4more_wellness" >> $GITHUB_OUTPUT
-            echo "Found Flutter project in ur4more_wellness/"
-          elif [ -f "./pubspec.yaml" ]; then
-            echo "dir=." >> $GITHUB_OUTPUT
-            echo "Found Flutter project at repo root"
-          else
-            echo "ERROR: No pubspec.yaml found in repo root or ur4more_wellness/"
-            exit 1
-          fi
-
-      - name: Ensure web platform is configured
-        working-directory: ${{ steps.project_dir.outputs.dir }}
-        run: |
-          if [ ! -d "web" ]; then
-            echo "web/ directory not found, creating it..."
-            flutter create . --platforms web
-          else
-            echo "web/ directory exists"
-          fi
-
-      - name: Get dependencies
-        working-directory: ${{ steps.project_dir.outputs.dir }}
-        run: flutter pub get
-
-      - name: Build web
-        working-directory: ${{ steps.project_dir.outputs.dir }}
-        run: |
-          flutter build web --release \
-            --base-href "/${{ github.event.repository.name }}/" \
-            --dart-define=UR4MORE_API_BASE_URL=
-
-      - name: Build validation complete
-        run: echo "✅ Build successful on ${{ github.ref }} - Deployment skipped (only main branch deploys)"
