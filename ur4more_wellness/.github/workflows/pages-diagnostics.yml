@@ -33,38 +33,37 @@ jobs:
       - name: List workflow files
         run: |
           echo "Workflows in .github/workflows:"
-          ls -la .github/workflows || true
+          ls -la .github/workflows || echo "Directory not found"
           echo ""
           echo "Workflows in ur4more_wellness/.github/workflows (if any):"
-          ls -la ur4more_wellness/.github/workflows || true
+          ls -la ur4more_wellness/.github/workflows 2>/dev/null || echo "Directory not found"
 
-      - name: Print deploy workflow (first match)
+      - name: Print deploy workflow details
         run: |
           echo "Searching for deploy workflow files..."
           echo ""
-
+          
           if [ -d ".github/workflows" ]; then
-            FILES=$(ls .github/workflows/*.yml .github/workflows/*.yaml 2>/dev/null || echo "")
-            if [ -n "$FILES" ]; then
-              echo "$FILES" | sed 's/^/ - /'
-              echo ""
-              echo "---- Grep for deploy-pages / github-pages / branches / if: ----"
-              for f in $FILES; do
+            echo "Found .github/workflows directory"
+            for file in .github/workflows/*.yml .github/workflows/*.yaml; do
+              if [ -f "$file" ]; then
                 echo ""
-                echo "===== $f ====="
-                grep -nE "deploy-pages|upload-pages-artifact|configure-pages|environment:|github-pages|branches:|if:" "$f" || true
-              done
-            else
-              echo "No workflow files found in .github/workflows"
-            fi
+                echo "===== $file ====="
+                grep -nE "deploy-pages|upload-pages-artifact|configure-pages|environment:|github-pages|branches:|if:" "$file" || echo "No matches found"
+              fi
+            done
           else
             echo ".github/workflows directory not found"
           fi
 
-      - name: Check if deploy workflow still allows workflow_dispatch on non-main
+      - name: Check if deploy workflow allows workflow_dispatch on non-main
         run: |
+          echo ""
+          echo "Checking for problematic conditions..."
           echo ""
           echo "If you see something like:"
           echo "  if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'"
           echo "then manual runs on fix-workflow-on-main will still attempt deploy and will be rejected."
-
+          echo ""
+          echo "The correct pattern should be:"
+          echo "  if: github.ref == 'refs/heads/main'"
