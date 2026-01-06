@@ -1,16 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../core/settings/settings_model.dart';
 
-/// 4-tier Faith Mode system with XP progression
-enum FaithMode { off, light, disciple, kingdom }
-
-/// Extension for FaithMode with convenient flags
-extension FaithFlags on FaithMode {
-  bool get isOff => this == FaithMode.off;
-  bool get isActivated => this != FaithMode.off;
-  bool get isDeep => this == FaithMode.disciple || this == FaithMode.kingdom;
-}
+/// Faith Service for managing faith tier and XP progression
+/// Uses canonical FaithTier enum from settings_model.dart
 
 /// Faith progress tracking with XP and streaks
 class FaithProgress {
@@ -67,28 +61,28 @@ class FaithService {
   static const String _faithProgressKey = 'faith_progress';
   
   // Daily XP caps per tier
-  static const Map<FaithMode, int> _dailyCaps = {
-    FaithMode.off: 0,
-    FaithMode.light: 10,
-    FaithMode.disciple: 20,
-    FaithMode.kingdom: 30,
+  static const Map<FaithTier, int> _dailyCaps = {
+    FaithTier.off: 0,
+    FaithTier.light: 10,
+    FaithTier.disciple: 20,
+    FaithTier.kingdom: 30,
   };
 
   // Tier upgrade thresholds
   static const int _lightToDiscipleThreshold = 200;
   static const int _discipleToKingdomThreshold = 600;
 
-  /// Get current faith mode
-  static Future<FaithMode> getFaithMode() async {
+  /// Get current faith tier
+  static Future<FaithTier> getFaithMode() async {
     final prefs = await SharedPreferences.getInstance();
     final modeString = prefs.getString(_faithModeKey);
     return _parseFaithMode(modeString);
   }
 
-  /// Set faith mode
-  static Future<void> setFaithMode(FaithMode mode) async {
+  /// Set faith tier
+  static Future<void> setFaithMode(FaithTier tier) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_faithModeKey, _faithModeToString(mode));
+    await prefs.setString(_faithModeKey, _faithModeToString(tier));
   }
 
   /// Get faith progress
@@ -114,7 +108,7 @@ class FaithService {
     final progress = await getFaithProgress();
     
     // No XP for Off mode
-    if (mode == FaithMode.off) {
+    if (mode == FaithTier.off) {
       return 0;
     }
 
@@ -185,112 +179,114 @@ class FaithService {
   }
 
   /// Check if user can upgrade to next tier
-  static Future<FaithMode?> getUpgradeableTier() async {
+  static Future<FaithTier?> getUpgradeableTier() async {
     final mode = await getFaithMode();
     final progress = await getFaithProgress();
 
     switch (mode) {
-      case FaithMode.light:
+      case FaithTier.light:
         if (progress.xp >= _lightToDiscipleThreshold) {
-          return FaithMode.disciple;
+          return FaithTier.disciple;
         }
         break;
-      case FaithMode.disciple:
+      case FaithTier.disciple:
         if (progress.xp >= _discipleToKingdomThreshold) {
-          return FaithMode.kingdom;
+          return FaithTier.kingdom;
         }
         break;
-      case FaithMode.off:
-      case FaithMode.kingdom:
+      case FaithTier.off:
+      case FaithTier.kingdom:
         return null; // No upgrades available
     }
 
     return null;
   }
 
-  /// Get faith mode label
-  static String getFaithModeLabel(FaithMode mode) {
-    switch (mode) {
-      case FaithMode.off:
+  /// Get faith tier label (display name)
+  static String getFaithModeLabel(FaithTier tier) {
+    switch (tier) {
+      case FaithTier.off:
         return 'Off';
-      case FaithMode.light:
+      case FaithTier.light:
         return 'Light';
-      case FaithMode.disciple:
+      case FaithTier.disciple:
         return 'Disciple';
-      case FaithMode.kingdom:
+      case FaithTier.kingdom:
         return 'Kingdom Builder';
     }
   }
 
-  /// Get faith mode description
-  static String getFaithModeDescription(FaithMode mode) {
-    switch (mode) {
-      case FaithMode.off:
+  /// Get faith tier description
+  static String getFaithModeDescription(FaithTier tier) {
+    switch (tier) {
+      case FaithTier.off:
         return 'Secular mode - no spiritual content';
-      case FaithMode.light:
+      case FaithTier.light:
         return 'Minimal spiritual content with gentle encouragement';
-      case FaithMode.disciple:
+      case FaithTier.disciple:
         return 'Active faith integration with daily devotions';
-      case FaithMode.kingdom:
+      case FaithTier.kingdom:
         return 'Complete spiritual journey with advanced features';
     }
   }
 
-  /// Parse faith mode from string (with migration support)
-  static FaithMode _parseFaithMode(String? modeString) {
+  /// Parse faith tier from string (with backward-compatibility migration support)
+  /// Handles legacy capitalized strings and "Full" → disciple migration
+  static FaithTier _parseFaithMode(String? modeString) {
+    if (modeString == null) return FaithTier.off;
+    
+    // First try canonical lowercase strings
+    final canonicalTier = parseFaithTier(modeString);
+    if (canonicalTier != FaithTier.off || modeString.toLowerCase() == 'off') {
+      return canonicalTier;
+    }
+    
+    // Backward compatibility: handle legacy capitalized strings
     switch (modeString) {
       case 'Light':
-        return FaithMode.light;
+        return FaithTier.light;
       case 'Full': // Migrate old 'Full' to 'Disciple'
-        return FaithMode.disciple;
+        return FaithTier.disciple;
       case 'Disciple':
-        return FaithMode.disciple;
+        return FaithTier.disciple;
       case 'Kingdom':
-        return FaithMode.kingdom;
+      case 'Kingdom Builder':
+        return FaithTier.kingdom;
       case 'Off':
       default:
-        return FaithMode.off;
+        return FaithTier.off;
     }
   }
 
-  /// Convert faith mode to string
-  static String _faithModeToString(FaithMode mode) {
-    switch (mode) {
-      case FaithMode.off:
-        return 'Off';
-      case FaithMode.light:
-        return 'Light';
-      case FaithMode.disciple:
-        return 'Disciple';
-      case FaithMode.kingdom:
-        return 'Kingdom';
-    }
+  /// Convert faith tier to string (canonical lowercase)
+  static String _faithModeToString(FaithTier tier) {
+    return faithTierToString(tier);
   }
 
-  /// Get urge threshold for micro-intervention based on faith mode
-  static int urgeThresholdForMicro(FaithMode mode) {
-    switch (mode) {
-      case FaithMode.off:
+  /// Get urge threshold for micro-intervention based on faith tier
+  static int urgeThresholdForMicro(FaithTier tier) {
+    switch (tier) {
+      case FaithTier.off:
         return 10; // Never show for Off mode
-      case FaithMode.light:
+      case FaithTier.light:
         return 7;
-      case FaithMode.disciple:
+      case FaithTier.disciple:
         return 6;
-      case FaithMode.kingdom:
+      case FaithTier.kingdom:
         return 5;
     }
   }
 
-  /// Get ordered coping strategies based on faith mode
-  static List<String> orderedCoping(FaithMode mode, List<String> baseStrategies, bool highUrge) {
-    if (mode == FaithMode.off) {
+  /// Get ordered coping strategies based on faith tier
+  static List<String> orderedCoping(FaithTier tier, List<String> baseStrategies, bool highUrge) {
+    if (tier == FaithTier.off) {
       return baseStrategies;
     }
 
     final List<String> ordered = List.from(baseStrategies);
     
     // Pin faith-based strategies for Disciple and Kingdom modes
-    if (mode == FaithMode.disciple || mode == FaithMode.kingdom) {
+    if (tier == FaithTier.disciple || tier == FaithTier.kingdom) {
       final faithStrategies = ['read_scripture', 'pray'];
       for (final strategy in faithStrategies) {
         if (ordered.contains(strategy)) {
@@ -314,34 +310,34 @@ class FaithService {
     return ordered;
   }
 
-  /// Get default journal prompt based on faith mode
-  static String? defaultJournalPrompt(FaithMode mode) {
-    switch (mode) {
-      case FaithMode.off:
+  /// Get default journal prompt based on faith tier
+  static String? defaultJournalPrompt(FaithTier tier) {
+    switch (tier) {
+      case FaithTier.off:
         return null;
-      case FaithMode.light:
+      case FaithTier.light:
         return 'What brought you peace today?';
-      case FaithMode.disciple:
+      case FaithTier.disciple:
         return 'How did you see God working in your life today?';
-      case FaithMode.kingdom:
+      case FaithTier.kingdom:
         return 'What spiritual growth did you experience today?';
     }
   }
 
   /// Get faith prompt chips for journal
-  static List<String> getFaithPromptChips(FaithMode mode) {
-    switch (mode) {
-      case FaithMode.off:
+  static List<String> getFaithPromptChips(FaithTier tier) {
+    switch (tier) {
+      case FaithTier.off:
         return [];
-      case FaithMode.light:
+      case FaithTier.light:
         return ['What brought you peace today?'];
-      case FaithMode.disciple:
+      case FaithTier.disciple:
         return [
           'How did you see God working in your life today?',
           'What scripture spoke to you today?',
           'How did you serve others today?',
         ];
-      case FaithMode.kingdom:
+      case FaithTier.kingdom:
         return [
           'What spiritual growth did you experience today?',
           'How did you advance God\'s kingdom today?',

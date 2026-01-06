@@ -1,0 +1,5 @@
+title = "UR4MORE Wellness Secret Detection"
+description = "Detect secrets in commits and working tree"
+
+[extend]
+useDefault = true
