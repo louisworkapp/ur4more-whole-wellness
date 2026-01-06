@@ -10,7 +10,7 @@ import './widgets/daily_checkin_cta.dart';
 import '../../widgets/media_card.dart';
 import '../../widgets/daily_inspiration_card.dart';
 import '../../theme/tokens.dart';
-import '../../widgets/whole_wellness_hero/whole_wellness_hero.dart';
+import '../../widgets/hero/hero_progress.dart';
 
 class HomeDashboard extends StatefulWidget {
   const HomeDashboard({super.key});
@@ -135,6 +135,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
     final points = userData["totalPoints"] as int;
+    final showSpirit = _shouldShowSpiritualContent();
 
     return Scaffold(
       backgroundColor: cs.background, // calmer page background
@@ -172,11 +173,12 @@ class _HomeDashboardState extends State<HomeDashboard> {
                   children: [
                     const SizedBox(height: AppSpace.x2),
 
-                    WholeWellnessHero(
+                    HeroProgress(
                       totalPoints: points,
                       bodyProgress: userData["bodyProgress"] as double,
                       mindProgress: userData["mindProgress"] as double,
                       spiritProgress: userData["spiritualProgress"] as double,
+                      showSpirit: showSpirit,
                       onBuilderTap: () => Navigator.pushNamed(
                         context,
                         AppRoutes.discipleshipCourses,
