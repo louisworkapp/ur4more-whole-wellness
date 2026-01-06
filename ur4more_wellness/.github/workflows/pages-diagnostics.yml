@@ -1,0 +1,80 @@
+name: Pages Diagnostics (No Deploy)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show event + ref context
+        run: |
+          echo "event_name=${{ github.event_name }}"
+          echo "ref=${{ github.ref }}"
+          echo "ref_name=${{ github.ref_name }}"
+          echo "sha=${{ github.sha }}"
+          echo "repository=${{ github.repository }}"
+          echo "repo_name=${{ github.event.repository.name }}"
+          echo "actor=${{ github.actor }}"
+          echo ""
+          echo "Would deploy if ref == main?"
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "YES (main)"
+          else
+            echo "NO (not main)"
+          fi
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: List workflow files
+        run: |
+          echo "Workflows in .github/workflows:"
+          if [ -d ".github/workflows" ]; then
+            ls -la .github/workflows || echo "Failed to list directory"
+          else
+            echo "Directory not found"
+          fi
+          echo ""
+          echo "Workflows in ur4more_wellness/.github/workflows (if any):"
+          if [ -d "ur4more_wellness/.github/workflows" ]; then
+            ls -la ur4more_wellness/.github/workflows || echo "Failed to list directory"
+          else
+            echo "Directory not found"
+          fi
+
+      - name: Print deploy workflow details
+        run: |
+          echo "Searching for deploy workflow files..."
+          echo ""
+          
+          if [ ! -d ".github/workflows" ]; then
+            echo ".github/workflows directory not found"
+            exit 0
+          fi
+          
+          echo "Found .github/workflows directory"
+          shopt -s nullglob
+          for file in .github/workflows/*.yml .github/workflows/*.yaml; do
+            if [ -f "$file" ]; then
+              echo ""
+              echo "===== $file ====="
+              grep -nE "deploy-pages|upload-pages-artifact|configure-pages|environment:|github-pages|branches:|if:" "$file" || echo "No matches found"
+            fi
+          done
+          shopt -u nullglob
+
+      - name: Check if deploy workflow allows workflow_dispatch on non-main
+        run: |
+          echo ""
+          echo "Checking for problematic conditions..."
+          echo ""
+          echo "If you see something like:"
+          echo "  if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'"
+          echo "then manual runs on fix-workflow-on-main will still attempt deploy and will be rejected."
+          echo ""
+          echo "The correct pattern should be:"
+          echo "  if: github.ref == 'refs/heads/main'"

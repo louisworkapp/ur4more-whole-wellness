@@ -8,7 +8,7 @@ import '../../widgets/brand_glyph_text.dart';
 import '../../widgets/demo_mode_banner.dart';
 import '../../widgets/gateway_error_banner.dart';
 import '../../services/gateway_service.dart';
-import '../../services/gateway_error.dart';
+import '../../services/gateway_error.dart'; // GatewayError for error state management
 
 class MainScaffold extends StatefulWidget {
   const MainScaffold({super.key});

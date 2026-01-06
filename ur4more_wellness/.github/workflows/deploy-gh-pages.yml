@@ -1,11 +1,9 @@
-﻿name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - main
-      - fix-workflow-on-main
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -18,10 +16,10 @@ concurrency:
 
 jobs:
   deploy:
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
