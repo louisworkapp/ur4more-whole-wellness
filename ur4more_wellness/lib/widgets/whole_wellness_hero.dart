@@ -42,6 +42,16 @@ class WholeWellnessHero extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
+                  // Background mockup image (subtle, cover)
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: Image.asset(
+                        'assets/images/Whole Wellness Hero.png',
+                        fit: BoxFit.cover,
+                        opacity: const AlwaysStoppedAnimation(0.22),
+                      ),
+                    ),
+                  ),
                   // subtle background glow
                   Container(
                     width: _ringSize * 1.05,
