@@ -150,9 +150,27 @@ class GatewayHttpWrapper {
   ) async {
     try {
       final response = await request();
+      
+      // Check for HTTP error status codes
+      if (response.statusCode >= 400) {
+        final origin = _getWebOrigin();
+        final error = GatewayError.fromException(
+          Exception('HTTP ${response.statusCode}: ${response.body}'),
+          url,
+          statusCode: response.statusCode,
+          origin: origin,
+        );
+        return (response: response, error: error);
+      }
+      
       return (response: response, error: null);
     } catch (e) {
-      final error = GatewayError.fromException(e, url);
+      final origin = _getWebOrigin();
+      final error = GatewayError.fromException(
+        e,
+        url,
+        origin: origin,
+      );
       return (response: null, error: error);
     }
   }

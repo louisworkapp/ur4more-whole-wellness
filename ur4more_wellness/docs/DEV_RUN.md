@@ -119,6 +119,95 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\self_diagnose_windows.
 - Flutter Web: `http://127.0.0.1:59844` (user interface)
 - Gateway API: `http://127.0.0.1:8080` (backend services)
 - These are different ports by design - this is normal and expected
+
+## Testing Connection Diagnostics
+
+The app includes comprehensive connection diagnostics to help debug gateway connectivity issues.
+
+### Testing Gateway Failure Scenarios
+
+#### 1. Test with Gateway Down (Local Development)
+
+1. **Stop the gateway server** (Ctrl+C in the gateway terminal)
+2. **Run the Flutter app**:
+   ```powershell
+   .\run_flutter.ps1
+   ```
+3. **Expected behavior:**
+   - App loads successfully (no crash)
+   - Error banner appears at top: "Gateway request failed: [kind] [url]"
+   - App falls back to demo mode with local fallback data
+   - In debug mode: "Copy details" button available to copy full error info
+
+#### 2. Test CORS Errors (Web Only)
+
+1. **Run Flutter web app** pointing to a different origin:
+   ```powershell
+   flutter run -d web-server --web-hostname 127.0.0.1 --web-port 59844 --dart-define=UR4MORE_API_BASE_URL=http://localhost:8080
+   ```
+2. **Expected behavior:**
+   - Error banner shows: "Gateway not reachable from this origin" (CORS error)
+   - Error kind is detected as `cors`
+   - Web origin is logged in debug console
+
+#### 3. Test Auto Demo Mode on HTTPS Origin
+
+1. **Deploy to GitHub Pages** (or any HTTPS origin)
+2. **Expected behavior:**
+   - Startup health probe runs automatically
+   - If gateway unreachable AND origin is HTTPS → Auto Demo Mode enabled
+   - Banner shows: "Demo Mode: gateway offline or not reachable from this origin"
+   - App uses local fallback data
+
+#### 4. Test Error Types
+
+The app categorizes errors into these types:
+- **CORS**: Cross-origin request blocked (common on GitHub Pages)
+- **DNS**: Cannot resolve gateway hostname
+- **Refused**: Connection refused (gateway not running)
+- **Timeout**: Request timed out (gateway slow/unresponsive)
+- **Unauthorized**: 401/403 HTTP status (authentication required)
+- **HTTP**: Other HTTP errors (4xx/5xx)
+- **Unknown**: Unrecognized error
+
+#### 5. View Error Details (Debug Mode)
+
+1. **Run in debug mode**:
+   ```powershell
+   flutter run -d web-server --web-hostname 127.0.0.1 --web-port 59844
+   ```
+2. **When error occurs:**
+   - Error banner shows short message
+   - Click "Copy details" button (debug mode only)
+   - Full error details copied to clipboard:
+     - URL
+     - Error kind
+     - Status code (if HTTP error)
+     - Web origin (if web platform)
+     - Full exception message
+
+### Verifying Diagnostics Work
+
+1. **Check debug console** for diagnostic logs:
+   - `🌐 GatewayService: Startup - Base URL: [url]`
+   - `🌐 GatewayService: Web origin: [origin]` (web only)
+   - `❌ GatewayService: Exception during [method]`
+   - `❌ GatewayService: Exception type: [type]`
+   - `❌ GatewayService: Target URL: [url]`
+
+2. **Verify error banner appears** in MainScaffold when `GatewayService.lastError != null`
+
+3. **Verify graceful degradation:**
+   - App never crashes
+   - Fallback data is used
+   - UI remains functional
+
+### Security Notes
+
+- **JWT tokens are never fully logged** - only first 20 characters shown in debug logs
+- **Debug-only logging** - All diagnostic prints are wrapped in `kDebugMode` checks
+- **No sensitive data** in error messages shown to users
+
 <<<<<<< HEAD
 =======
 

@@ -6,6 +6,8 @@ import '../spiritual_growth_screen/spiritual_growth_screen.dart';
 import '../rewards_marketplace_screen/rewards_marketplace_screen.dart';
 import '../../widgets/brand_glyph_text.dart';
 import '../../widgets/demo_mode_banner.dart';
+import '../../widgets/gateway_error_banner.dart';
+import '../../services/gateway_service.dart';
 
 class MainScaffold extends StatefulWidget {
   const MainScaffold({super.key});
@@ -16,6 +18,7 @@ class MainScaffold extends StatefulWidget {
 
 class _MainScaffoldState extends State<MainScaffold> {
   int _index = 0;
+  GatewayError? _lastError;
 
   final _pages = const [
     HomeDashboard(),
@@ -26,6 +29,21 @@ class _MainScaffoldState extends State<MainScaffold> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    // Check for errors periodically
+    _checkForErrors();
+  }
+
+  void _checkForErrors() {
+    setState(() {
+      _lastError = GatewayService.lastError;
+    });
+    // Check again after a delay
+    Future.delayed(const Duration(seconds: 2), _checkForErrors);
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
@@ -33,6 +51,15 @@ class _MainScaffoldState extends State<MainScaffold> {
       body: Column(
         children: [
           const DemoModeBanner(),
+          if (_lastError != null)
+            GatewayErrorBanner(
+              error: _lastError!,
+              onDismiss: () {
+                setState(() {
+                  _lastError = null;
+                });
+              },
+            ),
           Expanded(
             child: IndexedStack(index: _index, children: _pages),
           ),

@@ -257,43 +257,39 @@ class GatewayService {
       return _getFallbackQuotes(faithTier);
     }
 
-    final response = result.response!;
-    if (response.statusCode == 200) {
-      try {
-        final List<dynamic> quotes = json.decode(response.body);
-        final formattedQuotes = quotes.map((q) => {
-          'text': q['text'] ?? '',
-          'author': q['author'] ?? '',
-          'source': q['source'] ?? 'Gateway',
-          'tags': (q['tags'] as List<dynamic>?)?.map((tag) => tag.toString()).toList() ?? [],
-          'license': q['license'] ?? 'public_domain',
-        }).toList();
-        
-        if (kDebugMode) {
-          print('✅ GatewayService: Successfully fetched ${formattedQuotes.length} quotes from gateway');
-        }
-        
-        // Cache the results
-        await _cacheQuotes(formattedQuotes);
-        return formattedQuotes;
-      } catch (e) {
-        _lastError = GatewayError(
-          url: url,
-          kind: GatewayErrorKind.unknown,
-          rawException: 'Failed to parse response: $e',
-        );
-        return _getFallbackQuotes(faithTier);
+    // If error occurred, it's already set in result.error (including HTTP status codes >= 400)
+    if (result.error != null) {
+      _lastError = result.error;
+      if (kDebugMode) {
+        print('❌ GatewayService: Quotes request failed: ${result.error!.displayMessage}');
       }
-    } else {
+      return _getFallbackQuotes(faithTier);
+    }
+
+    final response = result.response!;
+    try {
+      final List<dynamic> quotes = json.decode(response.body);
+      final formattedQuotes = quotes.map((q) => {
+        'text': q['text'] ?? '',
+        'author': q['author'] ?? '',
+        'source': q['source'] ?? 'Gateway',
+        'tags': (q['tags'] as List<dynamic>?)?.map((tag) => tag.toString()).toList() ?? [],
+        'license': q['license'] ?? 'public_domain',
+      }).toList();
+      
+      if (kDebugMode) {
+        print('✅ GatewayService: Successfully fetched ${formattedQuotes.length} quotes from gateway');
+      }
+      
+      // Cache the results
+      await _cacheQuotes(formattedQuotes);
+      return formattedQuotes;
+    } catch (e) {
       _lastError = GatewayError(
         url: url,
         kind: GatewayErrorKind.unknown,
-        rawException: 'HTTP ${response.statusCode}: ${response.body}',
-        statusCode: response.statusCode,
+        rawException: 'Failed to parse response: $e',
       );
-      if (kDebugMode) {
-        print('❌ Gateway quotes error: ${response.statusCode} - ${response.body}');
-      }
       return _getFallbackQuotes(faithTier);
     }
   }
@@ -349,37 +345,24 @@ class GatewayService {
     }
 
     final response = result.response!;
-    if (response.statusCode == 200) {
-      try {
-        final scripture = json.decode(response.body);
-        final formattedScripture = {
-          'ref': scripture['ref'] ?? '',
-          'verses': List<Map<String, dynamic>>.from(scripture['verses'] ?? []),
-          'actNow': scripture['actNow'] ?? '',
-          'source': scripture['source'] ?? 'kjv.local',
-        };
-        
-        // Cache the result
-        await _cacheScripture(formattedScripture);
-        return formattedScripture;
-      } catch (e) {
-        _lastError = GatewayError(
-          url: url,
-          kind: GatewayErrorKind.unknown,
-          rawException: 'Failed to parse response: $e',
-        );
-        return _getFallbackScripture();
-      }
-    } else {
+    try {
+      final scripture = json.decode(response.body);
+      final formattedScripture = {
+        'ref': scripture['ref'] ?? '',
+        'verses': List<Map<String, dynamic>>.from(scripture['verses'] ?? []),
+        'actNow': scripture['actNow'] ?? '',
+        'source': scripture['source'] ?? 'kjv.local',
+      };
+      
+      // Cache the result
+      await _cacheScripture(formattedScripture);
+      return formattedScripture;
+    } catch (e) {
       _lastError = GatewayError(
         url: url,
         kind: GatewayErrorKind.unknown,
-        rawException: 'HTTP ${response.statusCode}: ${response.body}',
-        statusCode: response.statusCode,
+        rawException: 'Failed to parse response: $e',
       );
-      if (kDebugMode) {
-        print('❌ Gateway scripture error: ${response.statusCode} - ${response.body}');
-      }
       return _getFallbackScripture();
     }
   }
@@ -407,27 +390,14 @@ class GatewayService {
     }
 
     final response = result.response!;
-    if (response.statusCode == 200) {
-      try {
-        return json.decode(response.body) as Map<String, dynamic>;
-      } catch (e) {
-        _lastError = GatewayError(
-          url: url,
-          kind: GatewayErrorKind.unknown,
-          rawException: 'Failed to parse response: $e',
-        );
-        return null;
-      }
-    } else {
+    try {
+      return json.decode(response.body) as Map<String, dynamic>;
+    } catch (e) {
       _lastError = GatewayError(
         url: url,
         kind: GatewayErrorKind.unknown,
-        rawException: 'HTTP ${response.statusCode}: ${response.body}',
-        statusCode: response.statusCode,
+        rawException: 'Failed to parse response: $e',
       );
-      if (kDebugMode) {
-        print('❌ Gateway manifest error: ${response.statusCode} - ${response.body}');
-      }
       return null;
     }
   }
@@ -451,27 +421,14 @@ class GatewayService {
     }
 
     final response = result.response!;
-    if (response.statusCode == 200) {
-      try {
-        return json.decode(response.body) as Map<String, dynamic>;
-      } catch (e) {
-        _lastError = GatewayError(
-          url: url,
-          kind: GatewayErrorKind.unknown,
-          rawException: 'Failed to parse response: $e',
-        );
-        return null;
-      }
-    } else {
+    try {
+      return json.decode(response.body) as Map<String, dynamic>;
+    } catch (e) {
       _lastError = GatewayError(
         url: url,
         kind: GatewayErrorKind.unknown,
-        rawException: 'HTTP ${response.statusCode}: ${response.body}',
-        statusCode: response.statusCode,
+        rawException: 'Failed to parse response: $e',
       );
-      if (kDebugMode) {
-        print('❌ Gateway health check returned status ${response.statusCode}: ${response.body}');
-      }
       return null;
     }
   }
