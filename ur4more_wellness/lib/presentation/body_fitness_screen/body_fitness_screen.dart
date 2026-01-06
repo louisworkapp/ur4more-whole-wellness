@@ -24,9 +24,6 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   late AnimationController _pointsAnimationController;
   late Animation<double> _pointsAnimation;
 
-  enum DifficultyFilter { all, beginner, intermediate, advanced }
-  enum WorkoutSort { recommended, pointsHigh, durationShort }
-
   List<String> selectedEquipment = ['Bodyweight'];
   List<String> availableEquipment = ['Bodyweight', 'Bands', 'Pullup Bar'];
   List<Map<String, dynamic>> workouts = [];
