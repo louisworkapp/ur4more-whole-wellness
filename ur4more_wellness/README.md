@@ -12,6 +12,19 @@ A holistic wellness application that delivers evidence-based physical, mental, a
 
 ## 🚀 Quick Start
 
+### Live Demo
+
+🌐 **[View Live Demo](https://louisworkapp.github.io/ur4more-whole-wellness/)** - Explore the Flutter web app UI/UX
+
+> **Note:** The live demo runs in "Demo Mode" without backend connectivity. For full functionality, run locally with the gateway server.
+
+**For AI Tools & Explorers:**
+- **App Manifest:** [app-manifest.json](https://louisworkapp.github.io/ur4more-whole-wellness/app-manifest.json) - Structured app metadata and routes
+- **Sitemap:** [sitemap.txt](https://louisworkapp.github.io/ur4more-whole-wellness/sitemap.txt) - Complete list of all app routes
+- The app is publicly accessible and can be explored via the web interface
+
+### Local Development
+
 For detailed development setup instructions, see [docs/DEV_RUN.md](docs/DEV_RUN.md).
 
 **Quick start:**
@@ -48,9 +61,10 @@ pip install -r requirements.txt
 ## 📁 Project Structure
 
 ```
-ur4more_wellness/
+.
 ├── android/            # Android-specific configuration
 ├── ios/                # iOS-specific configuration
+├── web/                # Web-specific configuration
 ├── lib/
 │   ├── core/           # Core utilities, services, and truth integration
 │   ├── features/       # Feature modules (mind, body, spirit, planner, etc.)
@@ -81,19 +95,6 @@ UR4MORE Wellness consists of:
 - **Content Assets**: JSON-based content files (quotes, scriptures, courses)
 
 See [docs/app_core.md](docs/app_core.md) for core architecture and [docs/DEV_RUN.md](docs/DEV_RUN.md) for development setup.
-
-## Exercise Upgrader
-
-Generate L2/L3 variants from L1 exercises:
-
-```bash
-dart run tools/exercise_upgrade.dart --core assets/mind/exercises_core.json --faith assets/mind/exercises_faith.json --write
-```
-
-Dry run:
-```bash
-dart run tools/exercise_upgrade.dart --core assets/mind/exercises_core.json --faith assets/mind/exercises_faith.json --dry-run
-```
 
 ## Exercise Upgrader
 
@@ -159,7 +160,16 @@ Container(
   child: Text('Responsive Container'),
 )
 ```
+
 ## 📦 Deployment
+
+### Web (GitHub Pages)
+
+The Flutter web app is automatically deployed to GitHub Pages on every push to `main`. See [docs/DEV_RUN.md](docs/DEV_RUN.md#deploy-to-github-pages) for details.
+
+**Live URL:** `https://louisworkapp.github.io/ur4more-whole-wellness/`
+
+### Mobile
 
 Build the application for production:
 
@@ -188,6 +198,8 @@ flutter build ios --release
 - Pre-commit hooks setup
 - Development token configuration
 - Git history cleanup procedures
+
+**Secrets Safety:** The app uses `--dart-define` for configuration. No hardcoded tokens or API keys are committed. All sensitive values are passed at build time or stored securely.
 
 ## 🙏 Acknowledgments
 - Powered by [Flutter](https://flutter.dev) & [Dart](https://dart.dev)
