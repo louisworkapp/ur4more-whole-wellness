@@ -1,0 +1,62 @@
+name: Diagnose Pages Failures (No Deploy)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print run context
+        run: |
+          echo "event=${{ github.event_name }}"
+          echo "ref=${{ github.ref }}"
+          echo "ref_name=${{ github.ref_name }}"
+          echo "sha=${{ github.sha }}"
+          echo "repo=${{ github.repository }}"
+          echo "actor=${{ github.actor }}"
+
+      - uses: actions/checkout@v4
+
+      - name: List all workflow files (including nested)
+        run: |
+          echo "=== .github/workflows ==="
+          find .github/workflows -maxdepth 1 -type f -print || true
+          echo ""
+          echo "=== any nested workflows (common gotcha) ==="
+          find . -path "*/.github/workflows/*" -type f -print || true
+
+      - name: Flag any workflow that references github-pages environment or deploy-pages
+        run: |
+          echo ""
+          echo "Searching for github-pages environment + deploy actions..."
+          echo ""
+
+          find . -path "*/.github/workflows/*" -type f \( -name "*.yml" -o -name "*.yaml" \) -print0 \
+          | while IFS= read -r -d '' f; do
+              hit=$(grep -nE "environment:|github-pages|actions/deploy-pages|actions/upload-pages-artifact|actions/configure-pages" "$f" || true)
+              if [ -n "$hit" ]; then
+                echo "===== $f ====="
+                echo "$hit"
+                echo ""
+              fi
+            done
+
+      - name: Flag risky deploy conditions (manual deploy on non-main)
+        run: |
+          echo "Searching for risky if-conditions..."
+          echo ""
+
+          find . -path "*/.github/workflows/*" -type f \( -name "*.yml" -o -name "*.yaml" \) -print0 \
+          | while IFS= read -r -d '' f; do
+              hit=$(grep -nE "workflow_dispatch|github\.event_name|refs/heads/main|github-pages" "$f" || true)
+              if [ -n "$hit" ]; then
+                echo "===== $f ====="
+                echo "$hit"
+                echo ""
+              fi
+            done
+
