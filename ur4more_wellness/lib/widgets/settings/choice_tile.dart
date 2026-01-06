@@ -105,6 +105,7 @@ class ChoiceTile<T> extends StatelessWidget {
             ],
           ),
         ),
+        ),
       ),
     );
   }

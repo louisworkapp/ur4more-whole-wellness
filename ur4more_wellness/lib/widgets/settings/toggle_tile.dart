@@ -108,6 +108,7 @@ class ToggleTile extends StatelessWidget {
             ],
           ),
         ),
+        ),
       ),
     );
   }
