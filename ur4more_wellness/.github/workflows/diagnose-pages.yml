@@ -60,3 +60,58 @@ jobs:
               fi
             done
 
+      - name: Analyze deploy job conditions
+        run: |
+          echo ""
+          echo "=== Analyzing deploy job conditions ==="
+          echo ""
+          
+          find . -path "*/.github/workflows/*" -type f \( -name "*.yml" -o -name "*.yaml" \) -print0 \
+          | while IFS= read -r -d '' f; do
+              # Check for deploy jobs with environment: github-pages
+              if grep -q "environment:" "$f" && grep -q "github-pages" "$f"; then
+                echo "File: $f"
+                echo "---"
+                
+                # Extract job names that use github-pages environment
+                job_lines=$(grep -nB5 "environment:" "$f" | grep -E "^\s+[a-zA-Z_-]+:" | tail -1 || true)
+                if [ -n "$job_lines" ]; then
+                  echo "Jobs with github-pages environment:"
+                  echo "$job_lines"
+                fi
+                
+                # Check the if condition on those jobs
+                echo ""
+                echo "If conditions on deploy jobs:"
+                grep -nE "^\s+if:" "$f" | grep -B2 "environment:" || grep -nE "^\s+if:" "$f" || echo "  No if conditions found"
+                
+                # Check for problematic patterns
+                if grep -qE "github\.ref.*==.*refs/heads/main.*\|\|.*workflow_dispatch" "$f" || \
+                   grep -qE "workflow_dispatch.*\|\|.*github\.ref.*==.*refs/heads/main" "$f"; then
+                  echo ""
+                  echo "⚠️  WARNING: Found risky condition pattern (allows workflow_dispatch on non-main)"
+                  grep -nE "if:.*workflow_dispatch|if:.*github\.ref" "$f" || true
+                fi
+                
+                echo ""
+                echo "---"
+                echo ""
+              fi
+            done
+
+      - name: Summary
+        run: |
+          echo ""
+          echo "=== DIAGNOSIS SUMMARY ==="
+          echo ""
+          echo "✅ Check complete. Review the output above for:"
+          echo "   1. Any workflows referencing github-pages environment"
+          echo "   2. Deploy jobs without strict 'if: github.ref == \"refs/heads/main\"' guards"
+          echo "   3. Conditions that allow workflow_dispatch on non-main branches"
+          echo ""
+          echo "🔒 Safe pattern:"
+          echo "   if: github.ref == 'refs/heads/main'"
+          echo ""
+          echo "❌ Risky pattern:"
+          echo "   if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'"
+          echo ""
