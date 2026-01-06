@@ -119,3 +119,61 @@ powershell -NoProfile -ExecutionPolicy Bypass -File tools\self_diagnose_windows.
 - Flutter Web: `http://127.0.0.1:59844` (user interface)
 - Gateway API: `http://127.0.0.1:8080` (backend services)
 - These are different ports by design - this is normal and expected
+<<<<<<< HEAD
+=======
+
+## Deploy to GitHub Pages
+
+The Flutter web app is automatically deployed to GitHub Pages on every push to `main` branch.
+
+### Automatic Deployment
+
+The GitHub Actions workflow (`.github/workflows/deploy-gh-pages.yml`) automatically:
+1. Builds the Flutter web app with the correct base href
+2. Deploys to the `gh-pages` branch
+3. Makes the app available at: `https://louisworkapp.github.io/ur4more-whole-wellness/`
+
+### Manual Setup (One-time)
+
+If Pages isn't enabled yet, follow these steps:
+
+1. **Enable GitHub Pages:**
+   - Go to repository Settings → Pages
+   - Source: Deploy from a branch
+   - Branch: `gh-pages` / `root`
+   - Click Save
+
+2. **Wait for first deployment:**
+   - After pushing to `main`, the workflow will run automatically
+   - Check Actions tab to see deployment status
+   - Once complete, the app will be live at the URL above
+
+### Expected Public URL
+
+After deployment, the app will be available at:
+```
+https://louisworkapp.github.io/ur4more-whole-wellness/
+```
+
+### Demo Mode
+
+When deployed to GitHub Pages, the app runs in **Demo Mode** because the gateway backend isn't available. The app will:
+- Show a small "Demo Mode (gateway offline)" banner
+- Use local fallback data for quotes, scriptures, and content
+- Allow full UI/UX exploration without backend connectivity
+
+This is perfect for UI/UX review and flow exploration.
+
+### Manual Deployment (if needed)
+
+To manually trigger deployment:
+1. Go to repository Actions tab
+2. Select "Deploy to GitHub Pages" workflow
+3. Click "Run workflow" → "Run workflow"
+
+### Troubleshooting Pages Deployment
+
+- **404 errors on refresh:** The `404.html` file handles routing redirects automatically
+- **Assets not loading:** Ensure base href is set to `/ur4more-whole-wellness/` in workflow
+- **Build fails:** Check Actions logs for Flutter build errors
+>>>>>>> main-remote
