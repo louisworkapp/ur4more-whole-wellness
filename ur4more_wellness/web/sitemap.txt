@@ -1,0 +1,37 @@
+﻿# UR4MORE Wellness App Sitemap
+# Public URL: https://louisworkapp.github.io/ur4more-whole-wellness/
+
+# Main Routes
+/
+/check-in
+/settings
+/authentication-screen
+/home
+
+# Feature Routes
+/mind-coach
+/body-fitness
+/spiritual-growth
+/rewards-marketplace
+
+# Course Routes
+/courses
+/courses/detail
+/courses/week
+/discipleship-courses
+
+# Planner Routes
+/planner
+/planner/morning-checkin
+/planner/calendar
+/planner/suggestions
+/planner/commit
+/daily-calendar
+
+# Other Routes
+/breath-presets
+/safety-monitoring
+/faith-congratulations
+/discipleship-welcome
+/alarm-clock
+/morning-checkin
