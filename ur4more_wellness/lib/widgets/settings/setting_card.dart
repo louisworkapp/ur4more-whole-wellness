@@ -26,6 +26,7 @@ class SettingCard extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     return Card(
+      clipBehavior: Clip.antiAlias,
       margin: margin ?? const EdgeInsets.symmetric(horizontal: AppSpace.x4, vertical: AppSpace.x2),
       child: Padding(
         padding: padding ?? const EdgeInsets.all(AppSpace.x4),
