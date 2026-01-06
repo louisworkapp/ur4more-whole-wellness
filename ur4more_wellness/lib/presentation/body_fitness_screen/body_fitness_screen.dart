@@ -21,6 +21,9 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   late AnimationController _pointsAnimationController;
   late Animation<double> _pointsAnimation;
 
+  enum DifficultyFilter { all, beginner, intermediate, advanced }
+  enum WorkoutSort { recommended, pointsHigh, durationShort }
+
   List<String> selectedEquipment = ['Bodyweight'];
   List<String> availableEquipment = ['Bodyweight', 'Bands', 'Pullup Bar'];
   List<Map<String, dynamic>> workouts = [];
@@ -32,6 +35,9 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   int currentPoints = 1250;
   int weeklyGoal = 2000;
   double weeklyProgress = 0.625;
+
+  DifficultyFilter difficultyFilter = DifficultyFilter.all;
+  WorkoutSort sortMode = WorkoutSort.recommended;
 
   @override
   void initState() {
@@ -188,18 +194,47 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   }
 
   void _filterWorkouts() {
+    List<Map<String, dynamic>> results = List.from(workouts);
+
+    if (selectedEquipment.isNotEmpty) {
+      results = results.where((workout) {
+        final workoutEquipment = (workout['equipment'] as List).cast<String>();
+        return selectedEquipment.any((selected) => workoutEquipment.any(
+            (equipment) =>
+                equipment.toLowerCase() == selected.toLowerCase()));
+      }).toList();
+    }
+
+    if (difficultyFilter != DifficultyFilter.all) {
+      results = results.where((workout) {
+        final difficulty = (workout['difficulty'] as String).toLowerCase();
+        switch (difficultyFilter) {
+          case DifficultyFilter.beginner:
+            return difficulty == 'beginner';
+          case DifficultyFilter.intermediate:
+            return difficulty == 'intermediate';
+          case DifficultyFilter.advanced:
+            return difficulty == 'advanced';
+          case DifficultyFilter.all:
+            return true;
+        }
+      }).toList();
+    }
+
+    switch (sortMode) {
+      case WorkoutSort.pointsHigh:
+        results.sort((a, b) => (b['points'] as int).compareTo(a['points'] as int));
+        break;
+      case WorkoutSort.durationShort:
+        results.sort((a, b) => (a['duration'] as int).compareTo(b['duration'] as int));
+        break;
+      case WorkoutSort.recommended:
+        // keep original order
+        break;
+    }
+
     setState(() {
-      if (selectedEquipment.isEmpty) {
-        filteredWorkouts = workouts;
-      } else {
-        filteredWorkouts = workouts.where((workout) {
-          final workoutEquipment =
-              (workout['equipment'] as List).cast<String>();
-          return selectedEquipment.any((selected) => workoutEquipment.any(
-              (equipment) =>
-                  equipment.toLowerCase() == selected.toLowerCase()));
-        }).toList();
-      }
+      filteredWorkouts = results;
     });
   }
 
@@ -222,6 +257,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   }
 
   void _onWorkoutComplete() {
+    final colorScheme = Theme.of(context).colorScheme;
     if (activeWorkout != null) {
       final points = activeWorkout!['points'] as int;
       setState(() {
@@ -247,7 +283,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
               color: Colors.white,
             ),
           ),
-          backgroundColor: AppTheme.successLight,
+          backgroundColor: colorScheme.tertiary,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -266,6 +302,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   }
 
   void _onFavorite(Map<String, dynamic> workout) {
+    final colorScheme = Theme.of(context).colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -276,7 +313,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
             color: Colors.white,
           ),
         ),
-        backgroundColor: AppTheme.lightTheme.primaryColor,
+        backgroundColor: colorScheme.primary,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -286,6 +323,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   }
 
   void _onSchedule(Map<String, dynamic> workout) {
+    final colorScheme = Theme.of(context).colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -296,7 +334,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
             color: Colors.white,
           ),
         ),
-        backgroundColor: AppTheme.secondaryLight,
+        backgroundColor: colorScheme.secondary,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -306,6 +344,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   }
 
   void _onShare(Map<String, dynamic> workout) {
+    final colorScheme = Theme.of(context).colorScheme;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -316,7 +355,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
             color: Colors.white,
           ),
         ),
-        backgroundColor: AppTheme.successLight,
+        backgroundColor: colorScheme.tertiary,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -326,6 +365,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   }
 
   Future<void> _onRefresh() async {
+    final colorScheme = Theme.of(context).colorScheme;
     setState(() {
       isLoading = true;
     });
@@ -346,7 +386,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
             color: Colors.white,
           ),
         ),
-        backgroundColor: AppTheme.successLight,
+          backgroundColor: colorScheme.tertiary,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
@@ -356,6 +396,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   }
 
   void _showCreateWorkoutModal() {
+    final colorScheme = Theme.of(context).colorScheme;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -417,7 +458,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                           color: Colors.white,
                         ),
                       ),
-                      backgroundColor: AppTheme.lightTheme.primaryColor,
+                      backgroundColor: colorScheme.primary,
                       behavior: SnackBarBehavior.floating,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -426,7 +467,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppTheme.lightTheme.primaryColor,
+                  backgroundColor: colorScheme.primary,
                   padding: EdgeInsets.symmetric(horizontal: AppSpace.x8, vertical: AppSpace.x2),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -461,7 +502,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      backgroundColor: colorScheme.surface,
+      backgroundColor: colorScheme.background,
       body: Stack(
         children: [
           Column(
@@ -480,6 +521,8 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                 },
               ),
               SizedBox(height: AppSpace.x2),
+              _buildDifficultyAndSortRow(colorScheme, theme),
+              SizedBox(height: AppSpace.x2),
               EquipmentFilterChips(
                 selectedEquipment: selectedEquipment,
                 onEquipmentToggle: _onEquipmentToggle,
@@ -489,12 +532,12 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
               Expanded(
                 child: RefreshIndicator(
                   onRefresh: _onRefresh,
-                  color: AppTheme.lightTheme.primaryColor,
+                  color: colorScheme.primary,
                   child: filteredWorkouts.isEmpty
                       ? _buildEmptyState(colorScheme)
-                      : ListView.builder(
+                      : ListView.separated(
                           physics: const AlwaysScrollableScrollPhysics(),
-                          itemCount: filteredWorkouts.length,
+                          separatorBuilder: (_, __) => SizedBox(height: AppSpace.x2),
                           itemBuilder: (context, index) {
                             final workout = filteredWorkouts[index];
                             return Slidable(
@@ -504,8 +547,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                                 children: [
                                   SlidableAction(
                                     onPressed: (_) => _onFavorite(workout),
-                                    backgroundColor:
-                                        AppTheme.lightTheme.primaryColor,
+                                    backgroundColor: colorScheme.primary,
                                     foregroundColor: Colors.white,
                                     icon: Icons.favorite,
                                     label: 'Favorite',
@@ -516,14 +558,14 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                                   ),
                                   SlidableAction(
                                     onPressed: (_) => _onSchedule(workout),
-                                    backgroundColor: AppTheme.secondaryLight,
+                                    backgroundColor: colorScheme.secondary,
                                     foregroundColor: Colors.white,
                                     icon: Icons.schedule,
                                     label: 'Schedule',
                                   ),
                                   SlidableAction(
                                     onPressed: (_) => _onShare(workout),
-                                    backgroundColor: AppTheme.successLight,
+                                    backgroundColor: colorScheme.tertiary,
                                     foregroundColor: Colors.white,
                                     icon: Icons.share,
                                     label: 'Share',
@@ -543,6 +585,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                               ),
                             );
                           },
+                          itemCount: filteredWorkouts.length,
                         ),
                 ),
               ),
@@ -559,7 +602,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
       floatingActionButton: FloatingActionButton(
         heroTag: "body_fitness_fab",
         onPressed: _showCreateWorkoutModal,
-        backgroundColor: AppTheme.secondaryLight,
+        backgroundColor: colorScheme.secondary,
         child: CustomIconWidget(
           iconName: 'add',
           color: Colors.white,
@@ -609,7 +652,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                 _filterWorkouts();
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.lightTheme.primaryColor,
+                backgroundColor: colorScheme.primary,
                 padding: EdgeInsets.symmetric(horizontal: AppSpace.x6, vertical: AppSpace.x3),
               ),
               child: Text(
@@ -623,6 +666,97 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildDifficultyAndSortRow(ColorScheme colorScheme, ThemeData theme) {
+    final chipSpacing = AppSpace.x2.toDouble();
+
+    ChoiceChip _chip(String label, DifficultyFilter filter) {
+      final selected = difficultyFilter == filter;
+      return ChoiceChip(
+        label: Text(label),
+        selected: selected,
+        onSelected: (_) {
+          setState(() {
+            difficultyFilter = filter;
+          });
+          _filterWorkouts();
+        },
+        visualDensity: VisualDensity.compact,
+        labelStyle: theme.textTheme.labelLarge?.copyWith(
+          color: selected ? colorScheme.onPrimary : colorScheme.onSurface,
+        ),
+        selectedColor: colorScheme.primary,
+        backgroundColor: colorScheme.surfaceVariant,
+        side: BorderSide(color: colorScheme.outline.withOpacity(0.3)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      );
+    }
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: AppSpace.x4),
+      child: Row(
+        children: [
+          Expanded(
+            child: Wrap(
+              spacing: chipSpacing,
+              runSpacing: chipSpacing,
+              children: [
+                _chip('All', DifficultyFilter.all),
+                _chip('Beginner', DifficultyFilter.beginner),
+                _chip('Intermediate', DifficultyFilter.intermediate),
+                _chip('Advanced', DifficultyFilter.advanced),
+              ],
+            ),
+          ),
+          PopupMenuButton<WorkoutSort>(
+            tooltip: 'Sort',
+            onSelected: (mode) {
+              setState(() {
+                sortMode = mode;
+              });
+              _filterWorkouts();
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: WorkoutSort.recommended,
+                child: Text('Recommended'),
+              ),
+              const PopupMenuItem(
+                value: WorkoutSort.pointsHigh,
+                child: Text('Points (High → Low)'),
+              ),
+              const PopupMenuItem(
+                value: WorkoutSort.durationShort,
+                child: Text('Time (Short → Long)'),
+              ),
+            ],
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSpace.x3,
+                vertical: AppSpace.x2,
+              ),
+              decoration: BoxDecoration(
+                color: colorScheme.surface,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: colorScheme.outline.withOpacity(0.2)),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.sort, size: 18),
+                  SizedBox(width: AppSpace.x1),
+                  Text(
+                    'Sort',
+                    style: theme.textTheme.labelLarge,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
