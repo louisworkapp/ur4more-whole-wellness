@@ -32,9 +32,12 @@ class ChoiceTile<T> extends StatelessWidget {
       button: true,
       enabled: enabled,
       selected: isSelected,
+      inMutuallyExclusiveGroup: true,
       label: '$title${subtitle != null ? '. $subtitle' : ''}',
-      child: InkWell(
-        onTap: enabled ? () => onChanged?.call(value) : null,
+      child: AbsorbPointer(
+        absorbing: !enabled,
+        child: InkWell(
+          onTap: enabled ? () => onChanged?.call(value) : null,
         borderRadius: BorderRadius.circular(12),
         child: Container(
           constraints: const BoxConstraints(minHeight: 56),

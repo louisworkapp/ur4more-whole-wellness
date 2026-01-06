@@ -30,8 +30,10 @@ class ToggleTile extends StatelessWidget {
       enabled: enabled,
       label: '$title${subtitle != null ? '. $subtitle' : ''}',
       toggled: value,
-      child: InkWell(
-        onTap: enabled ? () => onChanged?.call(!value) : null,
+      child: AbsorbPointer(
+        absorbing: !enabled,
+        child: InkWell(
+          onTap: enabled ? () => onChanged?.call(!value) : null,
         borderRadius: BorderRadius.circular(12),
         child: Container(
           constraints: const BoxConstraints(minHeight: 56),
