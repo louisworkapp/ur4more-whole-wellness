@@ -65,7 +65,9 @@ class MyApp extends StatelessWidget {
               theme: buildLightTheme(),
               darkTheme: darkFrameTheme(context),
               themeMode: themeMode,
-        // 🚨 CRITICAL: NEVER REMOVE OR MODIFY
+              // Use hash routing for GitHub Pages compatibility
+              useInheritedMediaQuery: true,
+              // 🚨 CRITICAL: NEVER REMOVE OR MODIFY
         builder: (context, child) {
           // Normalize desktop/web layout with centered content and max width
           final media = MediaQuery.of(context);

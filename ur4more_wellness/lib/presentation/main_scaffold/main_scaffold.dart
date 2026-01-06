@@ -5,6 +5,7 @@ import '../../features/mind/presentation/mind_coach_screen.dart';
 import '../spiritual_growth_screen/spiritual_growth_screen.dart';
 import '../rewards_marketplace_screen/rewards_marketplace_screen.dart';
 import '../../widgets/brand_glyph_text.dart';
+import '../../widgets/demo_mode_banner.dart';
 
 class MainScaffold extends StatefulWidget {
   const MainScaffold({super.key});
@@ -29,7 +30,14 @@ class _MainScaffoldState extends State<MainScaffold> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      body: IndexedStack(index: _index, children: _pages),
+      body: Column(
+        children: [
+          const DemoModeBanner(),
+          Expanded(
+            child: IndexedStack(index: _index, children: _pages),
+          ),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _index,
         onDestinationSelected: (i) => setState(() => _index = i),

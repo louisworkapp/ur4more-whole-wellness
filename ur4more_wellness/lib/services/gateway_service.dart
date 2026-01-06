@@ -5,7 +5,42 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../core/settings/settings_model.dart';
 
 class GatewayService {
-  static const String _baseUrl = 'http://localhost:8080';
+  // Base URL from --dart-define=UR4MORE_API_BASE_URL=...
+  // Defaults to http://127.0.0.1:8080 if not provided
+  // Empty string means demo mode (no backend)
+  static String get _baseUrl => String.fromEnvironment(
+    'UR4MORE_API_BASE_URL',
+    defaultValue: 'http://127.0.0.1:8080',
+  );
+  
+  // Check if we're in demo mode (no backend available)
+  static bool get isDemoMode {
+    final url = _baseUrl.trim();
+    return url.isEmpty || url == 'demo' || url == 'offline';
+  }
+  
+  // Cache for health check result to avoid repeated checks
+  static bool? _healthCheckCache;
+  static DateTime? _healthCheckTime;
+  
+  // Check if gateway is available (with caching)
+  static Future<bool> _isGatewayAvailable() async {
+    if (isDemoMode) return false;
+    
+    // Cache health check for 30 seconds
+    if (_healthCheckCache != null && _healthCheckTime != null) {
+      final age = DateTime.now().difference(_healthCheckTime!);
+      if (age.inSeconds < 30) {
+        return _healthCheckCache!;
+      }
+    }
+    
+    final isHealthy = await checkHealth();
+    _healthCheckCache = isHealthy;
+    _healthCheckTime = DateTime.now();
+    return isHealthy;
+  }
+  
   static const String _tokenKey = 'gateway_jwt_token';
   
   // Cache keys for daily content
@@ -69,6 +104,14 @@ class GatewayService {
     String topic = '',
     int limit = 15, // Increased from 5 to 15 for more rotation options
   }) async {
+    // Demo mode: return fallback quotes immediately
+    if (!await _isGatewayAvailable()) {
+      if (kDebugMode) {
+        print('📦 GatewayService: Demo mode - using fallback quotes');
+      }
+      return _getFallbackQuotes(faithTier);
+    }
+    
     try {
       print('🔄 GatewayService: Fetching daily quotes for faithTier: $faithTier, topic: $topic');
       final headers = await _buildAuthHeaders();
@@ -94,14 +137,25 @@ class GatewayService {
         'limit': limit,
       };
 
-      print('🌐 GatewayService: Making HTTP request to $_baseUrl/content/quotes');
+      if (kDebugMode) {
+        print('🌐 GatewayService: Resolved base URL: $_baseUrl');
+        print('🌐 GatewayService: Making HTTP request to $_baseUrl/content/quotes');
+      }
+      
       final response = await http.post(
         Uri.parse('$_baseUrl/content/quotes'),
         headers: headers,
         body: json.encode(body),
+      ).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw Exception('Connection timeout: Gateway did not respond within 10 seconds. Check if gateway is running on $_baseUrl');
+        },
       );
 
-      print('🌐 GatewayService: Response status: ${response.statusCode}');
+      if (kDebugMode) {
+        print('📡 GatewayService: Response status: ${response.statusCode}');
+      }
       
       if (response.statusCode == 200) {
         final List<dynamic> quotes = json.decode(response.body);
@@ -113,17 +167,25 @@ class GatewayService {
           'license': q['license'] ?? 'public_domain',
         }).toList();
         
-        print('✅ GatewayService: Successfully fetched ${formattedQuotes.length} quotes from gateway');
+        if (kDebugMode) {
+          print('✅ GatewayService: Successfully fetched ${formattedQuotes.length} quotes from gateway');
+        }
         
         // Cache the results
         await _cacheQuotes(formattedQuotes);
         return formattedQuotes;
       } else {
-        print('❌ Gateway quotes error: ${response.statusCode} - ${response.body}');
+        if (kDebugMode) {
+          print('❌ Gateway quotes error: ${response.statusCode} - ${response.body}');
+        }
         return _getFallbackQuotes(faithTier);
       }
     } catch (e) {
-      print('Gateway quotes exception: $e');
+      if (kDebugMode) {
+        print('❌ Gateway quotes exception: $e');
+        print('💡 Tip: Ensure gateway is running on $_baseUrl');
+        print('💡 Tip: Use --dart-define=UR4MORE_API_BASE_URL=http://127.0.0.1:8080 if port differs');
+      }
       return _getFallbackQuotes(faithTier);
     }
   }
@@ -133,6 +195,14 @@ class GatewayService {
     required FaithTier faithTier,
     String theme = 'gluttony',
   }) async {
+    // Demo mode: return fallback scripture immediately
+    if (!await _isGatewayAvailable()) {
+      if (kDebugMode) {
+        print('📦 GatewayService: Demo mode - using fallback scripture');
+      }
+      return _getFallbackScripture();
+    }
+    
     try {
       final headers = await _buildAuthHeaders();
       final isNewDay = await _isNewDay();
@@ -156,6 +226,11 @@ class GatewayService {
         Uri.parse('$_baseUrl/content/scripture'),
         headers: headers,
         body: json.encode(body),
+      ).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw Exception('Connection timeout: Gateway did not respond within 10 seconds. Check if gateway is running on $_baseUrl');
+        },
       );
 
       if (response.statusCode == 200) {
@@ -171,11 +246,16 @@ class GatewayService {
         await _cacheScripture(formattedScripture);
         return formattedScripture;
       } else {
-        print('Gateway scripture error: ${response.statusCode} - ${response.body}');
+        if (kDebugMode) {
+          print('❌ Gateway scripture error: ${response.statusCode} - ${response.body}');
+        }
         return _getFallbackScripture();
       }
     } catch (e) {
-      print('Gateway scripture exception: $e');
+      if (kDebugMode) {
+        print('❌ Gateway scripture exception: $e');
+        print('💡 Tip: Ensure gateway is running on $_baseUrl');
+      }
       return _getFallbackScripture();
     }
   }
@@ -187,27 +267,51 @@ class GatewayService {
       final response = await http.get(
         Uri.parse('$_baseUrl/content/manifest'),
         headers: headers,
+      ).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw Exception('Connection timeout: Gateway did not respond within 10 seconds. Check if gateway is running on $_baseUrl');
+        },
       );
 
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else {
-        print('Gateway manifest error: ${response.statusCode} - ${response.body}');
+        if (kDebugMode) {
+          print('❌ Gateway manifest error: ${response.statusCode} - ${response.body}');
+        }
         return null;
       }
     } catch (e) {
-      print('Gateway manifest exception: $e');
+      if (kDebugMode) {
+        print('❌ Gateway manifest exception: $e');
+        print('💡 Tip: Ensure gateway is running on $_baseUrl');
+      }
       return null;
     }
   }
 
   // Health check
   static Future<bool> checkHealth() async {
+    if (isDemoMode) return false;
+    
     try {
-      final response = await http.get(Uri.parse('$_baseUrl/health'));
+      final response = await http.get(
+        Uri.parse('$_baseUrl/health'),
+      ).timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          throw Exception('Health check timeout: Gateway did not respond. Check if gateway is running on $_baseUrl');
+        },
+      );
       return response.statusCode == 200;
     } catch (e) {
-      print('Gateway health check failed: $e');
+      if (kDebugMode) {
+        print('❌ Gateway health check failed: $e');
+        print('💡 Tip: Ensure gateway is running on $_baseUrl');
+        print('💡 Tip: Use --dart-define=UR4MORE_API_BASE_URL=http://127.0.0.1:8080 if port differs');
+        print('💡 Tip: App will run in demo mode with fallback data');
+      }
       return false;
     }
   }
