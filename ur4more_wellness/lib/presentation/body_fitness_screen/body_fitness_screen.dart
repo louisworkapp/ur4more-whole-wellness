@@ -9,6 +9,9 @@ import './widgets/fitness_header.dart';
 import './widgets/workout_card.dart';
 import './widgets/workout_timer_overlay.dart';
 
+enum DifficultyFilter { all, beginner, intermediate, advanced }
+enum WorkoutSort { recommended, pointsHigh, durationShort }
+
 class BodyFitnessScreen extends StatefulWidget {
   const BodyFitnessScreen({super.key});
 
