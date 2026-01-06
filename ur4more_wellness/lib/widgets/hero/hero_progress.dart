@@ -85,7 +85,7 @@ class HeroProgress extends StatelessWidget {
                         size: Size.square(size * 0.9),
                         painter: _HeroRingPainter(
                           progress: value,
-                          baseColor: Brand.ink600,
+                          baseColor: T.ink600,
                         ),
                       );
                     },
