@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
-
 import '../../../core/app_export.dart';
 
 class EquipmentFilterChips extends StatelessWidget {
@@ -17,80 +15,39 @@ class EquipmentFilterChips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
-    return Container(
-      height: 6.h,
-      padding: EdgeInsets.symmetric(horizontal: 4.w),
+    FilterChip chip(String label) {
+      final selected = selectedEquipment.contains(label);
+
+      return FilterChip(
+        label: Text(label),
+        selected: selected,
+        onSelected: (_) => onEquipmentToggle(label),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        visualDensity: const VisualDensity(horizontal: -3, vertical: -3),
+        padding: EdgeInsets.zero,
+        labelPadding: const EdgeInsets.symmetric(horizontal: 10),
+        backgroundColor: colorScheme.surface.withOpacity(.55),
+        selectedColor: colorScheme.primary.withOpacity(.18),
+        side: BorderSide(color: colorScheme.outline.withOpacity(.25)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+        labelStyle: TextStyle(
+          fontWeight: FontWeight.w600,
+          color: selected ? colorScheme.onSurface : colorScheme.onSurfaceVariant,
+        ),
+      );
+    }
+
+    return SizedBox(
+      height: 36,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
         itemCount: availableEquipment.length,
-        separatorBuilder: (context, index) => SizedBox(width: 2.w),
-        itemBuilder: (context, index) {
-          final equipment = availableEquipment[index];
-          final isSelected = selectedEquipment.contains(equipment);
-
-          return GestureDetector(
-            onTap: () => onEquipmentToggle(equipment),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.easeInOut,
-              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
-              decoration: BoxDecoration(
-                // Selected chip: primary background + white text
-                // Unselected chip: outline by default
-                color: isSelected
-                    ? Theme.of(context).colorScheme.primary
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: isSelected
-                      ? Theme.of(context).colorScheme.primary
-                      : colorScheme.outline.withOpacity( 0.5),
-                  width: 1,
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomIconWidget(
-                    iconName: _getEquipmentIcon(equipment),
-                    color: isSelected
-                        ? Colors.white
-                        : colorScheme.onSurfaceVariant,
-                    size: 18,
-                  ),
-                  SizedBox(width: 2.w),
-                  Text(
-                    equipment,
-                    style: GoogleFonts.inter(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w500,
-                      color: isSelected
-                          ? Colors.white
-                          : colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
+        separatorBuilder: (_, __) => const SizedBox(width: 8),
+        itemBuilder: (_, i) => chip(availableEquipment[i]),
       ),
     );
-  }
-
-  String _getEquipmentIcon(String equipment) {
-    switch (equipment.toLowerCase()) {
-      case 'bodyweight':
-        return 'accessibility_new';
-      case 'bands':
-        return 'fitness_center';
-      case 'pullup bar':
-        return 'sports_gymnastics';
-      default:
-        return 'sports_handball';
-    }
   }
 }

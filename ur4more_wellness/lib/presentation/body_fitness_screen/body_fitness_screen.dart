@@ -521,14 +521,29 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                 },
               ),
               SizedBox(height: AppSpace.x2),
-              _buildDifficultyAndSortRow(colorScheme, theme),
-              SizedBox(height: AppSpace.x2),
+              _DifficultyAndSortRow(
+                value: difficultyFilter,
+                sortMode: sortMode,
+                onDifficultyChanged: (v) {
+                  setState(() {
+                    difficultyFilter = v;
+                  });
+                  _filterWorkouts();
+                },
+                onSortChanged: (mode) {
+                  setState(() {
+                    sortMode = mode;
+                  });
+                  _filterWorkouts();
+                },
+              ),
+              SizedBox(height: AppSpace.x1),
               EquipmentFilterChips(
                 selectedEquipment: selectedEquipment,
                 onEquipmentToggle: _onEquipmentToggle,
                 availableEquipment: availableEquipment,
               ),
-              SizedBox(height: AppSpace.x1),
+              SizedBox(height: AppSpace.x2),
               Expanded(
                 child: RefreshIndicator(
                   onRefresh: _onRefresh,
@@ -536,6 +551,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
                   child: filteredWorkouts.isEmpty
                       ? _buildEmptyState(colorScheme)
                       : ListView.separated(
+                          padding: const EdgeInsets.only(bottom: 96),
                           physics: const AlwaysScrollableScrollPhysics(),
                           separatorBuilder: (_, __) => SizedBox(height: AppSpace.x2),
                           itemBuilder: (context, index) {
@@ -670,28 +686,44 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
     );
   }
 
-  Widget _buildDifficultyAndSortRow(ColorScheme colorScheme, ThemeData theme) {
-    final chipSpacing = AppSpace.x2.toDouble();
+}
 
-    ChoiceChip _chip(String label, DifficultyFilter filter) {
-      final selected = difficultyFilter == filter;
+class _DifficultyAndSortRow extends StatelessWidget {
+  final DifficultyFilter value;
+  final WorkoutSort sortMode;
+  final ValueChanged<DifficultyFilter> onDifficultyChanged;
+  final ValueChanged<WorkoutSort> onSortChanged;
+
+  const _DifficultyAndSortRow({
+    required this.value,
+    required this.sortMode,
+    required this.onDifficultyChanged,
+    required this.onSortChanged,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+
+    ChoiceChip chip(String label, DifficultyFilter v) {
+      final selected = value == v;
+
       return ChoiceChip(
         label: Text(label),
         selected: selected,
-        onSelected: (_) {
-          setState(() {
-            difficultyFilter = filter;
-          });
-          _filterWorkouts();
-        },
-        visualDensity: VisualDensity.compact,
-        labelStyle: theme.textTheme.labelLarge?.copyWith(
-          color: selected ? colorScheme.onPrimary : colorScheme.onSurface,
+        onSelected: (_) => onDifficultyChanged(v),
+        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        visualDensity: const VisualDensity(horizontal: -3, vertical: -3),
+        padding: EdgeInsets.zero,
+        labelPadding: const EdgeInsets.symmetric(horizontal: 10),
+        selectedColor: cs.primary.withOpacity(.18),
+        backgroundColor: cs.surface.withOpacity(.55),
+        side: BorderSide(color: cs.outline.withOpacity(.25)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(999)),
+        labelStyle: TextStyle(
+          fontWeight: FontWeight.w600,
+          color: selected ? cs.onSurface : cs.onSurfaceVariant,
         ),
-        selectedColor: colorScheme.primary,
-        backgroundColor: colorScheme.surfaceVariant,
-        side: BorderSide(color: colorScheme.outline.withOpacity(0.3)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       );
     }
 
@@ -700,57 +732,60 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
       child: Row(
         children: [
           Expanded(
-            child: Wrap(
-              spacing: chipSpacing,
-              runSpacing: chipSpacing,
-              children: [
-                _chip('All', DifficultyFilter.all),
-                _chip('Beginner', DifficultyFilter.beginner),
-                _chip('Intermediate', DifficultyFilter.intermediate),
-                _chip('Advanced', DifficultyFilter.advanced),
-              ],
+            child: SizedBox(
+              height: 36,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                children: [
+                  chip('All', DifficultyFilter.all),
+                  const SizedBox(width: 8),
+                  chip('Beginner', DifficultyFilter.beginner),
+                  const SizedBox(width: 8),
+                  chip('Intermediate', DifficultyFilter.intermediate),
+                  const SizedBox(width: 8),
+                  chip('Advanced', DifficultyFilter.advanced),
+                ],
+              ),
             ),
           ),
+          const SizedBox(width: 10),
           PopupMenuButton<WorkoutSort>(
             tooltip: 'Sort',
-            onSelected: (mode) {
-              setState(() {
-                sortMode = mode;
-              });
-              _filterWorkouts();
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
+            initialValue: sortMode,
+            onSelected: onSortChanged,
+            itemBuilder: (context) => const [
+              PopupMenuItem(
                 value: WorkoutSort.recommended,
                 child: Text('Recommended'),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: WorkoutSort.pointsHigh,
                 child: Text('Points (High → Low)'),
               ),
-              const PopupMenuItem(
+              PopupMenuItem(
                 value: WorkoutSort.durationShort,
                 child: Text('Time (Short → Long)'),
               ),
             ],
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSpace.x3,
-                vertical: AppSpace.x2,
-              ),
+              height: 36,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
-                color: colorScheme.surface,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: colorScheme.outline.withOpacity(0.2)),
+                color: cs.surface.withOpacity(.55),
+                borderRadius: BorderRadius.circular(999),
+                border: Border.all(color: cs.outline.withOpacity(.25)),
               ),
               child: Row(
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.sort, size: 18),
-                  SizedBox(width: AppSpace.x1),
+                  Icon(Icons.sort, size: 18, color: cs.onSurfaceVariant),
+                  const SizedBox(width: 6),
                   Text(
                     'Sort',
-                    style: theme.textTheme.labelLarge,
+                    style: TextStyle(
+                      color: cs.onSurfaceVariant,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ],
               ),
