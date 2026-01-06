@@ -24,94 +24,91 @@ class ToggleTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final borderRadius = BorderRadius.circular(12);
+    const radius = 12.0;
+    final borderRadius = BorderRadius.circular(radius);
 
-    return Semantics(
-      button: true,
-      enabled: enabled,
-      label: '$title${subtitle != null ? '. $subtitle' : ''}',
-      toggled: value,
-      child: AbsorbPointer(
-        absorbing: !enabled,
-        child: MouseRegion(
-          cursor: enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
-          child: Material(
-            color: value
-                ? colorScheme.primary.withOpacity(0.15)
-                : colorScheme.surface,
-            shape: RoundedRectangleBorder(
-              borderRadius: borderRadius,
-              side: BorderSide(
-                color: value
-                    ? colorScheme.primary.withOpacity(0.4)
-                    : colorScheme.outline.withOpacity(0.2),
-                width: value ? 2 : 1,
-              ),
-            ),
-            child: InkWell(
-              onTap: enabled ? () => onChanged?.call(!value) : null,
-              borderRadius: borderRadius,
+    final bgColor =
+        value ? colorScheme.primary.withOpacity(0.15) : colorScheme.surface;
+
+    final borderColor = value
+        ? colorScheme.primary.withOpacity(0.4)
+        : colorScheme.outline.withOpacity(0.2);
+
+    final borderWidth = value ? 2.0 : 1.0;
+
+    return MouseRegion(
+      cursor: enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      child: Semantics(
+        enabled: enabled,
+        toggled: value,
+        label: '$title${subtitle != null ? '. $subtitle' : ''}',
+        child: Material(
+          color: bgColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: borderRadius,
+            side: BorderSide(color: borderColor, width: borderWidth),
+          ),
+          child: InkWell(
+            onTap: enabled ? () => onChanged?.call(!value) : null,
+            borderRadius: borderRadius,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 56),
               child: Padding(
                 padding: const EdgeInsets.all(AppSpace.x4),
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(minHeight: 56),
-                  child: Row(
-                    children: [
-                      if (icon != null) ...[
-                        Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: value
-                                ? colorScheme.primary.withOpacity(0.3)
-                                : colorScheme.surfaceContainerHighest,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Center(
-                            child: icon!,
-                          ),
+                child: Row(
+                  children: [
+                    if (icon != null) ...[
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: value
+                              ? colorScheme.primary.withOpacity(0.3)
+                              : colorScheme.surfaceContainerHighest,
+                          borderRadius: BorderRadius.circular(12),
                         ),
-                        const SizedBox(width: AppSpace.x3),
-                      ],
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                        child: Center(child: icon!),
+                      ),
+                      const SizedBox(width: AppSpace.x3),
+                    ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            title,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: colorScheme.onSurface,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                          ),
+                          if (subtitle != null) ...[
+                            const SizedBox(height: AppSpace.x1),
                             Text(
-                              title,
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                color: colorScheme.onSurface,
-                                fontWeight: FontWeight.w500,
+                              subtitle!,
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                color: colorScheme.onSurfaceVariant,
                               ),
                               overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
+                              maxLines: 2,
                             ),
-                            if (subtitle != null) ...[
-                              const SizedBox(height: AppSpace.x1),
-                              Text(
-                                subtitle!,
-                                style: theme.textTheme.bodySmall?.copyWith(
-                                  color: colorScheme.onSurfaceVariant,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                            ],
                           ],
-                        ),
+                        ],
                       ),
-                      const SizedBox(width: AppSpace.x2),
-                      Switch.adaptive(
-                        value: value,
-                        onChanged: enabled ? onChanged : null,
-                        activeThumbColor: colorScheme.primary,
-                        activeTrackColor: colorScheme.primary.withOpacity(0.3),
-                        inactiveThumbColor: colorScheme.outline,
-                        inactiveTrackColor: colorScheme.surfaceContainerHighest,
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(width: AppSpace.x2),
+                    Switch.adaptive(
+                      value: value,
+                      onChanged: enabled ? onChanged : null,
+                      activeThumbColor: colorScheme.primary,
+                      activeTrackColor: colorScheme.primary.withOpacity(0.3),
+                      inactiveThumbColor: colorScheme.outline,
+                      inactiveTrackColor: colorScheme.surfaceContainerHighest,
+                    ),
+                  ],
                 ),
               ),
             ),

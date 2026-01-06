@@ -101,7 +101,8 @@ class SettingsWidget extends StatelessWidget {
   Widget _buildActionTile(BuildContext context, ActionSettingItem item) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
-    final borderRadius = BorderRadius.circular(12);
+    const radius = 12.0;
+    final borderRadius = BorderRadius.circular(radius);
 
     return MouseRegion(
       cursor: item.enabled ? SystemMouseCursors.click : SystemMouseCursors.basic,
