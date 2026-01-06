@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - fix-workflow-on-main
+      - fix-workflow-on-main  # Trigger workflow on this branch
   workflow_dispatch:
 
 permissions:
