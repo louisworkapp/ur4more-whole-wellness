@@ -54,7 +54,7 @@ class WelcomeSplashScreen extends StatelessWidget {
                   AppSpace.x5,
                   0,
                   AppSpace.x5,
-                  AppSpace.x4,
+                  AppSpace.x12,
                 ),
                 child: Semantics(
                   button: true,
