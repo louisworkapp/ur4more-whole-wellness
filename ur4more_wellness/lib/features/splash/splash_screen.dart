@@ -62,9 +62,14 @@ class _SplashScreenState extends State<SplashScreen>
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            'assets/images/splash.png',
-            fit: BoxFit.cover,
+          Center(
+            child: FractionallySizedBox(
+              widthFactor: 0.8, // shrink background to ~80%
+              child: Image.asset(
+                'assets/images/splash.png',
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           Container(
             decoration: const BoxDecoration(
@@ -102,7 +107,7 @@ class _SplashScreenState extends State<SplashScreen>
                       ),
                     ],
                   ),
-                  const Spacer(flex: 2),
+                  const Spacer(),
                   FadeTransition(
                     opacity: _fade,
                     child: SlideTransition(
@@ -130,19 +135,20 @@ class _SplashScreenState extends State<SplashScreen>
                           const SizedBox(height: AppSpace.x4),
                           const _MotifRow(),
                           const SizedBox(height: AppSpace.x6),
-                          _ContinueButton(onTap: _onContinue),
-                          const SizedBox(height: AppSpace.x2),
-                          Text(
-                            'Takes ~30 seconds.',
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: Colors.white.withOpacity(0.75),
-                                ),
-                          ),
                         ],
                       ),
                     ),
                   ),
-                  const Spacer(flex: 3),
+                  const SizedBox(height: AppSpace.x8),
+                  _ContinueButton(onTap: _onContinue),
+                  const SizedBox(height: AppSpace.x2),
+                  Text(
+                    'Takes ~30 seconds.',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.white.withOpacity(0.75),
+                        ),
+                  ),
+                  const Spacer(flex: 2),
                 ],
               ),
             ),
