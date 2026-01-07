@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../presentation/daily_check_in_screen/daily_check_in_screen.dart';
-import '../presentation/splash_screen/splash_screen.dart';
+import '../features/splash/splash_screen.dart';
 import '../presentation/settings_profile_screen/settings_profile_screen.dart';
 import '../presentation/authentication_screen/authentication_screen.dart';
 import '../presentation/main_scaffold/main_scaffold.dart';

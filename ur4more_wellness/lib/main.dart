@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
         // 🚨 END CRITICAL SECTION
         debugShowCheckedModeBanner: false,
         routes: AppRoutes.routes,
-        initialRoute: AppRoutes.authentication,
+        initialRoute: AppRoutes.splash,
             );
           },
         ),
