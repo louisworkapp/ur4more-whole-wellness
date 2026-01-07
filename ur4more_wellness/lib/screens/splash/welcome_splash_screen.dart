@@ -45,16 +45,16 @@ class WelcomeSplashScreen extends StatelessWidget {
             ),
           ),
 
-          // Get Started button
+          // Get Started button - centered in space between image text and bottom
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSpace.x5,
-                vertical: AppSpace.x4,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  const Spacer(flex: 2),
                   Semantics(
                     button: true,
                     label: 'Get started',
@@ -91,6 +91,7 @@ class WelcomeSplashScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const Spacer(flex: 1),
                 ],
               ),
             ),
