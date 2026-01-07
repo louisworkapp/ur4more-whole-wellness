@@ -167,7 +167,7 @@ class _HeroRing extends StatelessWidget {
             width: size * 0.72,
             height: size * 0.72,
             child: Image.asset(
-              'assets/images/whole_wellness_hero_card.png',
+              'assets/images/whole_wellness_hero_body.png',
               fit: BoxFit.contain,
               filterQuality: FilterQuality.high,
             ),
