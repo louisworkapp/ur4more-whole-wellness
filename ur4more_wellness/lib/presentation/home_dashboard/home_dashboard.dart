@@ -179,13 +179,9 @@ class _HomeDashboardState extends State<HomeDashboard> {
                       mindProgress: userData["mindProgress"] as double,
                       spiritProgress: userData["spiritualProgress"] as double,
                       showSpirit: showSpirit,
-                      onBuilderTap: () => Navigator.pushNamed(
-                        context,
-                        AppRoutes.discipleshipCourses,
-                      ),
                     ),
 
-                    const SizedBox(height: AppSpace.x3),
+                    const SizedBox(height: AppSpace.x2),
 
                     // Daily Check-in: primary + optional secondary tonal
                     DailyCheckinCta(

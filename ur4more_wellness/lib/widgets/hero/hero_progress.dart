@@ -12,7 +12,6 @@ class HeroProgress extends StatelessWidget {
   final double mindProgress;
   final double spiritProgress;
   final bool showSpirit;
-  final VoidCallback? onBuilderTap;
 
   const HeroProgress({
     super.key,
@@ -21,7 +20,6 @@ class HeroProgress extends StatelessWidget {
     required this.mindProgress,
     required this.spiritProgress,
     this.showSpirit = true,
-    this.onBuilderTap,
   });
 
   @override
@@ -73,8 +71,6 @@ class HeroProgress extends StatelessWidget {
                     spirit: spirit,
                     showSpirit: shouldShowSpirit,
                   ),
-                  const SizedBox(height: AppSpace.x3),
-                  _BuilderButton(onTap: onBuilderTap),
                 ],
               ),
             ),
@@ -312,33 +308,6 @@ class _MetricTile extends StatelessWidget {
           ],
         );
       },
-    );
-  }
-}
-
-class _BuilderButton extends StatelessWidget {
-  final VoidCallback? onTap;
-
-  const _BuilderButton({this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return FilledButton.icon(
-      onPressed: onTap,
-      icon: const Icon(Icons.search),
-      label: const Text('Builder'),
-      style: FilledButton.styleFrom(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpace.x5,
-          vertical: AppSpace.x2,
-        ),
-        shape: const StadiumBorder(),
-        textStyle: theme.textTheme.labelLarge?.copyWith(
-          fontWeight: FontWeight.w700,
-        ),
-      ),
     );
   }
 }
