@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../core/app_export.dart';
 import '../../../design/tokens.dart';
@@ -140,6 +141,13 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
     final exercise = exercises[currentExerciseIndex];
     final restTime = _getRestTime(exercise);
     
+    // Haptic feedback for exercise completion:
+    // - Reps-based: already triggered in _completeRep() when reps reach target
+    // - Duration-based: trigger here (works for both timer auto-complete and manual button press)
+    if (_isDurationExercise(exercise)) {
+      HapticFeedback.mediumImpact();
+    }
+    
     if (currentExerciseIndex < exercises.length - 1 && restTime > 0) {
       setState(() {
         isResting = true;
@@ -175,6 +183,7 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
 
       if (restTimeRemaining <= 0) {
         timer.cancel();
+        HapticFeedback.lightImpact();
         _moveToNextExercise();
       }
     });
@@ -193,11 +202,13 @@ class _WorkoutTimerOverlayState extends State<WorkoutTimerOverlay>
       return;
     }
 
+    HapticFeedback.lightImpact();
     setState(() {
       currentRep++;
     });
 
     if (currentRep >= totalReps) {
+      HapticFeedback.mediumImpact();
       _onExerciseComplete();
     }
   }
