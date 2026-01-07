@@ -1,7 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/app_export.dart';
+import '../../core/services/auth_service.dart';
+import '../../core/state/points_store.dart';
 import '../../design/tokens.dart';
 import '../../routes/app_routes.dart';
 import '../../widgets/level_badge.dart';
@@ -11,6 +14,7 @@ import '../../widgets/media_card.dart';
 import '../../widgets/daily_inspiration_card.dart';
 import '../../theme/tokens.dart';
 import '../../widgets/hero/hero_progress.dart';
+import '../debug/debug_points_screen.dart';
 
 class HomeDashboard extends StatefulWidget {
   const HomeDashboard({super.key});
@@ -101,15 +105,30 @@ class _HomeDashboardState extends State<HomeDashboard> {
   ];
 
   bool _isRefreshing = false;
+  final PointsStore _pointsStore = PointsStore.i;
 
   @override
   void initState() {
     super.initState();
     _loadUserData();
+    _pointsStore.addListener(_onPointsChanged);
+  }
+
+  @override
+  void dispose() {
+    _pointsStore.removeListener(_onPointsChanged);
+    super.dispose();
+  }
+
+  void _onPointsChanged() {
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   Future<void> _loadUserData() async {
-    await Future.delayed(const Duration(milliseconds: 500));
+    final userId = userData["userId"] as String;
+    await _pointsStore.load(userId);
     if (mounted) {
       setState(() {});
     }
@@ -134,7 +153,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
-    final points = userData["totalPoints"] as int;
+    final points = _pointsStore.loaded ? _pointsStore.totalPoints : (userData["totalPoints"] as int);
     final showSpirit = _shouldShowSpiritualContent();
 
     return Scaffold(
@@ -156,11 +175,23 @@ class _HomeDashboardState extends State<HomeDashboard> {
                     child: FadeTransition(opacity: anim, child: child),
                   );
                 },
-                child: BrandedHeader(
-                  key: ValueKey(points),
-                  totalPoints: points,
-                  onProfileTap: () => Navigator.pushNamed(context, AppRoutes.settings),
-                  onNotificationTap: _handleNotificationTap,
+                child: GestureDetector(
+                  onLongPress: kDebugMode
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DebugPointsScreen(),
+                            ),
+                          );
+                        }
+                      : null,
+                  child: BrandedHeader(
+                    key: ValueKey(points),
+                    totalPoints: points,
+                    onProfileTap: () => Navigator.pushNamed(context, AppRoutes.settings),
+                    onNotificationTap: _handleNotificationTap,
+                  ),
                 ),
               ),
             ),
@@ -173,12 +204,35 @@ class _HomeDashboardState extends State<HomeDashboard> {
                   children: [
                     const SizedBox(height: AppSpace.x2),
 
-                    HeroProgress(
-                      totalPoints: points,
-                      bodyProgress: userData["bodyProgress"] as double,
-                      mindProgress: userData["mindProgress"] as double,
-                      spiritProgress: userData["spiritualProgress"] as double,
-                      showSpirit: showSpirit,
+                    GestureDetector(
+                      onLongPress: kDebugMode
+                          ? () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const DebugPointsScreen(),
+                                ),
+                              );
+                            }
+                          : null,
+                      child: AnimatedBuilder(
+                        animation: _pointsStore,
+                        builder: (context, child) {
+                          final storePoints = _pointsStore.loaded ? _pointsStore.totalPoints : points;
+                          final storeBody = _pointsStore.loaded ? _pointsStore.bodyProgress : (userData["bodyProgress"] as double);
+                          final storeMind = _pointsStore.loaded ? _pointsStore.mindProgress : (userData["mindProgress"] as double);
+                          final storeSpirit = _pointsStore.loaded ? _pointsStore.spiritProgress : (userData["spiritualProgress"] as double);
+                          
+                          return HeroProgress(
+                            key: ValueKey('${storePoints}_${storeBody}_${storeMind}_${storeSpirit}'),
+                            totalPoints: storePoints,
+                            bodyProgress: storeBody,
+                            mindProgress: storeMind,
+                            spiritProgress: storeSpirit,
+                            showSpirit: showSpirit,
+                          );
+                        },
+                      ),
                     ),
 
                     const SizedBox(height: AppSpace.x2),
