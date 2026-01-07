@@ -11,8 +11,8 @@ class HeroProgress extends StatelessWidget {
   final double bodyProgress;
   final double mindProgress;
   final double spiritProgress;
-  final VoidCallback onBuilderTap;
   final bool showSpirit;
+  final VoidCallback? onBuilderTap;
 
   const HeroProgress({
     super.key,
@@ -20,146 +20,62 @@ class HeroProgress extends StatelessWidget {
     required this.bodyProgress,
     required this.mindProgress,
     required this.spiritProgress,
-    required this.onBuilderTap,
     this.showSpirit = true,
+    this.onBuilderTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final metrics = <_Metric>[
-      _Metric('Body', bodyProgress, Brand.primary),
-      _Metric('Mind', mindProgress, Brand.mint),
-      if (showSpirit) _Metric('Spirit', spiritProgress, T.gold),
-    ];
-
-    final overall = metrics.isEmpty
-        ? 0.0
-        : metrics
-                .map((m) => m.value.clamp(0.0, 1.0))
-                .reduce((a, b) => a + b) /
-            metrics.length;
-
-    final disableAnims =
-        MediaQuery.maybeOf(context)?.disableAnimations == true;
-
     return LayoutBuilder(
       builder: (context, constraints) {
-        final maxW = constraints.maxWidth.isFinite
-            ? constraints.maxWidth
-            : 360.0;
-        final size = math.max(280.0, math.min(360.0, maxW));
-        final t = Theme.of(context).textTheme;
+        final availableWidth =
+            constraints.maxWidth.isFinite ? constraints.maxWidth : AppMaxW.card;
+        final size = availableWidth.clamp(280.0, 360.0);
+        final ringStroke = size * 0.08;
+
+        final bool shouldShowSpirit = showSpirit;
+        final double body = bodyProgress.clamp(0.0, 1.0);
+        final double mind = mindProgress.clamp(0.0, 1.0);
+        final double spirit = spiritProgress.clamp(0.0, 1.0);
+
+        final int divisor = shouldShowSpirit ? 3 : 2;
+        final double aggregate =
+            shouldShowSpirit ? (body + mind + spirit) : (body + mind);
+        final double overall = (aggregate / divisor).clamp(0.0, 1.0);
+
+        final List<Color> gradientColors = [
+          Brand.primary, // Body
+          Brand.mint, // Mind
+          T.gold, // Spirit
+          Brand.primary,
+        ];
 
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(
-              height: size,
               width: size,
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  // soft radial glow
-                  Container(
-                    width: size * 0.9,
-                    height: size * 0.9,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: RadialGradient(
-                        colors: [
-                          Brand.primary.withOpacity(0.18),
-                          Colors.transparent,
-                        ],
-                      ),
-                    ),
-                  ),
-                  // animated ring
-                  TweenAnimationBuilder<double>(
-                    tween: Tween(begin: 0, end: overall),
-                    duration: disableAnims
-                        ? Duration.zero
-                        : const Duration(milliseconds: 900),
-                    curve: Curves.easeOutCubic,
-                    builder: (_, value, __) {
-                      return CustomPaint(
-                        size: Size.square(size * 0.9),
-                        painter: _HeroRingPainter(
-                          progress: value,
-                          baseColor: T.ink600,
-                        ),
-                      );
-                    },
-                  ),
-                  // center body image
-                  _HeroBodyImage(size: size * 0.58),
-                ],
-              ),
-            ),
-            const SizedBox(height: AppSpace.x2),
-            Semantics(
-              label: 'Total points $totalPoints',
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  AnimatedSwitcher(
-                    duration: disableAnims
-                        ? Duration.zero
-                        : const Duration(milliseconds: 250),
-                    child: Text(
-                      '$totalPoints',
-                      key: ValueKey(totalPoints),
-                      style: t.displayMedium?.copyWith(
-                        color: Brand.onDark,
-                        fontWeight: FontWeight.w800,
-                        letterSpacing: -0.4,
-                      ),
-                    ),
+                  _HeroRing(
+                    size: size,
+                    strokeWidth: ringStroke,
+                    progress: overall,
+                    gradientColors: gradientColors,
                   ),
-                  Text(
-                    'pts',
-                    style: t.titleMedium?.copyWith(
-                      color: Brand.onDarkMuted,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  const SizedBox(height: AppSpace.x3),
+                  _PointsLabel(points: totalPoints),
+                  const SizedBox(height: AppSpace.x2),
+                  _MetricsRow(
+                    body: body,
+                    mind: mind,
+                    spirit: spirit,
+                    showSpirit: shouldShowSpirit,
                   ),
+                  const SizedBox(height: AppSpace.x3),
+                  _BuilderButton(onTap: onBuilderTap),
                 ],
-              ),
-            ),
-            const SizedBox(height: AppSpace.x3),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: metrics
-                  .map(
-                    (m) => _MetricStat(
-                      metric: m,
-                      disableAnims: disableAnims,
-                    ),
-                  )
-                  .toList(),
-            ),
-            const SizedBox(height: AppSpace.x4),
-            Semantics(
-              button: true,
-              label: 'Open builder',
-              child: OutlinedButton.icon(
-                onPressed: onBuilderTap,
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpace.x6,
-                    vertical: AppSpace.x3,
-                  ),
-                  shape: const StadiumBorder(),
-                  side: const BorderSide(color: T.gold, width: 1.2),
-                  foregroundColor: T.gold,
-                  backgroundColor: T.gold.withOpacity(0.12),
-                ),
-                icon: const Icon(Icons.search, size: 20),
-                label: Text(
-                  'Builder',
-                  style: t.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: T.gold,
-                  ),
-                ),
               ),
             ),
           ],
@@ -169,124 +85,91 @@ class HeroProgress extends StatelessWidget {
   }
 }
 
-class _HeroRingPainter extends CustomPainter {
+class _HeroRing extends StatelessWidget {
+  final double size;
+  final double strokeWidth;
   final double progress;
-  final Color baseColor;
+  final List<Color> gradientColors;
 
-  _HeroRingPainter({
+  const _HeroRing({
+    required this.size,
+    required this.strokeWidth,
     required this.progress,
-    required this.baseColor,
+    required this.gradientColors,
   });
 
   @override
-  void paint(Canvas canvas, Size size) {
-    final center = size.center(Offset.zero);
-    final radius = size.width / 2;
-    final stroke = size.width * 0.06;
-
-    final background = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = stroke
-      ..strokeCap = StrokeCap.round
-      ..color = baseColor.withOpacity(0.35);
-
-    canvas.drawCircle(center, radius - stroke, background);
-
-    final rect = Rect.fromCircle(center: center, radius: radius - stroke);
-
-    final gradient = SweepGradient(
-      startAngle: -math.pi / 2,
-      endAngle: 1.5 * math.pi,
-      colors: [
-        Brand.primary,
-        Brand.mint,
-        T.gold,
-        Brand.primary,
-      ],
-      stops: const [0.0, 0.38, 0.72, 1.0],
-    );
-
-    final progressPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = stroke
-      ..strokeCap = StrokeCap.round
-      ..shader = gradient.createShader(rect);
-
-    final sweep = (progress.clamp(0.0, 1.0)) * 2 * math.pi;
-
-    canvas.save();
-    canvas.translate(center.dx, center.dy);
-    canvas.rotate(-math.pi / 2);
-    canvas.translate(-center.dx, -center.dy);
-    canvas.drawArc(rect, 0, sweep, false, progressPaint);
-    canvas.restore();
-  }
-
-  @override
-  bool shouldRepaint(covariant _HeroRingPainter oldDelegate) {
-    return oldDelegate.progress != progress || oldDelegate.baseColor != baseColor;
-  }
-}
-
-class _HeroBodyImage extends StatelessWidget {
-  final double size;
-
-  const _HeroBodyImage({required this.size});
-
-  @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final cs = theme.colorScheme;
+
+    final double glowSize = size * 1.1;
+
     return SizedBox(
       width: size,
       height: size,
       child: Stack(
         alignment: Alignment.center,
         children: [
+          // Soft radial glow behind the ring
           Container(
-            width: size * 0.9,
-            height: size * 0.9,
+            width: glowSize,
+            height: glowSize,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: RadialGradient(
                 colors: [
-                  Brand.accent.withOpacity(0.18),
+                  cs.primary.withOpacity(0.16),
+                  cs.primary.withOpacity(0.04),
                   Colors.transparent,
                 ],
+                stops: const [0.35, 0.7, 1.0],
               ),
             ),
           ),
+
+          // Animated gradient ring
+          TweenAnimationBuilder<double>(
+            duration: const Duration(milliseconds: 1200),
+            curve: Curves.easeOutCubic,
+            tween: Tween<double>(begin: 0, end: progress),
+            builder: (context, value, _) {
+              return CustomPaint(
+                size: Size.square(size),
+                painter: _GradientRingPainter(
+                  progress: value,
+                  strokeWidth: strokeWidth,
+                  gradientColors: gradientColors,
+                  backgroundColor: cs.outline.withOpacity(0.15),
+                ),
+              );
+            },
+          ),
+
+          // Outer glow hugging the image
           Container(
-            width: size,
-            height: size,
+            width: size * 0.78,
+            height: size * 0.78,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Brand.accent.withOpacity(0.22),
-                  blurRadius: 30,
-                  spreadRadius: 3,
+                  color: cs.primary.withOpacity(0.16),
+                  blurRadius: 40,
+                  spreadRadius: 2,
                 ),
               ],
             ),
           ),
-          ClipOval(
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Image.asset(
-                  'assets/images/whole_wellness_hero_body.png',
-                  fit: BoxFit.cover,
-                ),
-                DecoratedBox(
-                  decoration: BoxDecoration(
-                    gradient: RadialGradient(
-                      colors: [
-                        Colors.white.withOpacity(0.05),
-                        Colors.transparent,
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+
+          // Center hero image
+          SizedBox(
+            width: size * 0.72,
+            height: size * 0.72,
+            child: Image.asset(
+              'assets/images/whole_wellness_hero_card.png',
+              fit: BoxFit.contain,
+              filterQuality: FilterQuality.high,
             ),
           ),
         ],
@@ -295,74 +178,223 @@ class _HeroBodyImage extends StatelessWidget {
   }
 }
 
-class _Metric {
-  final String label;
-  final double value;
-  final Color color;
+class _PointsLabel extends StatelessWidget {
+  final int points;
 
-  const _Metric(this.label, this.value, this.color);
+  const _PointsLabel({required this.points});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final cs = theme.colorScheme;
+
+    return Column(
+      children: [
+        Text(
+          '$points',
+          style: theme.textTheme.headlineMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+            letterSpacing: -0.5,
+            color: cs.onBackground,
+          ),
+        ),
+        Text(
+          'pts',
+          style: theme.textTheme.labelLarge?.copyWith(
+            color: cs.onBackground.withOpacity(0.68),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
-class _MetricStat extends StatelessWidget {
-  final _Metric metric;
-  final bool disableAnims;
+class _MetricsRow extends StatelessWidget {
+  final double body;
+  final double mind;
+  final double spirit;
+  final bool showSpirit;
 
-  const _MetricStat({
-    required this.metric,
-    required this.disableAnims,
+  const _MetricsRow({
+    required this.body,
+    required this.mind,
+    required this.spirit,
+    required this.showSpirit,
   });
 
   @override
   Widget build(BuildContext context) {
-    final pct = metric.value.clamp(0.0, 1.0);
-    final t = Theme.of(context).textTheme;
+    final metrics = <_Metric>[
+      _Metric('Body', body, Brand.primary),
+      _Metric('Mind', mind, Brand.mint),
+      if (showSpirit) _Metric('Spirit', spirit, T.gold),
+    ];
 
-    return Semantics(
-      label: '${metric.label} ${(pct * 100).round()} percent',
-      child: Column(
-        children: [
-          Container(
-            width: 14,
-            height: 14,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: metric.color,
-              boxShadow: [
-                BoxShadow(
-                  color: metric.color.withOpacity(0.45),
-                  blurRadius: 12,
-                  spreadRadius: 2,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: metrics
+          .map((m) => Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpace.x1),
+                  child: _MetricTile(metric: m),
+                ),
+              ))
+          .toList(),
+    );
+  }
+}
+
+class _Metric {
+  final String label;
+  final double progress;
+  final Color color;
+
+  _Metric(this.label, this.progress, this.color);
+}
+
+class _MetricTile extends StatelessWidget {
+  final _Metric metric;
+
+  const _MetricTile({required this.metric});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final cs = theme.colorScheme;
+
+    return TweenAnimationBuilder<double>(
+      duration: const Duration(milliseconds: 800),
+      curve: Curves.easeOutCubic,
+      tween: Tween<double>(
+        begin: 0,
+        end: metric.progress.clamp(0.0, 1.0),
+      ),
+      builder: (context, value, _) {
+        final percent = (value * 100).round();
+        return Column(
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 10,
+                  height: 10,
+                  decoration: BoxDecoration(
+                    color: metric.color,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: metric.color.withOpacity(0.35),
+                        blurRadius: 8,
+                        spreadRadius: 1,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: AppSpace.x1),
+                Text(
+                  metric.label,
+                  style: theme.textTheme.labelLarge?.copyWith(
+                    color: cs.onBackground,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            metric.label,
-            style: t.titleMedium?.copyWith(
-              color: Brand.onDark,
-              fontWeight: FontWeight.w700,
+            const SizedBox(height: AppSpace.x1),
+            Text(
+              '$percent%',
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: cs.onBackground.withOpacity(0.72),
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          TweenAnimationBuilder<double>(
-            tween: Tween<double>(begin: 0, end: pct),
-            duration: disableAnims
-                ? Duration.zero
-                : const Duration(milliseconds: 500),
-            curve: Curves.easeOut,
-            builder: (_, value, __) {
-              return Text(
-                '${(value * 100).round()}%',
-                style: t.bodyMedium?.copyWith(
-                  color: Brand.onDarkMuted,
-                  fontWeight: FontWeight.w600,
-                ),
-              );
-            },
-          ),
-        ],
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _BuilderButton extends StatelessWidget {
+  final VoidCallback? onTap;
+
+  const _BuilderButton({this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return FilledButton.icon(
+      onPressed: onTap,
+      icon: const Icon(Icons.search),
+      label: const Text('Builder'),
+      style: FilledButton.styleFrom(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpace.x5,
+          vertical: AppSpace.x2,
+        ),
+        shape: const StadiumBorder(),
+        textStyle: theme.textTheme.labelLarge?.copyWith(
+          fontWeight: FontWeight.w700,
+        ),
       ),
     );
+  }
+}
+
+class _GradientRingPainter extends CustomPainter {
+  final double progress;
+  final double strokeWidth;
+  final List<Color> gradientColors;
+  final Color backgroundColor;
+
+  _GradientRingPainter({
+    required this.progress,
+    required this.strokeWidth,
+    required this.gradientColors,
+    required this.backgroundColor,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = (size.width - strokeWidth) / 2;
+    final rect = Rect.fromCircle(center: center, radius: radius);
+    const startAngle = -math.pi / 2;
+
+    // Base track
+    final trackPaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round
+      ..color = backgroundColor;
+    canvas.drawArc(rect, startAngle, 2 * math.pi, false, trackPaint);
+
+    // Active sweep
+    final sweep = (2 * math.pi * progress).clamp(0.0, 2 * math.pi);
+    final gradient = SweepGradient(
+      startAngle: startAngle,
+      endAngle: startAngle + 2 * math.pi,
+      colors: gradientColors,
+      stops: const [0.0, 0.4, 0.75, 1.0],
+    );
+
+    final progressPaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round
+      ..shader = gradient.createShader(rect);
+
+    canvas.drawArc(rect, startAngle, sweep, false, progressPaint);
+  }
+
+  @override
+  bool shouldRepaint(covariant _GradientRingPainter oldDelegate) {
+    return oldDelegate.progress != progress ||
+        oldDelegate.strokeWidth != strokeWidth ||
+        oldDelegate.gradientColors != gradientColors ||
+        oldDelegate.backgroundColor != backgroundColor;
   }
 }
 
