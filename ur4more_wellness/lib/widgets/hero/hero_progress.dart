@@ -373,21 +373,28 @@ class _GradientRingPainter extends CustomPainter {
 
     // Active sweep
     final sweep = (2 * math.pi * progress).clamp(0.0, 2 * math.pi);
-    // Smooth wrap so the seam is gentle and all three colors blend
+    // Smooth wrap so the seam is gentle and all three colors blend.
+    // We add feathered midpoints between each brand color to avoid hard edges.
+    final c0 = gradientColors[0];
+    final c1 = gradientColors[1];
+    final c2 = gradientColors[2];
+    final c01 = Color.lerp(c0, c1, 0.5)!;
+    final c12 = Color.lerp(c1, c2, 0.5)!;
+    final c20 = Color.lerp(c2, c0, 0.5)!;
+
     final gradient = SweepGradient(
-      startAngle: startAngle - 0.2, // nudge seam to a less visible spot
-      endAngle: startAngle + 2 * math.pi - 0.2,
+      startAngle: startAngle - 0.35, // tuck seam off-axis
+      endAngle: startAngle + 2 * math.pi - 0.35,
       colors: [
-        gradientColors[0],
-        gradientColors[0],
-        gradientColors[1],
-        gradientColors[1],
-        gradientColors[2],
-        gradientColors[2],
-        gradientColors[0],
-        gradientColors[0],
+        c0,
+        c01,
+        c1,
+        c12,
+        c2,
+        c20,
+        c0,
       ],
-      stops: const [0.0, 0.08, 0.35, 0.42, 0.68, 0.78, 0.95, 1.0],
+      stops: const [0.0, 0.22, 0.38, 0.55, 0.72, 0.88, 1.0],
       tileMode: TileMode.clamp,
     );
 
