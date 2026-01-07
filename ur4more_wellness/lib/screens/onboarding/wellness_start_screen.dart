@@ -19,9 +19,15 @@ class WellnessStartScreen extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            'assets/images/wellness_journey_start_card.png',
-            fit: BoxFit.cover,
+          Center(
+            child: FractionallySizedBox(
+              widthFactor: 0.8,
+              heightFactor: 0.8,
+              child: Image.asset(
+                'assets/images/wellness_journey_start_card.png',
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
           Container(
             decoration: const BoxDecoration(
