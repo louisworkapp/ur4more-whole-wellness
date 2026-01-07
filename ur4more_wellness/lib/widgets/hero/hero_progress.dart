@@ -376,8 +376,16 @@ class _GradientRingPainter extends CustomPainter {
     final gradient = SweepGradient(
       startAngle: startAngle,
       endAngle: startAngle + 2 * math.pi,
-      colors: gradientColors,
-      stops: const [0.0, 0.4, 0.75, 1.0],
+      colors: [
+        gradientColors[0],
+        gradientColors[0],
+        gradientColors[1],
+        gradientColors[1],
+        gradientColors[2],
+        gradientColors[2],
+        gradientColors[0],
+      ],
+      stops: const [0.0, 0.15, 0.4, 0.55, 0.72, 0.9, 1.0],
     );
 
     final progressPaint = Paint()
