@@ -45,54 +45,53 @@ class WelcomeSplashScreen extends StatelessWidget {
             ),
           ),
 
-          // Get Started button - centered in space between image text and bottom
+          // Get Started button - pinned to bottom
           SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppSpace.x5,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const Spacer(flex: 2),
-                  Semantics(
-                    button: true,
-                    label: 'Get started',
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          HapticFeedback.lightImpact();
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            AppRoutes.main,
-                            (route) => false,
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppSpace.x8,
-                            vertical: AppSpace.x4,
-                          ),
-                          minimumSize: const Size(double.infinity, 52),
-                          shape: const StadiumBorder(),
-                          backgroundColor: Brand.primary,
-                          foregroundColor: Colors.white,
-                          elevation: 4,
-                          shadowColor: Brand.primary.withOpacity(0.5),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpace.x5,
+                  0,
+                  AppSpace.x5,
+                  AppSpace.x4,
+                ),
+                child: Semantics(
+                  button: true,
+                  label: 'Get started',
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        HapticFeedback.lightImpact();
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          AppRoutes.main,
+                          (route) => false,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpace.x8,
+                          vertical: AppSpace.x4,
                         ),
-                        child: Text(
-                          'Get Started',
-                          style: t.titleLarge?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                          ),
+                        minimumSize: const Size(double.infinity, 52),
+                        shape: const StadiumBorder(),
+                        backgroundColor: Brand.primary,
+                        foregroundColor: Colors.white,
+                        elevation: 4,
+                        shadowColor: Brand.primary.withOpacity(0.5),
+                      ),
+                      child: Text(
+                        'Get Started',
+                        style: t.titleLarge?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
                   ),
-                  const Spacer(flex: 1),
-                ],
+                ),
               ),
             ),
           ),
