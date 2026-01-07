@@ -136,11 +136,11 @@ class _HeroRing extends StatelessWidget {
             builder: (context, value, _) {
               return CustomPaint(
                 size: Size.square(size),
-                painter: _GradientRingPainter(
+                painter: _SegmentRingPainter(
                   progress: value,
                   strokeWidth: strokeWidth,
-                  gradientColors: gradientColors,
                   backgroundColor: cs.outline.withOpacity(0.15),
+                  segments: gradientColors,
                 ),
               );
             },
@@ -343,16 +343,16 @@ class _BuilderButton extends StatelessWidget {
   }
 }
 
-class _GradientRingPainter extends CustomPainter {
+class _SegmentRingPainter extends CustomPainter {
   final double progress;
   final double strokeWidth;
-  final List<Color> gradientColors;
+  final List<Color> segments;
   final Color backgroundColor;
 
-  _GradientRingPainter({
+  _SegmentRingPainter({
     required this.progress,
     required this.strokeWidth,
-    required this.gradientColors,
+    required this.segments,
     required this.backgroundColor,
   });
 
@@ -371,47 +371,31 @@ class _GradientRingPainter extends CustomPainter {
       ..color = backgroundColor;
     canvas.drawArc(rect, startAngle, 2 * math.pi, false, trackPaint);
 
-    // Active sweep
-    final sweep = (2 * math.pi * progress).clamp(0.0, 2 * math.pi);
-    // Smooth wrap so the seam is gentle and all three colors blend.
-    // We add feathered midpoints between each brand color to avoid hard edges.
-    final c0 = gradientColors[0];
-    final c1 = gradientColors[1];
-    final c2 = gradientColors[2];
-    final c01 = Color.lerp(c0, c1, 0.5)!;
-    final c12 = Color.lerp(c1, c2, 0.5)!;
-    final c20 = Color.lerp(c2, c0, 0.5)!;
+    if (segments.isEmpty || progress <= 0) return;
 
-    final gradient = SweepGradient(
-      startAngle: startAngle - 0.35, // tuck seam off-axis
-      endAngle: startAngle + 2 * math.pi - 0.35,
-      colors: [
-        c0,
-        c01,
-        c1,
-        c12,
-        c2,
-        c20,
-        c0,
-      ],
-      stops: const [0.0, 0.22, 0.38, 0.55, 0.72, 0.88, 1.0],
-      tileMode: TileMode.clamp,
-    );
+    final totalSweep = (2 * math.pi * progress).clamp(0.0, 2 * math.pi);
+    final perSegmentSweep = 2 * math.pi / segments.length;
+    double cursor = startAngle;
+    double remaining = totalSweep;
 
-    final progressPaint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = strokeWidth
-      ..strokeCap = StrokeCap.round
-      ..shader = gradient.createShader(rect);
-
-    canvas.drawArc(rect, startAngle, sweep, false, progressPaint);
+    for (int i = 0; i < segments.length && remaining > 0; i++) {
+      final segSweep = math.min(perSegmentSweep, remaining);
+      final paint = Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = strokeWidth
+        ..strokeCap = StrokeCap.round
+        ..color = segments[i];
+      canvas.drawArc(rect, cursor, segSweep, false, paint);
+      cursor += perSegmentSweep;
+      remaining -= segSweep;
+    }
   }
 
   @override
-  bool shouldRepaint(covariant _GradientRingPainter oldDelegate) {
+  bool shouldRepaint(covariant _SegmentRingPainter oldDelegate) {
     return oldDelegate.progress != progress ||
         oldDelegate.strokeWidth != strokeWidth ||
-        oldDelegate.gradientColors != gradientColors ||
+        oldDelegate.segments != segments ||
         oldDelegate.backgroundColor != backgroundColor;
   }
 }
