@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -142,7 +144,7 @@ class _PrimaryCta extends StatelessWidget {
   }
 }
 
-class FadeInUp extends StatelessWidget {
+class FadeInUp extends StatefulWidget {
   final Widget child;
   final Duration duration;
   final Duration delay;
@@ -155,13 +157,43 @@ class FadeInUp extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return TweenAnimationBuilder<double>(
-      tween: Tween(begin: 0, end: 1),
-      duration: duration,
+  State<FadeInUp> createState() => _FadeInUpState();
+}
+
+class _FadeInUpState extends State<FadeInUp>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _anim;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    );
+    _anim = CurvedAnimation(
+      parent: _controller,
       curve: Curves.easeOutCubic,
-      delay: delay,
-      builder: (context, value, child) {
+    );
+    _timer = Timer(widget.delay, _controller.forward);
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _anim,
+      child: widget.child,
+      builder: (context, child) {
+        final value = _anim.value;
         return Opacity(
           opacity: value,
           child: Transform.translate(
@@ -170,7 +202,6 @@ class FadeInUp extends StatelessWidget {
           ),
         );
       },
-      child: child,
     );
   }
 }
