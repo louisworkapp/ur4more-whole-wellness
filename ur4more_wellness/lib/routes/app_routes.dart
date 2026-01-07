@@ -21,9 +21,11 @@ import '../features/planner/presentation/daily_calendar_screen.dart';
 import '../features/planner/presentation/suggestions_screen.dart';
 import '../features/planner/presentation/calendar_screen.dart';
 import '../features/planner/presentation/commit_screen.dart';
+import '../screens/onboarding/wellness_start_screen.dart';
 
 class AppRoutes {
   static const String splash = '/splash';
+  static const String wellnessStart = '/wellness-start';
   static const String main = '/'; // host with bottom nav
   static const String checkin = '/check-in';
   static const String settings = '/settings';
@@ -52,6 +54,7 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> routes = {
     splash: (context) => const SplashScreen(),
+    wellnessStart: (context) => const WellnessStartScreen(),
     main: (context) => const MainScaffold(),
     checkin: (context) => const DailyCheckInScreen(),
     settings: (context) => const SettingsProfileScreen(),
