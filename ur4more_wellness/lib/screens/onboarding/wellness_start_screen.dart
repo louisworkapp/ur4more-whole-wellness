@@ -53,7 +53,7 @@ class WellnessStartScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Spacer(),
+                  const Spacer(flex: 2),
                   FadeInUp(
                     delay: const Duration(milliseconds: 80),
                     child: Column(
@@ -68,7 +68,7 @@ class WellnessStartScreen extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: AppSpace.x2),
+                        const SizedBox(height: AppSpace.x4),
                         Text(
                           'Build strength, clarity, and faith—daily.',
                           style: t.titleMedium?.copyWith(
@@ -77,7 +77,7 @@ class WellnessStartScreen extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: AppSpace.x2),
+                        const SizedBox(height: AppSpace.x3),
                         Text(
                           'Body • Mind • Spirit',
                           style: t.bodyLarge?.copyWith(
@@ -86,7 +86,7 @@ class WellnessStartScreen extends StatelessWidget {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: AppSpace.x6),
+                        const SizedBox(height: AppSpace.x8),
                         _PrimaryCta(onTap: () {
                           HapticFeedback.lightImpact();
                           Navigator.pushNamedAndRemoveUntil(
@@ -98,7 +98,7 @@ class WellnessStartScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const Spacer(flex: 2),
+                  const Spacer(flex: 3),
                 ],
               ),
             ),
