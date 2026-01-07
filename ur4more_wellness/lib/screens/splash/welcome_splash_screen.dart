@@ -45,31 +45,17 @@ class WelcomeSplashScreen extends StatelessWidget {
             ),
           ),
 
-          // Hero text and button
+          // Get Started button
           SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                // Hero text
-                Padding(
-                  padding: const EdgeInsets.only(bottom: AppSpace.x6),
-                  child: Text(
-                    'Build strength, clarity, and faith—daily.',
-                    style: t.titleLarge?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-
-                // Get Started button
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpace.x5,
-                    vertical: AppSpace.x4,
-                  ),
-                  child: Semantics(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpace.x5,
+                vertical: AppSpace.x4,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Semantics(
                     button: true,
                     label: 'Get started',
                     child: SizedBox(
@@ -105,8 +91,8 @@ class WelcomeSplashScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
