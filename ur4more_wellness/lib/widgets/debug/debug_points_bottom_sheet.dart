@@ -50,9 +50,16 @@ class _DebugPointsBottomSheetState extends State<DebugPointsBottomSheet> {
   Future<void> _loadUserId() async {
     _userId = await AuthService.getCurrentUserId();
     if (_userId == null && kDebugMode) {
-      _userId = "debug_user";
+      // Create a test user if none exists
+      _userId = "debug_user_${DateTime.now().millisecondsSinceEpoch}";
+      await AuthService.saveAuthData(
+        token: 'debug_token',
+        userId: _userId!,
+        expiryDate: DateTime.now().add(const Duration(days: 365)),
+      );
     }
-    if (_userId != null && !_store.loaded) {
+    if (_userId != null) {
+      // Always reload to ensure we have latest data
       await _store.load(_userId!);
     }
     if (mounted) {

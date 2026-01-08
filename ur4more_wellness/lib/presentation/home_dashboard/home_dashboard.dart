@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../../core/app_export.dart';
 import '../../core/state/points_store.dart';
+import '../../core/services/points_test_service.dart';
 import '../../design/tokens.dart';
 import '../../routes/app_routes.dart';
 import './widgets/branded_header.dart';
@@ -128,6 +129,12 @@ class _HomeDashboardState extends State<HomeDashboard> {
   Future<void> _loadUserData() async {
     final userId = userData["userId"] as String;
     await _pointsStore.load(userId);
+    
+    // In debug mode, ensure test service is initialized
+    if (kDebugMode) {
+      await PointsTestService.ensureLoaded();
+    }
+    
     if (mounted) {
       setState(() {});
     }
