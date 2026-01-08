@@ -37,20 +37,28 @@ class _DebugPointsScreenState extends State<DebugPointsScreen> {
   }
 
   Future<void> _loadUserId() async {
-    _userId = await AuthService.getCurrentUserId();
-    if (_userId == null && kDebugMode) {
-      // Create a test user if none exists
-      _userId = "debug_user_${DateTime.now().millisecondsSinceEpoch}";
-      await AuthService.saveAuthData(
-        token: 'debug_token',
-        userId: _userId!,
-        expiryDate: DateTime.now().add(const Duration(days: 365)),
-      );
-    }
-    
-    // Always reload to ensure we have latest data
-    if (_userId != null) {
-      await _store.load(_userId!);
+    try {
+      _userId = await AuthService.getCurrentUserId();
+      if (_userId == null && kDebugMode) {
+        // Use stable debug user ID
+        _userId = "debug_user";
+        await AuthService.saveAuthData(
+          token: 'debug_token',
+          userId: _userId!,
+          expiryDate: DateTime.now().add(const Duration(days: 365)),
+        );
+        debugPrint('DebugPointsScreen: Created debug user: $_userId');
+      }
+      
+      // Always reload to ensure we have latest data
+      if (_userId != null) {
+        await _store.load(_userId!);
+        debugPrint('DebugPointsScreen: Loaded points for userId: $_userId');
+      } else {
+        debugPrint('DebugPointsScreen: No userId available');
+      }
+    } catch (e) {
+      debugPrint('DebugPointsScreen: Error loading userId: $e');
     }
     
     if (mounted) {
