@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../core/app_export.dart';
-import '../../core/services/auth_service.dart';
 import '../../core/state/points_store.dart';
 import '../../design/tokens.dart';
 import '../../routes/app_routes.dart';
-import '../../widgets/level_badge.dart';
 import './widgets/branded_header.dart';
 import './widgets/daily_checkin_cta.dart';
 import '../../widgets/media_card.dart';
@@ -150,6 +148,17 @@ class _HomeDashboardState extends State<HomeDashboard> {
     });
   }
 
+  /// Navigate to debug points screen (debug mode only)
+  void _navigateToDebugScreen() {
+    if (!kDebugMode) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const DebugPointsScreen(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -184,16 +193,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                   );
                 },
                 child: GestureDetector(
-                  onLongPress: kDebugMode
-                      ? () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const DebugPointsScreen(),
-                            ),
-                          );
-                        }
-                      : null,
+                  onLongPress: kDebugMode ? _navigateToDebugScreen : null,
                   child: BrandedHeader(
                     key: ValueKey(points),
                     totalPoints: points,
@@ -213,16 +213,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                     const SizedBox(height: AppSpace.x2),
 
                     GestureDetector(
-                      onLongPress: kDebugMode
-                          ? () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const DebugPointsScreen(),
-                                ),
-                              );
-                            }
-                          : null,
+                      onLongPress: kDebugMode ? _navigateToDebugScreen : null,
                       child: AnimatedBuilder(
                         animation: _pointsStore,
                         builder: (context, child) {
@@ -291,7 +282,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
         .map((activity) {
           final activityMap = activity as Map<String, dynamic>;
           final completionPercentage = activityMap["completionPercentage"] as double? ?? 0.0;
-          final isCompleted = activityMap["isCompleted"] as bool? ?? false;
           
           // Get the appropriate color based on wellness category
           final activityId = activityMap["id"] as String? ?? '';
@@ -420,123 +410,6 @@ class _HomeDashboardState extends State<HomeDashboard> {
           label: 'View',
           onPressed: () {
             // Navigate to notifications screen
-          },
-        ),
-      ),
-    );
-  }
-
-  void _showQuickActions(BuildContext context, Map<String, dynamic> activity) {
-    HapticFeedback.mediumImpact();
-
-    showModalBottomSheet(
-      context: context,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder:
-          (context) => Container(
-            padding: const EdgeInsets.all(AppSpace.x4),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 40,
-                  height: 2,
-                  decoration: BoxDecoration(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.outline.withOpacity( 0.3),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                SizedBox(height: AppSpace.x2),
-                Text(
-                  activity["title"] as String,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                SizedBox(height: AppSpace.x2),
-                _buildQuickActionTile(
-                  context,
-                  'View Progress',
-                  'track_changes',
-                  () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, AppRoutes.main, arguments: activity["routeIndex"] as int? ?? 0);
-                  },
-                ),
-                _buildQuickActionTile(context, 'Set Reminder', 'schedule', () {
-                  Navigator.pop(context);
-                  _showReminderDialog(context, activity);
-                }),
-                _buildQuickActionTile(context, 'Skip Today', 'skip_next', () {
-                  Navigator.pop(context);
-                  _handleSkipToday(activity);
-                }),
-                SizedBox(height: AppSpace.x2),
-              ],
-            ),
-          ),
-    );
-  }
-
-  Widget _buildQuickActionTile(
-    BuildContext context,
-    String title,
-    String iconName,
-    VoidCallback onTap,
-  ) {
-    return ListTile(
-      leading: CustomIconWidget(
-        iconName: iconName,
-        color: Theme.of(context).colorScheme.primary,
-        size: 24,
-      ),
-      title: Text(title),
-      onTap: onTap,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-    );
-  }
-
-  void _showReminderDialog(
-    BuildContext context,
-    Map<String, dynamic> activity,
-  ) {
-    showDialog(
-      context: context,
-      builder:
-          (context) => AlertDialog(
-            title: Text('Set Reminder'),
-            content: Text('Set a daily reminder for ${activity["title"]}?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Cancel'),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Reminder set for ${activity["title"]}'),
-                    ),
-                  );
-                },
-                child: const Text('Set Reminder'),
-              ),
-            ],
-          ),
-    );
-  }
-
-  void _handleSkipToday(Map<String, dynamic> activity) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('${activity["title"]} skipped for today'),
-        action: SnackBarAction(
-          label: 'Undo',
-          onPressed: () {
-            // Handle undo skip
           },
         ),
       ),
