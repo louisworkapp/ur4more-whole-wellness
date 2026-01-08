@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 import '../../core/app_export.dart';
+import '../../core/services/auth_service.dart';
+import '../../core/state/points_store.dart';
 import '../../design/tokens.dart';
 import './widgets/equipment_filter_chips.dart';
 import './widgets/fitness_header.dart';
@@ -32,12 +34,15 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   bool showTimerOverlay = false;
   Map<String, dynamic>? activeWorkout;
 
-  int currentPoints = 1250;
   int weeklyGoal = 2000;
-  double weeklyProgress = 0.625;
+  String? _userId;
+  final PointsStore _pointsStore = PointsStore.i;
 
   DifficultyFilter difficultyFilter = DifficultyFilter.all;
   WorkoutSort sortMode = WorkoutSort.recommended;
+
+  int get currentPoints => _pointsStore.loaded ? _pointsStore.bodyPoints : 1250;
+  double get weeklyProgress => (currentPoints / weeklyGoal).clamp(0.0, 1.0);
 
   @override
   void initState() {
@@ -45,6 +50,28 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
     _initializeAnimations();
     _initializeWorkouts();
     _filterWorkouts();
+    _loadPoints();
+    _pointsStore.addListener(_onPointsChanged);
+  }
+
+  @override
+  void dispose() {
+    _pointsStore.removeListener(_onPointsChanged);
+    super.dispose();
+  }
+
+  void _onPointsChanged() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  Future<void> _loadPoints() async {
+    _userId = await AuthService.getCurrentUserId() ?? "user_12345";
+    await _pointsStore.load(_userId!);
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   void _initializeAnimations() {
@@ -256,13 +283,22 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
     });
   }
 
-  void _onWorkoutComplete() {
+  Future<void> _onWorkoutComplete() async {
     final colorScheme = Theme.of(context).colorScheme;
-    if (activeWorkout != null) {
+    if (activeWorkout != null && _userId != null) {
       final points = activeWorkout!['points'] as int;
+      final workoutName = activeWorkout!['name'] as String? ?? 'Workout';
+
+      // Award points through PointsStore
+      await _pointsStore.awardCategory(
+        userId: _userId!,
+        category: 'body',
+        delta: points,
+        action: 'workout_completed',
+        note: workoutName,
+      );
+
       setState(() {
-        currentPoints += points;
-        weeklyProgress = (currentPoints / weeklyGoal).clamp(0.0, 1.0);
         showTimerOverlay = false;
         activeWorkout = null;
       });
