@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Mock Supabase service
 class Sb {
@@ -127,14 +128,15 @@ class PointsService {
 
   static Future<int> _localPointsUpdate(String userId, int delta) async {
     try {
-      // Mock current points fetch
-      final currentPoints = 2847; // In real app, fetch from database
-      final newPoints =
-          (currentPoints + delta).clamp(0, double.infinity).toInt();
+      final prefs = await SharedPreferences.getInstance();
+      final key = 'points_total_$userId';
+      final currentPoints = prefs.getInt(key) ?? 0;
+      final newPoints = (currentPoints + delta).clamp(0, 1 << 31).toInt();
 
-      // Mock update operation
+      await prefs.setInt(key, newPoints);
+
       debugPrint(
-        'Local fallback: updating user $userId points by $delta, new total: $newPoints',
+        'Local fallback: updating user $userId points by $delta, current: $currentPoints, new total: $newPoints',
       );
 
       return newPoints;

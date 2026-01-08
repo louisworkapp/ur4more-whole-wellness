@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -67,8 +68,10 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   }
 
   Future<void> _loadPoints() async {
-    _userId = await AuthService.getCurrentUserId() ?? "user_12345";
-    await _pointsStore.load(_userId!);
+    _userId = await _resolveUserId();
+    if (_userId != null) {
+      await _pointsStore.load(_userId!);
+    }
     if (mounted) {
       setState(() {});
     }
@@ -87,6 +90,24 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
       parent: _pointsAnimationController,
       curve: Curves.elasticOut,
     ));
+  }
+
+  Future<String?> _resolveUserId() async {
+    try {
+      var userId = await AuthService.getCurrentUserId();
+      if (userId == null && kDebugMode) {
+        userId = 'debug_user';
+        await AuthService.saveAuthData(
+          token: 'debug_token',
+          userId: userId,
+          expiryDate: DateTime.now().add(const Duration(days: 365)),
+        );
+      }
+      return userId;
+    } catch (e) {
+      debugPrint('BodyFitnessScreen: error resolving user id: $e');
+      return null;
+    }
   }
 
   void _initializeWorkouts() {

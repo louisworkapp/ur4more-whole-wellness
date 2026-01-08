@@ -106,6 +106,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
 
   bool _isRefreshing = false;
   final PointsStore _pointsStore = PointsStore.i;
+  String? _userId;
 
   @override
   void initState() {
@@ -126,9 +127,29 @@ class _HomeDashboardState extends State<HomeDashboard> {
     }
   }
 
+  Future<String?> _resolveUserId() async {
+    try {
+      var userId = await AuthService.getCurrentUserId();
+      if (userId == null && kDebugMode) {
+        userId = 'debug_user';
+        await AuthService.saveAuthData(
+          token: 'debug_token',
+          userId: userId,
+          expiryDate: DateTime.now().add(const Duration(days: 365)),
+        );
+      }
+      return userId;
+    } catch (e) {
+      debugPrint('HomeDashboard: error resolving user id: $e');
+      return null;
+    }
+  }
+
   Future<void> _loadUserData() async {
-    final userId = userData["userId"] as String;
-    await _pointsStore.load(userId);
+    _userId = await _resolveUserId();
+    if (_userId != null) {
+      await _pointsStore.load(_userId!);
+    }
     if (mounted) {
       setState(() {});
     }
@@ -176,16 +197,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                   );
                 },
                 child: GestureDetector(
-                  onLongPress: kDebugMode
-                      ? () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const DebugPointsScreen(),
-                            ),
-                          );
-                        }
-                      : null,
+                  onLongPress: kDebugMode ? () => Navigator.pushNamed(context, AppRoutes.debugPoints) : null,
                   child: BrandedHeader(
                     key: ValueKey(points),
                     totalPoints: points,
@@ -205,16 +217,7 @@ class _HomeDashboardState extends State<HomeDashboard> {
                     const SizedBox(height: AppSpace.x2),
 
                     GestureDetector(
-                      onLongPress: kDebugMode
-                          ? () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const DebugPointsScreen(),
-                                ),
-                              );
-                            }
-                          : null,
+                      onLongPress: kDebugMode ? () => Navigator.pushNamed(context, AppRoutes.debugPoints) : null,
                       child: AnimatedBuilder(
                         animation: _pointsStore,
                         builder: (context, child) {
