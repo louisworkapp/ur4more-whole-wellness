@@ -243,6 +243,21 @@ class _HomeDashboardState extends State<HomeDashboard> {
 
                     const SizedBox(height: AppSpace.x2),
 
+                    if (kDebugMode)
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () async {
+                            await PointsTestService.quickTest();
+                            if (mounted) setState(() {});
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Debug: awarded +10 to all categories')),
+                            );
+                          },
+                          child: const Text('Run points quick test'),
+                        ),
+                      ),
+
                     // Daily Check-in: primary + optional secondary tonal
                     DailyCheckinCta(
                       isCompleted: userData["todayCompleted"] as bool,
