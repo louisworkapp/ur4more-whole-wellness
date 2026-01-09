@@ -9,6 +9,7 @@ import '../../widgets/custom_app_bar.dart';
 import '../../routes/app_routes.dart';
 import '../../core/settings/settings_scope.dart';
 import '../../core/settings/settings_model.dart';
+import '../../core/debug/debug_gate.dart';
 import './widgets/theme_section_widget.dart';
 import './widgets/account_section_widget.dart';
 import './widgets/app_info_section_widget.dart';
@@ -31,6 +32,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
   // Scroll controller for section focus
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _faithSectionKey = GlobalKey();
+  final TextEditingController _codeController = TextEditingController();
   
   // Profile settings
   String _fullName = 'Sarah Johnson';
@@ -53,10 +55,12 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
 
   // App info
   final String _appVersion = '1.2.3';
+  bool _debugToolsEnabled = false;
 
   @override
   void initState() {
     super.initState();
+    _loadDebugGate();
     // Check if we should focus on faith section
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
@@ -68,6 +72,7 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
 
   @override
   void dispose() {
+    _codeController.dispose();
     _scrollController.dispose();
     super.dispose();
   }
@@ -83,6 +88,78 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
   }
 
   void _showFaithCongratulations() {
+  Future<void> _loadDebugGate() async {
+    final enabled = await DebugGate.isEnabled();
+    if (mounted) {
+      setState(() {
+        _debugToolsEnabled = enabled;
+      });
+    }
+  }
+
+  Future<void> _promptDeveloperDialog() async {
+    final theme = Theme.of(context);
+    final cs = theme.colorScheme;
+    _codeController.clear();
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Developer Tools'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: _codeController,
+                decoration: const InputDecoration(labelText: 'Enter code'),
+                autofocus: true,
+              ),
+              if (_debugToolsEnabled)
+                Padding(
+                  padding: const EdgeInsets.only(top: AppSpace.x2),
+                  child: Text(
+                    'Developer Tools are enabled',
+                    style: theme.textTheme.bodySmall?.copyWith(color: cs.primary),
+                  ),
+                ),
+            ],
+          ),
+          actions: [
+            if (_debugToolsEnabled)
+              TextButton(
+                onPressed: () async {
+                  await DebugGate.setEnabled(false);
+                  if (mounted) {
+                    setState(() => _debugToolsEnabled = false);
+                  }
+                  Navigator.pop(context);
+                  _showSuccessToast('Developer Tools disabled');
+                },
+                child: const Text('Disable'),
+              ),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                final ok = await DebugGate.enableWithCode(_codeController.text.trim());
+                if (ok) {
+                  if (mounted) setState(() => _debugToolsEnabled = true);
+                  Navigator.pop(context);
+                  _showSuccessToast('Developer Tools enabled');
+                } else {
+                  _showErrorToast('Invalid code');
+                }
+              },
+              child: const Text('Enable'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
     // Navigate to faith congratulations screen
     Navigator.of(context).pushNamed('/faith-congratulations');
   }
@@ -187,6 +264,20 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
                 onViewHelp: _viewHelp,
                 onRateApp: _rateApp,
               ),
+
+              // Developer Tools
+              if (kDebugMode || _debugToolsEnabled)
+                ListTile(
+                  title: const Text('Developer Tools'),
+                  subtitle: const Text('Points debugger & smoke tests'),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: _promptDeveloperDialog,
+                )
+              else
+                TextButton(
+                  onPressed: _promptDeveloperDialog,
+                  child: const Text('Enable Developer Tools'),
+                ),
 
               SizedBox(height: AppSpace.x12), // Bottom padding for navigation bar
             ],

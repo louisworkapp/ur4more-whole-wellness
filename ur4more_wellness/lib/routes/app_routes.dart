@@ -23,6 +23,8 @@ import '../features/planner/presentation/calendar_screen.dart';
 import '../features/planner/presentation/commit_screen.dart';
 import '../screens/onboarding/wellness_start_screen.dart';
 import '../screens/splash/welcome_splash_screen.dart';
+import '../presentation/debug/debug_points_screen.dart';
+import '../presentation/stand_firm_screen.dart';
 
 class AppRoutes {
   static const String splash = '/splash';
@@ -49,6 +51,8 @@ class AppRoutes {
   static const String plannerSuggestions = '/planner/suggestions';
   static const String plannerCalendar = '/planner/calendar';
   static const String plannerCommit = '/planner/commit';
+  static const String debugPoints = '/debug/points';
+  static const String standFirm = '/stand-firm';
   
   // Special course IDs
   static const String ur4moreCoreId = 'ur4more_core_12w';
@@ -111,5 +115,7 @@ class AppRoutes {
         pmCheckinAlarmEnabled: args?['pmCheckinAlarmEnabled'] ?? true,
       );
     },
+    debugPoints: (context) => const DebugPointsScreen(),
+    standFirm: (context) => const StandFirmScreen(),
   };
 }

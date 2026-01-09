@@ -90,7 +90,7 @@ class PointsStore extends ChangeNotifier {
 
     try {
       // Call PointsService to log the action
-      await PointsService.award(
+      final updatedTotal = await PointsService.award(
         userId: userId,
         action: action,
         value: delta,
@@ -98,7 +98,11 @@ class PointsStore extends ChangeNotifier {
       );
 
       // Update local state
-      _totalPoints = (_totalPoints + delta).clamp(0, double.infinity).toInt();
+      if (updatedTotal is int) {
+        _totalPoints = updatedTotal.clamp(0, double.infinity).toInt();
+      } else {
+        _totalPoints = (_totalPoints + delta).clamp(0, double.infinity).toInt();
+      }
 
       switch (category.toLowerCase()) {
         case 'body':
