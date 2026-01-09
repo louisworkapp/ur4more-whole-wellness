@@ -281,19 +281,6 @@ class _DebugPointsScreenState extends State<DebugPointsScreen> {
     );
   }
 }
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-import '../../core/services/auth_service.dart';
-import '../../core/state/points_store.dart';
-import '../../design/tokens.dart';
-
-class DebugPointsScreen extends StatefulWidget {
-  const DebugPointsScreen({super.key});
-
-  @override
-  State<DebugPointsScreen> createState() => _DebugPointsScreenState();
-}
 
 class _DebugPointsScreenState extends State<DebugPointsScreen> {
   final PointsStore _store = PointsStore.i;

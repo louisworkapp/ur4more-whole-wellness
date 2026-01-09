@@ -549,12 +549,6 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
   }
 
   @override
-  void dispose() {
-    _pointsAnimationController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
