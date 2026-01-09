@@ -45,7 +45,7 @@ class WelcomeSplashScreen extends StatelessWidget {
             ),
           ),
 
-          // Get Started button - pinned to bottom
+          // Entry CTAs - pinned to bottom
           SafeArea(
             child: Align(
               alignment: Alignment.bottomCenter,
@@ -58,38 +58,91 @@ class WelcomeSplashScreen extends StatelessWidget {
                 ),
                 child: Semantics(
                   button: true,
-                  label: 'Get started',
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        HapticFeedback.lightImpact();
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          AppRoutes.main,
-                          (route) => false,
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpace.x8,
-                          vertical: AppSpace.x4,
+                  label: 'Start Stand Firm or explore the app',
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            HapticFeedback.lightImpact();
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              AppRoutes.standFirm,
+                              (route) => false,
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpace.x8,
+                              vertical: AppSpace.x4,
+                            ),
+                            minimumSize: const Size(double.infinity, 52),
+                            shape: const StadiumBorder(),
+                            backgroundColor: Brand.primary,
+                            foregroundColor: Colors.white,
+                            elevation: 4,
+                            shadowColor: Brand.primary.withOpacity(0.5),
+                          ),
+                          child: Text(
+                            'Start Stand Firm (60 sec)',
+                            style: t.titleLarge?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
-                        minimumSize: const Size(double.infinity, 52),
-                        shape: const StadiumBorder(),
-                        backgroundColor: Brand.primary,
-                        foregroundColor: Colors.white,
-                        elevation: 4,
-                        shadowColor: Brand.primary.withOpacity(0.5),
                       ),
-                      child: Text(
-                        'Get Started',
-                        style: t.titleLarge?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
+                      const SizedBox(height: AppSpace.x2),
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton(
+                          onPressed: () {
+                            HapticFeedback.lightImpact();
+                            Navigator.pushNamedAndRemoveUntil(
+                              context,
+                              AppRoutes.main,
+                              (route) => false,
+                            );
+                          },
+                          style: OutlinedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppSpace.x8,
+                              vertical: AppSpace.x4,
+                            ),
+                            minimumSize: const Size(double.infinity, 52),
+                            shape: const StadiumBorder(),
+                            side: BorderSide(color: Colors.white.withOpacity(0.6)),
+                            foregroundColor: Colors.white,
+                          ),
+                          child: Text(
+                            'Explore the full app',
+                            style: t.titleMedium?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      TextButton(
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            AppRoutes.main,
+                            (route) => false,
+                          );
+                        },
+                        child: Text(
+                          'Skip for now',
+                          style: t.bodyMedium?.copyWith(
+                            color: Colors.white.withOpacity(0.9),
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
