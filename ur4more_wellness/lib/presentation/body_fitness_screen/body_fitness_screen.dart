@@ -57,6 +57,7 @@ class _BodyFitnessScreenState extends State<BodyFitnessScreen>
 
   @override
   void dispose() {
+    _pointsAnimationController.dispose();
     _pointsStore.removeListener(_onPointsChanged);
     super.dispose();
   }
