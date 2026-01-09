@@ -52,6 +52,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/home_bg.png
     - assets/images/wellness_journey_start_card.png
     - assets/images/whole_wellness_hero_body.png
     - assets/images/splash_phone_card2.png

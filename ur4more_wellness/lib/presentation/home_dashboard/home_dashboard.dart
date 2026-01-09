@@ -178,93 +178,116 @@ class _HomeDashboardState extends State<HomeDashboard> {
     final showSpirit = _shouldShowSpiritualContent();
 
     return Scaffold(
-      backgroundColor: cs.background, // calmer page background
-      body: RefreshIndicator(
-        onRefresh: _refreshData,
-        color: cs.primary,
-        child: CustomScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          slivers: [
-            // Header with subtle points bump animation
-            SliverToBoxAdapter(
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 220),
-                switchInCurve: Curves.easeOut,
-                transitionBuilder: (child, anim) {
-                  return ScaleTransition(
-                    scale: Tween<double>(begin: 0.98, end: 1.0).animate(anim),
-                    child: FadeTransition(opacity: anim, child: child),
-                  );
-                },
-                child: GestureDetector(
-                  onLongPress: kDebugMode ? () => Navigator.pushNamed(context, AppRoutes.debugPoints) : null,
-                  child: BrandedHeader(
-                    key: ValueKey(points),
-                    totalPoints: points,
-                    onProfileTap: () => Navigator.pushNamed(context, AppRoutes.settings),
-                    onNotificationTap: _handleNotificationTap,
-                  ),
-                ),
-              ),
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/home_bg.png',
+              fit: BoxFit.cover,
             ),
-
-            // Main content
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpace.x4),
-              sliver: SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    const SizedBox(height: AppSpace.x2),
-
-                    GestureDetector(
-                      onLongPress: kDebugMode ? () => Navigator.pushNamed(context, AppRoutes.debugPoints) : null,
-                      child: AnimatedBuilder(
-                        animation: _pointsStore,
-                        builder: (context, child) {
-                          final storePoints = _pointsStore.loaded ? _pointsStore.totalPoints : points;
-                          final storeBody = _pointsStore.loaded ? _pointsStore.bodyProgress : (userData["bodyProgress"] as double);
-                          final storeMind = _pointsStore.loaded ? _pointsStore.mindProgress : (userData["mindProgress"] as double);
-                          final storeSpirit = _pointsStore.loaded ? _pointsStore.spiritProgress : (userData["spiritualProgress"] as double);
-                          
-                          return HeroProgress(
-                            key: ValueKey('${storePoints}_${storeBody}_${storeMind}_${storeSpirit}'),
-                            totalPoints: storePoints,
-                            bodyProgress: storeBody,
-                            mindProgress: storeMind,
-                            spiritProgress: storeSpirit,
-                            showSpirit: showSpirit,
-                          );
-                        },
+          ),
+          Positioned.fill(
+            child: Container(
+              color: Colors.black.withOpacity(0.25),
+            ),
+          ),
+          SafeArea(
+            child: RefreshIndicator(
+              onRefresh: _refreshData,
+              color: cs.primary,
+              child: CustomScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
+                slivers: [
+                  // Header with subtle points bump animation
+                  SliverToBoxAdapter(
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 220),
+                      switchInCurve: Curves.easeOut,
+                      transitionBuilder: (child, anim) {
+                        return ScaleTransition(
+                          scale: Tween<double>(begin: 0.98, end: 1.0).animate(anim),
+                          child: FadeTransition(opacity: anim, child: child),
+                        );
+                      },
+                      child: GestureDetector(
+                        onLongPress: kDebugMode ? () => Navigator.pushNamed(context, AppRoutes.debugPoints) : null,
+                        child: BrandedHeader(
+                          key: ValueKey(points),
+                          totalPoints: points,
+                          onProfileTap: () => Navigator.pushNamed(context, AppRoutes.settings),
+                          onNotificationTap: _handleNotificationTap,
+                        ),
                       ),
                     ),
+                  ),
 
-                    const SizedBox(height: AppSpace.x2),
+                  // Main content
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: AppSpace.x4),
+                    sliver: SliverToBoxAdapter(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: AppSpace.x2),
 
-                    // Daily Check-in: primary + optional secondary tonal
-                    DailyCheckinCta(
-                      isCompleted: userData["todayCompleted"] as bool,
-                      onTap: () => Navigator.pushNamed(context, AppRoutes.checkin),
-                      lastCheckinDate: DateTime.parse(userData["lastCheckinDate"] as String),
-                      userId: userData["userId"] as String,
-                      onPlannerTap: () => Navigator.pushNamed(context, AppRoutes.alarmClock),
+                          GestureDetector(
+                            onLongPress: kDebugMode ? () => Navigator.pushNamed(context, AppRoutes.debugPoints) : null,
+                            child: AnimatedBuilder(
+                              animation: _pointsStore,
+                              builder: (context, child) {
+                                final storePoints = _pointsStore.loaded ? _pointsStore.totalPoints : points;
+                                final storeBody = _pointsStore.loaded ? _pointsStore.bodyProgress : (userData["bodyProgress"] as double);
+                                final storeMind = _pointsStore.loaded ? _pointsStore.mindProgress : (userData["mindProgress"] as double);
+                                final storeSpirit = _pointsStore.loaded ? _pointsStore.spiritProgress : (userData["spiritualProgress"] as double);
+                                
+                                return HeroProgress(
+                                  key: ValueKey('${storePoints}_${storeBody}_${storeMind}_${storeSpirit}'),
+                                  totalPoints: storePoints,
+                                  bodyProgress: storeBody,
+                                  mindProgress: storeMind,
+                                  spiritProgress: storeSpirit,
+                                  showSpirit: showSpirit,
+                                );
+                              },
+                            ),
+                          ),
+
+                          const SizedBox(height: AppSpace.x3),
+
+                          _buildStandFirmCard(context),
+                          const SizedBox(height: AppSpace.x2),
+                          _buildDailyPlanCard(context),
+
+                          const SizedBox(height: AppSpace.x2),
+
+                          // Daily Check-in: primary + optional secondary tonal
+                          DailyCheckinCta(
+                            isCompleted: userData["todayCompleted"] as bool,
+                            onTap: () => Navigator.pushNamed(context, AppRoutes.checkin),
+                            lastCheckinDate: DateTime.parse(userData["lastCheckinDate"] as String),
+                            userId: userData["userId"] as String,
+                            onPlannerTap: () => Navigator.pushNamed(context, AppRoutes.alarmClock),
+                          ),
+
+                          const SizedBox(height: AppSpace.x2),
+
+                          const DailyInspirationCard(),
+
+                          const SizedBox(height: AppSpace.x2),
+
+                          ..._buildWellnessCards(context),
+
+                          // breathing room for nav / scroll
+                          const SizedBox(height: 96),
+                        ],
+                      ),
                     ),
-
-                    const SizedBox(height: AppSpace.x2),
-
-                    const DailyInspirationCard(),
-
-                    const SizedBox(height: AppSpace.x2),
-
-                    ..._buildWellnessCards(context),
-
-                    // breathing room for nav / scroll
-                    const SizedBox(height: 96),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -360,6 +383,84 @@ class _HomeDashboardState extends State<HomeDashboard> {
           );
         })
         .toList();
+  }
+
+  Widget _buildStandFirmCard(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Container(
+      width: double.infinity,
+      padding: Pad.card,
+      decoration: BoxDecoration(
+        color: cs.surface.withOpacity(0.55),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: cs.outline.withOpacity(0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Stand Firm', style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: AppSpace.x1),
+          Text(
+            'When pressure hits, get truth + a next step in 60 seconds.',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: AppSpace.x2),
+          Semantics(
+            button: true,
+            label: 'Run Stand Firm',
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pushNamed(context, AppRoutes.standFirm),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: AppSpace.x3),
+                ),
+                child: const Text('Run Stand Firm'),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDailyPlanCard(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Container(
+      width: double.infinity,
+      padding: Pad.card,
+      decoration: BoxDecoration(
+        color: cs.surface.withOpacity(0.55),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: cs.outline.withOpacity(0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Daily Plan', style: Theme.of(context).textTheme.headlineSmall),
+          const SizedBox(height: AppSpace.x1),
+          Text(
+            'Build your rhythm — Spirit → Mind → Body.',
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: AppSpace.x2),
+          Semantics(
+            button: true,
+            label: 'Start Daily Plan',
+            child: SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () => Navigator.pushNamed(context, AppRoutes.checkin),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: AppSpace.x3),
+                ),
+                child: const Text('Start Daily Plan'),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   IconData _getIconData(String iconName) {
