@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -88,6 +89,9 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
   }
 
   void _showFaithCongratulations() {
+    Navigator.of(context).pushNamed('/faith-congratulations');
+  }
+
   Future<void> _loadDebugGate() async {
     final enabled = await DebugGate.isEnabled();
     if (mounted) {
@@ -158,10 +162,6 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
         );
       },
     );
-  }
-
-    // Navigate to faith congratulations screen
-    Navigator.of(context).pushNamed('/faith-congratulations');
   }
 
   @override
@@ -558,6 +558,17 @@ class _SettingsProfileScreenState extends State<SettingsProfileScreen> {
       gravity: ToastGravity.BOTTOM,
       backgroundColor: const Color(0xFFF5C542),
       textColor: Colors.black,
+      fontSize: 14.0,
+    );
+  }
+
+  void _showErrorToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
       fontSize: 14.0,
     );
   }
