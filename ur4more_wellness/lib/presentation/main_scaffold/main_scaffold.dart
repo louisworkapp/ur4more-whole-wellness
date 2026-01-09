@@ -20,6 +20,7 @@ class MainScaffold extends StatefulWidget {
 class _MainScaffoldState extends State<MainScaffold> {
   int _index = 0;
   GatewayError? _lastError;
+  bool _initializedFromRoute = false;
 
   final _pages = const [
     HomeDashboard(),
@@ -34,6 +35,18 @@ class _MainScaffoldState extends State<MainScaffold> {
     super.initState();
     // Check for errors periodically
     _checkForErrors();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_initializedFromRoute) return;
+    _initializedFromRoute = true;
+
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args is int && args >= 0 && args < _pages.length) {
+      _index = args;
+    }
   }
 
   void _checkForErrors() {
