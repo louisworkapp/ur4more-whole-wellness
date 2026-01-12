@@ -1,0 +1,35 @@
+{
+  "id": "defusion_label",
+  "title": "Thought Labeling",
+  "summary": "Create distance: 'I am having the thought that…'",
+  "duration_minutes": 3,
+  "tags": ["act","cognitive","reframe"],
+  "safety_notes": [
+    "If thoughts are about self-harm or harm to others, seek immediate help (988 in the U.S.)."
+  ],
+  "offCopy": {
+    "intro": "We'll notice thoughts without becoming them.",
+    "steps": [
+      {"label":"Catch","body":"Write the sticky thought."},
+      {"label":"Label","body":"Say: 'I am having the thought that…' then repeat the thought."},
+      {"label":"Observe","body":"Notice its pull; breathe lightly and let it float by."},
+      {"label":"Choose","body":"What's one small action aligned with your values you can take next?"}
+    ],
+    "completion": "You practiced distance. Thoughts are events, not commands."
+  },
+  "activatedOverlays": {
+    "light": {
+      "verseKJV": [{"ref":"2 Corinthians 10:5","text":"...bringing into captivity every thought to the obedience of Christ;"}],
+      "prompt": "Ask God for a sound mind as you act."
+    },
+    "disciple": {
+      "verseKJV": [{"ref":"Romans 12:2","text":"...be ye transformed by the renewing of your mind;"}],
+      "identity": "Your mind is being renewed in Christ."
+    },
+    "kingdom": {
+      "verseKJV": [{"ref":"Philippians 4:8","text":"...whatsoever things are true... think on these things."}],
+      "commission": "Set your mind to serve in truth and love."
+    }
+  },
+  "xp": 20
+}

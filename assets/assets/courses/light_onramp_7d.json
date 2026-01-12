@@ -1,0 +1,184 @@
+{
+  "courseId": "light_onramp_7d",
+  "title": "Light Mode — 7-Day Sampler",
+  "subtitle": "Gently explore faith integration with your mental wellness tools",
+  "description": "A gentle introduction to faith-based mental wellness practices. Each day includes optional Scripture, prayer, and faith-integrated exercises.",
+  "xpPerDay": 20,
+  "totalXp": 140,
+  "estimatedWeeks": 1,
+  "gates": { 
+    "faith_mode": ["light", "disciple", "kingdomBuilder"] 
+  },
+  "tags": ["faith", "beginner", "sampler", "light"],
+  "days": [
+    {
+      "id": 1,
+      "slug": "steady-my-thoughts",
+      "title": "Steady My Thoughts",
+      "summary": "Invite God into your thinking for 60 seconds.",
+      "description": "Start your faith journey with simple breathing and thought exercises, gently inviting God's peace into your mental wellness practice.",
+      "practice": [
+        { 
+          "type": "breathing", 
+          "minutes": 1, 
+          "plan": "4-4-4-4 box breathing while focusing on God's presence" 
+        },
+        { 
+          "type": "reframe", 
+          "plan": "Name the thought; write a balanced alternative rooted in God's truth." 
+        }
+      ],
+      "scriptureKJV": [
+        { 
+          "ref": "Philippians 4:6-7", 
+          "text": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus." 
+        }
+      ],
+      "prayer": "Lord, steady my mind and guard my heart with Your peace. Amen.",
+      "xp": 20,
+      "completed": false
+    },
+    {
+      "id": 2,
+      "slug": "work-as-worship",
+      "title": "Work as Worship",
+      "summary": "Offer today's tasks to God.",
+      "description": "Transform your daily work into an act of worship by dedicating your efforts to God and seeking His guidance in your tasks.",
+      "practice": [
+        { 
+          "type": "implementation_intention", 
+          "plan": "When it's 9am, I will start with the hardest task for 10 minutes, offering it to God." 
+        }
+      ],
+      "scriptureKJV": [
+        { 
+          "ref": "Colossians 3:23", 
+          "text": "And whatsoever ye do, do it heartily, as to the Lord, and not unto men;" 
+        }
+      ],
+      "prayer": "Jesus, I commit my work to You. Help me do it heartily and honestly.",
+      "xp": 20,
+      "completed": false
+    },
+    {
+      "id": 3,
+      "slug": "identity-in-christ",
+      "title": "Identity in Christ",
+      "summary": "Anchor worth beyond performance.",
+      "description": "Discover your true identity as a child of God, separate from your achievements or failures. Learn to see yourself through God's eyes.",
+      "practice": [
+        { 
+          "type": "affirmation", 
+          "plan": "Write a one-sentence identity reframe rooted in grace: 'I am loved by God regardless of my performance.'" 
+        }
+      ],
+      "scriptureKJV": [
+        { 
+          "ref": "2 Corinthians 5:17", 
+          "text": "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new." 
+        }
+      ],
+      "prayer": "Father, let me live from who I am in Christ, not from fear or pride.",
+      "xp": 20,
+      "completed": false
+    },
+    {
+      "id": 4,
+      "slug": "gratitude-and-joy",
+      "title": "Gratitude and Joy",
+      "summary": "Name gifts; receive joy as a signpost.",
+      "description": "Practice gratitude as a pathway to joy, recognizing God's gifts in your life and allowing joy to point you toward His presence.",
+      "practice": [
+        { 
+          "type": "gratitude", 
+          "plan": "List three gifts from today; savor each for 10 seconds, thanking God for each one." 
+        }
+      ],
+      "scriptureKJV": [
+        { 
+          "ref": "Psalm 16:11", 
+          "text": "In thy presence is fulness of joy; at thy right hand there are pleasures for evermore." 
+        }
+      ],
+      "prayer": "Thank You for these gifts. Draw my joy toward Your presence.",
+      "xp": 20,
+      "completed": false
+    },
+    {
+      "id": 5,
+      "slug": "confession-and-truth",
+      "title": "Confession and Truth",
+      "summary": "Clear the mind by telling the truth to God.",
+      "description": "Practice honest confession as a way to clear your mind and heart, receiving God's forgiveness and moving forward in truth.",
+      "practice": [
+        { 
+          "type": "confession", 
+          "plan": "Write one thing to confess; pair it with one step of obedience for tomorrow." 
+        }
+      ],
+      "scriptureKJV": [
+        { 
+          "ref": "1 John 1:9", 
+          "text": "If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness." 
+        }
+      ],
+      "prayer": "Merciful Lord, I confess honestly. Cleanse me and help me walk in truth.",
+      "xp": 20,
+      "completed": false
+    },
+    {
+      "id": 6,
+      "slug": "serve-someone-today",
+      "title": "Serve Someone Today",
+      "summary": "Love expressed in a small act.",
+      "description": "Put your faith into action through simple acts of service, learning to love others as Christ loves you.",
+      "practice": [
+        { 
+          "type": "service", 
+          "plan": "Choose one person; do one unseen, helpful act for them today." 
+        }
+      ],
+      "scriptureKJV": [
+        { 
+          "ref": "Galatians 5:13", 
+          "text": "By love serve one another." 
+        }
+      ],
+      "prayer": "Jesus, open my eyes to serve with humility and joy.",
+      "xp": 20,
+      "completed": false
+    },
+    {
+      "id": 7,
+      "slug": "seek-first",
+      "title": "Seek First",
+      "summary": "Aim your life toward the Kingdom.",
+      "description": "Conclude your sampler by aligning your goals with God's Kingdom, making Him your first priority in all areas of life.",
+      "practice": [
+        { 
+          "type": "goal_review", 
+          "plan": "Rewrite your 90-day goals with Christ as true north; choose one step for tomorrow." 
+        }
+      ],
+      "scriptureKJV": [
+        { 
+          "ref": "Matthew 6:33", 
+          "text": "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you." 
+        }
+      ],
+      "prayer": "King Jesus, be my first pursuit. Align my goals with Your Kingdom.",
+      "xp": 20,
+      "completed": false
+    }
+  ],
+  "completionReward": {
+    "title": "Light Mode Sampler Complete!",
+    "message": "You've taken your first steps into faith-integrated mental wellness. Ready to explore deeper?",
+    "nextSteps": [
+      "Continue with Light Mode features throughout the app",
+      "Explore the full Discipleship course (12 weeks)",
+      "Consider upgrading to Disciple tier for deeper integration"
+    ],
+    "xpBonus": 50
+  }
+}

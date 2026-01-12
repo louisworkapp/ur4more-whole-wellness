@@ -1,0 +1,58 @@
+﻿{
+  "name": "UR4MORE Wellness",
+  "description": "A holistic wellness application that delivers evidence-based physical, mental, and spiritual health tools with optional faith integration",
+  "version": "1.0.0",
+  "url": "https://louisworkapp.github.io/ur4more-whole-wellness/",
+  "demoMode": true,
+  "features": {
+    "mind": {
+      "name": "Mind Coach",
+      "description": "Evidence-based mental health tools and exercises",
+      "routes": ["/mind-coach", "/thought-record", "/walk-in-light"]
+    },
+    "body": {
+      "name": "Body Fitness",
+      "description": "Physical health tracking and fitness tools",
+      "routes": ["/body-fitness"]
+    },
+    "spirit": {
+      "name": "Spiritual Growth",
+      "description": "Faith-based content and discipleship courses",
+      "routes": ["/spiritual-growth", "/courses", "/discipleship-courses"],
+      "faithModes": ["off", "light", "full"]
+    },
+    "planner": {
+      "name": "Daily Planner",
+      "description": "Daily planning and commitment tracking",
+      "routes": ["/planner", "/planner/morning-checkin", "/planner/calendar", "/planner/suggestions", "/planner/commit"]
+    },
+    "rewards": {
+      "name": "Rewards Marketplace",
+      "description": "Points and rewards system",
+      "routes": ["/rewards-marketplace"]
+    }
+  },
+  "mainRoutes": [
+    {"path": "/", "name": "Main Scaffold", "description": "Main app container with bottom navigation", "tabs": ["Home", "Body", "Mind", "Spirit", "Rewards"]},
+    {"path": "/check-in", "name": "Daily Check-In", "description": "Daily wellness check-in screen"},
+    {"path": "/settings", "name": "Settings", "description": "User settings and profile"},
+    {"path": "/authentication-screen", "name": "Authentication", "description": "Login/authentication screen"},
+    {"path": "/home", "name": "Home Dashboard", "description": "Main home dashboard"},
+    {"path": "/courses", "name": "Courses", "description": "Browse available courses"},
+    {"path": "/courses/detail", "name": "Course Detail", "description": "View course details"},
+    {"path": "/breath-presets", "name": "Breath Presets", "description": "Breathing exercise presets"},
+    {"path": "/morning-checkin", "name": "Morning Check-In", "description": "Morning wellness check-in"},
+    {"path": "/alarm-clock", "name": "Alarm Clock", "description": "Set morning alarms"}
+  ],
+  "demoModeFeatures": {
+    "enabled": true,
+    "banner": "Demo Mode (gateway offline)",
+    "mockData": {"quotes": true, "scriptures": true, "streaks": true, "checkIn": true}
+  },
+  "technology": {
+    "framework": "Flutter",
+    "language": "Dart",
+    "platforms": ["web", "android", "ios"],
+    "routing": "hash-based (GitHub Pages compatible)"
+  }
+}

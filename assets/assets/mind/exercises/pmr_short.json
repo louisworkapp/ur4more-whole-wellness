@@ -1,0 +1,36 @@
+{
+  "id": "pmr_short",
+  "title": "PMR (Short)",
+  "summary": "Progressive muscle relaxation to release tension.",
+  "duration_minutes": 5,
+  "tags": ["sleep","relaxation","body"],
+  "safety_notes": [
+    "Avoid painful tensing if injured. Breathe lightly; stop if dizzy."
+  ],
+  "offCopy": {
+    "intro": "We'll gently tense then release key muscle groups to downshift your body.",
+    "steps": [
+      {"label":"Face","body":"Raise eyebrows & tighten eyes for 5s, release for 10s."},
+      {"label":"Shoulders","body":"Shrug gently for 5s, release for 10s."},
+      {"label":"Hands","body":"Make fists for 5s, release for 10s."},
+      {"label":"Core","body":"Brace lightly for 5s, release for 10s."},
+      {"label":"Legs","body":"Press feet into floor for 5s, release for 10s."}
+    ],
+    "completion": "Notice the heaviness and warmth. Carry this calm into your next step."
+  },
+  "activatedOverlays": {
+    "light": {
+      "verseKJV": [{"ref":"Matthew 11:28","text":"Come unto me, all ye that labour and are heavy laden, and I will give you rest."}],
+      "prompt": "Offer your tension to the Lord as you release."
+    },
+    "disciple": {
+      "verseKJV": [{"ref":"Philippians 4:7","text":"And the peace of God... shall keep your hearts and minds through Christ Jesus."}],
+      "identity": "You are held by Christ's peace."
+    },
+    "kingdom": {
+      "verseKJV": [{"ref":"Hebrews 4:9","text":"There remaineth therefore a rest to the people of God."}],
+      "commission": "Rest equips you to serve well."
+    }
+  },
+  "xp": 20
+}

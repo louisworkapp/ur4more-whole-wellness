@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "off": {
+    "title": "Go deeper",
+    "body": "Order and truth change your life. We believe their deepest end is found in Jesus Christ.",
+    "bullets": [
+      "Same tools you know",
+      "Gentle faith overlays (optional)",
+      "Short KJV verses (≤ 2 sentences)"
+    ],
+    "primaryCta": { "label": "Explore Faith Mode", "action": "activate_light" },
+    "secondaryCta": { "label": "Keep Secular Tools", "action": "dismiss" },
+    "rateLimit": { "cooldownHours": 24, "snoozeDaysOnDismiss": 7 },
+    "showContexts": ["week_complete", "values_milestone", "urge_resolved", "coach_home_idle"]
+  },
+  "activated": {
+    "title": "Walk in the Light",
+    "body": "You can show or hide faith overlays any time in Settings.",
+    "primaryCta": { "label": "Manage Faith Settings", "action": "open_settings" }
+  }
+}

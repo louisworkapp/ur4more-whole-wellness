@@ -1,0 +1,36 @@
+{
+  "id": "urge_surfing",
+  "title": "Urge Surfing",
+  "summary": "Ride the wave of craving or anxiety without acting on it.",
+  "duration_minutes": 3,
+  "tags": ["craving","anxiety","urge","acceptance"],
+  "safety_notes": [
+    "If you feel unsafe or the urge involves harm to self/others, stop and seek help (988 in the U.S.).",
+    "Mild discomfort is expected; reduce intensity if dizzy or panicky."
+  ],
+  "offCopy": {
+    "intro": "Notice the urge. We're going to surf it instead of fighting it.",
+    "steps": [
+      {"label":"Name it","body":"What's the urge (0–10)? Where do you feel it in your body?"},
+      {"label":"Breathe lightly","body":"Nasal, quiet breaths. Let the sensations rise and fall like a wave."},
+      {"label":"Stay curious","body":"Say: 'This is an urge. It will crest and pass.' Track it for 60–120s."},
+      {"label":"Re-rate","body":"What is the urge now (0–10)? Note what helped."}
+    ],
+    "completion": "You just rode a wave without reacting. Small wins build freedom."
+  },
+  "activatedOverlays": {
+    "light": {
+      "verseKJV": [{"ref":"1 Corinthians 10:13","text":"There hath no temptation taken you but such as is common to man: but God is faithful..."}],
+      "prompt": "Invite God to steady you as the wave passes."
+    },
+    "disciple": {
+      "verseKJV": [{"ref":"Galatians 5:16","text":"Walk in the Spirit, and ye shall not fulfil the lust of the flesh."}],
+      "identity": "In Christ, you are no longer a slave to urges."
+    },
+    "kingdom": {
+      "verseKJV": [{"ref":"Romans 6:14","text":"For sin shall not have dominion over you..."}],
+      "commission": "Your restraint today equips you to strengthen others."
+    }
+  },
+  "xp": 25
+}
